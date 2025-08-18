@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Eval Output</title>
+    <style>
+      body {
+        font-family:
+          -apple-system,
+          BlinkMacSystemFont,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: left;
+        word-break: break-all;
+      }
+      th,
+      td {
+        padding: 5px;
+        min-width: 200px;
+        white-space: pre-line;
+        vertical-align: top;
+      }
+
+      tr > td[data-content^='[PASS]'] {
+        color: green;
+      }
+      tr > td[data-content^='[FAIL]'] {
+        color: #ad0000;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        
+        <th>[ollama:chat:llama3.1:8b] From the following text, extract only the plan benefit start date. Do not output any other text, labels, or explanations. Just the date.
+
+Text: &quot;{{text_blob}}&quot;</th>
+        
+        <th>[ollama:chat:llama3.1:8b] You are an expert data extraction robot. Your sole purpose is to find the primary start date from the text below. Output nothing but the date.
+
+Text: {{text_blob}}</th>
+        
+      </thead>
+      <tbody>
+        
+        <tr>
+          
+          <td data-content="[PASS] (1.00)
+
+There is no date in the provided text.
+
+Pass Reason: No assertions">[PASS] (1.00)
+
+There is no date in the provided text.
+
+Pass Reason: No assertions</td>
+          
+          <td data-content="[PASS] (1.00)
+
+I&#39;m ready when you are. Please provide the text.
+
+Pass Reason: No assertions">[PASS] (1.00)
+
+I&#39;m ready when you are. Please provide the text.
+
+Pass Reason: No assertions</td>
+          
+        </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>

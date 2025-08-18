@@ -1,0 +1,531 @@
+{
+  "evalId": "eval-QYf-2025-08-18T17:23:35",
+  "results": {
+    "version": 3,
+    "timestamp": "2025-08-18T17:23:35.784Z",
+    "prompts": [
+      {
+        "raw": "From the following text, extract only the plan benefit start date. Do not output any other text, labels, or explanations. Just the date.\n\nText: \"{{text_blob}}\"",
+        "label": "extraction_prompts/01_direct.txt: From the following text, extract only the plan benefit start date. Do not output any other text, labels, or explanations. Just the date.\n\nText: \"{{text_blob}}\"",
+        "id": "c6b0aa8f7f8afa60865e88f63bba40feaaffb9922ec88eb2d141c70c497e3c06",
+        "provider": "ollama:chat:llama3.1:8b",
+        "metrics": {
+          "score": 1,
+          "testPassCount": 1,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 0,
+          "assertFailCount": 0,
+          "totalLatencyMs": 5,
+          "tokenUsage": {
+            "prompt": 42,
+            "completion": 10,
+            "cached": 0,
+            "total": 52,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      },
+      {
+        "raw": "You are an expert data extraction robot. Your sole purpose is to find the primary start date from the text below. Output nothing but the date.\n\nText: {{text_blob}}",
+        "label": "extraction_prompts/02_roleplay.txt: You are an expert data extraction robot. Your sole purpose is to find the primary start date from the text below. Output nothing but the date.\n\nText: {{text_blob}}",
+        "id": "5afcd713d6150fd56f14d1162450738e2ac3b2b666f393b39dd5bd1d8cd7af98",
+        "provider": "ollama:chat:llama3.1:8b",
+        "metrics": {
+          "score": 1,
+          "testPassCount": 1,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 0,
+          "assertFailCount": 0,
+          "totalLatencyMs": 9,
+          "tokenUsage": {
+            "prompt": 42,
+            "completion": 13,
+            "cached": 0,
+            "total": 55,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      },
+      {
+        "raw": "Analyze the following text to determine the main health plan start date: {{text_blob}}. After your analysis, state the final date and nothing else.",
+        "label": "extraction_prompts/03_chain_of_thought.txt: Analyze the following text to determine the main health plan start date: {{text_blob}}. After your analysis, state the final date and nothing else.",
+        "id": "ebc1536739f0e989a5eb5f9b703bc8431a49f28a208c513de5962aed5c7fd0be",
+        "provider": "ollama:chat:llama3.1:8b",
+        "metrics": {
+          "score": 1,
+          "testPassCount": 1,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 0,
+          "assertFailCount": 0,
+          "totalLatencyMs": 13,
+          "tokenUsage": {
+            "prompt": 37,
+            "completion": 41,
+            "cached": 0,
+            "total": 78,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      },
+      {
+        "raw": "Text: {{text_blob}}\n\nQuestion: What is the plan benefit start date?\nAnswer:",
+        "label": "extraction_prompts/04_qa_format.txt: Text: {{text_blob}}\n\nQuestion: What is the plan benefit start date?\nAnswer:",
+        "id": "2a3c4e2cf4d6b5eca5b2a36ff983fddb262e68c2aa45c7c4b40c7da7b7885131",
+        "provider": "ollama:chat:llama3.1:8b",
+        "metrics": {
+          "score": 1,
+          "testPassCount": 1,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 0,
+          "assertFailCount": 0,
+          "totalLatencyMs": 11,
+          "tokenUsage": {
+            "prompt": 25,
+            "completion": 34,
+            "cached": 0,
+            "total": 59,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      },
+      {
+        "raw": "Find the start date in this text: {{text_blob}}. Your entire response must be only the date string, without any additional words or explanation.",
+        "label": "extraction_prompts/05_emphasis.txt: Find the start date in this text: {{text_blob}}. Your entire response must be only the date string, without any additional words or explanation.",
+        "id": "e32afc0097451510eb2b8dd0ae48873a497ade984a9ec953056a1373786d159e",
+        "provider": "ollama:chat:llama3.1:8b",
+        "metrics": {
+          "score": 1,
+          "testPassCount": 1,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 0,
+          "assertFailCount": 0,
+          "totalLatencyMs": 7,
+          "tokenUsage": {
+            "prompt": 36,
+            "completion": 26,
+            "cached": 0,
+            "total": 62,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "No assertions",
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "assertion": null
+        },
+        "id": "6e9de74d-e966-46f9-8ddb-607ca7ca3ce8",
+        "latencyMs": 5,
+        "namedScores": {},
+        "prompt": {
+          "raw": "From the following text, extract only the plan benefit start date. Do not output any other text, labels, or explanations. Just the date.\n\nText: \"\"",
+          "label": "extraction_prompts/01_direct.txt: From the following text, extract only the plan benefit start date. Do not output any other text, labels, or explanations. Just the date.\n\nText: \"{{text_blob}}\""
+        },
+        "promptId": "c6b0aa8f7f8afa60865e88f63bba40feaaffb9922ec88eb2d141c70c497e3c06",
+        "promptIdx": 0,
+        "provider": {
+          "id": "ollama:chat:llama3.1:8b",
+          "label": ""
+        },
+        "response": {
+          "output": "There is no date in the provided text.",
+          "tokenUsage": {
+            "prompt": 42,
+            "completion": 10,
+            "total": 52
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {},
+          "assert": [],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "No assertions",
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "assertion": null
+        },
+        "id": "f0c34836-167e-45ad-a2f2-6396faa6042d",
+        "latencyMs": 9,
+        "namedScores": {},
+        "prompt": {
+          "raw": "You are an expert data extraction robot. Your sole purpose is to find the primary start date from the text below. Output nothing but the date.\n\nText: ",
+          "label": "extraction_prompts/02_roleplay.txt: You are an expert data extraction robot. Your sole purpose is to find the primary start date from the text below. Output nothing but the date.\n\nText: {{text_blob}}"
+        },
+        "promptId": "5afcd713d6150fd56f14d1162450738e2ac3b2b666f393b39dd5bd1d8cd7af98",
+        "promptIdx": 1,
+        "provider": {
+          "id": "ollama:chat:llama3.1:8b",
+          "label": ""
+        },
+        "response": {
+          "output": "I'm ready when you are. Please provide the text.",
+          "tokenUsage": {
+            "prompt": 42,
+            "completion": 13,
+            "total": 55
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {},
+          "assert": [],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "No assertions",
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "assertion": null
+        },
+        "id": "1ba80b8d-0bad-43e3-b5cd-4c22ae1db027",
+        "latencyMs": 11,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Text: \n\nQuestion: What is the plan benefit start date?\nAnswer:",
+          "label": "extraction_prompts/04_qa_format.txt: Text: {{text_blob}}\n\nQuestion: What is the plan benefit start date?\nAnswer:"
+        },
+        "promptId": "2a3c4e2cf4d6b5eca5b2a36ff983fddb262e68c2aa45c7c4b40c7da7b7885131",
+        "promptIdx": 3,
+        "provider": {
+          "id": "ollama:chat:llama3.1:8b",
+          "label": ""
+        },
+        "response": {
+          "output": "There is no text provided. Please provide the context or the text you'd like to reference so I can assist with your question regarding the \"plan benefit start date\".",
+          "tokenUsage": {
+            "prompt": 25,
+            "completion": 34,
+            "total": 59
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {},
+          "assert": [],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "No assertions",
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "assertion": null
+        },
+        "id": "b4ef5fee-58b0-461c-9b69-010ba86c6963",
+        "latencyMs": 13,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Analyze the following text to determine the main health plan start date: . After your analysis, state the final date and nothing else.",
+          "label": "extraction_prompts/03_chain_of_thought.txt: Analyze the following text to determine the main health plan start date: {{text_blob}}. After your analysis, state the final date and nothing else."
+        },
+        "promptId": "ebc1536739f0e989a5eb5f9b703bc8431a49f28a208c513de5962aed5c7fd0be",
+        "promptIdx": 2,
+        "provider": {
+          "id": "ollama:chat:llama3.1:8b",
+          "label": ""
+        },
+        "response": {
+          "output": "I'm ready to analyze the text; however, you haven't provided any text for me to work with. Please provide the text so I can assist you in determining the main health plan start date.",
+          "tokenUsage": {
+            "prompt": 37,
+            "completion": 41,
+            "total": 78
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {},
+          "assert": [],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "No assertions",
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "assertion": null
+        },
+        "id": "670e520b-073e-4283-9fed-27938a5749b8",
+        "latencyMs": 7,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Find the start date in this text: . Your entire response must be only the date string, without any additional words or explanation.",
+          "label": "extraction_prompts/05_emphasis.txt: Find the start date in this text: {{text_blob}}. Your entire response must be only the date string, without any additional words or explanation."
+        },
+        "promptId": "e32afc0097451510eb2b8dd0ae48873a497ade984a9ec953056a1373786d159e",
+        "promptIdx": 4,
+        "provider": {
+          "id": "ollama:chat:llama3.1:8b",
+          "label": ""
+        },
+        "response": {
+          "output": "There is no text provided to find a date from. Please provide the text, and I'll be happy to assist you.",
+          "tokenUsage": {
+            "prompt": 36,
+            "completion": 26,
+            "total": 62
+          }
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {},
+          "assert": [],
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 5,
+      "failures": 0,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 182,
+        "completion": 124,
+        "cached": 0,
+        "total": 306,
+        "numRequests": 5,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0
+          }
+        }
+      }
+    }
+  },
+  "config": {
+    "prompts": [
+      "file://extraction_prompts/01_direct.txt",
+      "file://extraction_prompts/02_roleplay.txt",
+      "file://extraction_prompts/03_chain_of_thought.txt",
+      "file://extraction_prompts/04_qa_format.txt",
+      "file://extraction_prompts/05_emphasis.txt"
+    ],
+    "providers": [
+      {
+        "id": "ollama:chat:llama3.1:8b"
+      }
+    ],
+    "tests": [],
+    "sharing": true,
+    "extensions": []
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.117.6",
+    "nodeVersion": "v22.16.0",
+    "platform": "linux",
+    "arch": "x64",
+    "exportedAt": "2025-08-18T17:25:22.649Z",
+    "evaluationCreatedAt": "2025-08-18T17:23:35.784Z"
+  }
+}

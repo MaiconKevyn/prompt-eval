@@ -1,0 +1,1 @@
+Analyze the following text to determine the main health plan start date: {{text_blob}}. After your analysis, state the final date and nothing else.

@@ -1,0 +1,3 @@
+From the following text, extract only the plan benefit start date. Do not output any other text, labels, or explanations. Just the date.
+
+Text: "{{text_blob}}"

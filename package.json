@@ -1,0 +1,13 @@
+{
+  "name": "prompt-evaluation",
+  "version": "1.0.0",
+  "description": "Prompt evaluation project for extracting plan benefit start dates",
+  "scripts": {
+    "eval": "promptfoo eval",
+    "view": "promptfoo view",
+    "test": "promptfoo eval && promptfoo view"
+  },
+  "dependencies": {
+    "promptfoo": "^0.117.6"
+  }
+}

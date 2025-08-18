@@ -1,0 +1,1 @@
+Find the start date in this text: {{text_blob}}. Your entire response must be only the date string, without any additional words or explanation.

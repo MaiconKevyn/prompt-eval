@@ -1,0 +1,26 @@
+prompts:
+  - "From the following text, extract only the plan benefit start date. Do not output any other text, labels, or explanations. Just the date.\n\nText: \"{{text}}\""
+  - "You are an expert data extraction robot. Your sole purpose is to find the primary start date from the text below. Output nothing but the date.\n\nText: {{text}}"
+  - "Analyze the following text to determine the main health plan start date: {{text}}. After your analysis, state the final date and nothing else."
+  - "Text: {{text}}\n\nQuestion: What is the plan benefit start date?\nAnswer:"
+  - "Find the start date in this text: {{text}}. Your entire response must be only the date string, without any additional words or explanation."
+
+providers:
+  - id: ollama:chat:llama3.1:8b
+
+testCases:
+  - vars:
+      text: "The member's health plan will become active on January 1, 2025. All benefits, including dental and vision, are available from this start date."
+    assert:
+      - type: contains
+        value: "January 1, 2025"
+  - vars:
+      text: "Your coverage begins on March 15, 2024, but the premium dental plan benefits do not start until May 1, 2024. The vision plan starts at the same time as the main health coverage."
+    assert:
+      - type: contains
+        value: "March 15, 2024"
+  - vars:
+      text: "Benefits are effective starting April 10, 2024. Please note that prescription drug coverage begins immediately upon enrollment."
+    assert:
+      - type: contains
+        value: "April 10, 2024"

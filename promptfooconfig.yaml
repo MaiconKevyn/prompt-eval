@@ -3,7 +3,6 @@ prompts:
   - "You are an expert data extraction robot. Your sole purpose is to find the primary start date from the text below. Output nothing but the date.\n\nText: {{text}}"
   - "Analyze the following text to determine the main health plan start date: {{text}}. After your analysis, state the final date and nothing else."
   - "Text: {{text}}\n\nQuestion: What is the plan benefit start date?\nAnswer:"
-  - "Find the start date in this text: {{text}}. Your entire response must be only the date string, without any additional words or explanation."
 
 providers:
   - id: ollama:chat:llama3.1:8b

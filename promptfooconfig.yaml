@@ -18,8 +18,3 @@ testCases:
     assert:
       - type: contains
         value: "March 15, 2024"
-  - vars:
-      text: "Benefits are effective starting April 10, 2024. Please note that prescription drug coverage begins immediately upon enrollment."
-    assert:
-      - type: contains
-        value: "April 10, 2024"

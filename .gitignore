@@ -10,3 +10,4 @@ CLAUDE.md
 .promptfoo/
 artifacts/generated/*
 !artifacts/generated/.gitkeep
+img.png

@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Avaliação de Prompts</title>
+    <title>Prompt Evaluation Report</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -142,29 +142,29 @@
 </head>
 <body>
     <div class="header">
-        <h1>📊 Relatório de Avaliação de Prompts</h1>
-        <p>Extração de Datas de Planos de Benefícios</p>
-        <p>Executado em: 18/08/2025, 14:23:35</p>
+        <h1>Prompt Evaluation Report</h1>
+        <p>Benefit Start Date Extraction Benchmark</p>
+        <p>Executed at: 8/18/2025, 2:23:35 PM</p>
     </div>
 
     <div class="summary">
-        <h2>📈 Resumo da Avaliação</h2>
+        <h2>Evaluation Summary</h2>
         <div class="stats">
             <div class="stat-card">
                 <div class="stat-value">5</div>
-                <div class="stat-label">Prompts Testados</div>
+                <div class="stat-label">Prompts Tested</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">5</div>
-                <div class="stat-label">Casos de Teste</div>
+                <div class="stat-label">Test Cases</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">306</div>
-                <div class="stat-label">Tokens Utilizados</div>
+                <div class="stat-value">0</div>
+                <div class="stat-label">Tokens Used</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">NaNms</div>
-                <div class="stat-label">Latência Média</div>
+                <div class="stat-value">9ms</div>
+                <div class="stat-label">Average Latency</div>
             </div>
         </div>
     </div>
@@ -172,34 +172,36 @@
     
     <div class="prompt-section">
         <div class="prompt-header">
-            🎯 Prompt 1: 01_direct.txt
+            Prompt 1: 01_direct.txt: From the following text, extract only the plan benefit start date. Do not output any other text, labels, or explanations. Just the date.
+
+Text: &quot;{{text_blob}}&quot;
         </div>
         <div class="prompt-content">
             <div class="prompt-text">From the following text, extract only the plan benefit start date. Do not output any other text, labels, or explanations. Just the date.
 
-Text: "{{text_blob}}"</div>
+Text: &quot;{{text_blob}}&quot;</div>
             
             <div class="metrics">
                 <div class="metric">
                     <div class="metric-value pass">100%</div>
-                    <div class="metric-label">Taxa de Sucesso</div>
+                    <div class="metric-label">Success Rate</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">52</div>
-                    <div class="metric-label">Tokens</div>
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">Total Tokens</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">5ms</div>
-                    <div class="metric-label">Latência</div>
+                    <div class="metric-value">n/a</div>
+                    <div class="metric-label">Average Latency</div>
                 </div>
                 <div class="metric">
                     <div class="metric-value">1</div>
-                    <div class="metric-label">Testes Passou</div>
+                    <div class="metric-label">Tests Passed</div>
                 </div>
             </div>
 
             <div class="test-results">
-                <h4>🧪 Resultados dos Testes:</h4>
+                <h4>Test Results</h4>
                 
             </div>
         </div>
@@ -207,7 +209,9 @@ Text: "{{text_blob}}"</div>
     
     <div class="prompt-section">
         <div class="prompt-header">
-            🎯 Prompt 2: 02_roleplay.txt
+            Prompt 2: 02_roleplay.txt: You are an expert data extraction robot. Your sole purpose is to find the primary start date from the text below. Output nothing but the date.
+
+Text: {{text_blob}}
         </div>
         <div class="prompt-content">
             <div class="prompt-text">You are an expert data extraction robot. Your sole purpose is to find the primary start date from the text below. Output nothing but the date.
@@ -217,24 +221,24 @@ Text: {{text_blob}}</div>
             <div class="metrics">
                 <div class="metric">
                     <div class="metric-value pass">100%</div>
-                    <div class="metric-label">Taxa de Sucesso</div>
+                    <div class="metric-label">Success Rate</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">55</div>
-                    <div class="metric-label">Tokens</div>
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">Total Tokens</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">9ms</div>
-                    <div class="metric-label">Latência</div>
+                    <div class="metric-value">n/a</div>
+                    <div class="metric-label">Average Latency</div>
                 </div>
                 <div class="metric">
                     <div class="metric-value">1</div>
-                    <div class="metric-label">Testes Passou</div>
+                    <div class="metric-label">Tests Passed</div>
                 </div>
             </div>
 
             <div class="test-results">
-                <h4>🧪 Resultados dos Testes:</h4>
+                <h4>Test Results</h4>
                 
             </div>
         </div>
@@ -242,7 +246,7 @@ Text: {{text_blob}}</div>
     
     <div class="prompt-section">
         <div class="prompt-header">
-            🎯 Prompt 3: 03_chain_of_thought.txt
+            Prompt 3: 03_chain_of_thought.txt: Analyze the following text to determine the main health plan start date: {{text_blob}}. After your analysis, state the final date and nothing else.
         </div>
         <div class="prompt-content">
             <div class="prompt-text">Analyze the following text to determine the main health plan start date: {{text_blob}}. After your analysis, state the final date and nothing else.</div>
@@ -250,24 +254,24 @@ Text: {{text_blob}}</div>
             <div class="metrics">
                 <div class="metric">
                     <div class="metric-value pass">100%</div>
-                    <div class="metric-label">Taxa de Sucesso</div>
+                    <div class="metric-label">Success Rate</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">78</div>
-                    <div class="metric-label">Tokens</div>
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">Total Tokens</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">13ms</div>
-                    <div class="metric-label">Latência</div>
+                    <div class="metric-value">n/a</div>
+                    <div class="metric-label">Average Latency</div>
                 </div>
                 <div class="metric">
                     <div class="metric-value">1</div>
-                    <div class="metric-label">Testes Passou</div>
+                    <div class="metric-label">Tests Passed</div>
                 </div>
             </div>
 
             <div class="test-results">
-                <h4>🧪 Resultados dos Testes:</h4>
+                <h4>Test Results</h4>
                 
             </div>
         </div>
@@ -275,7 +279,10 @@ Text: {{text_blob}}</div>
     
     <div class="prompt-section">
         <div class="prompt-header">
-            🎯 Prompt 4: 04_qa_format.txt
+            Prompt 4: 04_qa_format.txt: Text: {{text_blob}}
+
+Question: What is the plan benefit start date?
+Answer:
         </div>
         <div class="prompt-content">
             <div class="prompt-text">Text: {{text_blob}}
@@ -286,24 +293,24 @@ Answer:</div>
             <div class="metrics">
                 <div class="metric">
                     <div class="metric-value pass">100%</div>
-                    <div class="metric-label">Taxa de Sucesso</div>
+                    <div class="metric-label">Success Rate</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">59</div>
-                    <div class="metric-label">Tokens</div>
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">Total Tokens</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">11ms</div>
-                    <div class="metric-label">Latência</div>
+                    <div class="metric-value">n/a</div>
+                    <div class="metric-label">Average Latency</div>
                 </div>
                 <div class="metric">
                     <div class="metric-value">1</div>
-                    <div class="metric-label">Testes Passou</div>
+                    <div class="metric-label">Tests Passed</div>
                 </div>
             </div>
 
             <div class="test-results">
-                <h4>🧪 Resultados dos Testes:</h4>
+                <h4>Test Results</h4>
                 
             </div>
         </div>
@@ -311,7 +318,7 @@ Answer:</div>
     
     <div class="prompt-section">
         <div class="prompt-header">
-            🎯 Prompt 5: 05_emphasis.txt
+            Prompt 5: 05_emphasis.txt: Find the start date in this text: {{text_blob}}. Your entire response must be only the date string, without any additional words or explanation.
         </div>
         <div class="prompt-content">
             <div class="prompt-text">Find the start date in this text: {{text_blob}}. Your entire response must be only the date string, without any additional words or explanation.</div>
@@ -319,24 +326,24 @@ Answer:</div>
             <div class="metrics">
                 <div class="metric">
                     <div class="metric-value pass">100%</div>
-                    <div class="metric-label">Taxa de Sucesso</div>
+                    <div class="metric-label">Success Rate</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">62</div>
-                    <div class="metric-label">Tokens</div>
+                    <div class="metric-value">0</div>
+                    <div class="metric-label">Total Tokens</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">7ms</div>
-                    <div class="metric-label">Latência</div>
+                    <div class="metric-value">n/a</div>
+                    <div class="metric-label">Average Latency</div>
                 </div>
                 <div class="metric">
                     <div class="metric-value">1</div>
-                    <div class="metric-label">Testes Passou</div>
+                    <div class="metric-label">Tests Passed</div>
                 </div>
             </div>
 
             <div class="test-results">
-                <h4>🧪 Resultados dos Testes:</h4>
+                <h4>Test Results</h4>
                 
             </div>
         </div>
@@ -344,8 +351,8 @@ Answer:</div>
     
 
     <div class="footer">
-        <p>Relatório gerado automaticamente pelo promptfoo em 18/08/2025, 14:26:06</p>
-        <p>ID da Avaliação: eval-QYf-2025-08-18T17:23:35</p>
+        <p>Automatically generated from promptfoo output at 4/25/2026, 2:30:19 AM</p>
+        <p>Evaluation ID: eval-QYf-2025-08-18T17:23:35</p>
     </div>
 </body>
 </html>

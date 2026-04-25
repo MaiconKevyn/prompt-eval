@@ -1,0 +1,12 @@
+.codex
+.venv
+.claude
+__pycache__
+*.pyc
+*.pyo
+.idea/
+node_modules
+CLAUDE.md
+.promptfoo/
+artifacts/generated/*
+!artifacts/generated/.gitkeep

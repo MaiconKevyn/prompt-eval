@@ -1,11 +1,14 @@
 {
   "name": "prompt-evaluation",
   "version": "1.0.0",
-  "description": "Prompt evaluation project for extracting plan benefit start dates",
+  "description": "Prompt engineering benchmark for structured extraction prompt experiments",
   "scripts": {
-    "eval": "promptfoo eval",
+    "eval": "promptfoo eval -c configs/promptfoo.yaml -o artifacts/generated/evaluation-results.json",
     "view": "promptfoo view",
-    "test": "promptfoo eval && promptfoo view"
+    "report": "node scripts/generate-html-report.js --input artifacts/generated/evaluation-results.json --output artifacts/generated/evaluation-results.html",
+    "report:fixture": "node scripts/generate-html-report.js --input artifacts/fixtures/evaluation-results.json --output artifacts/fixtures/evaluation-results.html",
+    "analyze": "npm run eval && npm run report",
+    "test": "npm run analyze"
   },
   "dependencies": {
     "promptfoo": "^0.117.6"

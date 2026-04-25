@@ -1,0 +1,16 @@
+prompts:
+  - raw: file://../prompts/benefit_start_date/01_direct.txt
+    label: direct-extraction
+  - raw: file://../prompts/benefit_start_date/02_roleplay.txt
+    label: roleplay-extractor
+  - raw: file://../prompts/benefit_start_date/03_chain_of_thought.txt
+    label: analysis-first
+  - raw: file://../prompts/benefit_start_date/04_qa_format.txt
+    label: qa-format
+  - raw: file://../prompts/benefit_start_date/05_emphasis.txt
+    label: emphasis-only
+
+providers:
+  - id: ollama:chat:llama3.1:8b
+
+tests: file://../datasets/benefit_start_date/eval-cases.yaml

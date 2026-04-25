@@ -1,18 +1,86 @@
 const fs = require('fs');
 const path = require('path');
 
-// Read the JSON results
-const resultsPath = path.join(__dirname, 'evaluation-results.json');
+const DEFAULT_INPUT_PATH = path.join(__dirname, '..', 'artifacts', 'generated', 'evaluation-results.json');
+const DEFAULT_OUTPUT_PATH = path.join(__dirname, '..', 'artifacts', 'generated', 'evaluation-results.html');
+
+function parseArgs(argv) {
+    const args = {};
+
+    for (let index = 0; index < argv.length; index += 1) {
+        const token = argv[index];
+        const next = argv[index + 1];
+
+        if (token === '--input' && next) {
+            args.input = next;
+            index += 1;
+        } else if (token === '--output' && next) {
+            args.output = next;
+            index += 1;
+        }
+    }
+
+    return args;
+}
+
+const cliArgs = parseArgs(process.argv.slice(2));
+const resultsPath = path.resolve(cliArgs.input || DEFAULT_INPUT_PATH);
+const htmlPath = path.resolve(cliArgs.output || DEFAULT_OUTPUT_PATH);
 const results = JSON.parse(fs.readFileSync(resultsPath, 'utf8'));
 
-// Generate HTML report
+const getPromptName = (prompt) => {
+    if (!prompt || typeof prompt.label !== 'string') {
+        return 'unknown-prompt';
+    }
+
+    const label = prompt.label;
+    const labelParts = label.split('/');
+    return labelParts[labelParts.length - 1] || label;
+};
+
+const escapeHtml = (value) => String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+const formatLatency = (latencyMs) => {
+    if (!Number.isFinite(latencyMs)) {
+        return 'n/a';
+    }
+
+    return `${Math.round(latencyMs)}ms`;
+};
+
+const getResultLatency = (result) => Number(result?.latencyMs ?? result?.response?.latencyMs ?? NaN);
+
+const promptSummaries = results.results.prompts.map((prompt) => {
+    const promptResults = results.results.results.filter((result) => result.prompt?.raw === prompt.raw);
+    const totalLatencyMs = promptResults.reduce((acc, result) => acc + getResultLatency(result), 0);
+    const totalTokens = promptResults.reduce((acc, result) => acc + Number(result?.response?.tokenUsage?.total ?? 0), 0);
+
+    return {
+        prompt,
+        promptResults,
+        averageLatencyMs: promptResults.length > 0 ? totalLatencyMs / promptResults.length : NaN,
+        totalTokens,
+    };
+});
+
+const totalTokens = promptSummaries.reduce((acc, item) => acc + item.totalTokens, 0);
+const totalLatencyMs = results.results.results.reduce((acc, result) => acc + getResultLatency(result), 0);
+const averageLatencyMs = results.results.results.length > 0
+    ? totalLatencyMs / results.results.results.length
+    : NaN;
+
 const html = `
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Avaliação de Prompts</title>
+    <title>Prompt Evaluation Report</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -150,70 +218,73 @@ const html = `
 </head>
 <body>
     <div class="header">
-        <h1>📊 Relatório de Avaliação de Prompts</h1>
-        <p>Extração de Datas de Planos de Benefícios</p>
-        <p>Executado em: ${new Date(results.results.timestamp).toLocaleString('pt-BR')}</p>
+        <h1>Prompt Evaluation Report</h1>
+        <p>Benefit Start Date Extraction Benchmark</p>
+        <p>Executed at: ${new Date(results.results.timestamp).toLocaleString('en-US')}</p>
     </div>
 
     <div class="summary">
-        <h2>📈 Resumo da Avaliação</h2>
+        <h2>Evaluation Summary</h2>
         <div class="stats">
             <div class="stat-card">
                 <div class="stat-value">${results.results.prompts.length}</div>
-                <div class="stat-label">Prompts Testados</div>
+                <div class="stat-label">Prompts Tested</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">${results.results.results.length}</div>
-                <div class="stat-label">Casos de Teste</div>
+                <div class="stat-label">Test Cases</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">${results.results.results.reduce((acc, r) => acc + r.response.tokenUsage.total, 0)}</div>
-                <div class="stat-label">Tokens Utilizados</div>
+                <div class="stat-value">${totalTokens}</div>
+                <div class="stat-label">Tokens Used</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">${Math.round(results.results.results.reduce((acc, r) => acc + r.response.latencyMs, 0) / results.results.results.length)}ms</div>
-                <div class="stat-label">Latência Média</div>
+                <div class="stat-value">${formatLatency(averageLatencyMs)}</div>
+                <div class="stat-label">Average Latency</div>
             </div>
         </div>
     </div>
 
-    ${results.results.prompts.map((prompt, index) => `
+    ${promptSummaries.map(({ prompt, promptResults, averageLatencyMs, totalTokens }, index) => `
     <div class="prompt-section">
         <div class="prompt-header">
-            🎯 Prompt ${index + 1}: ${prompt.label.split('/').pop().split(':')[0]}
+            Prompt ${index + 1}: ${escapeHtml(getPromptName(prompt))}
         </div>
         <div class="prompt-content">
-            <div class="prompt-text">${prompt.raw}</div>
+            <div class="prompt-text">${escapeHtml(prompt.raw)}</div>
             
             <div class="metrics">
                 <div class="metric">
                     <div class="metric-value ${prompt.metrics.score === 1 ? 'pass' : 'fail'}">${Math.round(prompt.metrics.score * 100)}%</div>
-                    <div class="metric-label">Taxa de Sucesso</div>
+                    <div class="metric-label">Success Rate</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">${prompt.metrics.tokenUsage.total}</div>
-                    <div class="metric-label">Tokens</div>
+                    <div class="metric-value">${totalTokens}</div>
+                    <div class="metric-label">Total Tokens</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value">${prompt.metrics.totalLatencyMs}ms</div>
-                    <div class="metric-label">Latência</div>
+                    <div class="metric-value">${formatLatency(averageLatencyMs)}</div>
+                    <div class="metric-label">Average Latency</div>
                 </div>
                 <div class="metric">
                     <div class="metric-value">${prompt.metrics.testPassCount}</div>
-                    <div class="metric-label">Testes Passou</div>
+                    <div class="metric-label">Tests Passed</div>
                 </div>
             </div>
 
             <div class="test-results">
-                <h4>🧪 Resultados dos Testes:</h4>
-                ${results.results.results.filter(r => r.response.prompt === prompt.raw).map((result, testIndex) => `
+                <h4>Test Results</h4>
+                ${promptResults.map((result, testIndex) => `
                 <div class="test-case">
-                    <div class="test-header">Teste ${testIndex + 1}</div>
+                    <div class="test-header">Test ${testIndex + 1}</div>
                     <div class="test-content">
-                        <strong>Entrada:</strong> ${result.vars.text_blob.substring(0, 100)}...<br>
-                        <strong>Resposta:</strong> "${result.response.output}"<br>
-                        <strong>Esperado:</strong> ${result.vars.expected_date}<br>
-                        <strong>Status:</strong> <span class="pass">✅ PASSOU</span>
+                        <strong>Description:</strong> ${escapeHtml(result.testCase?.description || 'n/a')}<br>
+                        <strong>Category:</strong> ${escapeHtml(result.testCase?.metadata?.category || 'n/a')}<br>
+                        <strong>Input:</strong> ${escapeHtml((result.vars.text_blob || '').substring(0, 140))}${(result.vars.text_blob || '').length > 140 ? '...' : ''}<br>
+                        <strong>Output:</strong> "${escapeHtml(result.response.output)}"<br>
+                        <strong>Expected:</strong> ${escapeHtml(result.vars.expected_date || 'n/a')}<br>
+                        <strong>Latency:</strong> ${formatLatency(getResultLatency(result))}<br>
+                        <strong>Status:</strong> <span class="${result.success ? 'pass' : 'fail'}">${result.success ? 'PASS' : 'FAIL'}</span>
                     </div>
                 </div>
                 `).join('')}
@@ -223,15 +294,14 @@ const html = `
     `).join('')}
 
     <div class="footer">
-        <p>Relatório gerado automaticamente pelo promptfoo em ${new Date().toLocaleString('pt-BR')}</p>
-        <p>ID da Avaliação: ${results.evalId}</p>
+        <p>Automatically generated from promptfoo output at ${new Date().toLocaleString('en-US')}</p>
+        <p>Evaluation ID: ${results.evalId}</p>
     </div>
 </body>
 </html>
 `;
 
-// Save HTML report
-const htmlPath = path.join(__dirname, 'evaluation-results.html');
+fs.mkdirSync(path.dirname(htmlPath), { recursive: true });
 fs.writeFileSync(htmlPath, html);
 
-console.log(`Relatório HTML gerado com sucesso em: ${htmlPath}`);
+console.log(`HTML report generated at: ${htmlPath}`);

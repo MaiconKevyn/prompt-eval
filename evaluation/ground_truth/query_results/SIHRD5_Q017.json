@@ -1,0 +1,108 @@
+{
+  "id": "SIHRD5_Q017",
+  "question_pt": "Qual foi o valor total por ano de entrada?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 1.035,
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "valor_total"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "valor_total": 66804.04
+    },
+    {
+      "ano": 2001,
+      "valor_total": 35385.07
+    },
+    {
+      "ano": 2002,
+      "valor_total": 16168.21
+    },
+    {
+      "ano": 2003,
+      "valor_total": 1917.93
+    },
+    {
+      "ano": 2005,
+      "valor_total": 14187.47
+    },
+    {
+      "ano": 2006,
+      "valor_total": 63953.35
+    },
+    {
+      "ano": 2007,
+      "valor_total": 714520809.23
+    },
+    {
+      "ano": 2008,
+      "valor_total": 11302888818.35
+    },
+    {
+      "ano": 2009,
+      "valor_total": 11833531204.47
+    },
+    {
+      "ano": 2010,
+      "valor_total": 12735514045.93
+    },
+    {
+      "ano": 2011,
+      "valor_total": 13362357837.73
+    },
+    {
+      "ano": 2012,
+      "valor_total": 13918253047.96
+    },
+    {
+      "ano": 2013,
+      "valor_total": 15012441315.87
+    },
+    {
+      "ano": 2014,
+      "valor_total": 15792991258.48
+    },
+    {
+      "ano": 2015,
+      "valor_total": 16180140241.9
+    },
+    {
+      "ano": 2016,
+      "valor_total": 16618814978.37
+    },
+    {
+      "ano": 2017,
+      "valor_total": 17301494411.89
+    },
+    {
+      "ano": 2018,
+      "valor_total": 17975662786.9
+    },
+    {
+      "ano": 2019,
+      "valor_total": 18785819030.8
+    },
+    {
+      "ano": 2020,
+      "valor_total": 21540364332.04
+    },
+    {
+      "ano": 2021,
+      "valor_total": 30803898072.58
+    },
+    {
+      "ano": 2022,
+      "valor_total": 24190816482.51
+    },
+    {
+      "ano": 2023,
+      "valor_total": 23413601002.91
+    }
+  ],
+  "result_hash": "2aba5399009012b5e33aaff87bfe67d83910313659cebf9758eaa681405d50ac"
+}

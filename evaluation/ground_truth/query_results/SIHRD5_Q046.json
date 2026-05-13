@@ -1,0 +1,76 @@
+{
+  "id": "SIHRD5_Q046",
+  "question_pt": "Quais especialidades tiveram maior volume de internacoes?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT e.DESCRICAO AS especialidade, COUNT(*) AS internacoes FROM internacoes i JOIN especialidade e ON i.ESPEC = e.ESPEC GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
+  "duration_seconds": 0.278,
+  "row_count": 15,
+  "columns": [
+    "especialidade",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "especialidade": "CIRURGIA GERAL",
+      "internacoes": 66592564
+    },
+    {
+      "especialidade": "BUCO MAXILO FACIAL",
+      "internacoes": 57484340
+    },
+    {
+      "especialidade": "CARDIOLOGIA",
+      "internacoes": 34051416
+    },
+    {
+      "especialidade": "CIRURGICO/DIAGNOSTICO/TERAPEUTICO",
+      "internacoes": 19967078
+    },
+    {
+      "especialidade": "GASTROENTEROLOGIA",
+      "internacoes": 2847736
+    },
+    {
+      "especialidade": "NEUROCIRURGIA",
+      "internacoes": 1545414
+    },
+    {
+      "especialidade": "ENDOCRINOLOGIA",
+      "internacoes": 339853
+    },
+    {
+      "especialidade": "NEFROLOGIAUROLOGIA",
+      "internacoes": 253952
+    },
+    {
+      "especialidade": "OTORRINOLARINGOLOGIA",
+      "internacoes": 235106
+    },
+    {
+      "especialidade": "SAUDE MENTAL",
+      "internacoes": 230078
+    },
+    {
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 116261
+    },
+    {
+      "especialidade": "GINECOLOGIA",
+      "internacoes": 111362
+    },
+    {
+      "especialidade": "ONCOLOGIA",
+      "internacoes": 92261
+    },
+    {
+      "especialidade": "ORTOPEDIATRAUMATOLOGIA",
+      "internacoes": 6902
+    },
+    {
+      "especialidade": "OFTALMOLOGIA",
+      "internacoes": 78
+    }
+  ],
+  "result_hash": "6cfab21433bac1d5c4600d014421daced756103b7fac23d152ac07beb4476f27"
+}

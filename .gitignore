@@ -11,3 +11,6 @@ CLAUDE.md
 artifacts/generated/*
 !artifacts/generated/.gitkeep
 img.png
+*.duckdb
+*.duckdb.wal
+*.duckdb.tmp

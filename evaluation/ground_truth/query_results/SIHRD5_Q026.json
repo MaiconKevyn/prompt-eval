@@ -1,0 +1,40 @@
+{
+  "id": "SIHRD5_Q026",
+  "question_pt": "Qual e a distribuicao das internacoes por faixa etaria?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT CASE WHEN IDADE < 1 THEN '00_<1' WHEN IDADE BETWEEN 1 AND 4 THEN '01_1_4' WHEN IDADE BETWEEN 5 AND 14 THEN '02_5_14' WHEN IDADE BETWEEN 15 AND 24 THEN '03_15_24' WHEN IDADE BETWEEN 25 AND 44 THEN '04_25_44' WHEN IDADE BETWEEN 45 AND 64 THEN '05_45_64' WHEN IDADE >= 65 THEN '06_65_plus' ELSE '99_ignorado' END AS faixa_etaria, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 1.232,
+  "row_count": 6,
+  "columns": [
+    "faixa_etaria",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "faixa_etaria": "00_<1",
+      "internacoes": 22907520
+    },
+    {
+      "faixa_etaria": "02_5_14",
+      "internacoes": 5576496
+    },
+    {
+      "faixa_etaria": "03_15_24",
+      "internacoes": 30280473
+    },
+    {
+      "faixa_etaria": "04_25_44",
+      "internacoes": 50706860
+    },
+    {
+      "faixa_etaria": "05_45_64",
+      "internacoes": 38772492
+    },
+    {
+      "faixa_etaria": "06_65_plus",
+      "internacoes": 35633378
+    }
+  ],
+  "result_hash": "fc871b0b0ceed60e6abc2686e1c1c8bc547b24ad7a4b8249798fcef3ff50ca63"
+}

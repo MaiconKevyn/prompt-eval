@@ -1,0 +1,152 @@
+{
+  "id": "SIHRD5_Q041",
+  "question_pt": "Quantas internacoes e qual valor total por UF de residencia?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT m.SG_UF, COUNT(*) AS internacoes, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY internacoes DESC",
+  "duration_seconds": 1.392,
+  "row_count": 27,
+  "columns": [
+    "SG_UF",
+    "internacoes",
+    "valor_total"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "SP",
+      "internacoes": 37750172,
+      "valor_total": 65999677549.54
+    },
+    {
+      "SG_UF": "MG",
+      "internacoes": 19403123,
+      "valor_total": 34899738095.24
+    },
+    {
+      "SG_UF": "BA",
+      "internacoes": 13289208,
+      "valor_total": 15655044149.59
+    },
+    {
+      "SG_UF": "PR",
+      "internacoes": 12700186,
+      "valor_total": 24007925832.21
+    },
+    {
+      "SG_UF": "RS",
+      "internacoes": 11834981,
+      "valor_total": 20292376586.16
+    },
+    {
+      "SG_UF": "RJ",
+      "internacoes": 10939273,
+      "valor_total": 17238517757.09
+    },
+    {
+      "SG_UF": "PE",
+      "internacoes": 8532465,
+      "valor_total": 13502252721.22
+    },
+    {
+      "SG_UF": "PA",
+      "internacoes": 7958966,
+      "valor_total": 7478331366.4
+    },
+    {
+      "SG_UF": "CE",
+      "internacoes": 7813316,
+      "valor_total": 10417216394.28
+    },
+    {
+      "SG_UF": "SC",
+      "internacoes": 7223756,
+      "valor_total": 12996451904.97
+    },
+    {
+      "SG_UF": "MA",
+      "internacoes": 6804713,
+      "valor_total": 6401860266.55
+    },
+    {
+      "SG_UF": "GO",
+      "internacoes": 6179099,
+      "valor_total": 8855861956.94
+    },
+    {
+      "SG_UF": "ES",
+      "internacoes": 3656717,
+      "valor_total": 5938445961.28
+    },
+    {
+      "SG_UF": "PI",
+      "internacoes": 3338399,
+      "valor_total": 3368022229.32
+    },
+    {
+      "SG_UF": "PB",
+      "internacoes": 3223339,
+      "valor_total": 4414466432.71
+    },
+    {
+      "SG_UF": "MT",
+      "internacoes": 3028008,
+      "valor_total": 3904079438.57
+    },
+    {
+      "SG_UF": "AM",
+      "internacoes": 2877882,
+      "valor_total": 3283628918.7
+    },
+    {
+      "SG_UF": "AL",
+      "internacoes": 2724676,
+      "valor_total": 3567420178.33
+    },
+    {
+      "SG_UF": "RN",
+      "internacoes": 2708573,
+      "valor_total": 4314434369.79
+    },
+    {
+      "SG_UF": "MS",
+      "internacoes": 2706080,
+      "valor_total": 4129896893.26
+    },
+    {
+      "SG_UF": "RO",
+      "internacoes": 1738501,
+      "valor_total": 1846169112.29
+    },
+    {
+      "SG_UF": "SE",
+      "internacoes": 1484587,
+      "valor_total": 2126006432.7
+    },
+    {
+      "SG_UF": "TO",
+      "internacoes": 1465583,
+      "valor_total": 1676243390.83
+    },
+    {
+      "SG_UF": "DF",
+      "internacoes": 1264585,
+      "valor_total": 1956743257.45
+    },
+    {
+      "SG_UF": "AC",
+      "internacoes": 772507,
+      "valor_total": 720567357.8
+    },
+    {
+      "SG_UF": "RR",
+      "internacoes": 601447,
+      "valor_total": 593208943.82
+    },
+    {
+      "SG_UF": "AP",
+      "internacoes": 586680,
+      "valor_total": 496805211.33
+    }
+  ],
+  "result_hash": "80b00ac973bb8c70f620d07cd3dcc19c8721940713157162d61ffe62feb99b8c"
+}

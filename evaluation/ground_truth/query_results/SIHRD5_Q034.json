@@ -1,0 +1,167 @@
+{
+  "id": "SIHRD5_Q034",
+  "question_pt": "Quantas internacoes ocorreram por mes calendario?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, month(DT_INTER) AS mes, COUNT(*) AS internacoes FROM internacoes GROUP BY 1, 2 ORDER BY 1, 2",
+  "duration_seconds": 0.229,
+  "row_count": 225,
+  "columns": [
+    "ano",
+    "mes",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "mes": 1,
+      "internacoes": 1
+    },
+    {
+      "ano": 2000,
+      "mes": 3,
+      "internacoes": 2
+    },
+    {
+      "ano": 2000,
+      "mes": 6,
+      "internacoes": 3
+    },
+    {
+      "ano": 2000,
+      "mes": 7,
+      "internacoes": 1
+    },
+    {
+      "ano": 2000,
+      "mes": 11,
+      "internacoes": 2
+    },
+    {
+      "ano": 2001,
+      "mes": 4,
+      "internacoes": 1
+    },
+    {
+      "ano": 2001,
+      "mes": 11,
+      "internacoes": 1
+    },
+    {
+      "ano": 2002,
+      "mes": 2,
+      "internacoes": 1
+    },
+    {
+      "ano": 2002,
+      "mes": 3,
+      "internacoes": 1
+    },
+    {
+      "ano": 2003,
+      "mes": 1,
+      "internacoes": 1
+    },
+    {
+      "ano": 2005,
+      "mes": 1,
+      "internacoes": 1
+    },
+    {
+      "ano": 2005,
+      "mes": 3,
+      "internacoes": 1
+    },
+    {
+      "ano": 2005,
+      "mes": 5,
+      "internacoes": 2
+    },
+    {
+      "ano": 2005,
+      "mes": 11,
+      "internacoes": 2
+    },
+    {
+      "ano": 2006,
+      "mes": 1,
+      "internacoes": 1
+    },
+    {
+      "ano": 2006,
+      "mes": 3,
+      "internacoes": 1
+    },
+    {
+      "ano": 2006,
+      "mes": 6,
+      "internacoes": 1
+    },
+    {
+      "ano": 2006,
+      "mes": 8,
+      "internacoes": 1
+    },
+    {
+      "ano": 2006,
+      "mes": 9,
+      "internacoes": 1
+    },
+    {
+      "ano": 2006,
+      "mes": 10,
+      "internacoes": 1
+    },
+    {
+      "ano": 2006,
+      "mes": 11,
+      "internacoes": 1
+    },
+    {
+      "ano": 2007,
+      "mes": 1,
+      "internacoes": 62
+    },
+    {
+      "ano": 2007,
+      "mes": 2,
+      "internacoes": 64
+    },
+    {
+      "ano": 2007,
+      "mes": 3,
+      "internacoes": 4
+    },
+    {
+      "ano": 2007,
+      "mes": 4,
+      "internacoes": 6
+    },
+    {
+      "ano": 2007,
+      "mes": 5,
+      "internacoes": 17
+    },
+    {
+      "ano": 2007,
+      "mes": 6,
+      "internacoes": 38
+    },
+    {
+      "ano": 2007,
+      "mes": 7,
+      "internacoes": 387
+    },
+    {
+      "ano": 2007,
+      "mes": 8,
+      "internacoes": 6334
+    },
+    {
+      "ano": 2007,
+      "mes": 9,
+      "internacoes": 15959
+    }
+  ],
+  "result_hash": "dbda384829ba2db4c15a8fff6cd8ecfce46d97030eef37d0bd964053bcc58bb1"
+}

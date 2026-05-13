@@ -1,0 +1,138 @@
+{
+  "id": "SIHRD5_Q060",
+  "question_pt": "Quais hospitais tiveram maior valor total registrado?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT i.CNES, h.NO_HOSPITAL, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total, COUNT(*) AS internacoes FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES GROUP BY 1, 2 ORDER BY valor_total DESC LIMIT 20",
+  "duration_seconds": 2.952,
+  "row_count": 20,
+  "columns": [
+    "CNES",
+    "NO_HOSPITAL",
+    "valor_total",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "CNES": 2078015,
+      "NO_HOSPITAL": null,
+      "valor_total": 2984765340.75,
+      "internacoes": 761959
+    },
+    {
+      "CNES": 27014,
+      "NO_HOSPITAL": "SANTA CASA DE MISERICORDIA DE BELO HORIZONTE",
+      "valor_total": 2222411246.25,
+      "internacoes": 623140
+    },
+    {
+      "CNES": 2077396,
+      "NO_HOSPITAL": null,
+      "valor_total": 2219961433.86,
+      "internacoes": 582168
+    },
+    {
+      "CNES": 13846,
+      "NO_HOSPITAL": "MATERNIDADE E CIRURGIA NOSSA SENHORA DO ROCIO LTDA",
+      "valor_total": 2205626659.45,
+      "internacoes": 569114
+    },
+    {
+      "CNES": 13633,
+      "NO_HOSPITAL": "SOCIEDADE HOSPITALAR ANGELINA CARON",
+      "valor_total": 1916450135.27,
+      "internacoes": 454384
+    },
+    {
+      "CNES": 2082187,
+      "NO_HOSPITAL": "FUNDACAO DE APOIO AO ENSINO PESQUISA E ASSISTENCIA HCFMRP",
+      "valor_total": 1825516824.13,
+      "internacoes": 592426
+    },
+    {
+      "CNES": 2071568,
+      "NO_HOSPITAL": null,
+      "valor_total": 1783998583.96,
+      "internacoes": 197263
+    },
+    {
+      "CNES": 434,
+      "NO_HOSPITAL": "INSTITUTO DE MEDICINA INTEGRAL PROF FERNANDO FIGUEIRA",
+      "valor_total": 1702212892.73,
+      "internacoes": 719254
+    },
+    {
+      "CNES": 2237601,
+      "NO_HOSPITAL": "HOSPITAL DE CLINICAS DE PORTO ALEGRE",
+      "valor_total": 1480788783.81,
+      "internacoes": 521837
+    },
+    {
+      "CNES": 2688689,
+      "NO_HOSPITAL": null,
+      "valor_total": 1438902741.61,
+      "internacoes": 467320
+    },
+    {
+      "CNES": 2237253,
+      "NO_HOSPITAL": "IRMANDADE DA SANTA CASA DE MISERICORDIA DE PORTO ALEGRE",
+      "valor_total": 1430173731.72,
+      "internacoes": 368826
+    },
+    {
+      "CNES": 9717,
+      "NO_HOSPITAL": null,
+      "valor_total": 1386934533.07,
+      "internacoes": 424481
+    },
+    {
+      "CNES": 2079798,
+      "NO_HOSPITAL": null,
+      "valor_total": 1382174679.84,
+      "internacoes": 442815
+    },
+    {
+      "CNES": 2077477,
+      "NO_HOSPITAL": "CASA DE SAUDE SANTA MARCELINA",
+      "valor_total": 1378211972.65,
+      "internacoes": 432735
+    },
+    {
+      "CNES": 2080575,
+      "NO_HOSPITAL": "REAL E BENEMERITA ASSOCIACAO PORTUGUESA DE BENEFICENCIA",
+      "valor_total": 1311854081.33,
+      "internacoes": 171205
+    },
+    {
+      "CNES": 2237571,
+      "NO_HOSPITAL": null,
+      "valor_total": 1208428481.65,
+      "internacoes": 587240
+    },
+    {
+      "CNES": 2246988,
+      "NO_HOSPITAL": "ASSOCIACAO HOSPITALAR BENEFICENTE SAO VICENTE DE PAULO",
+      "valor_total": 1185887416.83,
+      "internacoes": 364975
+    },
+    {
+      "CNES": 655,
+      "NO_HOSPITAL": null,
+      "valor_total": 1159463070.54,
+      "internacoes": 522136
+    },
+    {
+      "CNES": 27049,
+      "NO_HOSPITAL": "UNIVERSIDADE FEDERAL DE MINAS GERAIS HOSPITAL DAS CLINICAS",
+      "valor_total": 1143947997.33,
+      "internacoes": 296353
+    },
+    {
+      "CNES": 2077485,
+      "NO_HOSPITAL": null,
+      "valor_total": 1129242663.33,
+      "internacoes": 371173
+    }
+  ],
+  "result_hash": "0c156421094492247be2d5c7043a5572f0909308f8c03aa46fff831bbbf1ff10"
+}

@@ -1,0 +1,96 @@
+{
+  "id": "SIHRD5_Q098",
+  "question_pt": "Quais CNES sem nome cadastrado concentram mais internacoes?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT i.CNES, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i.CNES = h.CNES WHERE h.NO_HOSPITAL IS NULL OR h.NO_HOSPITAL = '' GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
+  "duration_seconds": 0.392,
+  "row_count": 20,
+  "columns": [
+    "CNES",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "CNES": 2078015,
+      "internacoes": 761959
+    },
+    {
+      "CNES": 2237571,
+      "internacoes": 587240
+    },
+    {
+      "CNES": 2077396,
+      "internacoes": 582168
+    },
+    {
+      "CNES": 655,
+      "internacoes": 522136
+    },
+    {
+      "CNES": 2688689,
+      "internacoes": 467320
+    },
+    {
+      "CNES": 2079798,
+      "internacoes": 442815
+    },
+    {
+      "CNES": 9717,
+      "internacoes": 424481
+    },
+    {
+      "CNES": 2755130,
+      "internacoes": 385833
+    },
+    {
+      "CNES": 2077485,
+      "internacoes": 371173
+    },
+    {
+      "CNES": 2748223,
+      "internacoes": 359852
+    },
+    {
+      "CNES": 10456,
+      "internacoes": 349390
+    },
+    {
+      "CNES": 2146355,
+      "internacoes": 343304
+    },
+    {
+      "CNES": 10472,
+      "internacoes": 338783
+    },
+    {
+      "CNES": 2205440,
+      "internacoes": 334480
+    },
+    {
+      "CNES": 9628,
+      "internacoes": 332065
+    },
+    {
+      "CNES": 3021114,
+      "internacoes": 314447
+    },
+    {
+      "CNES": 10499,
+      "internacoes": 306426
+    },
+    {
+      "CNES": 15369,
+      "internacoes": 299611
+    },
+    {
+      "CNES": 2802104,
+      "internacoes": 295644
+    },
+    {
+      "CNES": 2802783,
+      "internacoes": 278106
+    }
+  ],
+  "result_hash": "5371f42d0788d0cab26141f1d17c2733f773935d81cc552253cb05eb505d9cf5"
+}

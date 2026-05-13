@@ -1,0 +1,156 @@
+{
+  "id": "SIHRD5_Q081",
+  "question_pt": "Qual foi a taxa de uso de UTI por ano?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE MARCA_UTI <> 0 OR UTI_INT_TO > 0) AS com_uti, ROUND(100.0 * COUNT(*) FILTER (WHERE MARCA_UTI <> 0 OR UTI_INT_TO > 0) / COUNT(*), 4) AS taxa_uti_pct FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 0.351,
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "internacoes",
+    "com_uti",
+    "taxa_uti_pct"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "internacoes": 9,
+      "com_uti": 0,
+      "taxa_uti_pct": 0.0
+    },
+    {
+      "ano": 2001,
+      "internacoes": 2,
+      "com_uti": 0,
+      "taxa_uti_pct": 0.0
+    },
+    {
+      "ano": 2002,
+      "internacoes": 2,
+      "com_uti": 0,
+      "taxa_uti_pct": 0.0
+    },
+    {
+      "ano": 2003,
+      "internacoes": 1,
+      "com_uti": 0,
+      "taxa_uti_pct": 0.0
+    },
+    {
+      "ano": 2005,
+      "internacoes": 6,
+      "com_uti": 0,
+      "taxa_uti_pct": 0.0
+    },
+    {
+      "ano": 2006,
+      "internacoes": 7,
+      "com_uti": 0,
+      "taxa_uti_pct": 0.0
+    },
+    {
+      "ano": 2007,
+      "internacoes": 602947,
+      "com_uti": 39277,
+      "taxa_uti_pct": 6.5142
+    },
+    {
+      "ano": 2008,
+      "internacoes": 10847458,
+      "com_uti": 472827,
+      "taxa_uti_pct": 4.3589
+    },
+    {
+      "ano": 2009,
+      "internacoes": 11114857,
+      "com_uti": 513959,
+      "taxa_uti_pct": 4.6241
+    },
+    {
+      "ano": 2010,
+      "internacoes": 11347880,
+      "com_uti": 554193,
+      "taxa_uti_pct": 4.8837
+    },
+    {
+      "ano": 2011,
+      "internacoes": 11267097,
+      "com_uti": 587203,
+      "taxa_uti_pct": 5.2117
+    },
+    {
+      "ano": 2012,
+      "internacoes": 11103250,
+      "com_uti": 615977,
+      "taxa_uti_pct": 5.5477
+    },
+    {
+      "ano": 2013,
+      "internacoes": 11179438,
+      "com_uti": 645118,
+      "taxa_uti_pct": 5.7706
+    },
+    {
+      "ano": 2014,
+      "internacoes": 11353704,
+      "com_uti": 681682,
+      "taxa_uti_pct": 6.004
+    },
+    {
+      "ano": 2015,
+      "internacoes": 11325421,
+      "com_uti": 702909,
+      "taxa_uti_pct": 6.2065
+    },
+    {
+      "ano": 2016,
+      "internacoes": 11256224,
+      "com_uti": 724649,
+      "taxa_uti_pct": 6.4378
+    },
+    {
+      "ano": 2017,
+      "internacoes": 11522847,
+      "com_uti": 764702,
+      "taxa_uti_pct": 6.6364
+    },
+    {
+      "ano": 2018,
+      "internacoes": 11857648,
+      "com_uti": 799550,
+      "taxa_uti_pct": 6.7429
+    },
+    {
+      "ano": 2019,
+      "internacoes": 12185437,
+      "com_uti": 854890,
+      "taxa_uti_pct": 7.0157
+    },
+    {
+      "ano": 2020,
+      "internacoes": 10531843,
+      "com_uti": 960632,
+      "taxa_uti_pct": 9.1212
+    },
+    {
+      "ano": 2021,
+      "internacoes": 11566528,
+      "com_uti": 1183403,
+      "taxa_uti_pct": 10.2313
+    },
+    {
+      "ano": 2022,
+      "internacoes": 12363889,
+      "com_uti": 1080116,
+      "taxa_uti_pct": 8.7361
+    },
+    {
+      "ano": 2023,
+      "internacoes": 12450724,
+      "com_uti": 1073004,
+      "taxa_uti_pct": 8.618
+    }
+  ],
+  "result_hash": "04f34be8c8165fd0e131c58677c186c250ae4c92cfcf9628653b775bdab67712"
+}

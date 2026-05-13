@@ -1,0 +1,22 @@
+{
+  "id": "SIHRD5_Q015",
+  "question_pt": "Quantos dias existem na dimensao tempo?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS dias_calendario, MIN(data) AS data_inicial, MAX(data) AS data_final FROM tempo",
+  "duration_seconds": 0.001,
+  "row_count": 1,
+  "columns": [
+    "dias_calendario",
+    "data_inicial",
+    "data_final"
+  ],
+  "preview_rows": [
+    {
+      "dias_calendario": 6210,
+      "data_inicial": "2008-01-01",
+      "data_final": "2024-12-31"
+    }
+  ],
+  "result_hash": "dd51dcc8bebb29be4799ac49c1f6402b822d319c118bada5dd7822de9f07ae74"
+}

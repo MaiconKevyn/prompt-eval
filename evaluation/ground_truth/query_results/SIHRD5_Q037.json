@@ -1,0 +1,68 @@
+{
+  "id": "SIHRD5_Q037",
+  "question_pt": "Qual e a populacao total registrada por ano nos indicadores socioeconomicos?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT NU_ANO AS ano, SUM(QT_POPULACAO) AS populacao_total FROM socioeconomico GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 0.001,
+  "row_count": 13,
+  "columns": [
+    "ano",
+    "populacao_total"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2008,
+      "populacao_total": 189612823
+    },
+    {
+      "ano": 2009,
+      "populacao_total": 191480630
+    },
+    {
+      "ano": 2011,
+      "populacao_total": 192379287
+    },
+    {
+      "ano": 2012,
+      "populacao_total": 193946886
+    },
+    {
+      "ano": 2013,
+      "populacao_total": 201032714
+    },
+    {
+      "ano": 2014,
+      "populacao_total": 202768562
+    },
+    {
+      "ano": 2015,
+      "populacao_total": 204450049
+    },
+    {
+      "ano": 2016,
+      "populacao_total": 206081432
+    },
+    {
+      "ano": 2017,
+      "populacao_total": 207660929
+    },
+    {
+      "ano": 2018,
+      "populacao_total": 208494900
+    },
+    {
+      "ano": 2019,
+      "populacao_total": 210147125
+    },
+    {
+      "ano": 2020,
+      "populacao_total": 211755692
+    },
+    {
+      "ano": 2021,
+      "populacao_total": 213317639
+    }
+  ],
+  "result_hash": "a2ddcbf455ec7f8a82fb509d2965f06b07be1462112f6147803b8794b1f29ded"
+}

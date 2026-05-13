@@ -1,0 +1,180 @@
+{
+  "id": "SIHRD5_Q055",
+  "question_pt": "Qual e a taxa de mortalidade hospitalar por UF de residencia?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT m.SG_UF, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE i.MORTE) AS mortes, ROUND(100.0 * COUNT(*) FILTER (WHERE i.MORTE) / COUNT(*), 4) AS taxa_morte_pct FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY taxa_morte_pct DESC",
+  "duration_seconds": 0.553,
+  "row_count": 27,
+  "columns": [
+    "SG_UF",
+    "internacoes",
+    "mortes",
+    "taxa_morte_pct"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "RJ",
+      "internacoes": 10939273,
+      "mortes": 718999,
+      "taxa_morte_pct": 6.5726
+    },
+    {
+      "SG_UF": "SP",
+      "internacoes": 37750172,
+      "mortes": 1973309,
+      "taxa_morte_pct": 5.2273
+    },
+    {
+      "SG_UF": "RS",
+      "internacoes": 11834981,
+      "mortes": 612014,
+      "taxa_morte_pct": 5.1712
+    },
+    {
+      "SG_UF": "MG",
+      "internacoes": 19403123,
+      "mortes": 912137,
+      "taxa_morte_pct": 4.701
+    },
+    {
+      "SG_UF": "PB",
+      "internacoes": 3223339,
+      "mortes": 142190,
+      "taxa_morte_pct": 4.4113
+    },
+    {
+      "SG_UF": "SE",
+      "internacoes": 1484587,
+      "mortes": 64883,
+      "taxa_morte_pct": 4.3704
+    },
+    {
+      "SG_UF": "PE",
+      "internacoes": 8532465,
+      "mortes": 365693,
+      "taxa_morte_pct": 4.2859
+    },
+    {
+      "SG_UF": "SC",
+      "internacoes": 7223756,
+      "mortes": 309453,
+      "taxa_morte_pct": 4.2838
+    },
+    {
+      "SG_UF": "PR",
+      "internacoes": 12700186,
+      "mortes": 523117,
+      "taxa_morte_pct": 4.119
+    },
+    {
+      "SG_UF": "MS",
+      "internacoes": 2706080,
+      "mortes": 108115,
+      "taxa_morte_pct": 3.9953
+    },
+    {
+      "SG_UF": "ES",
+      "internacoes": 3656717,
+      "mortes": 141795,
+      "taxa_morte_pct": 3.8777
+    },
+    {
+      "SG_UF": "AL",
+      "internacoes": 2724676,
+      "mortes": 103857,
+      "taxa_morte_pct": 3.8117
+    },
+    {
+      "SG_UF": "CE",
+      "internacoes": 7813316,
+      "mortes": 292864,
+      "taxa_morte_pct": 3.7483
+    },
+    {
+      "SG_UF": "RN",
+      "internacoes": 2708573,
+      "mortes": 101436,
+      "taxa_morte_pct": 3.745
+    },
+    {
+      "SG_UF": "DF",
+      "internacoes": 1264585,
+      "mortes": 45789,
+      "taxa_morte_pct": 3.6209
+    },
+    {
+      "SG_UF": "MT",
+      "internacoes": 3028008,
+      "mortes": 108137,
+      "taxa_morte_pct": 3.5712
+    },
+    {
+      "SG_UF": "BA",
+      "internacoes": 13289208,
+      "mortes": 459708,
+      "taxa_morte_pct": 3.4593
+    },
+    {
+      "SG_UF": "GO",
+      "internacoes": 6179099,
+      "mortes": 206403,
+      "taxa_morte_pct": 3.3403
+    },
+    {
+      "SG_UF": "AM",
+      "internacoes": 2877882,
+      "mortes": 88063,
+      "taxa_morte_pct": 3.06
+    },
+    {
+      "SG_UF": "TO",
+      "internacoes": 1465583,
+      "mortes": 44513,
+      "taxa_morte_pct": 3.0372
+    },
+    {
+      "SG_UF": "AC",
+      "internacoes": 772507,
+      "mortes": 23285,
+      "taxa_morte_pct": 3.0142
+    },
+    {
+      "SG_UF": "AP",
+      "internacoes": 586680,
+      "mortes": 16916,
+      "taxa_morte_pct": 2.8833
+    },
+    {
+      "SG_UF": "RO",
+      "internacoes": 1738501,
+      "mortes": 49572,
+      "taxa_morte_pct": 2.8514
+    },
+    {
+      "SG_UF": "RR",
+      "internacoes": 601447,
+      "mortes": 17128,
+      "taxa_morte_pct": 2.8478
+    },
+    {
+      "SG_UF": "PI",
+      "internacoes": 3338399,
+      "mortes": 92956,
+      "taxa_morte_pct": 2.7844
+    },
+    {
+      "SG_UF": "MA",
+      "internacoes": 6804713,
+      "mortes": 161198,
+      "taxa_morte_pct": 2.3689
+    },
+    {
+      "SG_UF": "PA",
+      "internacoes": 7958966,
+      "mortes": 185228,
+      "taxa_morte_pct": 2.3273
+    }
+  ],
+  "result_hash": "80735068d7e63459d22cb3ee32720e2c54997328c3721982d26c8140d2ab3ef8"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "SIHRD5_Q092",
+  "question_pt": "Quantos diagnosticos principais nao existem na tabela CID?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS diagnosticos_principais_orfaos FROM internacoes i LEFT JOIN cid c ON i.DIAG_PRINC = c.CID WHERE i.DIAG_PRINC IS NOT NULL AND c.CID IS NULL",
+  "duration_seconds": 0.945,
+  "row_count": 1,
+  "columns": [
+    "diagnosticos_principais_orfaos"
+  ],
+  "preview_rows": [
+    {
+      "diagnosticos_principais_orfaos": 1044
+    }
+  ],
+  "result_hash": "c0179199f265722280cbb886f0e584fdb2af413baf05a6eb26b160a01744c713"
+}

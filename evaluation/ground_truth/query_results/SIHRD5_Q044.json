@@ -1,0 +1,36 @@
+{
+  "id": "SIHRD5_Q044",
+  "question_pt": "Como as internacoes se distribuem por raca/cor descrita?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT r.DESCRICAO AS raca_cor, COUNT(*) AS internacoes FROM internacoes i JOIN raca_cor r ON i.RACA_COR = r.RACA_COR GROUP BY 1 ORDER BY internacoes DESC",
+  "duration_seconds": 0.264,
+  "row_count": 5,
+  "columns": [
+    "raca_cor",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "raca_cor": "Parda",
+      "internacoes": 65749749
+    },
+    {
+      "raca_cor": "Branca",
+      "internacoes": 60081825
+    },
+    {
+      "raca_cor": "Preta",
+      "internacoes": 6541484
+    },
+    {
+      "raca_cor": "Amarela",
+      "internacoes": 2252044
+    },
+    {
+      "raca_cor": "Indígena",
+      "internacoes": 491304
+    }
+  ],
+  "result_hash": "06dc2a179299a7f832f2e25a186404a5d68c03a6acacffc32bb25e9057f03014"
+}

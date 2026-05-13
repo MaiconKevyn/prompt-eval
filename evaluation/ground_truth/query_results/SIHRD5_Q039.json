@@ -1,0 +1,136 @@
+{
+  "id": "SIHRD5_Q039",
+  "question_pt": "Quantos municipios existem por UF no cadastro territorial?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT SG_UF, COUNT(*) AS municipios FROM municipios GROUP BY 1 ORDER BY municipios DESC, SG_UF",
+  "duration_seconds": 0.001,
+  "row_count": 38,
+  "columns": [
+    "SG_UF",
+    "municipios"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "MG",
+      "municipios": 853
+    },
+    {
+      "SG_UF": "SP",
+      "municipios": 645
+    },
+    {
+      "SG_UF": "RS",
+      "municipios": 497
+    },
+    {
+      "SG_UF": "BA",
+      "municipios": 417
+    },
+    {
+      "SG_UF": "PR",
+      "municipios": 399
+    },
+    {
+      "SG_UF": "SC",
+      "municipios": 295
+    },
+    {
+      "SG_UF": "GO",
+      "municipios": 246
+    },
+    {
+      "SG_UF": "PI",
+      "municipios": 224
+    },
+    {
+      "SG_UF": "PB",
+      "municipios": 223
+    },
+    {
+      "SG_UF": "MA",
+      "municipios": 217
+    },
+    {
+      "SG_UF": "PE",
+      "municipios": 185
+    },
+    {
+      "SG_UF": "CE",
+      "municipios": 184
+    },
+    {
+      "SG_UF": "RN",
+      "municipios": 167
+    },
+    {
+      "SG_UF": "PA",
+      "municipios": 144
+    },
+    {
+      "SG_UF": "MT",
+      "municipios": 142
+    },
+    {
+      "SG_UF": "TO",
+      "municipios": 139
+    },
+    {
+      "SG_UF": "AL",
+      "municipios": 102
+    },
+    {
+      "SG_UF": "RJ",
+      "municipios": 92
+    },
+    {
+      "SG_UF": "MS",
+      "municipios": 79
+    },
+    {
+      "SG_UF": "ES",
+      "municipios": 78
+    },
+    {
+      "SG_UF": "SE",
+      "municipios": 75
+    },
+    {
+      "SG_UF": "AM",
+      "municipios": 62
+    },
+    {
+      "SG_UF": "RO",
+      "municipios": 52
+    },
+    {
+      "SG_UF": "AC",
+      "municipios": 22
+    },
+    {
+      "SG_UF": "AP",
+      "municipios": 16
+    },
+    {
+      "SG_UF": "RR",
+      "municipios": 15
+    },
+    {
+      "SG_UF": "25",
+      "municipios": 4
+    },
+    {
+      "SG_UF": "13",
+      "municipios": 3
+    },
+    {
+      "SG_UF": "21",
+      "municipios": 2
+    },
+    {
+      "SG_UF": "43",
+      "municipios": 2
+    }
+  ],
+  "result_hash": "8adc1c2d1f319c319618b820c27c078badec1b98099898a883b64f900cb42783"
+}

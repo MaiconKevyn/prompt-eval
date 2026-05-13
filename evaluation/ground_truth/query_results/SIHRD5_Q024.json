@@ -1,0 +1,24 @@
+{
+  "id": "SIHRD5_Q024",
+  "question_pt": "Como as internacoes se distribuem por codigo de sexo?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT SEXO, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY SEXO",
+  "duration_seconds": 0.166,
+  "row_count": 2,
+  "columns": [
+    "SEXO",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SEXO": 1,
+      "internacoes": 75948834
+    },
+    {
+      "SEXO": 3,
+      "internacoes": 107928385
+    }
+  ],
+  "result_hash": "c1242fee505452634147752a72ccbd417aeb972462ed8a6b2a7d1208cb446198"
+}

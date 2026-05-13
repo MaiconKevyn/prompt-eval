@@ -1,0 +1,96 @@
+{
+  "id": "SIHRD5_Q049",
+  "question_pt": "Quais procedimentos realizados foram mais frequentes por descricao?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT p.NOME_PROC, COUNT(*) AS ocorrencias FROM internacao_procedimento ip JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1 ORDER BY ocorrencias DESC LIMIT 20",
+  "duration_seconds": 1.289,
+  "row_count": 20,
+  "columns": [
+    "NOME_PROC",
+    "ocorrencias"
+  ],
+  "preview_rows": [
+    {
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 16435256
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE PNEUMONIAS OU INFLUENZA (GRIPE)",
+      "ocorrencias": 10576911
+    },
+    {
+      "NOME_PROC": "PARTO CESARIANO",
+      "ocorrencias": 10309968
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE DOENCAS INFECCIOSAS INTESTINAIS",
+      "ocorrencias": 4507648
+    },
+    {
+      "NOME_PROC": "TRATAMENTO EM PSIQUIATRIA (POR DIA)",
+      "ocorrencias": 4214855
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DAS DOENCAS CRONICAS DAS VIAS AEREAS INFERIORES",
+      "ocorrencias": 3735530
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE OUTRAS DOENCAS BACTERIANAS",
+      "ocorrencias": 3723552
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE INSUFICIENCIA CARDIACA",
+      "ocorrencias": 3636826
+    },
+    {
+      "NOME_PROC": "TRATAMENTO C/ CIRURGIAS MULTIPLAS",
+      "ocorrencias": 3353755
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE INTERCORRENCIAS CLINICAS NA GRAVIDEZ",
+      "ocorrencias": 3139159
+    },
+    {
+      "NOME_PROC": "DIAGNOSTICO E/OU ATENDIMENTO DE URGENCIA EM CLINICA MEDICA",
+      "ocorrencias": 3120396
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE ACIDENTE VASCULAR CEREBRAL - AVC (ISQUEMICO OU HEMORRAGICO AGUDO)",
+      "ocorrencias": 3017652
+    },
+    {
+      "NOME_PROC": "CURETAGEM POS-ABORTAMENTO / PUERPERAL",
+      "ocorrencias": 2839585
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE OUTRAS DOENCAS DO APARELHO URINARIO",
+      "ocorrencias": 2347762
+    },
+    {
+      "NOME_PROC": "PARTO CESARIANO EM GESTACAO DE ALTO RISCO",
+      "ocorrencias": 2068691
+    },
+    {
+      "NOME_PROC": "COLECISTECTOMIA",
+      "ocorrencias": 1998158
+    },
+    {
+      "NOME_PROC": "HERNIOPLASTIA INGUINAL / CRURAL (UNILATERAL)",
+      "ocorrencias": 1868884
+    },
+    {
+      "NOME_PROC": "TRATAMENTO CLINICO DE PACIENTE ONCOLOGICO",
+      "ocorrencias": 1813092
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE INFECCAO PELO CORONAVIRUS ? COVID 19",
+      "ocorrencias": 1792677
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DA PIELONEFRITE",
+      "ocorrencias": 1789419
+    }
+  ],
+  "result_hash": "f38859659f86229311921e35aa858b0e505453875b84e0b59612b7afae9ec5f3"
+}

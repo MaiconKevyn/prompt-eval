@@ -1,0 +1,96 @@
+{
+  "id": "SIHRD5_Q022",
+  "question_pt": "Quais codigos de diagnostico principal foram mais frequentes?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT DIAG_PRINC, COUNT(*) AS internacoes FROM internacoes WHERE DIAG_PRINC IS NOT NULL GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
+  "duration_seconds": 0.262,
+  "row_count": 20,
+  "columns": [
+    "DIAG_PRINC",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "DIAG_PRINC": "O800",
+      "internacoes": 12391391
+    },
+    {
+      "DIAG_PRINC": "J189",
+      "internacoes": 4090969
+    },
+    {
+      "DIAG_PRINC": "O809",
+      "internacoes": 3224114
+    },
+    {
+      "DIAG_PRINC": "N390",
+      "internacoes": 2412074
+    },
+    {
+      "DIAG_PRINC": "A09",
+      "internacoes": 2322889
+    },
+    {
+      "DIAG_PRINC": "I64",
+      "internacoes": 2307576
+    },
+    {
+      "DIAG_PRINC": "I500",
+      "internacoes": 1917483
+    },
+    {
+      "DIAG_PRINC": "B342",
+      "internacoes": 1860545
+    },
+    {
+      "DIAG_PRINC": "O821",
+      "internacoes": 1637991
+    },
+    {
+      "DIAG_PRINC": "O829",
+      "internacoes": 1630248
+    },
+    {
+      "DIAG_PRINC": "J459",
+      "internacoes": 1599026
+    },
+    {
+      "DIAG_PRINC": "I509",
+      "internacoes": 1585605
+    },
+    {
+      "DIAG_PRINC": "Z302",
+      "internacoes": 1530009
+    },
+    {
+      "DIAG_PRINC": "J180",
+      "internacoes": 1513988
+    },
+    {
+      "DIAG_PRINC": "K409",
+      "internacoes": 1483763
+    },
+    {
+      "DIAG_PRINC": "K359",
+      "internacoes": 1306700
+    },
+    {
+      "DIAG_PRINC": "I200",
+      "internacoes": 1235256
+    },
+    {
+      "DIAG_PRINC": "O808",
+      "internacoes": 1229939
+    },
+    {
+      "DIAG_PRINC": "O034",
+      "internacoes": 1199658
+    },
+    {
+      "DIAG_PRINC": "I219",
+      "internacoes": 1188353
+    }
+  ],
+  "result_hash": "289c6b4b7b87c960871dbea80ef172ceb3df18f998d52bee917539cd1c90afc3"
+}

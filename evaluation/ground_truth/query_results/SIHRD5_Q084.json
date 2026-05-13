@@ -1,0 +1,167 @@
+{
+  "id": "SIHRD5_Q084",
+  "question_pt": "Quantas internacoes ocorreram em UF de residencia diferente da UF do hospital?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH fluxo AS (SELECT mr.SG_UF AS uf_residencia, mh.SG_UF AS uf_hospital, COUNT(*) AS internacoes FROM internacoes i JOIN municipios mr ON i.MUNIC_RES = mr.CO_MUNICIPIO_6D JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1, 2) SELECT uf_residencia, uf_hospital, internacoes FROM fluxo WHERE uf_residencia <> uf_hospital ORDER BY internacoes DESC LIMIT 30",
+  "duration_seconds": 2.846,
+  "row_count": 30,
+  "columns": [
+    "uf_residencia",
+    "uf_hospital",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "uf_residencia": "GO",
+      "uf_hospital": "DF",
+      "internacoes": 191903
+    },
+    {
+      "uf_residencia": "MA",
+      "uf_hospital": "PI",
+      "internacoes": 139860
+    },
+    {
+      "uf_residencia": "MG",
+      "uf_hospital": "SP",
+      "internacoes": 126388
+    },
+    {
+      "uf_residencia": "BA",
+      "uf_hospital": "PE",
+      "internacoes": 111803
+    },
+    {
+      "uf_residencia": "PE",
+      "uf_hospital": "BA",
+      "internacoes": 65923
+    },
+    {
+      "uf_residencia": "SC",
+      "uf_hospital": "PR",
+      "internacoes": 51320
+    },
+    {
+      "uf_residencia": "BA",
+      "uf_hospital": "SE",
+      "internacoes": 47025
+    },
+    {
+      "uf_residencia": "PB",
+      "uf_hospital": "PE",
+      "internacoes": 44405
+    },
+    {
+      "uf_residencia": "PR",
+      "uf_hospital": "SC",
+      "internacoes": 37571
+    },
+    {
+      "uf_residencia": "PA",
+      "uf_hospital": "AP",
+      "internacoes": 31731
+    },
+    {
+      "uf_residencia": "GO",
+      "uf_hospital": "SP",
+      "internacoes": 29488
+    },
+    {
+      "uf_residencia": "MS",
+      "uf_hospital": "SP",
+      "internacoes": 26422
+    },
+    {
+      "uf_residencia": "AL",
+      "uf_hospital": "PE",
+      "internacoes": 26039
+    },
+    {
+      "uf_residencia": "MG",
+      "uf_hospital": "DF",
+      "internacoes": 25491
+    },
+    {
+      "uf_residencia": "AM",
+      "uf_hospital": "AC",
+      "internacoes": 24432
+    },
+    {
+      "uf_residencia": "PB",
+      "uf_hospital": "RN",
+      "internacoes": 22039
+    },
+    {
+      "uf_residencia": "SP",
+      "uf_hospital": "MG",
+      "internacoes": 21360
+    },
+    {
+      "uf_residencia": "PR",
+      "uf_hospital": "SP",
+      "internacoes": 19252
+    },
+    {
+      "uf_residencia": "MT",
+      "uf_hospital": "SP",
+      "internacoes": 18138
+    },
+    {
+      "uf_residencia": "ES",
+      "uf_hospital": "MG",
+      "internacoes": 17673
+    },
+    {
+      "uf_residencia": "MG",
+      "uf_hospital": "ES",
+      "internacoes": 17021
+    },
+    {
+      "uf_residencia": "PA",
+      "uf_hospital": "MA",
+      "internacoes": 16929
+    },
+    {
+      "uf_residencia": "MS",
+      "uf_hospital": "PR",
+      "internacoes": 16356
+    },
+    {
+      "uf_residencia": "BA",
+      "uf_hospital": "SP",
+      "internacoes": 16344
+    },
+    {
+      "uf_residencia": "PA",
+      "uf_hospital": "TO",
+      "internacoes": 15865
+    },
+    {
+      "uf_residencia": "RJ",
+      "uf_hospital": "MG",
+      "internacoes": 15290
+    },
+    {
+      "uf_residencia": "PE",
+      "uf_hospital": "PB",
+      "internacoes": 14014
+    },
+    {
+      "uf_residencia": "RS",
+      "uf_hospital": "SC",
+      "internacoes": 13718
+    },
+    {
+      "uf_residencia": "TO",
+      "uf_hospital": "MA",
+      "internacoes": 13649
+    },
+    {
+      "uf_residencia": "RO",
+      "uf_hospital": "SP",
+      "internacoes": 13115
+    }
+  ],
+  "result_hash": "cfb36bdd068a725b96588e2ed6d758d09425bfb7e33d8f7fba3ad5fe614170d7"
+}

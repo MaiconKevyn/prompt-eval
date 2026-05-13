@@ -1,0 +1,18 @@
+{
+  "id": "SIHRD5_Q006",
+  "question_pt": "Quantos procedimentos distintos existem no cadastro de procedimentos?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS total_procedimentos_cadastrados FROM procedimentos",
+  "duration_seconds": 0.0,
+  "row_count": 1,
+  "columns": [
+    "total_procedimentos_cadastrados"
+  ],
+  "preview_rows": [
+    {
+      "total_procedimentos_cadastrados": 5394
+    }
+  ],
+  "result_hash": "036dacde6cf5646d40457744e98c1ae8563b3e63895d2c726bb566d033f989f7"
+}

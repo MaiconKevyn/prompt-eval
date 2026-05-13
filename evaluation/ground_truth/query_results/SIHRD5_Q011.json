@@ -1,0 +1,20 @@
+{
+  "id": "SIHRD5_Q011",
+  "question_pt": "Qual e a menor e a maior idade registradas nas internacoes?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT MIN(IDADE) AS idade_minima, MAX(IDADE) AS idade_maxima FROM internacoes",
+  "duration_seconds": 0.048,
+  "row_count": 1,
+  "columns": [
+    "idade_minima",
+    "idade_maxima"
+  ],
+  "preview_rows": [
+    {
+      "idade_minima": 0,
+      "idade_maxima": 99
+    }
+  ],
+  "result_hash": "dbf991467018603281d5dd5a9e9e07296da2c21196f56de2092b7cc95a05346c"
+}

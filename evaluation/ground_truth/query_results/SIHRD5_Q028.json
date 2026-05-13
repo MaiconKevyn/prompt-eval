@@ -1,0 +1,84 @@
+{
+  "id": "SIHRD5_Q028",
+  "question_pt": "Como as internacoes se distribuem pelo marcador de UTI?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT MARCA_UTI, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY internacoes DESC",
+  "duration_seconds": 0.17,
+  "row_count": 17,
+  "columns": [
+    "MARCA_UTI",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "MARCA_UTI": 0,
+      "internacoes": 171623174
+    },
+    {
+      "MARCA_UTI": 75,
+      "internacoes": 7273804
+    },
+    {
+      "MARCA_UTI": 76,
+      "internacoes": 1503527
+    },
+    {
+      "MARCA_UTI": 81,
+      "internacoes": 1231179
+    },
+    {
+      "MARCA_UTI": 78,
+      "internacoes": 657578
+    },
+    {
+      "MARCA_UTI": 51,
+      "internacoes": 477515
+    },
+    {
+      "MARCA_UTI": 74,
+      "internacoes": 311251
+    },
+    {
+      "MARCA_UTI": 79,
+      "internacoes": 252301
+    },
+    {
+      "MARCA_UTI": 82,
+      "internacoes": 214056
+    },
+    {
+      "MARCA_UTI": 85,
+      "internacoes": 149119
+    },
+    {
+      "MARCA_UTI": 1,
+      "internacoes": 49623
+    },
+    {
+      "MARCA_UTI": 99,
+      "internacoes": 42023
+    },
+    {
+      "MARCA_UTI": 83,
+      "internacoes": 30236
+    },
+    {
+      "MARCA_UTI": 77,
+      "internacoes": 29428
+    },
+    {
+      "MARCA_UTI": 80,
+      "internacoes": 15160
+    },
+    {
+      "MARCA_UTI": 86,
+      "internacoes": 11981
+    },
+    {
+      "MARCA_UTI": 52,
+      "internacoes": 5264
+    }
+  ],
+  "result_hash": "d5cdbc62c241e5639d7a04c917ebda9549cdb9fbc596c4ca502e32e956ccca46"
+}

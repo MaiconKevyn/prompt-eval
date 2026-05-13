@@ -1,0 +1,156 @@
+{
+  "id": "SIHRD5_Q067",
+  "question_pt": "Qual foi a variacao ano contra ano do valor total?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH anual AS (SELECT year(DT_INTER) AS ano, SUM(CAST(VAL_TOT AS DECIMAL(20,2))) AS valor_total FROM internacoes GROUP BY 1) SELECT ano, ROUND(valor_total, 2) AS valor_total, ROUND(valor_total - LAG(valor_total) OVER (ORDER BY ano), 2) AS diff_abs, ROUND(100.0 * (valor_total - LAG(valor_total) OVER (ORDER BY ano)) / NULLIF(LAG(valor_total) OVER (ORDER BY ano), 0), 4) AS diff_pct FROM anual ORDER BY ano",
+  "duration_seconds": 1.037,
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "valor_total",
+    "diff_abs",
+    "diff_pct"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "valor_total": 66804.04,
+      "diff_abs": null,
+      "diff_pct": null
+    },
+    {
+      "ano": 2001,
+      "valor_total": 35385.07,
+      "diff_abs": -31418.97,
+      "diff_pct": -47.0315
+    },
+    {
+      "ano": 2002,
+      "valor_total": 16168.21,
+      "diff_abs": -19216.86,
+      "diff_pct": -54.3078
+    },
+    {
+      "ano": 2003,
+      "valor_total": 1917.93,
+      "diff_abs": -14250.28,
+      "diff_pct": -88.1376
+    },
+    {
+      "ano": 2005,
+      "valor_total": 14187.47,
+      "diff_abs": 12269.54,
+      "diff_pct": 639.7282
+    },
+    {
+      "ano": 2006,
+      "valor_total": 63953.35,
+      "diff_abs": 49765.88,
+      "diff_pct": 350.7735
+    },
+    {
+      "ano": 2007,
+      "valor_total": 714520809.23,
+      "diff_abs": 714456855.88,
+      "diff_pct": 1117153.1372
+    },
+    {
+      "ano": 2008,
+      "valor_total": 11302888818.35,
+      "diff_abs": 10588368009.12,
+      "diff_pct": 1481.8838
+    },
+    {
+      "ano": 2009,
+      "valor_total": 11833531204.47,
+      "diff_abs": 530642386.12,
+      "diff_pct": 4.6948
+    },
+    {
+      "ano": 2010,
+      "valor_total": 12735514045.93,
+      "diff_abs": 901982841.46,
+      "diff_pct": 7.6223
+    },
+    {
+      "ano": 2011,
+      "valor_total": 13362357837.73,
+      "diff_abs": 626843791.8,
+      "diff_pct": 4.922
+    },
+    {
+      "ano": 2012,
+      "valor_total": 13918253047.96,
+      "diff_abs": 555895210.23,
+      "diff_pct": 4.1602
+    },
+    {
+      "ano": 2013,
+      "valor_total": 15012441315.87,
+      "diff_abs": 1094188267.91,
+      "diff_pct": 7.8615
+    },
+    {
+      "ano": 2014,
+      "valor_total": 15792991258.48,
+      "diff_abs": 780549942.61,
+      "diff_pct": 5.1994
+    },
+    {
+      "ano": 2015,
+      "valor_total": 16180140241.9,
+      "diff_abs": 387148983.42,
+      "diff_pct": 2.4514
+    },
+    {
+      "ano": 2016,
+      "valor_total": 16618814978.37,
+      "diff_abs": 438674736.47,
+      "diff_pct": 2.7112
+    },
+    {
+      "ano": 2017,
+      "valor_total": 17301494411.89,
+      "diff_abs": 682679433.52,
+      "diff_pct": 4.1079
+    },
+    {
+      "ano": 2018,
+      "valor_total": 17975662786.9,
+      "diff_abs": 674168375.01,
+      "diff_pct": 3.8966
+    },
+    {
+      "ano": 2019,
+      "valor_total": 18785819030.8,
+      "diff_abs": 810156243.9,
+      "diff_pct": 4.507
+    },
+    {
+      "ano": 2020,
+      "valor_total": 21540364332.04,
+      "diff_abs": 2754545301.24,
+      "diff_pct": 14.6629
+    },
+    {
+      "ano": 2021,
+      "valor_total": 30803898072.58,
+      "diff_abs": 9263533740.54,
+      "diff_pct": 43.0055
+    },
+    {
+      "ano": 2022,
+      "valor_total": 24190816482.51,
+      "diff_abs": -6613081590.07,
+      "diff_pct": -21.4683
+    },
+    {
+      "ano": 2023,
+      "valor_total": 23413601002.91,
+      "diff_abs": -777215479.6,
+      "diff_pct": -3.2129
+    }
+  ],
+  "result_hash": "bc8bf01d850450e2ee2a806410d7244adc77c7b11382fe41ebaadb2207955869"
+}

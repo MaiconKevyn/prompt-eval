@@ -1,0 +1,96 @@
+{
+  "id": "SIHRD5_Q063",
+  "question_pt": "Quais grupos CID foram mais frequentes entre internacoes femininas?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT c.DS_GRUPO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID JOIN sexo s ON i.SEXO = s.SEXO WHERE s.DESCRICAO = 'Feminino' GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
+  "duration_seconds": 1.518,
+  "row_count": 20,
+  "columns": [
+    "DS_GRUPO",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "DS_GRUPO": "O80-O84 Parto",
+      "internacoes": 22690237
+    },
+    {
+      "DS_GRUPO": "J09-J18 Influenza [gripe] e pneumonia",
+      "internacoes": 5074280
+    },
+    {
+      "DS_GRUPO": "C00-C75 Neoplasias malignas",
+      "internacoes": 4009655
+    },
+    {
+      "DS_GRUPO": "O30-O48 Assistência à mãe por motivos ligados ao feto",
+      "internacoes": 3985505
+    },
+    {
+      "DS_GRUPO": "O60-O75 Complicações do trabalho de parto e do parto",
+      "internacoes": 3689333
+    },
+    {
+      "DS_GRUPO": "K80-K87 Transtornos da vesícula biliar, vias biliares e pâncreas",
+      "internacoes": 3524039
+    },
+    {
+      "DS_GRUPO": "O00-O08 Gravidez que termina em aborto",
+      "internacoes": 3210333
+    },
+    {
+      "DS_GRUPO": "I30-I52 Outras formas de doença do coração",
+      "internacoes": 2454924
+    },
+    {
+      "DS_GRUPO": "A00-A09 Doenças infecciosas intestinais",
+      "internacoes": 2445923
+    },
+    {
+      "DS_GRUPO": "A30-A49 Outras doenças bacterianas",
+      "internacoes": 2373900
+    },
+    {
+      "DS_GRUPO": "N80-N98 Transtornos não-inflamatórios do trato genital feminino",
+      "internacoes": 2269404
+    },
+    {
+      "DS_GRUPO": "N30-N39 Outras doenças do aparelho urinário",
+      "internacoes": 2086888
+    },
+    {
+      "DS_GRUPO": "J40-J47 Doenças crônicas das vias aéreas inferiores",
+      "internacoes": 1872348
+    },
+    {
+      "DS_GRUPO": "D10-D36 Neoplasias benignas",
+      "internacoes": 1769219
+    },
+    {
+      "DS_GRUPO": "O20-O29 Outros transtornos maternos relacionados com a gravidez",
+      "internacoes": 1647664
+    },
+    {
+      "DS_GRUPO": "I80-I89 Doenças das veias e dos vasos linfáticos",
+      "internacoes": 1630519
+    },
+    {
+      "DS_GRUPO": "I60-I69 Doenças cerebrovasculares",
+      "internacoes": 1621058
+    },
+    {
+      "DS_GRUPO": "I20-I25 Doenças isquêmicas do coração",
+      "internacoes": 1577829
+    },
+    {
+      "DS_GRUPO": "O10-O16 Edema, proteinúria e transtornos hipertensivos na gravidez",
+      "internacoes": 1505001
+    },
+    {
+      "DS_GRUPO": "K40-K46 Hérnias",
+      "internacoes": 1362330
+    }
+  ],
+  "result_hash": "a2141f7e86187e1fb5f159f563ad9d847e03c33e5928160fd8e06094e138ac63"
+}

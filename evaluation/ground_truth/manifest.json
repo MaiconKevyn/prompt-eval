@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-05-13T09:42:16",
+  "database_file": "sihrd5.duckdb",
+  "table_count": 234,
+  "main_table_count": 23,
+  "audit_table_count": 211,
+  "ground_truth_count": 100,
+  "difficulty_distribution": {
+    "L1": 15,
+    "L2": 25,
+    "L3": 25,
+    "L4": 20,
+    "L5": 15
+  },
+  "docs": [
+    "docs/database_overview.md",
+    "docs/schema_catalog.md",
+    "docs/business_dictionary.md",
+    "docs/relationship_map.md",
+    "docs/data_quality_report.md",
+    "docs/query_design_methodology.md",
+    "docs/stage2_readiness.md"
+  ],
+  "ground_truth": [
+    "evaluation/ground_truth/stage1_questions.jsonl",
+    "evaluation/ground_truth/stage1_questions.md",
+    "evaluation/ground_truth/rejected_questions.md",
+    "evaluation/ground_truth/query_results/"
+  ],
+  "generated_artifacts": [
+    "docs/generated/table_inventory.csv",
+    "docs/generated/table_storage_estimates.csv",
+    "docs/generated/column_catalog.csv",
+    "docs/generated/column_profiles.csv",
+    "docs/generated/top_frequent_values.csv",
+    "docs/generated/candidate_keys.csv",
+    "docs/generated/relationship_coverage.csv",
+    "docs/generated/data_quality_checks.json"
+  ]
+}

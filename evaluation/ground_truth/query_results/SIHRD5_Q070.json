@@ -1,0 +1,117 @@
+{
+  "id": "SIHRD5_Q070",
+  "question_pt": "Quais procedimentos tiveram maior valor medio por ocorrencia entre os com pelo menos 10 mil ocorrencias?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH proc AS (SELECT p.NOME_PROC, COUNT(*) AS ocorrencias, (SUM(CAST(i.VAL_TOT AS DECIMAL(20,2)))::DOUBLE / COUNT(i.VAL_TOT)) AS valor_medio FROM internacao_procedimento ip JOIN internacoes i ON ip.N_AIH = i.N_AIH JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1) SELECT NOME_PROC, ocorrencias, ROUND(valor_medio, 2) AS valor_medio FROM proc WHERE ocorrencias >= 10000 ORDER BY valor_medio DESC LIMIT 20",
+  "duration_seconds": 9.078,
+  "row_count": 20,
+  "columns": [
+    "NOME_PROC",
+    "ocorrencias",
+    "valor_medio"
+  ],
+  "preview_rows": [
+    {
+      "NOME_PROC": "TRATAMENTO DE PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES NEUROLOGICAS",
+      "ocorrencias": 739927,
+      "valor_medio": 214133.42
+    },
+    {
+      "NOME_PROC": "TRANSPLANTE DE FIGADO (ORGAO DE DOADOR FALECIDO)",
+      "ocorrencias": 23438,
+      "valor_medio": 94153.74
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES OSTEOMUSCULARES E DO TECIDO CONJUNT",
+      "ocorrencias": 74870,
+      "valor_medio": 87105.87
+    },
+    {
+      "NOME_PROC": "ATENDIMENTO A PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES CARDIOVASCULARES",
+      "ocorrencias": 236754,
+      "valor_medio": 74448.45
+    },
+    {
+      "NOME_PROC": "ATENDIMENTO A PACIENTE SOB CUIDADOS PROLONGADOS DEVIDO A CAUSAS EXTERNAS",
+      "ocorrencias": 65425,
+      "valor_medio": 41662.17
+    },
+    {
+      "NOME_PROC": "TRANSPLANTE DE RIM (ORGAO DE DOADOR FALECIDO)",
+      "ocorrencias": 57217,
+      "valor_medio": 41277.78
+    },
+    {
+      "NOME_PROC": "IMPLANTE DE CARDIOVERSOR DESFIBRILADOR DE CAMARA DUPLA TRANSVENOSO",
+      "ocorrencias": 14457,
+      "valor_medio": 39901.93
+    },
+    {
+      "NOME_PROC": "TRATAMENTO EM PSIQUIATRIA (POR DIA)",
+      "ocorrencias": 4214855,
+      "valor_medio": 28184.56
+    },
+    {
+      "NOME_PROC": "ATENDIMENTO A PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES PNEUMOLOGICAS",
+      "ocorrencias": 41568,
+      "valor_medio": 28082.91
+    },
+    {
+      "NOME_PROC": "CORRECAO ENDOVASCULAR DE ANEURISMA / DISSECCAO DA AORTA ABDOMINAL E ILIACAS COM ENDOPROTESE BIF",
+      "ocorrencias": 11467,
+      "valor_medio": 27683.6
+    },
+    {
+      "NOME_PROC": "TRANSPLANTE DE RIM (ORGAO DE DOADOR VIVO)",
+      "ocorrencias": 15666,
+      "valor_medio": 26964.84
+    },
+    {
+      "NOME_PROC": "TRANSPLANTE AUTOGENICO DE CELULAS-TRONCO HEMATOPOETICAS DE SANGUE PERIFERICO -",
+      "ocorrencias": 15014,
+      "valor_medio": 23530.27
+    },
+    {
+      "NOME_PROC": "TRATAMENTO EM PSIQUIATRIA POR DIA (COM DURACAO SUPERIOR A 90 DIAS DE INTERNACAO OU REINTERNACAO",
+      "ocorrencias": 57060,
+      "valor_medio": 22723.07
+    },
+    {
+      "NOME_PROC": "TROCA VALVAR C/ REVASCULARIZACAO MIOCARDICA",
+      "ocorrencias": 29469,
+      "valor_medio": 19645.81
+    },
+    {
+      "NOME_PROC": "EMBOLIZACAO DE ANEURISMA CEREBRAL MAIOR QUE 1,5 CM COM COLO LARGO",
+      "ocorrencias": 10493,
+      "valor_medio": 19400.86
+    },
+    {
+      "NOME_PROC": "PLASTICA VALVAR E/OU TROCA VALVAR MULTIPLA",
+      "ocorrencias": 40874,
+      "valor_medio": 18024.1
+    },
+    {
+      "NOME_PROC": "IMPLANTE DE PROTESE VALVAR",
+      "ocorrencias": 109664,
+      "valor_medio": 15830.79
+    },
+    {
+      "NOME_PROC": "REVASCULARIZACAO MIOCARDICA C/ USO DE EXTRACORPOREA (C/ 2 OU MAIS ENXERTOS)",
+      "ocorrencias": 257118,
+      "valor_medio": 15790.77
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES DECORRENTES DA AIDS",
+      "ocorrencias": 25651,
+      "valor_medio": 15390.69
+    },
+    {
+      "NOME_PROC": "REVASCULARIZACAO MIOCARDICA C/ USO DE EXTRACORPOREA",
+      "ocorrencias": 47632,
+      "valor_medio": 14987.58
+    }
+  ],
+  "result_hash": "2ce05335e329b81d9d2096f5e12e19f951ac0f415ade6152cb1f893499b5c1ae"
+}

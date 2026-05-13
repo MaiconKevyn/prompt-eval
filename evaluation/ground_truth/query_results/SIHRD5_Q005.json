@@ -1,0 +1,20 @@
+{
+  "id": "SIHRD5_Q005",
+  "question_pt": "Quantos municipios e quantas UFs aparecem na dimensao territorial?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS total_municipios, COUNT(DISTINCT SG_UF) AS total_ufs FROM municipios",
+  "duration_seconds": 0.001,
+  "row_count": 1,
+  "columns": [
+    "total_municipios",
+    "total_ufs"
+  ],
+  "preview_rows": [
+    {
+      "total_municipios": 5589,
+      "total_ufs": 38
+    }
+  ],
+  "result_hash": "03cf7691d9142e043f0353388e98907f0ccbd68693e73a2bb3b254eb578f1de8"
+}

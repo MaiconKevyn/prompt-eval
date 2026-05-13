@@ -1,0 +1,108 @@
+{
+  "id": "SIHRD5_Q029",
+  "question_pt": "Qual foi a media de dias de permanencia por ano?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, ROUND((SUM(CAST(DIAS_PERM AS DECIMAL(20,2)))::DOUBLE / COUNT(DIAS_PERM)), 2) AS media_dias_permanencia FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 0.371,
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "media_dias_permanencia"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2001,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2002,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2003,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2005,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2006,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2007,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2008,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2009,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2010,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2011,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2012,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2013,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2014,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2015,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2016,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2017,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2018,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2019,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2020,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2021,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2022,
+      "media_dias_permanencia": 0.0
+    },
+    {
+      "ano": 2023,
+      "media_dias_permanencia": 0.0
+    }
+  ],
+  "result_hash": "746ba30f4f8d0da18407e7c9d3dfac45795795c6ec8d6c0f5bb8eeb82f388582"
+}

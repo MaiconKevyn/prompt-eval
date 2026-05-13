@@ -1,0 +1,156 @@
+{
+  "id": "SIHRD5_Q066",
+  "question_pt": "Qual foi a variacao ano contra ano no volume de internacoes?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH anual AS (SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes FROM internacoes GROUP BY 1) SELECT ano, internacoes, internacoes - LAG(internacoes) OVER (ORDER BY ano) AS diff_abs, ROUND(100.0 * (internacoes - LAG(internacoes) OVER (ORDER BY ano)) / NULLIF(LAG(internacoes) OVER (ORDER BY ano), 0), 4) AS diff_pct FROM anual ORDER BY ano",
+  "duration_seconds": 0.188,
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "internacoes",
+    "diff_abs",
+    "diff_pct"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "internacoes": 9,
+      "diff_abs": null,
+      "diff_pct": null
+    },
+    {
+      "ano": 2001,
+      "internacoes": 2,
+      "diff_abs": -7,
+      "diff_pct": -77.7778
+    },
+    {
+      "ano": 2002,
+      "internacoes": 2,
+      "diff_abs": 0,
+      "diff_pct": 0.0
+    },
+    {
+      "ano": 2003,
+      "internacoes": 1,
+      "diff_abs": -1,
+      "diff_pct": -50.0
+    },
+    {
+      "ano": 2005,
+      "internacoes": 6,
+      "diff_abs": 5,
+      "diff_pct": 500.0
+    },
+    {
+      "ano": 2006,
+      "internacoes": 7,
+      "diff_abs": 1,
+      "diff_pct": 16.6667
+    },
+    {
+      "ano": 2007,
+      "internacoes": 602947,
+      "diff_abs": 602940,
+      "diff_pct": 8613428.5714
+    },
+    {
+      "ano": 2008,
+      "internacoes": 10847458,
+      "diff_abs": 10244511,
+      "diff_pct": 1699.0732
+    },
+    {
+      "ano": 2009,
+      "internacoes": 11114857,
+      "diff_abs": 267399,
+      "diff_pct": 2.4651
+    },
+    {
+      "ano": 2010,
+      "internacoes": 11347880,
+      "diff_abs": 233023,
+      "diff_pct": 2.0965
+    },
+    {
+      "ano": 2011,
+      "internacoes": 11267097,
+      "diff_abs": -80783,
+      "diff_pct": -0.7119
+    },
+    {
+      "ano": 2012,
+      "internacoes": 11103250,
+      "diff_abs": -163847,
+      "diff_pct": -1.4542
+    },
+    {
+      "ano": 2013,
+      "internacoes": 11179438,
+      "diff_abs": 76188,
+      "diff_pct": 0.6862
+    },
+    {
+      "ano": 2014,
+      "internacoes": 11353704,
+      "diff_abs": 174266,
+      "diff_pct": 1.5588
+    },
+    {
+      "ano": 2015,
+      "internacoes": 11325421,
+      "diff_abs": -28283,
+      "diff_pct": -0.2491
+    },
+    {
+      "ano": 2016,
+      "internacoes": 11256224,
+      "diff_abs": -69197,
+      "diff_pct": -0.611
+    },
+    {
+      "ano": 2017,
+      "internacoes": 11522847,
+      "diff_abs": 266623,
+      "diff_pct": 2.3687
+    },
+    {
+      "ano": 2018,
+      "internacoes": 11857648,
+      "diff_abs": 334801,
+      "diff_pct": 2.9055
+    },
+    {
+      "ano": 2019,
+      "internacoes": 12185437,
+      "diff_abs": 327789,
+      "diff_pct": 2.7644
+    },
+    {
+      "ano": 2020,
+      "internacoes": 10531843,
+      "diff_abs": -1653594,
+      "diff_pct": -13.5702
+    },
+    {
+      "ano": 2021,
+      "internacoes": 11566528,
+      "diff_abs": 1034685,
+      "diff_pct": 9.8243
+    },
+    {
+      "ano": 2022,
+      "internacoes": 12363889,
+      "diff_abs": 797361,
+      "diff_pct": 6.8937
+    },
+    {
+      "ano": 2023,
+      "internacoes": 12450724,
+      "diff_abs": 86835,
+      "diff_pct": 0.7023
+    }
+  ],
+  "result_hash": "711f3939a1b20ad9a43c035d5dcb0da111d91333d368a96f3b19d3bddeb5694a"
+}

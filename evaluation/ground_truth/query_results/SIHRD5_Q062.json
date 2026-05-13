@@ -1,0 +1,167 @@
+{
+  "id": "SIHRD5_Q062",
+  "question_pt": "Como a complexidade das internacoes se distribui em cada UF?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT m.SG_UF, c.DESCRICAO AS complexidade, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D JOIN complexidade c ON i.COMPLEX = c.COMPLEX GROUP BY 1, 2 ORDER BY 1, internacoes DESC",
+  "duration_seconds": 1.315,
+  "row_count": 54,
+  "columns": [
+    "SG_UF",
+    "complexidade",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "AC",
+      "complexidade": "Média complexidade",
+      "internacoes": 753187
+    },
+    {
+      "SG_UF": "AC",
+      "complexidade": "Alta complexidade",
+      "internacoes": 19320
+    },
+    {
+      "SG_UF": "AL",
+      "complexidade": "Média complexidade",
+      "internacoes": 2590464
+    },
+    {
+      "SG_UF": "AL",
+      "complexidade": "Alta complexidade",
+      "internacoes": 134212
+    },
+    {
+      "SG_UF": "AM",
+      "complexidade": "Média complexidade",
+      "internacoes": 2782125
+    },
+    {
+      "SG_UF": "AM",
+      "complexidade": "Alta complexidade",
+      "internacoes": 95757
+    },
+    {
+      "SG_UF": "AP",
+      "complexidade": "Média complexidade",
+      "internacoes": 572628
+    },
+    {
+      "SG_UF": "AP",
+      "complexidade": "Alta complexidade",
+      "internacoes": 14052
+    },
+    {
+      "SG_UF": "BA",
+      "complexidade": "Média complexidade",
+      "internacoes": 12691666
+    },
+    {
+      "SG_UF": "BA",
+      "complexidade": "Alta complexidade",
+      "internacoes": 597539
+    },
+    {
+      "SG_UF": "CE",
+      "complexidade": "Média complexidade",
+      "internacoes": 7383507
+    },
+    {
+      "SG_UF": "CE",
+      "complexidade": "Alta complexidade",
+      "internacoes": 429809
+    },
+    {
+      "SG_UF": "DF",
+      "complexidade": "Média complexidade",
+      "internacoes": 1185434
+    },
+    {
+      "SG_UF": "DF",
+      "complexidade": "Alta complexidade",
+      "internacoes": 79151
+    },
+    {
+      "SG_UF": "ES",
+      "complexidade": "Média complexidade",
+      "internacoes": 3380297
+    },
+    {
+      "SG_UF": "ES",
+      "complexidade": "Alta complexidade",
+      "internacoes": 276420
+    },
+    {
+      "SG_UF": "GO",
+      "complexidade": "Média complexidade",
+      "internacoes": 5837389
+    },
+    {
+      "SG_UF": "GO",
+      "complexidade": "Alta complexidade",
+      "internacoes": 341710
+    },
+    {
+      "SG_UF": "MA",
+      "complexidade": "Média complexidade",
+      "internacoes": 6626635
+    },
+    {
+      "SG_UF": "MA",
+      "complexidade": "Alta complexidade",
+      "internacoes": 178078
+    },
+    {
+      "SG_UF": "MG",
+      "complexidade": "Média complexidade",
+      "internacoes": 18025600
+    },
+    {
+      "SG_UF": "MG",
+      "complexidade": "Alta complexidade",
+      "internacoes": 1377523
+    },
+    {
+      "SG_UF": "MS",
+      "complexidade": "Média complexidade",
+      "internacoes": 2512323
+    },
+    {
+      "SG_UF": "MS",
+      "complexidade": "Alta complexidade",
+      "internacoes": 193757
+    },
+    {
+      "SG_UF": "MT",
+      "complexidade": "Média complexidade",
+      "internacoes": 2925377
+    },
+    {
+      "SG_UF": "MT",
+      "complexidade": "Alta complexidade",
+      "internacoes": 102631
+    },
+    {
+      "SG_UF": "PA",
+      "complexidade": "Média complexidade",
+      "internacoes": 7777609
+    },
+    {
+      "SG_UF": "PA",
+      "complexidade": "Alta complexidade",
+      "internacoes": 181357
+    },
+    {
+      "SG_UF": "PB",
+      "complexidade": "Média complexidade",
+      "internacoes": 3043872
+    },
+    {
+      "SG_UF": "PB",
+      "complexidade": "Alta complexidade",
+      "internacoes": 179466
+    }
+  ],
+  "result_hash": "b1e82168a477057ab9bf96ac40c9a850d3b267b73261c8920715c2807d3d9ba8"
+}

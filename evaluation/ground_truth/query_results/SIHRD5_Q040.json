@@ -1,0 +1,24 @@
+{
+  "id": "SIHRD5_Q040",
+  "question_pt": "Quantos hospitais existem por tipo de gestao cadastral?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT GESTAO, COUNT(*) AS hospitais FROM hospital GROUP BY 1 ORDER BY hospitais DESC",
+  "duration_seconds": 0.001,
+  "row_count": 2,
+  "columns": [
+    "GESTAO",
+    "hospitais"
+  ],
+  "preview_rows": [
+    {
+      "GESTAO": "2",
+      "hospitais": 3891
+    },
+    {
+      "GESTAO": "1",
+      "hospitais": 2982
+    }
+  ],
+  "result_hash": "40171627faff42d42b0189173e4905bfc57627ffc8b702136e232dd85addaa1b"
+}

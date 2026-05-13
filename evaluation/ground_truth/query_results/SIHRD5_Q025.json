@@ -1,0 +1,40 @@
+{
+  "id": "SIHRD5_Q025",
+  "question_pt": "Como as internacoes se distribuem por codigo de raca/cor?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT RACA_COR, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY RACA_COR",
+  "duration_seconds": 0.179,
+  "row_count": 6,
+  "columns": [
+    "RACA_COR",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "RACA_COR": 1,
+      "internacoes": 60081825
+    },
+    {
+      "RACA_COR": 2,
+      "internacoes": 6541484
+    },
+    {
+      "RACA_COR": 3,
+      "internacoes": 65749749
+    },
+    {
+      "RACA_COR": 4,
+      "internacoes": 2252044
+    },
+    {
+      "RACA_COR": 5,
+      "internacoes": 491304
+    },
+    {
+      "RACA_COR": 99,
+      "internacoes": 48760813
+    }
+  ],
+  "result_hash": "79f2c991de1989fed009c48115678163fb01e4966044d3c6ae74d7a0a43d8e17"
+}

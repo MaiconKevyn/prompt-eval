@@ -1,0 +1,18 @@
+{
+  "id": "SIHRD5_Q013",
+  "question_pt": "Quantos CNES distintos aparecem nas internacoes?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(DISTINCT CNES) AS cnes_distintos FROM internacoes",
+  "duration_seconds": 0.249,
+  "row_count": 1,
+  "columns": [
+    "cnes_distintos"
+  ],
+  "preview_rows": [
+    {
+      "cnes_distintos": 6873
+    }
+  ],
+  "result_hash": "4cfdec0001ffc147c2fc273999178907463d25b85d279d7e55089f53699ad002"
+}

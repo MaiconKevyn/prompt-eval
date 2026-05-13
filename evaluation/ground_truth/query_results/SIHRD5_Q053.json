@@ -1,0 +1,117 @@
+{
+  "id": "SIHRD5_Q053",
+  "question_pt": "Quais municipios de residencia tiveram mais internacoes?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT m.SG_UF, m.NO_MUNICIPIO, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20",
+  "duration_seconds": 0.72,
+  "row_count": 20,
+  "columns": [
+    "SG_UF",
+    "NO_MUNICIPIO",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "SP",
+      "NO_MUNICIPIO": "São Paulo",
+      "internacoes": 9179591
+    },
+    {
+      "SG_UF": "RJ",
+      "NO_MUNICIPIO": "Rio de Janeiro",
+      "internacoes": 3412931
+    },
+    {
+      "SG_UF": "BA",
+      "NO_MUNICIPIO": "Salvador",
+      "internacoes": 2249720
+    },
+    {
+      "SG_UF": "CE",
+      "NO_MUNICIPIO": "Fortaleza",
+      "internacoes": 2237047
+    },
+    {
+      "SG_UF": "MG",
+      "NO_MUNICIPIO": "Belo Horizonte",
+      "internacoes": 2148438
+    },
+    {
+      "SG_UF": "PR",
+      "NO_MUNICIPIO": "Curitiba",
+      "internacoes": 1773231
+    },
+    {
+      "SG_UF": "AM",
+      "NO_MUNICIPIO": "Manaus",
+      "internacoes": 1691106
+    },
+    {
+      "SG_UF": "PE",
+      "NO_MUNICIPIO": "Recife",
+      "internacoes": 1636126
+    },
+    {
+      "SG_UF": "RS",
+      "NO_MUNICIPIO": "Porto Alegre",
+      "internacoes": 1581334
+    },
+    {
+      "SG_UF": "GO",
+      "NO_MUNICIPIO": "Goiânia",
+      "internacoes": 1285536
+    },
+    {
+      "SG_UF": "DF",
+      "NO_MUNICIPIO": "Brasília",
+      "internacoes": 1264585
+    },
+    {
+      "SG_UF": "PA",
+      "NO_MUNICIPIO": "Belém",
+      "internacoes": 1189411
+    },
+    {
+      "SG_UF": "SP",
+      "NO_MUNICIPIO": "Guarulhos",
+      "internacoes": 961104
+    },
+    {
+      "SG_UF": "MA",
+      "NO_MUNICIPIO": "São Luís",
+      "internacoes": 902980
+    },
+    {
+      "SG_UF": "SP",
+      "NO_MUNICIPIO": "Campinas",
+      "internacoes": 858995
+    },
+    {
+      "SG_UF": "PI",
+      "NO_MUNICIPIO": "Teresina",
+      "internacoes": 846179
+    },
+    {
+      "SG_UF": "MS",
+      "NO_MUNICIPIO": "Campo Grande",
+      "internacoes": 815951
+    },
+    {
+      "SG_UF": "AL",
+      "NO_MUNICIPIO": "Maceió",
+      "internacoes": 770696
+    },
+    {
+      "SG_UF": "RJ",
+      "NO_MUNICIPIO": "São Gonçalo",
+      "internacoes": 728038
+    },
+    {
+      "SG_UF": "PB",
+      "NO_MUNICIPIO": "João Pessoa",
+      "internacoes": 684059
+    }
+  ],
+  "result_hash": "0c44163695d3eeb27856dc2c5453327df617022fe99e475c85155a5e6f69213e"
+}

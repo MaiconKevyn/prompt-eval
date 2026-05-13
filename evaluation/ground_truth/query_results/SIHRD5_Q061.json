@@ -1,0 +1,167 @@
+{
+  "id": "SIHRD5_Q061",
+  "question_pt": "Como as internacoes por sexo se distribuem em cada UF?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT m.SG_UF, s.DESCRICAO AS sexo, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D JOIN sexo s ON i.SEXO = s.SEXO GROUP BY 1, 2 ORDER BY 1, internacoes DESC",
+  "duration_seconds": 1.14,
+  "row_count": 54,
+  "columns": [
+    "SG_UF",
+    "sexo",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "AC",
+      "sexo": "Feminino",
+      "internacoes": 499660
+    },
+    {
+      "SG_UF": "AC",
+      "sexo": "Masculino",
+      "internacoes": 272847
+    },
+    {
+      "SG_UF": "AL",
+      "sexo": "Feminino",
+      "internacoes": 1744999
+    },
+    {
+      "SG_UF": "AL",
+      "sexo": "Masculino",
+      "internacoes": 979677
+    },
+    {
+      "SG_UF": "AM",
+      "sexo": "Feminino",
+      "internacoes": 1898344
+    },
+    {
+      "SG_UF": "AM",
+      "sexo": "Masculino",
+      "internacoes": 979538
+    },
+    {
+      "SG_UF": "AP",
+      "sexo": "Feminino",
+      "internacoes": 413197
+    },
+    {
+      "SG_UF": "AP",
+      "sexo": "Masculino",
+      "internacoes": 173483
+    },
+    {
+      "SG_UF": "BA",
+      "sexo": "Feminino",
+      "internacoes": 8124966
+    },
+    {
+      "SG_UF": "BA",
+      "sexo": "Masculino",
+      "internacoes": 5164242
+    },
+    {
+      "SG_UF": "CE",
+      "sexo": "Feminino",
+      "internacoes": 4711400
+    },
+    {
+      "SG_UF": "CE",
+      "sexo": "Masculino",
+      "internacoes": 3101916
+    },
+    {
+      "SG_UF": "DF",
+      "sexo": "Feminino",
+      "internacoes": 749725
+    },
+    {
+      "SG_UF": "DF",
+      "sexo": "Masculino",
+      "internacoes": 514860
+    },
+    {
+      "SG_UF": "ES",
+      "sexo": "Feminino",
+      "internacoes": 2093217
+    },
+    {
+      "SG_UF": "ES",
+      "sexo": "Masculino",
+      "internacoes": 1563500
+    },
+    {
+      "SG_UF": "GO",
+      "sexo": "Feminino",
+      "internacoes": 3493769
+    },
+    {
+      "SG_UF": "GO",
+      "sexo": "Masculino",
+      "internacoes": 2685330
+    },
+    {
+      "SG_UF": "MA",
+      "sexo": "Feminino",
+      "internacoes": 4250826
+    },
+    {
+      "SG_UF": "MA",
+      "sexo": "Masculino",
+      "internacoes": 2553887
+    },
+    {
+      "SG_UF": "MG",
+      "sexo": "Feminino",
+      "internacoes": 11047549
+    },
+    {
+      "SG_UF": "MG",
+      "sexo": "Masculino",
+      "internacoes": 8355574
+    },
+    {
+      "SG_UF": "MS",
+      "sexo": "Feminino",
+      "internacoes": 1580506
+    },
+    {
+      "SG_UF": "MS",
+      "sexo": "Masculino",
+      "internacoes": 1125574
+    },
+    {
+      "SG_UF": "MT",
+      "sexo": "Feminino",
+      "internacoes": 1760930
+    },
+    {
+      "SG_UF": "MT",
+      "sexo": "Masculino",
+      "internacoes": 1267078
+    },
+    {
+      "SG_UF": "PA",
+      "sexo": "Feminino",
+      "internacoes": 4933571
+    },
+    {
+      "SG_UF": "PA",
+      "sexo": "Masculino",
+      "internacoes": 3025395
+    },
+    {
+      "SG_UF": "PB",
+      "sexo": "Feminino",
+      "internacoes": 2004146
+    },
+    {
+      "SG_UF": "PB",
+      "sexo": "Masculino",
+      "internacoes": 1219193
+    }
+  ],
+  "result_hash": "0054cc784edca6bf6a5557e6d8adac0ca99bdb9f6e60357b020d4f400f57f9f8"
+}

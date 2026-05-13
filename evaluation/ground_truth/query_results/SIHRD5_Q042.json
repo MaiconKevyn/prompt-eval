@@ -1,0 +1,124 @@
+{
+  "id": "SIHRD5_Q042",
+  "question_pt": "Quantas internacoes ocorreram por UF do hospital?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT mh.SG_UF, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY internacoes DESC",
+  "duration_seconds": 0.744,
+  "row_count": 27,
+  "columns": [
+    "SG_UF",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "SP",
+      "internacoes": 38005592
+    },
+    {
+      "SG_UF": "MG",
+      "internacoes": 19272592
+    },
+    {
+      "SG_UF": "BA",
+      "internacoes": 13202375
+    },
+    {
+      "SG_UF": "PR",
+      "internacoes": 12726407
+    },
+    {
+      "SG_UF": "RS",
+      "internacoes": 11821898
+    },
+    {
+      "SG_UF": "RJ",
+      "internacoes": 10940205
+    },
+    {
+      "SG_UF": "PE",
+      "internacoes": 8648438
+    },
+    {
+      "SG_UF": "PA",
+      "internacoes": 7883134
+    },
+    {
+      "SG_UF": "CE",
+      "internacoes": 7819946
+    },
+    {
+      "SG_UF": "SC",
+      "internacoes": 7200795
+    },
+    {
+      "SG_UF": "MA",
+      "internacoes": 6690220
+    },
+    {
+      "SG_UF": "GO",
+      "internacoes": 5575239
+    },
+    {
+      "SG_UF": "ES",
+      "internacoes": 3653242
+    },
+    {
+      "SG_UF": "PI",
+      "internacoes": 3470858
+    },
+    {
+      "SG_UF": "PB",
+      "internacoes": 3165579
+    },
+    {
+      "SG_UF": "MT",
+      "internacoes": 3003974
+    },
+    {
+      "SG_UF": "AM",
+      "internacoes": 2836719
+    },
+    {
+      "SG_UF": "RN",
+      "internacoes": 2722262
+    },
+    {
+      "SG_UF": "AL",
+      "internacoes": 2681656
+    },
+    {
+      "SG_UF": "MS",
+      "internacoes": 2665795
+    },
+    {
+      "SG_UF": "RO",
+      "internacoes": 1732597
+    },
+    {
+      "SG_UF": "SE",
+      "internacoes": 1518842
+    },
+    {
+      "SG_UF": "TO",
+      "internacoes": 1453826
+    },
+    {
+      "SG_UF": "DF",
+      "internacoes": 1212516
+    },
+    {
+      "SG_UF": "AC",
+      "internacoes": 788168
+    },
+    {
+      "SG_UF": "AP",
+      "internacoes": 607153
+    },
+    {
+      "SG_UF": "RR",
+      "internacoes": 590447
+    }
+  ],
+  "result_hash": "f976d307ad6522ebffd9046b8542e1a93bb6deecbb542a440153f6c4370bf5cf"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "SIHRD5_Q031",
+  "question_pt": "Qual foi o valor total por codigo de complexidade?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COMPLEX, ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY valor_total DESC",
+  "duration_seconds": 1.055,
+  "row_count": 3,
+  "columns": [
+    "COMPLEX",
+    "valor_total",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "COMPLEX": "02",
+      "valor_total": 211583361374.16,
+      "internacoes": 171675245
+    },
+    {
+      "COMPLEX": "03",
+      "valor_total": 69899943016.92,
+      "internacoes": 12201962
+    },
+    {
+      "COMPLEX": "00",
+      "valor_total": 3702.91,
+      "internacoes": 12
+    }
+  ],
+  "result_hash": "d5a396875a7e656f78d24c1ad75162dcd36dd819c9377d28332d705f883b3de2"
+}

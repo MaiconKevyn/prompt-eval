@@ -1,0 +1,152 @@
+{
+  "id": "SIHRD5_Q078",
+  "question_pt": "Qual foi o procedimento mais frequente em cada UF de residencia?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH proc_uf AS (SELECT m.SG_UF, p.NOME_PROC, COUNT(*) AS ocorrencias, ROW_NUMBER() OVER (PARTITION BY m.SG_UF ORDER BY COUNT(*) DESC) AS rn FROM internacao_procedimento ip JOIN internacoes i ON ip.N_AIH = i.N_AIH JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1, 2) SELECT SG_UF, NOME_PROC, ocorrencias FROM proc_uf WHERE rn = 1 ORDER BY SG_UF",
+  "duration_seconds": 9.824,
+  "row_count": 27,
+  "columns": [
+    "SG_UF",
+    "NOME_PROC",
+    "ocorrencias"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "AC",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 102277
+    },
+    {
+      "SG_UF": "AL",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 349583
+    },
+    {
+      "SG_UF": "AM",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 563922
+    },
+    {
+      "SG_UF": "AP",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 139908
+    },
+    {
+      "SG_UF": "BA",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 1575460
+    },
+    {
+      "SG_UF": "CE",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 704685
+    },
+    {
+      "SG_UF": "DF",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 104069
+    },
+    {
+      "SG_UF": "ES",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 262794
+    },
+    {
+      "SG_UF": "GO",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 406178
+    },
+    {
+      "SG_UF": "MA",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 884984
+    },
+    {
+      "SG_UF": "MG",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 1366894
+    },
+    {
+      "SG_UF": "MS",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 230737
+    },
+    {
+      "SG_UF": "MT",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 296689
+    },
+    {
+      "SG_UF": "PA",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 939282
+    },
+    {
+      "SG_UF": "PB",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 321322
+    },
+    {
+      "SG_UF": "PE",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 814832
+    },
+    {
+      "SG_UF": "PI",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 322301
+    },
+    {
+      "SG_UF": "PR",
+      "NOME_PROC": "TRATAMENTO DE PNEUMONIAS OU INFLUENZA (GRIPE)",
+      "ocorrencias": 787729
+    },
+    {
+      "SG_UF": "RJ",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 1154996
+    },
+    {
+      "SG_UF": "RN",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 253068
+    },
+    {
+      "SG_UF": "RO",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 121161
+    },
+    {
+      "SG_UF": "RR",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 77805
+    },
+    {
+      "SG_UF": "RS",
+      "NOME_PROC": "TRATAMENTO DE PNEUMONIAS OU INFLUENZA (GRIPE)",
+      "ocorrencias": 755998
+    },
+    {
+      "SG_UF": "SC",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 477923
+    },
+    {
+      "SG_UF": "SE",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 267579
+    },
+    {
+      "SG_UF": "SP",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 2866935
+    },
+    {
+      "SG_UF": "TO",
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 169006
+    }
+  ],
+  "result_hash": "4d427c89c33c035c2acc481bd14e28d9537ac4ddb08e29d73a0fbd74e4f7f951"
+}

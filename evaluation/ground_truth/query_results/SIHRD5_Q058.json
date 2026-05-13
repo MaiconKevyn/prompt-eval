@@ -1,0 +1,117 @@
+{
+  "id": "SIHRD5_Q058",
+  "question_pt": "Quais procedimentos por descricao tiveram maior valor total?",
+  "executed_at": "2026-05-13T09:45:23",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT p.NOME_PROC, COUNT(*) AS ocorrencias, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacao_procedimento ip JOIN internacoes i ON ip.N_AIH = i.N_AIH JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1 ORDER BY valor_total DESC LIMIT 20",
+  "duration_seconds": 9.177,
+  "row_count": 20,
+  "columns": [
+    "NOME_PROC",
+    "ocorrencias",
+    "valor_total"
+  ],
+  "preview_rows": [
+    {
+      "NOME_PROC": "TRATAMENTO DE PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES NEUROLOGICAS",
+      "ocorrencias": 739927,
+      "valor_total": 158443097161.65
+    },
+    {
+      "NOME_PROC": "TRATAMENTO EM PSIQUIATRIA (POR DIA)",
+      "ocorrencias": 4214855,
+      "valor_total": 118793847002.99
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE INFECCAO PELO CORONAVIRUS ? COVID 19",
+      "ocorrencias": 1792677,
+      "valor_total": 17844192206.98
+    },
+    {
+      "NOME_PROC": "ATENDIMENTO A PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES CARDIOVASCULARES",
+      "ocorrencias": 236754,
+      "valor_total": 17625969481.13
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE OUTRAS DOENCAS BACTERIANAS",
+      "ocorrencias": 3723552,
+      "valor_total": 16898866663.41
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE PNEUMONIAS OU INFLUENZA (GRIPE)",
+      "ocorrencias": 10576911,
+      "valor_total": 13194351262.87
+    },
+    {
+      "NOME_PROC": "TRATAMENTO C/ CIRURGIAS MULTIPLAS",
+      "ocorrencias": 3353755,
+      "valor_total": 12286849109.01
+    },
+    {
+      "NOME_PROC": "PARTO NORMAL",
+      "ocorrencias": 16435256,
+      "valor_total": 8969158225.29
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE TRANSTORNOS RESPIRATORIOS E CARDIOVASCULARES ESPECIFICOS DO PERIODO NEONATAL",
+      "ocorrencias": 756459,
+      "valor_total": 8092861427.92
+    },
+    {
+      "NOME_PROC": "PARTO CESARIANO",
+      "ocorrencias": 10309968,
+      "valor_total": 7448107690.57
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE TRANSTORNOS RELACIONADOS C/ A DURACAO DA GESTACAO E C/ O CRESCIMENTO FETAL",
+      "ocorrencias": 786751,
+      "valor_total": 6737371840.34
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE INSUFICIENCIA CARDIACA",
+      "ocorrencias": 3636826,
+      "valor_total": 6634943417.23
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES OSTEOMUSCULARES E DO TECIDO CONJUNT",
+      "ocorrencias": 74870,
+      "valor_total": 6521616660.89
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE ACIDENTE VASCULAR CEREBRAL - AVC (ISQUEMICO OU HEMORRAGICO AGUDO)",
+      "ocorrencias": 3017652,
+      "valor_total": 5654739100.15
+    },
+    {
+      "NOME_PROC": "PROCEDIMENTOS SEQUENCIAIS EM ONCOLOGIA",
+      "ocorrencias": 618052,
+      "valor_total": 4868361965.29
+    },
+    {
+      "NOME_PROC": "TRATAMENTO DE OUTRAS DOENCAS DO APARELHO RESPIRATORIO",
+      "ocorrencias": 1010550,
+      "valor_total": 4179031085.5
+    },
+    {
+      "NOME_PROC": "REVASCULARIZACAO MIOCARDICA C/ USO DE EXTRACORPOREA (C/ 2 OU MAIS ENXERTOS)",
+      "ocorrencias": 257118,
+      "valor_total": 4060091023.0
+    },
+    {
+      "NOME_PROC": "ANGIOPLASTIA CORONARIANA COM IMPLANTE DE STENT",
+      "ocorrencias": 652215,
+      "valor_total": 3884749129.63
+    },
+    {
+      "NOME_PROC": "TRATAMENTO CIRURGICO EM POLITRAUMATIZADO",
+      "ocorrencias": 954668,
+      "valor_total": 3817065026.96
+    },
+    {
+      "NOME_PROC": "OUTROS PROCEDIMENTOS COM CIRURGIAS SEQUENCIAIS",
+      "ocorrencias": 835426,
+      "valor_total": 3620119197.06
+    }
+  ],
+  "result_hash": "189f1594fe975e1b9bc7edbcea8c2aeac894e3f02aaca2551d3f5f58f8c664fc"
+}

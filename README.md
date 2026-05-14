@@ -66,13 +66,15 @@ O `.gitignore` bloqueia:
 O projeto esta organizado como um chatbot Text-to-SQL local, com adaptadores
 finos para CLI e HTTP e um pipeline central em `workflow.run_chat`. A API
 FastAPI e a CLI chamam o mesmo fluxo, o que mantem a semantica de resposta,
-validacao, auditoria e avaliacao alinhada entre interface web, terminal e
-benchmarks.
+validacao e auditoria alinhada entre interface web e terminal. A avaliacao
+automatizada (`evaluation.evaluate_dataset`) e uma trilha de desenvolvimento
+separada: ela reutiliza os componentes centrais de classificacao, contexto,
+geracao SQL, validacao e execucao para medir qualidade, mas nao sintetiza
+`ChatbotAnswer` nem registra conversa como usuario.
 
 Fluxo principal:
 
-1. O usuario envia uma pergunta pela interface web, CLI ou scripts de
-   avaliacao.
+1. O usuario envia uma pergunta pela interface web ou CLI (`ask`/`ask-file`).
 2. `intent.classify_question` decide se a pergunta pode ser respondida,
    precisa de esclarecimento ou deve ser recusada.
 3. `schema_context.retrieve_context` recupera tabelas, colunas, politicas de
@@ -94,6 +96,14 @@ Fluxo principal:
    `result_summary`, `sql`, `caveats`, `evidence` e `developer_context`.
 9. `workflow.run_chat` grava traces e audit log em `evaluation/chatbot/` para
    depuracao, auditoria e avaliacao posterior.
+
+Trilha de avaliacao:
+
+- `evaluation.evaluate_dataset` le o ground truth v2, executa os componentes
+  centrais ate `duckdb_executor.execute_validated_sql` e grava metricas em
+  `evaluation/chatbot/results/`.
+- Essa trilha nao substitui `workflow.run_chat`: ela existe para regressao e
+  analise de erros durante o desenvolvimento.
 
 Decisoes arquiteturais importantes:
 

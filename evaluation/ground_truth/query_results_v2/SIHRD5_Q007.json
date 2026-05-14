@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q007",
+  "question_pt": "Quantos codigos CID existem na tabela de diagnosticos?",
+  "executed_at": "2026-05-14T03:38:33.221246+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS total_cids FROM cid",
+  "duration_seconds": 0.000242,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "total_cids"
+  ],
+  "preview_rows": [
+    {
+      "total_cids": 14253
+    }
+  ],
+  "result_hash": "ecc3d84a0b918817cd786c6e5996983404b64d2cf4d8986262073c0cb4b3239d",
+  "semantic_disposition": "accepted"
+}

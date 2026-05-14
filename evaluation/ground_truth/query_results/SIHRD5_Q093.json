@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q093",
   "question_pt": "Quantos procedimentos realizados nao existem no cadastro de procedimentos?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT COUNT(*) AS procedimentos_orfaos FROM internacao_procedimento ip LEFT JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA WHERE ip.PROC_REA IS NOT NULL AND p.PROC_REA IS NULL",
-  "duration_seconds": 0.836,
+  "duration_seconds": 0.801,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 1,
   "columns": [
     "procedimentos_orfaos"

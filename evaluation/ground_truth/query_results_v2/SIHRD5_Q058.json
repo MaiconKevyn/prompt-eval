@@ -1,0 +1,125 @@
+{
+  "id": "SIHRD5_Q058",
+  "question_pt": "Quais procedimentos por descricao tiveram maior valor total?",
+  "executed_at": "2026-05-14T03:39:17.013624+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT NOME_PROC AS nome_procedimento, COUNT(*) AS ocorrencias, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacao_procedimento ip JOIN internacoes i ON ip.N_AIH = i.N_AIH JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1 ORDER BY valor_total DESC LIMIT 20",
+  "duration_seconds": 12.110015,
+  "performance_class": "slow",
+  "explain_plan": [
+    {
+      "explain_key": "physical_plan",
+      "explain_value": "┌───────────────────────────┐\n│           TOP_N           │\n│    ────────────────────   │\n│          Top: 20          │\n│                           │\n│         Order By:         │\n│  round(sum(CAST(i.VAL_TOT │\n│   AS DECIMAL(20, 2))), 2) │\n│            DESC           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             0             │\n│        ocorrencias        │\n│        valor_total        │\n│                           │\n│        ~1,813 rows        │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       HASH_GROUP_BY       │\n│    ────────────────────   │\n│         Groups: #0        │\n│                           │\n│        Aggregates:        │\n│        count_star()       │\n│          sum(#1)          │\n│                           │\n│        ~1,813 rows        │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│     nome_procedimento     │\n│ CAST(VAL_TOT AS DECIMAL(20│\n│            ,2))           │\n│                           │\n│     ~189,227,295 rows     │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         HASH_JOIN         │\n│    ────────────────────   │\n│      Join Type: INNER     │\n│                           │\n│        Conditions:        ├───────────────────────────────────────────┐\n│       N_AIH = N_AIH       │                                           │\n│                           │                                           │\n│     ~189,227,295 rows     │                                           │\n└─────────────┬─────────────┘                                           │\n┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐\n│         HASH_JOIN         │                             │          SEQ_SCAN         │\n│    ────────────────────   │                             │    ────────────────────   │\n│      Join Type: INNER     │                             │           Table:          │\n│                           │                             │  sihrd5.main.internacoes  │\n│        Conditions:        │                             │                           │\n│    PROC_REA = PROC_REA    │                             │   Type: Sequential Scan   │\n│                           ├──────────────┐              │                           │\n│                           │              │              │        Projections:       │\n│                           │              │              │           N_AIH           │\n│                           │              │              │          VAL_TOT          │\n│                           │              │              │                           │\n│     ~187,957,888 rows     │              │              │     ~183,877,219 rows     │\n└─────────────┬─────────────┘              │              └───────────────────────────┘\n┌─────────────┴─────────────┐┌─────────────┴─────────────┐\n│          SEQ_SCAN         ││          SEQ_SCAN         │\n│    ────────────────────   ││    ────────────────────   │\n│           Table:          ││           Table:          │\n│        sihrd5.main        ││ sihrd5.main.procedimentos │\n│  .internacao_procedimento ││                           │\n│                           ││   Type: Sequential Scan   │\n│   Type: Sequential Scan   ││                           │\n│                           ││        Projections:       │\n│        Projections:       ││          PROC_REA         │\n│           N_AIH           ││         NOME_PROC         │\n│          PROC_REA         ││                           │\n│                           ││          Filters:         │\n│                           ││  PROC_REA>=201010038 AND  │\n│                           ││     PROC_REA<=506020134   │\n│                           ││                           │\n│     ~187,957,888 rows     ││        ~5,394 rows        │\n└───────────────────────────┘└───────────────────────────┘\n"
+    }
+  ],
+  "row_count": 20,
+  "columns": [
+    "nome_procedimento",
+    "ocorrencias",
+    "valor_total"
+  ],
+  "preview_rows": [
+    {
+      "nome_procedimento": "TRATAMENTO DE PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES NEUROLOGICAS",
+      "ocorrencias": 739927,
+      "valor_total": 158443097161.65
+    },
+    {
+      "nome_procedimento": "TRATAMENTO EM PSIQUIATRIA (POR DIA)",
+      "ocorrencias": 4214855,
+      "valor_total": 118793847002.99
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE INFECCAO PELO CORONAVIRUS ? COVID 19",
+      "ocorrencias": 1792677,
+      "valor_total": 17844192206.98
+    },
+    {
+      "nome_procedimento": "ATENDIMENTO A PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES CARDIOVASCULARES",
+      "ocorrencias": 236754,
+      "valor_total": 17625969481.13
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE OUTRAS DOENCAS BACTERIANAS",
+      "ocorrencias": 3723552,
+      "valor_total": 16898866663.41
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE PNEUMONIAS OU INFLUENZA (GRIPE)",
+      "ocorrencias": 10576911,
+      "valor_total": 13194351262.87
+    },
+    {
+      "nome_procedimento": "TRATAMENTO C/ CIRURGIAS MULTIPLAS",
+      "ocorrencias": 3353755,
+      "valor_total": 12286849109.01
+    },
+    {
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 16435256,
+      "valor_total": 8969158225.29
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE TRANSTORNOS RESPIRATORIOS E CARDIOVASCULARES ESPECIFICOS DO PERIODO NEONATAL",
+      "ocorrencias": 756459,
+      "valor_total": 8092861427.92
+    },
+    {
+      "nome_procedimento": "PARTO CESARIANO",
+      "ocorrencias": 10309968,
+      "valor_total": 7448107690.57
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE TRANSTORNOS RELACIONADOS C/ A DURACAO DA GESTACAO E C/ O CRESCIMENTO FETAL",
+      "ocorrencias": 786751,
+      "valor_total": 6737371840.34
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE INSUFICIENCIA CARDIACA",
+      "ocorrencias": 3636826,
+      "valor_total": 6634943417.23
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES OSTEOMUSCULARES E DO TECIDO CONJUNT",
+      "ocorrencias": 74870,
+      "valor_total": 6521616660.89
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE ACIDENTE VASCULAR CEREBRAL - AVC (ISQUEMICO OU HEMORRAGICO AGUDO)",
+      "ocorrencias": 3017652,
+      "valor_total": 5654739100.15
+    },
+    {
+      "nome_procedimento": "PROCEDIMENTOS SEQUENCIAIS EM ONCOLOGIA",
+      "ocorrencias": 618052,
+      "valor_total": 4868361965.29
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE OUTRAS DOENCAS DO APARELHO RESPIRATORIO",
+      "ocorrencias": 1010550,
+      "valor_total": 4179031085.5
+    },
+    {
+      "nome_procedimento": "REVASCULARIZACAO MIOCARDICA C/ USO DE EXTRACORPOREA (C/ 2 OU MAIS ENXERTOS)",
+      "ocorrencias": 257118,
+      "valor_total": 4060091023.0
+    },
+    {
+      "nome_procedimento": "ANGIOPLASTIA CORONARIANA COM IMPLANTE DE STENT",
+      "ocorrencias": 652215,
+      "valor_total": 3884749129.63
+    },
+    {
+      "nome_procedimento": "TRATAMENTO CIRURGICO EM POLITRAUMATIZADO",
+      "ocorrencias": 954668,
+      "valor_total": 3817065026.96
+    },
+    {
+      "nome_procedimento": "OUTROS PROCEDIMENTOS COM CIRURGIAS SEQUENCIAIS",
+      "ocorrencias": 835426,
+      "valor_total": 3620119197.06
+    }
+  ],
+  "result_hash": "c9a7d46f95b469aac9b82b2ac006c1a30317acf0f00482146a974594cf838f70",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

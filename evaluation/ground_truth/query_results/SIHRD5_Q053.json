@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q053",
   "question_pt": "Quais municipios de residencia tiveram mais internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT m.SG_UF, m.NO_MUNICIPIO, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20",
-  "duration_seconds": 0.72,
+  "duration_seconds": 0.736,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "SG_UF",

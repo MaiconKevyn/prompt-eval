@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q014",
+  "question_pt": "Quantos municipios de residencia distintos aparecem nas internacoes?",
+  "executed_at": "2026-05-14T03:38:36.480923+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(DISTINCT MUNIC_RES) AS municipios_residencia_distintos FROM internacoes",
+  "duration_seconds": 0.688962,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "municipios_residencia_distintos"
+  ],
+  "preview_rows": [
+    {
+      "municipios_residencia_distintos": 5588
+    }
+  ],
+  "result_hash": "6b3a6ae5cfe58c4394bb4775d1c655dda8a128dbc2ddd515be4c5525137a88bb",
+  "semantic_disposition": "accepted"
+}

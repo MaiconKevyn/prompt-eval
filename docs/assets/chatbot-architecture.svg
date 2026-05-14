@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Health System Chatbot runtime architecture</title>
+  <desc id="desc">AWS-inspired architecture diagram showing clients, FastAPI and CLI adapters, run_chat orchestration, LlamaIndex and OpenAI model calls, DuckDB execution, answer synthesis, and local observability artifacts.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#17202a" flood-opacity="0.14"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#4d5b66"/>
+    </marker>
+    <marker id="orangeArrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#ff9900"/>
+    </marker>
+    <style>
+      .bg { fill: #f7f8fa; }
+      .group { fill: #ffffff; stroke: #c7d0d9; stroke-width: 2; rx: 18; filter: url(#shadow); }
+      .group-dashed { fill: #fbfcfd; stroke: #b6c1cc; stroke-width: 2; stroke-dasharray: 8 7; rx: 18; }
+      .hdr { font: 700 18px Arial, sans-serif; fill: #1f2933; }
+      .sub { font: 400 13px Arial, sans-serif; fill: #52616f; }
+      .label { font: 700 15px Arial, sans-serif; fill: #1f2933; }
+      .text { font: 400 12px Arial, sans-serif; fill: #52616f; }
+      .tiny { font: 400 11px Arial, sans-serif; fill: #52616f; }
+      .card { fill: #ffffff; stroke: #d7dee6; stroke-width: 1.5; rx: 10; filter: url(#shadow); }
+      .aws { fill: #fff8ed; stroke: #ff9900; stroke-width: 2; rx: 10; }
+      .core { fill: #eef6ff; stroke: #2f80ed; stroke-width: 2; rx: 10; }
+      .guard { fill: #f0fbf3; stroke: #2f855a; stroke-width: 2; rx: 10; }
+      .data { fill: #f7f3ff; stroke: #7c3aed; stroke-width: 2; rx: 10; }
+      .obs { fill: #fff5f5; stroke: #d64545; stroke-width: 2; rx: 10; }
+      .arrow { fill: none; stroke: #4d5b66; stroke-width: 2.2; marker-end: url(#arrow); }
+      .arrow-orange { fill: none; stroke: #ff9900; stroke-width: 2.2; marker-end: url(#orangeArrow); }
+      .arrow-dash { fill: none; stroke: #6b7785; stroke-width: 2; stroke-dasharray: 7 6; marker-end: url(#arrow); }
+      .badge { fill: #ff9900; }
+      .badge-blue { fill: #2f80ed; }
+      .badge-green { fill: #2f855a; }
+      .badge-purple { fill: #7c3aed; }
+      .badge-red { fill: #d64545; }
+      .badge-text { font: 700 12px Arial, sans-serif; fill: #ffffff; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1400" height="900"/>
+
+  <text x="48" y="48" class="hdr">Health System Chatbot</text>
+  <text x="48" y="70" class="sub">Runtime Text-to-SQL flow over the local SIH/SUS DuckDB database</text>
+
+  <rect class="group" x="40" y="105" width="220" height="265"/>
+  <text x="62" y="137" class="hdr">Clients</text>
+  <text x="62" y="158" class="sub">User and dev entrypoints</text>
+
+  <rect class="aws" x="65" y="185" width="170" height="45"/>
+  <circle class="badge" cx="88" cy="207" r="13"/>
+  <text x="84" y="212" class="badge-text">1</text>
+  <text x="108" y="203" class="label">Web UI</text>
+  <text x="108" y="219" class="tiny">static/index.html</text>
+
+  <rect class="aws" x="65" y="245" width="170" height="45"/>
+  <circle class="badge" cx="88" cy="267" r="13"/>
+  <text x="84" y="272" class="badge-text">2</text>
+  <text x="108" y="263" class="label">CLI</text>
+  <text x="108" y="279" class="tiny">ask / ask-file</text>
+
+  <rect class="aws" x="65" y="305" width="170" height="45"/>
+  <circle class="badge" cx="88" cy="327" r="13"/>
+  <text x="84" y="332" class="badge-text">3</text>
+  <text x="108" y="323" class="label">Evaluation</text>
+  <text x="108" y="339" class="tiny">ground truth v2</text>
+
+  <rect class="group" x="305" y="105" width="230" height="265"/>
+  <text x="327" y="137" class="hdr">Adapters</text>
+  <text x="327" y="158" class="sub">Thin transport layer</text>
+
+  <rect class="core" x="330" y="190" width="180" height="58"/>
+  <text x="355" y="213" class="label">FastAPI app</text>
+  <text x="355" y="231" class="tiny">POST /api/chat</text>
+
+  <rect class="core" x="330" y="275" width="180" height="58"/>
+  <text x="355" y="298" class="label">CLI parser</text>
+  <text x="355" y="316" class="tiny">health_system_chatbot.cli</text>
+
+  <rect class="group" x="575" y="105" width="550" height="510"/>
+  <text x="598" y="137" class="hdr">Application Runtime</text>
+  <text x="598" y="158" class="sub">Synchronous orchestration in workflow.run_chat</text>
+
+  <rect class="core" x="610" y="190" width="205" height="62"/>
+  <circle class="badge-blue" cx="634" cy="221" r="13"/>
+  <text x="630" y="226" class="badge-text">1</text>
+  <text x="656" y="215" class="label">Intent classifier</text>
+  <text x="656" y="233" class="tiny">clarify / refuse / answer</text>
+
+  <rect class="core" x="870" y="190" width="205" height="62"/>
+  <circle class="badge-blue" cx="894" cy="221" r="13"/>
+  <text x="890" y="226" class="badge-text">2</text>
+  <text x="916" y="215" class="label">Schema retrieval</text>
+  <text x="916" y="233" class="tiny">keyword + LlamaIndex vector</text>
+
+  <rect class="data" x="610" y="295" width="205" height="62"/>
+  <circle class="badge-purple" cx="634" cy="326" r="13"/>
+  <text x="630" y="331" class="badge-text">3</text>
+  <text x="656" y="320" class="label">Related context</text>
+  <text x="656" y="338" class="tiny">audit-log similarity</text>
+
+  <rect class="aws" x="870" y="295" width="205" height="62"/>
+  <circle class="badge" cx="894" cy="326" r="13"/>
+  <text x="890" y="331" class="badge-text">4</text>
+  <text x="916" y="320" class="label">SQL plan</text>
+  <text x="916" y="338" class="tiny">structured LlamaIndex output</text>
+
+  <rect class="guard" x="610" y="400" width="205" height="62"/>
+  <circle class="badge-green" cx="634" cy="431" r="13"/>
+  <text x="630" y="436" class="badge-text">5</text>
+  <text x="656" y="425" class="label">SQL validator</text>
+  <text x="656" y="443" class="tiny">read-only + semantic guards</text>
+
+  <rect class="guard" x="870" y="400" width="205" height="62"/>
+  <circle class="badge-green" cx="894" cy="431" r="13"/>
+  <text x="890" y="436" class="badge-text">6</text>
+  <text x="916" y="425" class="label">DuckDB executor</text>
+  <text x="916" y="443" class="tiny">read-only validated SQL</text>
+
+  <rect class="core" x="740" y="505" width="235" height="72"/>
+  <circle class="badge-blue" cx="765" cy="541" r="13"/>
+  <text x="761" y="546" class="badge-text">7</text>
+  <text x="790" y="534" class="label">Answer synthesizer</text>
+  <text x="790" y="552" class="tiny">answer_pt + developer_context</text>
+
+  <rect class="group" x="1165" y="105" width="195" height="265"/>
+  <text x="1187" y="137" class="hdr">Model Services</text>
+  <text x="1187" y="158" class="sub">External calls</text>
+
+  <rect class="aws" x="1188" y="190" width="150" height="58"/>
+  <text x="1210" y="214" class="label">OpenAI LLM</text>
+  <text x="1210" y="232" class="tiny">SQL generation</text>
+
+  <rect class="aws" x="1188" y="275" width="150" height="58"/>
+  <text x="1210" y="299" class="label">Embeddings</text>
+  <text x="1210" y="317" class="tiny">schema index</text>
+
+  <rect class="group-dashed" x="40" y="655" width="1320" height="190"/>
+  <text x="62" y="690" class="hdr">Local Data Plane and Observability</text>
+  <text x="62" y="711" class="sub">Files are local to the project; the DuckDB file is not committed</text>
+
+  <rect class="data" x="75" y="735" width="215" height="62"/>
+  <text x="100" y="759" class="label">Stage 1 artifacts</text>
+  <text x="100" y="777" class="tiny">docs/generated + policy CSVs</text>
+
+  <rect class="data" x="330" y="735" width="190" height="62"/>
+  <text x="355" y="759" class="label">Vector index</text>
+  <text x="355" y="777" class="tiny">.chatbot_index</text>
+
+  <rect class="data" x="560" y="735" width="205" height="62"/>
+  <text x="585" y="759" class="label">SIH/SUS DuckDB</text>
+  <text x="585" y="777" class="tiny">sihrd5.duckdb read-only</text>
+
+  <rect class="obs" x="805" y="735" width="220" height="62"/>
+  <text x="830" y="759" class="label">Trace + audit log</text>
+  <text x="830" y="777" class="tiny">evaluation/chatbot/...</text>
+
+  <rect class="obs" x="1065" y="735" width="220" height="62"/>
+  <text x="1090" y="759" class="label">Evaluation results</text>
+  <text x="1090" y="777" class="tiny">iteration metrics + errors</text>
+
+  <line class="arrow" x1="235" y1="208" x2="330" y2="219"/>
+  <line class="arrow" x1="235" y1="267" x2="330" y2="304"/>
+  <line class="arrow" x1="235" y1="327" x2="330" y2="304"/>
+  <line class="arrow" x1="510" y1="219" x2="610" y2="221"/>
+  <line class="arrow" x1="510" y1="304" x2="610" y2="221"/>
+
+  <line class="arrow" x1="815" y1="221" x2="870" y2="221"/>
+  <path class="arrow" d="M 972 252 C 972 275, 725 275, 725 295"/>
+  <line class="arrow" x1="815" y1="326" x2="870" y2="326"/>
+  <path class="arrow" d="M 972 357 C 972 382, 714 382, 714 400"/>
+  <line class="arrow" x1="815" y1="431" x2="870" y2="431"/>
+  <path class="arrow" d="M 972 462 C 972 488, 858 488, 858 505"/>
+
+  <path class="arrow-orange" d="M 1075 326 C 1125 326, 1125 219, 1188 219"/>
+  <path class="arrow-orange" d="M 970 190 C 1015 120, 1160 120, 1235 190"/>
+  <path class="arrow-orange" d="M 1000 252 C 1050 275, 1125 290, 1188 304"/>
+
+  <path class="arrow-dash" d="M 965 190 C 955 120, 430 120, 425 735"/>
+  <path class="arrow-dash" d="M 972 252 C 930 630, 175 630, 175 735"/>
+  <path class="arrow-dash" d="M 972 462 C 950 650, 660 650, 660 735"/>
+  <path class="arrow-dash" d="M 714 357 C 740 650, 915 650, 915 735"/>
+  <path class="arrow-dash" d="M 858 577 C 860 640, 915 680, 915 735"/>
+  <path class="arrow-dash" d="M 915 797 C 915 830, 265 830, 245 357"/>
+  <path class="arrow-dash" d="M 975 541 C 1130 590, 1185 690, 1175 735"/>
+
+  <path class="arrow" d="M 740 541 C 610 590, 420 570, 420 333"/>
+  <path class="arrow" d="M 975 541 C 1090 555, 1145 460, 1125 370"/>
+
+  <text x="595" y="640" class="tiny">solid arrows: runtime request path</text>
+  <text x="595" y="660" class="tiny">dashed arrows: local data, index, trace, and evaluation artifacts</text>
+  <text x="595" y="680" class="tiny">orange arrows: model and embedding calls through configured OpenAI services</text>
+</svg>

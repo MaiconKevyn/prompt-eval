@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q020",
   "question_pt": "Qual foi o valor medio por internacao em cada ano?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT year(DT_INTER) AS ano, ROUND((SUM(CAST(VAL_TOT AS DECIMAL(20,2)))::DOUBLE / COUNT(VAL_TOT)), 2) AS valor_medio FROM internacoes GROUP BY 1 ORDER BY 1",
-  "duration_seconds": 1.058,
+  "duration_seconds": 1.061,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 23,
   "columns": [
     "ano",

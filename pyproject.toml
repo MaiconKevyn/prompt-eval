@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "health-system-chatbot"
+version = "0.1.0"
+description = "LlamaIndex Text-to-SQL chatbot for the local SIH/SUS DuckDB database."
+requires-python = ">=3.12"
+dependencies = [
+  "duckdb>=1.5.2",
+  "duckdb-engine>=0.17.0",
+  "sqlalchemy>=2.0.49",
+  "llama-index-core>=0.14.21",
+  "llama-index-llms-openai>=0.7.8",
+  "llama-index-embeddings-openai>=0.6.0",
+  "python-dotenv>=1.2.2",
+  "pydantic>=2.13.4",
+  "sqlglot>=30.8.0",
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.30.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9.0.3",
+]
+
+[project.scripts]
+health-system-chatbot = "health_system_chatbot.cli:main"
+health-system-chatbot-api = "health_system_chatbot.api:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+health_system_chatbot = ["static/*.html"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+markers = [
+  "live_openai: tests that call OpenAI through LlamaIndex",
+]

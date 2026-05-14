@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-05-13T09:42:16",
+  "generated_at": "2026-05-13T19:23:25",
   "database_file": "sihrd5.duckdb",
   "table_count": 234,
   "main_table_count": 23,
   "audit_table_count": 211,
   "ground_truth_count": 100,
+  "ground_truth_v2_count": 100,
   "difficulty_distribution": {
     "L1": 15,
     "L2": 25,
@@ -12,6 +13,14 @@
     "L4": 20,
     "L5": 15
   },
+  "difficulty_distribution_v2": {
+    "L1": 15,
+    "L2": 25,
+    "L3": 25,
+    "L4": 20,
+    "L5": 15
+  },
+  "rejected_v2_count": 0,
   "docs": [
     "docs/database_overview.md",
     "docs/schema_catalog.md",
@@ -25,16 +34,30 @@
     "evaluation/ground_truth/stage1_questions.jsonl",
     "evaluation/ground_truth/stage1_questions.md",
     "evaluation/ground_truth/rejected_questions.md",
-    "evaluation/ground_truth/query_results/"
+    "evaluation/ground_truth/query_results/",
+    "evaluation/ground_truth/stage1_questions_v2.jsonl",
+    "evaluation/ground_truth/stage1_questions_v2.md",
+    "evaluation/ground_truth/rejected_questions_v2.md",
+    "evaluation/ground_truth/query_results_v2/",
+    "ground_truth_v2.json"
   ],
   "generated_artifacts": [
+    "docs/generated/duckdb_runtime_metadata.json",
+    "docs/generated/physical_constraints.csv",
+    "docs/generated/secondary_indexes.csv",
+    "docs/generated/table_metadata.csv",
     "docs/generated/table_inventory.csv",
     "docs/generated/table_storage_estimates.csv",
     "docs/generated/column_catalog.csv",
     "docs/generated/column_profiles.csv",
+    "docs/generated/column_profiles_exact.csv",
+    "docs/generated/column_profiles_approx.csv",
     "docs/generated/top_frequent_values.csv",
     "docs/generated/candidate_keys.csv",
     "docs/generated/relationship_coverage.csv",
+    "docs/generated/join_policy.csv",
+    "docs/generated/uf_code_quality.csv",
+    "docs/generated/ground_truth_semantic_audit.csv",
     "docs/generated/data_quality_checks.json"
   ]
 }

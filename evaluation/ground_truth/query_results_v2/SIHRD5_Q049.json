@@ -1,0 +1,99 @@
+{
+  "id": "SIHRD5_Q049",
+  "question_pt": "Quais procedimentos realizados foram mais frequentes por descricao?",
+  "executed_at": "2026-05-14T03:38:55.105249+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT NOME_PROC AS nome_procedimento, COUNT(*) AS ocorrencias FROM internacao_procedimento ip JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1 ORDER BY ocorrencias DESC LIMIT 20",
+  "duration_seconds": 1.3784,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 20,
+  "columns": [
+    "nome_procedimento",
+    "ocorrencias"
+  ],
+  "preview_rows": [
+    {
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 16435256
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE PNEUMONIAS OU INFLUENZA (GRIPE)",
+      "ocorrencias": 10576911
+    },
+    {
+      "nome_procedimento": "PARTO CESARIANO",
+      "ocorrencias": 10309968
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE DOENCAS INFECCIOSAS INTESTINAIS",
+      "ocorrencias": 4507648
+    },
+    {
+      "nome_procedimento": "TRATAMENTO EM PSIQUIATRIA (POR DIA)",
+      "ocorrencias": 4214855
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DAS DOENCAS CRONICAS DAS VIAS AEREAS INFERIORES",
+      "ocorrencias": 3735530
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE OUTRAS DOENCAS BACTERIANAS",
+      "ocorrencias": 3723552
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE INSUFICIENCIA CARDIACA",
+      "ocorrencias": 3636826
+    },
+    {
+      "nome_procedimento": "TRATAMENTO C/ CIRURGIAS MULTIPLAS",
+      "ocorrencias": 3353755
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE INTERCORRENCIAS CLINICAS NA GRAVIDEZ",
+      "ocorrencias": 3139159
+    },
+    {
+      "nome_procedimento": "DIAGNOSTICO E/OU ATENDIMENTO DE URGENCIA EM CLINICA MEDICA",
+      "ocorrencias": 3120396
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE ACIDENTE VASCULAR CEREBRAL - AVC (ISQUEMICO OU HEMORRAGICO AGUDO)",
+      "ocorrencias": 3017652
+    },
+    {
+      "nome_procedimento": "CURETAGEM POS-ABORTAMENTO / PUERPERAL",
+      "ocorrencias": 2839585
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE OUTRAS DOENCAS DO APARELHO URINARIO",
+      "ocorrencias": 2347762
+    },
+    {
+      "nome_procedimento": "PARTO CESARIANO EM GESTACAO DE ALTO RISCO",
+      "ocorrencias": 2068691
+    },
+    {
+      "nome_procedimento": "COLECISTECTOMIA",
+      "ocorrencias": 1998158
+    },
+    {
+      "nome_procedimento": "HERNIOPLASTIA INGUINAL / CRURAL (UNILATERAL)",
+      "ocorrencias": 1868884
+    },
+    {
+      "nome_procedimento": "TRATAMENTO CLINICO DE PACIENTE ONCOLOGICO",
+      "ocorrencias": 1813092
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE INFECCAO PELO CORONAVIRUS ? COVID 19",
+      "ocorrencias": 1792677
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DA PIELONEFRITE",
+      "ocorrencias": 1789419
+    }
+  ],
+  "result_hash": "10caa4591d2f4cd7dafc118e831de9ea1c41e52340b8cef7e967a9fd0154d555",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

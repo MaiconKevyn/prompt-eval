@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q065",
   "question_pt": "Quais municipios tiveram maior valor total por residencia?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT m.SG_UF, m.NO_MUNICIPIO, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY valor_total DESC LIMIT 20",
-  "duration_seconds": 1.695,
+  "duration_seconds": 1.711,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "SG_UF",

@@ -1,0 +1,43 @@
+{
+  "id": "SIHRD5_Q023",
+  "question_pt": "Como as internacoes se distribuem por carater de internacao?",
+  "executed_at": "2026-05-14T03:38:40.471781+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT CAR_INT, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY internacoes DESC",
+  "duration_seconds": 0.200534,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 6,
+  "columns": [
+    "CAR_INT",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "CAR_INT": 2,
+      "internacoes": 145586729
+    },
+    {
+      "CAR_INT": 1,
+      "internacoes": 36515288
+    },
+    {
+      "CAR_INT": 6,
+      "internacoes": 1138155
+    },
+    {
+      "CAR_INT": 5,
+      "internacoes": 635768
+    },
+    {
+      "CAR_INT": 3,
+      "internacoes": 1060
+    },
+    {
+      "CAR_INT": 4,
+      "internacoes": 219
+    }
+  ],
+  "result_hash": "f5166e92351fd1a64f9fa83ed0bab23ee28bb846df1db0aedf791d5caddc0fbd",
+  "semantic_disposition": "accepted"
+}

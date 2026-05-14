@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q091",
+  "question_pt": "Quantas internacoes tem municipio de residencia sem cadastro territorial?",
+  "executed_at": "2026-05-14T03:40:16.489634+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS internacoes_municipio_orfao FROM internacoes i LEFT JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D WHERE i.MUNIC_RES IS NOT NULL AND m.CO_MUNICIPIO_6D IS NULL",
+  "duration_seconds": 0.487155,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "internacoes_municipio_orfao"
+  ],
+  "preview_rows": [
+    {
+      "internacoes_municipio_orfao": 1270397
+    }
+  ],
+  "result_hash": "a5c106341744b6e12aabe63ae36b33e60c8dab02a49a96972ba3b8f2a7b35a60",
+  "semantic_disposition": "accepted"
+}

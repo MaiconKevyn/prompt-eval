@@ -1,0 +1,99 @@
+{
+  "id": "SIHRD5_Q016",
+  "question_pt": "Quantas internacoes ocorreram por ano de entrada?",
+  "executed_at": "2026-05-14T03:38:36.809384+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 0.327177,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "internacoes": 9
+    },
+    {
+      "ano": 2001,
+      "internacoes": 2
+    },
+    {
+      "ano": 2002,
+      "internacoes": 2
+    },
+    {
+      "ano": 2003,
+      "internacoes": 1
+    },
+    {
+      "ano": 2005,
+      "internacoes": 6
+    },
+    {
+      "ano": 2006,
+      "internacoes": 7
+    },
+    {
+      "ano": 2007,
+      "internacoes": 602947
+    },
+    {
+      "ano": 2008,
+      "internacoes": 10847458
+    },
+    {
+      "ano": 2009,
+      "internacoes": 11114857
+    },
+    {
+      "ano": 2010,
+      "internacoes": 11347880
+    },
+    {
+      "ano": 2011,
+      "internacoes": 11267097
+    },
+    {
+      "ano": 2012,
+      "internacoes": 11103250
+    },
+    {
+      "ano": 2013,
+      "internacoes": 11179438
+    },
+    {
+      "ano": 2014,
+      "internacoes": 11353704
+    },
+    {
+      "ano": 2015,
+      "internacoes": 11325421
+    },
+    {
+      "ano": 2016,
+      "internacoes": 11256224
+    },
+    {
+      "ano": 2017,
+      "internacoes": 11522847
+    },
+    {
+      "ano": 2018,
+      "internacoes": 11857648
+    },
+    {
+      "ano": 2019,
+      "internacoes": 12185437
+    },
+    {
+      "ano": 2020,
+      "internacoes": 10531843
+    }
+  ],
+  "result_hash": "a923b7764da7ce282f6be44f3974a667d6f34b7b4e8f83eb7ec2fc0ba1204efe",
+  "semantic_disposition": "accepted"
+}

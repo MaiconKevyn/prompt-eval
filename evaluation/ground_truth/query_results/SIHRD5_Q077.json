@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q077",
   "question_pt": "Quais capitulos CID tiveram maior taxa de mortalidade com pelo menos 100 mil internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH cap AS (SELECT c.DS_CAPITULO, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE i.MORTE) AS mortes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID GROUP BY 1) SELECT DS_CAPITULO, internacoes, mortes, ROUND(100.0 * mortes / internacoes, 4) AS taxa_morte_pct FROM cap WHERE internacoes >= 100000 ORDER BY taxa_morte_pct DESC",
-  "duration_seconds": 1.678,
+  "duration_seconds": 1.701,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "DS_CAPITULO",

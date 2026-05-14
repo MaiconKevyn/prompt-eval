@@ -1,0 +1,50 @@
+{
+  "id": "SIHRD5_Q044",
+  "question_pt": "Como as internacoes se distribuem por codigo de raca/cor, com descricao quando houver correspondencia na dimensao?",
+  "executed_at": "2026-05-14T03:38:50.836621+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COALESCE(r.DESCRICAO, 'Sem correspondencia na dimensao raca_cor') AS raca_cor, i.RACA_COR AS codigo_raca_cor, COUNT(*) AS internacoes FROM internacoes i LEFT JOIN raca_cor r ON i.RACA_COR = r.RACA_COR GROUP BY 1, 2 ORDER BY internacoes DESC",
+  "duration_seconds": 1.31793,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 6,
+  "columns": [
+    "raca_cor",
+    "codigo_raca_cor",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "raca_cor": "Parda",
+      "codigo_raca_cor": 3,
+      "internacoes": 65749749
+    },
+    {
+      "raca_cor": "Branca",
+      "codigo_raca_cor": 1,
+      "internacoes": 60081825
+    },
+    {
+      "raca_cor": "Sem correspondencia na dimensao raca_cor",
+      "codigo_raca_cor": 99,
+      "internacoes": 48760813
+    },
+    {
+      "raca_cor": "Preta",
+      "codigo_raca_cor": 2,
+      "internacoes": 6541484
+    },
+    {
+      "raca_cor": "Amarela",
+      "codigo_raca_cor": 4,
+      "internacoes": 2252044
+    },
+    {
+      "raca_cor": "Indígena",
+      "codigo_raca_cor": 5,
+      "internacoes": 491304
+    }
+  ],
+  "result_hash": "f0a60c9991d667b9fada787578729028c3b31101148904e0bf5c1b182bbc14c3",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

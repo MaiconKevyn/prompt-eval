@@ -1,0 +1,141 @@
+{
+  "id": "SIHRD5_Q080",
+  "question_pt": "Como variou ano a ano o valor total por complexidade?",
+  "executed_at": "2026-05-14T03:40:10.652763+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH anual AS (SELECT c.DESCRICAO AS complexidade, year(i.DT_INTER) AS ano, SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))) AS valor_total FROM internacoes i JOIN complexidade c ON i.COMPLEX = c.COMPLEX GROUP BY 1, 2) SELECT complexidade, ano, ROUND(valor_total, 2) AS valor_total, ROUND(valor_total - LAG(valor_total) OVER (PARTITION BY complexidade ORDER BY ano), 2) AS diff_abs FROM anual ORDER BY complexidade, ano",
+  "duration_seconds": 2.237979,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 40,
+  "columns": [
+    "complexidade",
+    "ano",
+    "valor_total",
+    "diff_abs"
+  ],
+  "preview_rows": [
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2007,
+      "valor_total": 169734263.68,
+      "diff_abs": null
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2008,
+      "valor_total": 2071252935.47,
+      "diff_abs": 1901518671.79
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2009,
+      "valor_total": 2510737844.91,
+      "diff_abs": 439484909.44
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2010,
+      "valor_total": 2816953085.44,
+      "diff_abs": 306215240.53
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2011,
+      "valor_total": 3231394089.47,
+      "diff_abs": 414441004.03
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2012,
+      "valor_total": 3477645224.11,
+      "diff_abs": 246251134.64
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2013,
+      "valor_total": 4154945727.68,
+      "diff_abs": 677300503.57
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2014,
+      "valor_total": 4430212674.45,
+      "diff_abs": 275266946.77
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2015,
+      "valor_total": 4524493857.56,
+      "diff_abs": 94281183.11
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2016,
+      "valor_total": 4695704532.48,
+      "diff_abs": 171210674.92
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2017,
+      "valor_total": 4950503451.16,
+      "diff_abs": 254798918.68
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2018,
+      "valor_total": 5137673120.22,
+      "diff_abs": 187169669.06
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2019,
+      "valor_total": 5437980098.97,
+      "diff_abs": 300306978.75
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2020,
+      "valor_total": 4711278054.48,
+      "diff_abs": -726702044.49
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2021,
+      "valor_total": 5145934796.15,
+      "diff_abs": 434656741.67
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2022,
+      "valor_total": 6039882565.47,
+      "diff_abs": 893947769.32
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "ano": 2023,
+      "valor_total": 6393616695.22,
+      "diff_abs": 353734129.75
+    },
+    {
+      "complexidade": "Média complexidade",
+      "ano": 2000,
+      "valor_total": 66804.04,
+      "diff_abs": null
+    },
+    {
+      "complexidade": "Média complexidade",
+      "ano": 2001,
+      "valor_total": 35385.07,
+      "diff_abs": -31418.97
+    },
+    {
+      "complexidade": "Média complexidade",
+      "ano": 2002,
+      "valor_total": 16168.21,
+      "diff_abs": -19216.86
+    }
+  ],
+  "result_hash": "a855cbf5aa492a298244cce31fc192c476bc0f4ad123facb2c3017fcaa553b3d",
+  "semantic_disposition": "accepted"
+}

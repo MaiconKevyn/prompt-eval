@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q098",
   "question_pt": "Quais CNES sem nome cadastrado concentram mais internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT i.CNES, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i.CNES = h.CNES WHERE h.NO_HOSPITAL IS NULL OR h.NO_HOSPITAL = '' GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
-  "duration_seconds": 0.392,
+  "duration_seconds": 0.399,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "CNES",

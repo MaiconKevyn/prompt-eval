@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q023",
   "question_pt": "Como as internacoes se distribuem por carater de internacao?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT CAR_INT, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY internacoes DESC",
-  "duration_seconds": 0.168,
+  "duration_seconds": 0.182,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 6,
   "columns": [
     "CAR_INT",

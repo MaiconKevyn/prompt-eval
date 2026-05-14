@@ -1,0 +1,125 @@
+{
+  "id": "SIHRD5_Q070",
+  "question_pt": "Quais procedimentos tiveram maior valor medio por ocorrencia entre os com pelo menos 10 mil ocorrencias?",
+  "executed_at": "2026-05-14T03:39:46.121263+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH proc AS (SELECT NOME_PROC AS nome_procedimento, COUNT(*) AS ocorrencias, (SUM(CAST(i.VAL_TOT AS DECIMAL(20,2)))::DOUBLE / COUNT(i.VAL_TOT)) AS valor_medio FROM internacao_procedimento ip JOIN internacoes i ON ip.N_AIH = i.N_AIH JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1) SELECT nome_procedimento, ocorrencias, ROUND(valor_medio, 2) AS valor_medio FROM proc WHERE ocorrencias >= 10000 ORDER BY valor_medio DESC LIMIT 20",
+  "duration_seconds": 11.888375,
+  "performance_class": "slow",
+  "explain_plan": [
+    {
+      "explain_key": "physical_plan",
+      "explain_value": "┌───────────────────────────┐\n│           TOP_N           │\n│    ────────────────────   │\n│          Top: 20          │\n│                           │\n│         Order By:         │\n│ round(proc.valor_medio, 2)│\n│            DESC           │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│     nome_procedimento     │\n│        ocorrencias        │\n│        valor_medio        │\n│                           │\n│         ~362 rows         │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             0             │\n│        ocorrencias        │\n│        valor_medio        │\n│                           │\n│         ~362 rows         │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│           FILTER          │\n│    ────────────────────   │\n│   (ocorrencias >= 10000)  │\n│                           │\n│         ~362 rows         │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       HASH_GROUP_BY       │\n│    ────────────────────   │\n│         Groups: #0        │\n│                           │\n│        Aggregates:        │\n│        count_star()       │\n│          sum(#1)          │\n│                           │\n│        ~1,813 rows        │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│     nome_procedimento     │\n│ CAST(VAL_TOT AS DECIMAL(20│\n│            ,2))           │\n│                           │\n│     ~189,227,295 rows     │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         HASH_JOIN         │\n│    ────────────────────   │\n│      Join Type: INNER     │\n│                           │\n│        Conditions:        ├───────────────────────────────────────────┐\n│       N_AIH = N_AIH       │                                           │\n│                           │                                           │\n│     ~189,227,295 rows     │                                           │\n└─────────────┬─────────────┘                                           │\n┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐\n│         HASH_JOIN         │                             │          SEQ_SCAN         │\n│    ────────────────────   │                             │    ────────────────────   │\n│      Join Type: INNER     │                             │           Table:          │\n│                           │                             │  sihrd5.main.internacoes  │\n│        Conditions:        │                             │                           │\n│    PROC_REA = PROC_REA    │                             │   Type: Sequential Scan   │\n│                           ├──────────────┐              │                           │\n│                           │              │              │        Projections:       │\n│                           │              │              │           N_AIH           │\n│                           │              │              │          VAL_TOT          │\n│                           │              │              │                           │\n│     ~187,957,888 rows     │              │              │     ~183,877,219 rows     │\n└─────────────┬─────────────┘              │              └───────────────────────────┘\n┌─────────────┴─────────────┐┌─────────────┴─────────────┐\n│          SEQ_SCAN         ││          SEQ_SCAN         │\n│    ────────────────────   ││    ────────────────────   │\n│           Table:          ││           Table:          │\n│        sihrd5.main        ││ sihrd5.main.procedimentos │\n│  .internacao_procedimento ││                           │\n│                           ││   Type: Sequential Scan   │\n│   Type: Sequential Scan   ││                           │\n│                           ││        Projections:       │\n│        Projections:       ││          PROC_REA         │\n│           N_AIH           ││         NOME_PROC         │\n│          PROC_REA         ││                           │\n│                           ││          Filters:         │\n│                           ││  PROC_REA>=201010038 AND  │\n│                           ││     PROC_REA<=506020134   │\n│                           ││                           │\n│     ~187,957,888 rows     ││        ~5,394 rows        │\n└───────────────────────────┘└───────────────────────────┘\n"
+    }
+  ],
+  "row_count": 20,
+  "columns": [
+    "nome_procedimento",
+    "ocorrencias",
+    "valor_medio"
+  ],
+  "preview_rows": [
+    {
+      "nome_procedimento": "TRATAMENTO DE PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES NEUROLOGICAS",
+      "ocorrencias": 739927,
+      "valor_medio": 214133.42
+    },
+    {
+      "nome_procedimento": "TRANSPLANTE DE FIGADO (ORGAO DE DOADOR FALECIDO)",
+      "ocorrencias": 23438,
+      "valor_medio": 94153.74
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES OSTEOMUSCULARES E DO TECIDO CONJUNT",
+      "ocorrencias": 74870,
+      "valor_medio": 87105.87
+    },
+    {
+      "nome_procedimento": "ATENDIMENTO A PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES CARDIOVASCULARES",
+      "ocorrencias": 236754,
+      "valor_medio": 74448.45
+    },
+    {
+      "nome_procedimento": "ATENDIMENTO A PACIENTE SOB CUIDADOS PROLONGADOS DEVIDO A CAUSAS EXTERNAS",
+      "ocorrencias": 65425,
+      "valor_medio": 41662.17
+    },
+    {
+      "nome_procedimento": "TRANSPLANTE DE RIM (ORGAO DE DOADOR FALECIDO)",
+      "ocorrencias": 57217,
+      "valor_medio": 41277.78
+    },
+    {
+      "nome_procedimento": "IMPLANTE DE CARDIOVERSOR DESFIBRILADOR DE CAMARA DUPLA TRANSVENOSO",
+      "ocorrencias": 14457,
+      "valor_medio": 39901.93
+    },
+    {
+      "nome_procedimento": "TRATAMENTO EM PSIQUIATRIA (POR DIA)",
+      "ocorrencias": 4214855,
+      "valor_medio": 28184.56
+    },
+    {
+      "nome_procedimento": "ATENDIMENTO A PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES PNEUMOLOGICAS",
+      "ocorrencias": 41568,
+      "valor_medio": 28082.91
+    },
+    {
+      "nome_procedimento": "CORRECAO ENDOVASCULAR DE ANEURISMA / DISSECCAO DA AORTA ABDOMINAL E ILIACAS COM ENDOPROTESE BIF",
+      "ocorrencias": 11467,
+      "valor_medio": 27683.6
+    },
+    {
+      "nome_procedimento": "TRANSPLANTE DE RIM (ORGAO DE DOADOR VIVO)",
+      "ocorrencias": 15666,
+      "valor_medio": 26964.84
+    },
+    {
+      "nome_procedimento": "TRANSPLANTE AUTOGENICO DE CELULAS-TRONCO HEMATOPOETICAS DE SANGUE PERIFERICO -",
+      "ocorrencias": 15014,
+      "valor_medio": 23530.27
+    },
+    {
+      "nome_procedimento": "TRATAMENTO EM PSIQUIATRIA POR DIA (COM DURACAO SUPERIOR A 90 DIAS DE INTERNACAO OU REINTERNACAO",
+      "ocorrencias": 57060,
+      "valor_medio": 22723.07
+    },
+    {
+      "nome_procedimento": "TROCA VALVAR C/ REVASCULARIZACAO MIOCARDICA",
+      "ocorrencias": 29469,
+      "valor_medio": 19645.81
+    },
+    {
+      "nome_procedimento": "EMBOLIZACAO DE ANEURISMA CEREBRAL MAIOR QUE 1,5 CM COM COLO LARGO",
+      "ocorrencias": 10493,
+      "valor_medio": 19400.86
+    },
+    {
+      "nome_procedimento": "PLASTICA VALVAR E/OU TROCA VALVAR MULTIPLA",
+      "ocorrencias": 40874,
+      "valor_medio": 18024.1
+    },
+    {
+      "nome_procedimento": "IMPLANTE DE PROTESE VALVAR",
+      "ocorrencias": 109664,
+      "valor_medio": 15830.79
+    },
+    {
+      "nome_procedimento": "REVASCULARIZACAO MIOCARDICA C/ USO DE EXTRACORPOREA (C/ 2 OU MAIS ENXERTOS)",
+      "ocorrencias": 257118,
+      "valor_medio": 15790.77
+    },
+    {
+      "nome_procedimento": "TRATAMENTO DE PACIENTE SOB CUIDADOS PROLONGADOS POR ENFERMIDADES DECORRENTES DA AIDS",
+      "ocorrencias": 25651,
+      "valor_medio": 15390.69
+    },
+    {
+      "nome_procedimento": "REVASCULARIZACAO MIOCARDICA C/ USO DE EXTRACORPOREA",
+      "ocorrencias": 47632,
+      "valor_medio": 14987.58
+    }
+  ],
+  "result_hash": "5a3a827a6d40441904203f75c1e4daa46bc64e52ad64dedc86c8ef0cd9738808",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

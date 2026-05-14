@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q004",
   "question_pt": "Quantos hospitais existem no cadastro de estabelecimentos?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT COUNT(*) AS total_hospitais FROM hospital",
   "duration_seconds": 0.0,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 1,
   "columns": [
     "total_hospitais"

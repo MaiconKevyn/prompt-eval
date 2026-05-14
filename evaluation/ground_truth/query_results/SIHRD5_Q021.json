@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q021",
   "question_pt": "Quais CNES concentraram mais internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT CNES, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
-  "duration_seconds": 0.282,
+  "duration_seconds": 0.284,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "CNES",

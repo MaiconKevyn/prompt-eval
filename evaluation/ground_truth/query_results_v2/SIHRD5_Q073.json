@@ -1,0 +1,120 @@
+{
+  "id": "SIHRD5_Q073",
+  "question_pt": "Qual proporcao das mortes vem de cada capitulo CID?",
+  "executed_at": "2026-05-14T03:39:48.846041+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH mortes AS (SELECT c.DS_CAPITULO, COUNT(*) AS mortes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID WHERE i.MORTE GROUP BY 1), total AS (SELECT SUM(mortes) AS total_mortes FROM mortes) SELECT DS_CAPITULO, mortes, ROUND(100.0 * mortes / total_mortes, 4) AS proporcao_mortes_pct FROM mortes, total ORDER BY mortes DESC",
+  "duration_seconds": 0.449279,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 22,
+  "columns": [
+    "DS_CAPITULO",
+    "mortes",
+    "proporcao_mortes_pct"
+  ],
+  "preview_rows": [
+    {
+      "DS_CAPITULO": "I. Algumas doenças infecciosas e parasitárias",
+      "mortes": 1648769,
+      "proporcao_mortes_pct": 20.8502
+    },
+    {
+      "DS_CAPITULO": "IX. Doenças do aparelho circulatório",
+      "mortes": 1477322,
+      "proporcao_mortes_pct": 18.6821
+    },
+    {
+      "DS_CAPITULO": "X. Doenças do aparelho respiratório",
+      "mortes": 1438634,
+      "proporcao_mortes_pct": 18.1929
+    },
+    {
+      "DS_CAPITULO": "II. Neoplasias [tumores]",
+      "mortes": 962049,
+      "proporcao_mortes_pct": 12.166
+    },
+    {
+      "DS_CAPITULO": "XI. Doenças do aparelho digestivo",
+      "mortes": 576771,
+      "proporcao_mortes_pct": 7.2938
+    },
+    {
+      "DS_CAPITULO": "XIX. Lesões, envenenamento e outras consequências de causas externas",
+      "mortes": 417530,
+      "proporcao_mortes_pct": 5.2801
+    },
+    {
+      "DS_CAPITULO": "XIV. Doenças do aparelho geniturinário",
+      "mortes": 341301,
+      "proporcao_mortes_pct": 4.3161
+    },
+    {
+      "DS_CAPITULO": "IV. Doenças endócrinas, nutricionais e metabólicas",
+      "mortes": 236603,
+      "proporcao_mortes_pct": 2.9921
+    },
+    {
+      "DS_CAPITULO": "XVIII. Sintomas, sinais e achados anormais",
+      "mortes": 223961,
+      "proporcao_mortes_pct": 2.8322
+    },
+    {
+      "DS_CAPITULO": "XVI. Algumas afecções originadas no período perinatal",
+      "mortes": 177340,
+      "proporcao_mortes_pct": 2.2426
+    },
+    {
+      "DS_CAPITULO": "VI. Doenças do sistema nervoso",
+      "mortes": 145107,
+      "proporcao_mortes_pct": 1.835
+    },
+    {
+      "DS_CAPITULO": "III. Doenças do sangue e dos órgãos hematopoéticos",
+      "mortes": 73322,
+      "proporcao_mortes_pct": 0.9272
+    },
+    {
+      "DS_CAPITULO": "XII. Doenças da pele e do tecido subcutâneo",
+      "mortes": 55055,
+      "proporcao_mortes_pct": 0.6962
+    },
+    {
+      "DS_CAPITULO": "XXI. Fatores que influenciam o estado de saúde",
+      "mortes": 48775,
+      "proporcao_mortes_pct": 0.6168
+    },
+    {
+      "DS_CAPITULO": "XVII. Malformações congênitas, deformidades e anomalias cromossômicas",
+      "mortes": 32839,
+      "proporcao_mortes_pct": 0.4153
+    },
+    {
+      "DS_CAPITULO": "XIII. Doenças do sistema osteomuscular e do tecido conjuntivo",
+      "mortes": 21526,
+      "proporcao_mortes_pct": 0.2722
+    },
+    {
+      "DS_CAPITULO": "V. Transtornos mentais e comportamentais",
+      "mortes": 14811,
+      "proporcao_mortes_pct": 0.1873
+    },
+    {
+      "DS_CAPITULO": "XV. Gravidez, parto e puerpério",
+      "mortes": 13772,
+      "proporcao_mortes_pct": 0.1742
+    },
+    {
+      "DS_CAPITULO": "XX. Causas externas de morbidade e de mortalidade",
+      "mortes": 810,
+      "proporcao_mortes_pct": 0.0102
+    },
+    {
+      "DS_CAPITULO": "XXII. Códigos para propósitos especiais",
+      "mortes": 554,
+      "proporcao_mortes_pct": 0.007
+    }
+  ],
+  "result_hash": "18bc1069478fe102f05e644ce4e6730de33138f4952da3f08bbd4a1781586f2b",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

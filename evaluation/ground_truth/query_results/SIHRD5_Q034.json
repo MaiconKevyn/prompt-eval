@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q034",
   "question_pt": "Quantas internacoes ocorreram por mes calendario?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT year(DT_INTER) AS ano, month(DT_INTER) AS mes, COUNT(*) AS internacoes FROM internacoes GROUP BY 1, 2 ORDER BY 1, 2",
-  "duration_seconds": 0.229,
+  "duration_seconds": 0.233,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 225,
   "columns": [
     "ano",

@@ -1,5 +1,7 @@
 .codex
 .venv
+.venv.bak/
+*.egg-info/
 .claude
 __pycache__
 *.pyc
@@ -11,6 +13,10 @@ CLAUDE.md
 artifacts/generated/*
 !artifacts/generated/.gitkeep
 img.png
+.env
+.chatbot_index/
+evaluation/chatbot/traces/*.json
+evaluation/chatbot/audit/*.jsonl
 *.duckdb
 *.duckdb.wal
 *.duckdb.tmp

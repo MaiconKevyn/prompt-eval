@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q063",
   "question_pt": "Quais grupos CID foram mais frequentes entre internacoes femininas?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT c.DS_GRUPO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID JOIN sexo s ON i.SEXO = s.SEXO WHERE s.DESCRICAO = 'Feminino' GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
-  "duration_seconds": 1.518,
+  "duration_seconds": 1.511,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "DS_GRUPO",

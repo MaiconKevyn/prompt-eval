@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q089",
+  "question_pt": "Existem idades fora do intervalo aceito de 0 a 150 anos?",
+  "executed_at": "2026-05-14T03:40:15.480227+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS idades_invalidas FROM internacoes WHERE IDADE < 0 OR IDADE > 150",
+  "duration_seconds": 0.000457,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "idades_invalidas"
+  ],
+  "preview_rows": [
+    {
+      "idades_invalidas": 0
+    }
+  ],
+  "result_hash": "02a7a64e8150910d2d67ad03a5c1d42b028e91f253714bf12686d6d7ca06419b",
+  "semantic_disposition": "accepted"
+}

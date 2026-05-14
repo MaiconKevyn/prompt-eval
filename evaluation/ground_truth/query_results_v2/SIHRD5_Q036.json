@@ -1,0 +1,99 @@
+{
+  "id": "SIHRD5_Q036",
+  "question_pt": "Quais codigos PROC_REA aparecem mais na tabela de procedimentos realizados?",
+  "executed_at": "2026-05-14T03:38:46.934856+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT PROC_REA, COUNT(*) AS ocorrencias FROM internacao_procedimento GROUP BY 1 ORDER BY ocorrencias DESC LIMIT 20",
+  "duration_seconds": 0.700306,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 20,
+  "columns": [
+    "PROC_REA",
+    "ocorrencias"
+  ],
+  "preview_rows": [
+    {
+      "PROC_REA": 310010039,
+      "ocorrencias": 16435256
+    },
+    {
+      "PROC_REA": 303140151,
+      "ocorrencias": 10576911
+    },
+    {
+      "PROC_REA": 411010034,
+      "ocorrencias": 10309968
+    },
+    {
+      "PROC_REA": 303010061,
+      "ocorrencias": 4507648
+    },
+    {
+      "PROC_REA": 303170093,
+      "ocorrencias": 4214855
+    },
+    {
+      "PROC_REA": 303140046,
+      "ocorrencias": 3735530
+    },
+    {
+      "PROC_REA": 303010037,
+      "ocorrencias": 3723552
+    },
+    {
+      "PROC_REA": 303060212,
+      "ocorrencias": 3636826
+    },
+    {
+      "PROC_REA": 415010012,
+      "ocorrencias": 3353755
+    },
+    {
+      "PROC_REA": 303100044,
+      "ocorrencias": 3139159
+    },
+    {
+      "PROC_REA": 301060088,
+      "ocorrencias": 3120396
+    },
+    {
+      "PROC_REA": 303040149,
+      "ocorrencias": 3017652
+    },
+    {
+      "PROC_REA": 411020013,
+      "ocorrencias": 2839585
+    },
+    {
+      "PROC_REA": 303150050,
+      "ocorrencias": 2347762
+    },
+    {
+      "PROC_REA": 411010026,
+      "ocorrencias": 2068691
+    },
+    {
+      "PROC_REA": 407030026,
+      "ocorrencias": 1998158
+    },
+    {
+      "PROC_REA": 407040102,
+      "ocorrencias": 1868884
+    },
+    {
+      "PROC_REA": 304100021,
+      "ocorrencias": 1813092
+    },
+    {
+      "PROC_REA": 303010223,
+      "ocorrencias": 1792677
+    },
+    {
+      "PROC_REA": 305020013,
+      "ocorrencias": 1789419
+    }
+  ],
+  "result_hash": "474ebbca22a608073046efa4a6c9e4a5147f2f7183e00014b0ed35e19d7ede13",
+  "semantic_disposition": "accepted"
+}

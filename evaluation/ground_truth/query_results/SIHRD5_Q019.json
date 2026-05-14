@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q019",
   "question_pt": "Qual foi a taxa bruta de mortalidade hospitalar por ano?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE MORTE) AS mortes, ROUND(100.0 * COUNT(*) FILTER (WHERE MORTE) / COUNT(*), 4) AS taxa_morte_pct FROM internacoes GROUP BY 1 ORDER BY 1",
-  "duration_seconds": 0.263,
+  "duration_seconds": 0.264,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 23,
   "columns": [
     "ano",

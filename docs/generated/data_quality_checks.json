@@ -9,7 +9,7 @@
     "sample_sql": "SELECT N_AIH, DT_INTER, DT_SAIDA, DIAS_PERM FROM internacoes WHERE DT_SAIDA < DT_INTER LIMIT 10",
     "sample_rows": [],
     "blocks_ground_truth": false,
-    "duration_seconds": 0.356
+    "duration_seconds": 0.617
   },
   {
     "id": "DQ002",
@@ -72,7 +72,7 @@
       }
     ],
     "blocks_ground_truth": true,
-    "duration_seconds": 0.027
+    "duration_seconds": 0.025
   },
   {
     "id": "DQ003",
@@ -84,7 +84,7 @@
     "sample_sql": "SELECT N_AIH, DT_INTER, DT_SAIDA FROM internacoes WHERE DT_SAIDA < DATE '2007-01-01' OR DT_SAIDA > DATE '2023-12-31' ORDER BY DT_SAIDA LIMIT 10",
     "sample_rows": [],
     "blocks_ground_truth": false,
-    "duration_seconds": 0.003
+    "duration_seconds": 0.002
   },
   {
     "id": "DQ004",
@@ -167,7 +167,7 @@
       }
     ],
     "blocks_ground_truth": false,
-    "duration_seconds": 0.357
+    "duration_seconds": 0.363
   },
   {
     "id": "DQ005",
@@ -215,7 +215,7 @@
     "sample_sql": null,
     "sample_rows": [],
     "blocks_ground_truth": false,
-    "duration_seconds": 0.273
+    "duration_seconds": 0.38
   },
   {
     "id": "DQ009",
@@ -227,7 +227,7 @@
     "sample_sql": "SELECT i.CNES, COUNT(*) AS internacoes FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES WHERE i.CNES IS NOT NULL AND h.CNES IS NULL GROUP BY 1 ORDER BY 2 DESC LIMIT 10",
     "sample_rows": [],
     "blocks_ground_truth": false,
-    "duration_seconds": 1.1
+    "duration_seconds": 1.32
   },
   {
     "id": "DQ010",
@@ -280,7 +280,7 @@
       }
     ],
     "blocks_ground_truth": true,
-    "duration_seconds": 1.034
+    "duration_seconds": 1.261
   },
   {
     "id": "DQ011",
@@ -333,7 +333,7 @@
       }
     ],
     "blocks_ground_truth": true,
-    "duration_seconds": 1.67
+    "duration_seconds": 1.674
   },
   {
     "id": "DQ012",
@@ -362,7 +362,7 @@
       }
     ],
     "blocks_ground_truth": true,
-    "duration_seconds": 0.965
+    "duration_seconds": 0.986
   },
   {
     "id": "DQ013",
@@ -415,7 +415,7 @@
       }
     ],
     "blocks_ground_truth": false,
-    "duration_seconds": 0.684
+    "duration_seconds": 0.688
   },
   {
     "id": "DQ014",
@@ -432,7 +432,7 @@
       }
     ],
     "blocks_ground_truth": false,
-    "duration_seconds": 0.002
+    "duration_seconds": 0.001
   },
   {
     "id": "DQ015",
@@ -444,6 +444,83 @@
     "sample_sql": "SELECT N_AIH, VAL_SH, VAL_SP, VAL_UTI, VAL_TOT, COALESCE(VAL_SH, 0) + COALESCE(VAL_SP, 0) + COALESCE(VAL_UTI, 0) AS soma_componentes FROM internacoes WHERE VAL_TOT + 0.01 < COALESCE(VAL_SH, 0) + COALESCE(VAL_SP, 0) + COALESCE(VAL_UTI, 0) LIMIT 10",
     "sample_rows": [],
     "blocks_ground_truth": false,
-    "duration_seconds": 2.42
+    "duration_seconds": 2.656
+  },
+  {
+    "id": "DQ016",
+    "title": "municipios.SG_UF contem valores que nao sao UFs brasileiras",
+    "severity": "high",
+    "why_it_matters": "Valores numericos em SG_UF fazem perguntas sobre UFs retornarem 38 categorias em vez das 27 UFs validas.",
+    "affected_rows": 18,
+    "sql": "WITH valid_uf(sg_uf) AS (VALUES ('AC'), ('AL'), ('AP'), ('AM'), ('BA'), ('CE'), ('DF'), ('ES'), ('GO'), ('MA'), ('MT'), ('MS'), ('MG'), ('PA'), ('PB'), ('PR'), ('PE'), ('PI'), ('RJ'), ('RN'), ('RS'), ('RO'), ('RR'), ('SC'), ('SP'), ('SE'), ('TO')) SELECT COUNT(*) AS affected_rows FROM municipios m LEFT JOIN valid_uf v ON m.SG_UF = v.sg_uf WHERE v.sg_uf IS NULL",
+    "sample_sql": "WITH valid_uf(sg_uf) AS (VALUES ('AC'), ('AL'), ('AP'), ('AM'), ('BA'), ('CE'), ('DF'), ('ES'), ('GO'), ('MA'), ('MT'), ('MS'), ('MG'), ('PA'), ('PB'), ('PR'), ('PE'), ('PI'), ('RJ'), ('RN'), ('RS'), ('RO'), ('RR'), ('SC'), ('SP'), ('SE'), ('TO')) SELECT m.SG_UF, COUNT(*) AS municipios FROM municipios m LEFT JOIN valid_uf v ON m.SG_UF = v.sg_uf WHERE v.sg_uf IS NULL GROUP BY 1 ORDER BY 1",
+    "sample_rows": [
+      {
+        "SG_UF": "13",
+        "municipios": 3
+      },
+      {
+        "SG_UF": "14",
+        "municipios": 1
+      },
+      {
+        "SG_UF": "20",
+        "municipios": 1
+      },
+      {
+        "SG_UF": "21",
+        "municipios": 2
+      },
+      {
+        "SG_UF": "25",
+        "municipios": 4
+      },
+      {
+        "SG_UF": "29",
+        "municipios": 1
+      },
+      {
+        "SG_UF": "33",
+        "municipios": 1
+      },
+      {
+        "SG_UF": "42",
+        "municipios": 1
+      },
+      {
+        "SG_UF": "43",
+        "municipios": 2
+      },
+      {
+        "SG_UF": "51",
+        "municipios": 1
+      }
+    ],
+    "blocks_ground_truth": true,
+    "duration_seconds": 0.003
+  },
+  {
+    "id": "DQ017",
+    "title": "CO_MUNICIPIO_6D com formato diferente de seis digitos",
+    "severity": "high",
+    "why_it_matters": "Codigos municipais fora do formato esperado prejudicam joins territoriais e validacao IBGE/DATASUS.",
+    "affected_rows": 0,
+    "sql": "SELECT COUNT(*) AS affected_rows FROM municipios WHERE NOT regexp_full_match(CAST(CO_MUNICIPIO_6D AS VARCHAR), '^[0-9]{6}$')",
+    "sample_sql": "SELECT CO_MUNICIPIO_6D, NO_MUNICIPIO, SG_UF FROM municipios WHERE NOT regexp_full_match(CAST(CO_MUNICIPIO_6D AS VARCHAR), '^[0-9]{6}$') LIMIT 10",
+    "sample_rows": [],
+    "blocks_ground_truth": false,
+    "duration_seconds": 0.003
+  },
+  {
+    "id": "DQ018",
+    "title": "CO_MUNICIPIO_7D nao nulo com formato diferente de sete digitos",
+    "severity": "medium",
+    "why_it_matters": "Codigos municipais de sete digitos fora do formato esperado indicam problema cadastral ou campo com significado distinto.",
+    "affected_rows": 0,
+    "sql": "SELECT COUNT(*) AS affected_rows FROM municipios WHERE CO_MUNICIPIO_7D IS NOT NULL AND NOT regexp_full_match(CAST(CO_MUNICIPIO_7D AS VARCHAR), '^[0-9]{7}$')",
+    "sample_sql": "SELECT CO_MUNICIPIO_7D, NO_MUNICIPIO, SG_UF FROM municipios WHERE CO_MUNICIPIO_7D IS NOT NULL AND NOT regexp_full_match(CAST(CO_MUNICIPIO_7D AS VARCHAR), '^[0-9]{7}$') LIMIT 10",
+    "sample_rows": [],
+    "blocks_ground_truth": false,
+    "duration_seconds": 0.001
   }
 ]

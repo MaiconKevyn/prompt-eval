@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q031",
   "question_pt": "Qual foi o valor total por codigo de complexidade?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT COMPLEX, ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY valor_total DESC",
-  "duration_seconds": 1.055,
+  "duration_seconds": 1.059,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 3,
   "columns": [
     "COMPLEX",

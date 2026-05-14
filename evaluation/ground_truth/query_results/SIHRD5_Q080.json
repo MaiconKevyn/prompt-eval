@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q080",
   "question_pt": "Como variou ano a ano o valor total por complexidade?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH anual AS (SELECT c.DESCRICAO AS complexidade, year(i.DT_INTER) AS ano, SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))) AS valor_total FROM internacoes i JOIN complexidade c ON i.COMPLEX = c.COMPLEX GROUP BY 1, 2) SELECT complexidade, ano, ROUND(valor_total, 2) AS valor_total, ROUND(valor_total - LAG(valor_total) OVER (PARTITION BY complexidade ORDER BY ano), 2) AS diff_abs FROM anual ORDER BY complexidade, ano",
-  "duration_seconds": 2.289,
+  "duration_seconds": 2.414,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 40,
   "columns": [
     "complexidade",

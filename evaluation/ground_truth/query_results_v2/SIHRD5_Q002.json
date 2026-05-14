@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q002",
+  "question_pt": "Quantos registros de procedimentos realizados existem?",
+  "executed_at": "2026-05-14T03:38:33.176797+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS total_procedimentos_realizados FROM internacao_procedimento",
+  "duration_seconds": 0.005608,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "total_procedimentos_realizados"
+  ],
+  "preview_rows": [
+    {
+      "total_procedimentos_realizados": 187957888
+    }
+  ],
+  "result_hash": "a236796f0bf8e6b974e1a3366d5407743366f6dca488a4e4c07d8f3fecc8e9c6",
+  "semantic_disposition": "accepted"
+}

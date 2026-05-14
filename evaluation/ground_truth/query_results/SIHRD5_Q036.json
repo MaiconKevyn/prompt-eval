@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q036",
   "question_pt": "Quais codigos PROC_REA aparecem mais na tabela de procedimentos realizados?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT PROC_REA, COUNT(*) AS ocorrencias FROM internacao_procedimento GROUP BY 1 ORDER BY ocorrencias DESC LIMIT 20",
-  "duration_seconds": 0.268,
+  "duration_seconds": 0.277,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "PROC_REA",

@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q030",
   "question_pt": "Qual e a distribuicao de permanencia em faixas de dias?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT CASE WHEN DIAS_PERM = 0 THEN '00_0' WHEN DIAS_PERM BETWEEN 1 AND 3 THEN '01_1_3' WHEN DIAS_PERM BETWEEN 4 AND 7 THEN '02_4_7' WHEN DIAS_PERM BETWEEN 8 AND 14 THEN '03_8_14' WHEN DIAS_PERM BETWEEN 15 AND 30 THEN '04_15_30' WHEN DIAS_PERM > 30 THEN '05_31_plus' ELSE '99_ignorado' END AS faixa_dias, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY 1",
-  "duration_seconds": 0.065,
+  "duration_seconds": 0.067,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 4,
   "columns": [
     "faixa_dias",

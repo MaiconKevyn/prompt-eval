@@ -1,0 +1,71 @@
+{
+  "id": "SIHRD5_Q038",
+  "question_pt": "Quantos leitos SUS estao registrados por ano nos indicadores socioeconomicos?",
+  "executed_at": "2026-05-14T03:38:46.939150+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT NU_ANO AS ano, SUM(QT_LEITOS_SUS) AS leitos_sus FROM socioeconomico GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 0.002281,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 13,
+  "columns": [
+    "ano",
+    "leitos_sus"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2008,
+      "leitos_sus": 278144
+    },
+    {
+      "ano": 2009,
+      "leitos_sus": 275556
+    },
+    {
+      "ano": 2011,
+      "leitos_sus": 271515
+    },
+    {
+      "ano": 2012,
+      "leitos_sus": 267321
+    },
+    {
+      "ano": 2013,
+      "leitos_sus": 261554
+    },
+    {
+      "ano": 2014,
+      "leitos_sus": 259841
+    },
+    {
+      "ano": 2015,
+      "leitos_sus": 254182
+    },
+    {
+      "ano": 2016,
+      "leitos_sus": 250783
+    },
+    {
+      "ano": 2017,
+      "leitos_sus": 248455
+    },
+    {
+      "ano": 2018,
+      "leitos_sus": 245966
+    },
+    {
+      "ano": 2019,
+      "leitos_sus": 242891
+    },
+    {
+      "ano": 2020,
+      "leitos_sus": 250390
+    },
+    {
+      "ano": 2021,
+      "leitos_sus": 259234
+    }
+  ],
+  "result_hash": "43c8dd0339b4270690ea7e571092f545a80c4833ac675130f8a0adabb74d0cae",
+  "semantic_disposition": "accepted"
+}

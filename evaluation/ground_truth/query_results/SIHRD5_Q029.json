@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q029",
   "question_pt": "Qual foi a media de dias de permanencia por ano?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT year(DT_INTER) AS ano, ROUND((SUM(CAST(DIAS_PERM AS DECIMAL(20,2)))::DOUBLE / COUNT(DIAS_PERM)), 2) AS media_dias_permanencia FROM internacoes GROUP BY 1 ORDER BY 1",
-  "duration_seconds": 0.371,
+  "duration_seconds": 0.375,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 23,
   "columns": [
     "ano",

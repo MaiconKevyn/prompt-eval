@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q009",
   "question_pt": "Quantas internacoes tiveram morte registrada?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT COUNT(*) AS internacoes_com_morte FROM internacoes WHERE MORTE = TRUE",
-  "duration_seconds": 0.097,
+  "duration_seconds": 0.149,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 1,
   "columns": [
     "internacoes_com_morte"

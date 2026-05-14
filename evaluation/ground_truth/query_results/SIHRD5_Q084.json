@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q084",
   "question_pt": "Quantas internacoes ocorreram em UF de residencia diferente da UF do hospital?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH fluxo AS (SELECT mr.SG_UF AS uf_residencia, mh.SG_UF AS uf_hospital, COUNT(*) AS internacoes FROM internacoes i JOIN municipios mr ON i.MUNIC_RES = mr.CO_MUNICIPIO_6D JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1, 2) SELECT uf_residencia, uf_hospital, internacoes FROM fluxo WHERE uf_residencia <> uf_hospital ORDER BY internacoes DESC LIMIT 30",
-  "duration_seconds": 2.846,
+  "duration_seconds": 2.814,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 30,
   "columns": [
     "uf_residencia",

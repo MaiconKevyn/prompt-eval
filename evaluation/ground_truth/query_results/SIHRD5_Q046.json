@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q046",
   "question_pt": "Quais especialidades tiveram maior volume de internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT e.DESCRICAO AS especialidade, COUNT(*) AS internacoes FROM internacoes i JOIN especialidade e ON i.ESPEC = e.ESPEC GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
-  "duration_seconds": 0.278,
+  "duration_seconds": 0.286,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 15,
   "columns": [
     "especialidade",

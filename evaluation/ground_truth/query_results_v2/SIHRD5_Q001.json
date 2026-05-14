@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q001",
+  "question_pt": "Quantas internacoes existem na tabela principal?",
+  "executed_at": "2026-05-14T03:38:33.170833+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS total_internacoes FROM internacoes",
+  "duration_seconds": 0.021979,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "total_internacoes"
+  ],
+  "preview_rows": [
+    {
+      "total_internacoes": 183877219
+    }
+  ],
+  "result_hash": "3442f2b1c187266ae7c55f712819b704af350d91427291c2f5114662954c265c",
+  "semantic_disposition": "accepted"
+}

@@ -1,0 +1,141 @@
+{
+  "id": "SIHRD5_Q019",
+  "question_pt": "Qual foi a taxa bruta de mortalidade hospitalar por ano?",
+  "executed_at": "2026-05-14T03:38:38.381902+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE MORTE) AS mortes, ROUND(100.0 * COUNT(*) FILTER (WHERE MORTE) / COUNT(*), 4) AS taxa_morte_pct FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 0.2722,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "internacoes",
+    "mortes",
+    "taxa_morte_pct"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "internacoes": 9,
+      "mortes": 0,
+      "taxa_morte_pct": 0.0
+    },
+    {
+      "ano": 2001,
+      "internacoes": 2,
+      "mortes": 0,
+      "taxa_morte_pct": 0.0
+    },
+    {
+      "ano": 2002,
+      "internacoes": 2,
+      "mortes": 0,
+      "taxa_morte_pct": 0.0
+    },
+    {
+      "ano": 2003,
+      "internacoes": 1,
+      "mortes": 0,
+      "taxa_morte_pct": 0.0
+    },
+    {
+      "ano": 2005,
+      "internacoes": 6,
+      "mortes": 0,
+      "taxa_morte_pct": 0.0
+    },
+    {
+      "ano": 2006,
+      "internacoes": 7,
+      "mortes": 0,
+      "taxa_morte_pct": 0.0
+    },
+    {
+      "ano": 2007,
+      "internacoes": 602947,
+      "mortes": 27510,
+      "taxa_morte_pct": 4.5626
+    },
+    {
+      "ano": 2008,
+      "internacoes": 10847458,
+      "mortes": 359547,
+      "taxa_morte_pct": 3.3146
+    },
+    {
+      "ano": 2009,
+      "internacoes": 11114857,
+      "mortes": 385756,
+      "taxa_morte_pct": 3.4706
+    },
+    {
+      "ano": 2010,
+      "internacoes": 11347880,
+      "mortes": 409593,
+      "taxa_morte_pct": 3.6094
+    },
+    {
+      "ano": 2011,
+      "internacoes": 11267097,
+      "mortes": 417535,
+      "taxa_morte_pct": 3.7058
+    },
+    {
+      "ano": 2012,
+      "internacoes": 11103250,
+      "mortes": 422779,
+      "taxa_morte_pct": 3.8077
+    },
+    {
+      "ano": 2013,
+      "internacoes": 11179438,
+      "mortes": 438335,
+      "taxa_morte_pct": 3.9209
+    },
+    {
+      "ano": 2014,
+      "internacoes": 11353704,
+      "mortes": 449779,
+      "taxa_morte_pct": 3.9615
+    },
+    {
+      "ano": 2015,
+      "internacoes": 11325421,
+      "mortes": 473573,
+      "taxa_morte_pct": 4.1815
+    },
+    {
+      "ano": 2016,
+      "internacoes": 11256224,
+      "mortes": 490975,
+      "taxa_morte_pct": 4.3618
+    },
+    {
+      "ano": 2017,
+      "internacoes": 11522847,
+      "mortes": 492555,
+      "taxa_morte_pct": 4.2746
+    },
+    {
+      "ano": 2018,
+      "internacoes": 11857648,
+      "mortes": 504632,
+      "taxa_morte_pct": 4.2558
+    },
+    {
+      "ano": 2019,
+      "internacoes": 12185437,
+      "mortes": 524050,
+      "taxa_morte_pct": 4.3006
+    },
+    {
+      "ano": 2020,
+      "internacoes": 10531843,
+      "mortes": 605736,
+      "taxa_morte_pct": 5.7515
+    }
+  ],
+  "result_hash": "35ab42667d62545466ae9926a5e9d4ddc88f51e898c304b5cb1305983f3c7ee7",
+  "semantic_disposition": "accepted"
+}

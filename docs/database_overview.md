@@ -1,6 +1,6 @@
 # Database Overview: sihrd5.duckdb
 
-Generated at: 2026-05-13T09:42:16
+Generated at: 2026-05-13T19:23:25
 
 ## Scope
 
@@ -9,6 +9,26 @@ Generated at: 2026-05-13T09:42:16
 **Observed:** the main fact table `internacoes` has `183,877,219` rows and the bridge/detail table `internacao_procedimento` has `187,957,888` rows. The database therefore appears to model SIH/SUS hospital admissions (AIH/internacoes), procedures, hospitals, municipalities, clinical diagnoses, and socioeconomic context.
 
 **Observed:** `PRAGMA database_size` reports the database size as `25.0 GiB`. Main-schema table storage estimates are derived from `PRAGMA storage_info` persistent block ids, so they are approximate and intended for prioritizing exploration rather than billing or physical storage guarantees.
+
+## DuckDB Runtime
+
+**Observed:** DuckDB version `v1.5.2` using Python package `1.5.2`.
+
+| setting | value |
+| --- | --- |
+| access_mode | read_only |
+| threads | 4 |
+| memory_limit | 12.4 GiB |
+| temp_directory | /home/maiconkevyn/PycharmProjects/health-system-chatbot/sihrd5.duckdb.tmp |
+| max_temp_directory_size | 90% of available disk space |
+
+The generator opens `sihrd5.duckdb` with `read_only=True`. DuckDB is an embedded analytical database; this Stage 1 workflow assumes multiple read-only readers are safe, while writes to the source file are out of scope.
+
+DuckDB source anchors used for DBMS-specific claims:
+
+- Metadata table functions: https://duckdb.org/docs/current/sql/meta/duckdb_table_functions
+- `PRAGMA database_size` and `PRAGMA storage_info`: https://duckdb.org/docs/current/configuration/pragmas
+- Read-only concurrency model: https://duckdb.org/docs/current/connect/concurrency
 
 **Inferred:** one row in `internacoes` most likely represents one hospital admission/AIH-level event. `internacao_procedimento` links admissions to performed procedures and can contain multiple records per admission.
 
@@ -46,16 +66,16 @@ Generated at: 2026-05-13T09:42:16
 
 | table_schema | table_name | row_count | persistent_block_count | estimated_bytes | estimated_gib | database_size | sql | duration_seconds |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| main | internacoes | 183877219 | 33612 | 8811184128 | 8.2061 | 25.0 GiB | PRAGMA storage_info('internacoes') | 6.497 |
-| main | stg_internacoes | 183877219 | 32005 | 8389918720 | 7.8137 | 25.0 GiB | PRAGMA storage_info('stg_internacoes') | 9.957 |
-| main | internacao_procedimento | 187957888 | 5794 | 1518862336 | 1.4146 | 25.0 GiB | PRAGMA storage_info('internacao_procedimento') | 2.118 |
+| main | internacoes | 183877219 | 33612 | 8811184128 | 8.2061 | 25.0 GiB | PRAGMA storage_info('internacoes') | 3.227 |
+| main | stg_internacoes | 183877219 | 32005 | 8389918720 | 7.8137 | 25.0 GiB | PRAGMA storage_info('stg_internacoes') | 5.901 |
+| main | internacao_procedimento | 187957888 | 5794 | 1518862336 | 1.4146 | 25.0 GiB | PRAGMA storage_info('internacao_procedimento') | 0.898 |
 | main | socioeconomico | 72395 | 7 | 1835008 | 0.0017 | 25.0 GiB | PRAGMA storage_info('socioeconomico') | 0.002 |
-| main | cid | 14253 | 2 | 524288 | 0.0005 | 25.0 GiB | PRAGMA storage_info('cid') | 0.001 |
+| main | cid | 14253 | 2 | 524288 | 0.0005 | 25.0 GiB | PRAGMA storage_info('cid') | 0.0 |
 | main | car_int | 6 | 1 | 262144 | 0.0002 | 25.0 GiB | PRAGMA storage_info('car_int') | 0.001 |
-| main | cbor | 2812 | 1 | 262144 | 0.0002 | 25.0 GiB | PRAGMA storage_info('cbor') | 0.001 |
+| main | cbor | 2812 | 1 | 262144 | 0.0002 | 25.0 GiB | PRAGMA storage_info('cbor') | 0.0 |
 | main | complexidade | 3 | 1 | 262144 | 0.0002 | 25.0 GiB | PRAGMA storage_info('complexidade') | 0.0 |
-| main | contraceptivos | 12 | 1 | 262144 | 0.0002 | 25.0 GiB | PRAGMA storage_info('contraceptivos') | 0.001 |
-| main | especialidade | 70 | 1 | 262144 | 0.0002 | 25.0 GiB | PRAGMA storage_info('especialidade') | 0.001 |
+| main | contraceptivos | 12 | 1 | 262144 | 0.0002 | 25.0 GiB | PRAGMA storage_info('contraceptivos') | 0.0 |
+| main | especialidade | 70 | 1 | 262144 | 0.0002 | 25.0 GiB | PRAGMA storage_info('especialidade') | 0.0 |
 
 ## dbt Audit Tables
 

@@ -1,0 +1,105 @@
+{
+  "id": "SIHRD5_Q083",
+  "question_pt": "Como evoluiram as internacoes obstetricas por ano?",
+  "executed_at": "2026-05-14T03:40:11.778521+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(i.DT_INTER) AS ano, e.DESCRICAO AS especialidade, COUNT(*) AS internacoes FROM internacoes i JOIN especialidade e ON i.ESPEC = e.ESPEC WHERE e.DESCRICAO ILIKE '%OBSTETRICIA%' GROUP BY 1, 2 ORDER BY 1, 2",
+  "duration_seconds": 0.167603,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 17,
+  "columns": [
+    "ano",
+    "especialidade",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2007,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 680
+    },
+    {
+      "ano": 2008,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 7170
+    },
+    {
+      "ano": 2009,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 7704
+    },
+    {
+      "ano": 2010,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 8167
+    },
+    {
+      "ano": 2011,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 9071
+    },
+    {
+      "ano": 2012,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 9078
+    },
+    {
+      "ano": 2013,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 9926
+    },
+    {
+      "ano": 2014,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 9191
+    },
+    {
+      "ano": 2015,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 7037
+    },
+    {
+      "ano": 2016,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 7070
+    },
+    {
+      "ano": 2017,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 7742
+    },
+    {
+      "ano": 2018,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 7434
+    },
+    {
+      "ano": 2019,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 6371
+    },
+    {
+      "ano": 2020,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 4316
+    },
+    {
+      "ano": 2021,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 4829
+    },
+    {
+      "ano": 2022,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 5671
+    },
+    {
+      "ano": 2023,
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 4804
+    }
+  ],
+  "result_hash": "01c562454b6ab189315029725a6fd7be4af9da1225597f7d33c385879676211b",
+  "semantic_disposition": "accepted"
+}

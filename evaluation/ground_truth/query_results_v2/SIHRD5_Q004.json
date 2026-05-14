@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q004",
+  "question_pt": "Quantos hospitais existem no cadastro de estabelecimentos?",
+  "executed_at": "2026-05-14T03:38:33.215713+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS total_hospitais FROM hospital",
+  "duration_seconds": 0.000839,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "total_hospitais"
+  ],
+  "preview_rows": [
+    {
+      "total_hospitais": 6873
+    }
+  ],
+  "result_hash": "f6a4fc866f07b3672f77b8bb0d106ea3d73e81321e9c5318a25733e9feb5143a",
+  "semantic_disposition": "accepted"
+}

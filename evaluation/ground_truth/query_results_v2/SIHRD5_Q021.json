@@ -1,0 +1,99 @@
+{
+  "id": "SIHRD5_Q021",
+  "question_pt": "Quais CNES concentraram mais internacoes?",
+  "executed_at": "2026-05-14T03:38:39.827857+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT CNES, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
+  "duration_seconds": 0.317715,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 20,
+  "columns": [
+    "CNES",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "CNES": 2078015,
+      "internacoes": 761959
+    },
+    {
+      "CNES": 434,
+      "internacoes": 719254
+    },
+    {
+      "CNES": 27014,
+      "internacoes": 623140
+    },
+    {
+      "CNES": 2082187,
+      "internacoes": 592426
+    },
+    {
+      "CNES": 2237571,
+      "internacoes": 587240
+    },
+    {
+      "CNES": 2077396,
+      "internacoes": 582168
+    },
+    {
+      "CNES": 13846,
+      "internacoes": 569114
+    },
+    {
+      "CNES": 655,
+      "internacoes": 522136
+    },
+    {
+      "CNES": 2237601,
+      "internacoes": 521837
+    },
+    {
+      "CNES": 2688689,
+      "internacoes": 467320
+    },
+    {
+      "CNES": 13633,
+      "internacoes": 454384
+    },
+    {
+      "CNES": 2079798,
+      "internacoes": 442815
+    },
+    {
+      "CNES": 2077477,
+      "internacoes": 432735
+    },
+    {
+      "CNES": 9717,
+      "internacoes": 424481
+    },
+    {
+      "CNES": 15245,
+      "internacoes": 423990
+    },
+    {
+      "CNES": 2755130,
+      "internacoes": 385833
+    },
+    {
+      "CNES": 2077485,
+      "internacoes": 371173
+    },
+    {
+      "CNES": 2237253,
+      "internacoes": 368826
+    },
+    {
+      "CNES": 2246988,
+      "internacoes": 364975
+    },
+    {
+      "CNES": 2748223,
+      "internacoes": 359852
+    }
+  ],
+  "result_hash": "a46c9cf558679b75f297f2001727756a3804eba07651396b9b70c0fd30214b3c",
+  "semantic_disposition": "accepted"
+}

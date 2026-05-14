@@ -1,0 +1,162 @@
+{
+  "id": "SIHRD5_Q076",
+  "question_pt": "Qual foi o valor total por habitante por UF e ano? (considerando apenas internacoes com municipio de residencia mapeado)",
+  "executed_at": "2026-05-14T03:39:54.764214+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH valor_uf AS (SELECT m.SG_UF, year(i.DT_INTER) AS ano, SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))) AS valor_total FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2), pop_uf AS (SELECT m.SG_UF, se.NU_ANO AS ano, SUM(se.QT_POPULACAO) AS populacao FROM socioeconomico se JOIN municipios m ON se.CO_MUNICIPIO_6D = m.CO_MUNICIPIO_6D GROUP BY 1, 2) SELECT p.SG_UF, p.ano, ROUND(COALESCE(v.valor_total, 0), 2) AS valor_total, p.populacao, ROUND(COALESCE(v.valor_total, 0) / NULLIF(p.populacao, 0), 4) AS valor_por_habitante FROM pop_uf p LEFT JOIN valor_uf v ON p.SG_UF = v.SG_UF AND p.ano = v.ano ORDER BY p.SG_UF, p.ano",
+  "duration_seconds": 2.03456,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 351,
+  "columns": [
+    "SG_UF",
+    "ano",
+    "valor_total",
+    "populacao",
+    "valor_por_habitante"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "AC",
+      "ano": 2008,
+      "valor_total": 27963515.49,
+      "populacao": 680075,
+      "valor_por_habitante": 41.1183
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2009,
+      "valor_total": 31968575.91,
+      "populacao": 691132,
+      "valor_por_habitante": 46.2554
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2011,
+      "valor_total": 40394040.62,
+      "populacao": 746386,
+      "valor_por_habitante": 54.1195
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2012,
+      "valor_total": 40248167.87,
+      "populacao": 758786,
+      "valor_por_habitante": 53.0428
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2013,
+      "valor_total": 39386839.51,
+      "populacao": 776463,
+      "valor_por_habitante": 50.726
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2014,
+      "valor_total": 42370905.11,
+      "populacao": 790101,
+      "valor_por_habitante": 53.6272
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2015,
+      "valor_total": 44329322.1,
+      "populacao": 803513,
+      "valor_por_habitante": 55.1694
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2016,
+      "valor_total": 46930407.79,
+      "populacao": 816687,
+      "valor_por_habitante": 57.4644
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2017,
+      "valor_total": 46147398.49,
+      "populacao": 829619,
+      "valor_por_habitante": 55.6248
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2018,
+      "valor_total": 43010990.35,
+      "populacao": 869265,
+      "valor_por_habitante": 49.4797
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2019,
+      "valor_total": 43697425.28,
+      "populacao": 881935,
+      "valor_por_habitante": 49.5472
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2020,
+      "valor_total": 52890962.08,
+      "populacao": 894470,
+      "valor_por_habitante": 59.1311
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2021,
+      "valor_total": 68225480.8,
+      "populacao": 906876,
+      "valor_por_habitante": 75.2313
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2008,
+      "valor_total": 137078071.05,
+      "populacao": 3127560,
+      "valor_por_habitante": 43.8291
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2009,
+      "valor_total": 156485582.31,
+      "populacao": 3156108,
+      "valor_por_habitante": 49.5818
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2011,
+      "valor_total": 173789016.63,
+      "populacao": 3143384,
+      "valor_por_habitante": 55.2872
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2012,
+      "valor_total": 175097114.52,
+      "populacao": 3165472,
+      "valor_por_habitante": 55.3147
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2013,
+      "valor_total": 196368743.11,
+      "populacao": 3300935,
+      "valor_por_habitante": 59.4888
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2014,
+      "valor_total": 209956516.81,
+      "populacao": 3321730,
+      "valor_por_habitante": 63.207
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2015,
+      "valor_total": 211987332.58,
+      "populacao": 3340932,
+      "valor_por_habitante": 63.4516
+    }
+  ],
+  "result_hash": "0f98c9b3b9f91c770770b18eaea5f3d2ab5cc4845cc425cb4c41042dd9c87405",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

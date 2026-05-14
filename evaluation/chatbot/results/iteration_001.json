@@ -1,0 +1,1411 @@
+{
+  "dataset": "/home/maiconkevyn/PycharmProjects/health-system-chatbot/evaluation/ground_truth/stage1_questions_v2.jsonl",
+  "limit": null,
+  "allow_llm": false,
+  "summary": {
+    "total": 100,
+    "intent_accuracy": 0.97,
+    "sql_valid_rate": 0.91,
+    "sql_execution_rate": 0.91,
+    "result_match_rate": 0.9680851063829787,
+    "latency_p50": 0.40590556299866876,
+    "latency_p95": 2.08180059499864,
+    "failures": [
+      {
+        "id": "SIHRD5_Q044",
+        "question_pt": "Como as internacoes se distribuem por codigo de raca/cor, com descricao quando houver correspondencia na dimensao?",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.03422926299390383,
+        "errors": [
+          "Rejected relationship cannot be used for business answers: internacoes.RACA_COR -> raca_cor.RACA_COR"
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q050",
+        "question_pt": "Quais diagnosticos principais foram mais frequentes por descricao CID?",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.0289436090097297,
+        "errors": [
+          "Rejected relationship cannot be used for business answers: internacoes.DIAG_SECUN -> cid.CID",
+          "Rejected relationship cannot be used for business answers: internacoes.CID_MORTE -> cid.CID"
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q051",
+        "question_pt": "Quais capitulos CID concentraram mais internacoes?",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.02151261200197041,
+        "errors": [
+          "Rejected relationship cannot be used for business answers: internacoes.DIAG_SECUN -> cid.CID",
+          "Rejected relationship cannot be used for business answers: internacoes.CID_MORTE -> cid.CID"
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q055",
+        "question_pt": "Qual e a taxa de mortalidade hospitalar por UF de residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+        "status": "clarified",
+        "intent_status": "needs_clarification",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": false,
+        "latency_seconds": 5.852199683431536e-05,
+        "errors": [
+          "Pergunta contem termo ambiguo para a semantica documentada."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q063",
+        "question_pt": "Quais grupos CID foram mais frequentes entre internacoes femininas?",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.027871297992533073,
+        "errors": [
+          "Rejected relationship cannot be used for business answers: internacoes.DIAG_SECUN -> cid.CID",
+          "Rejected relationship cannot be used for business answers: internacoes.CID_MORTE -> cid.CID"
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q069",
+        "question_pt": "Quais UFs tiveram maior taxa de mortalidade entre UFs com pelo menos 100 mil internacoes? (considerando apenas internacoes com municipio de residencia mapeado)",
+        "status": "clarified",
+        "intent_status": "needs_clarification",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": false,
+        "latency_seconds": 0.0003365170123288408,
+        "errors": [
+          "Pergunta contem termo ambiguo para a semantica documentada."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q073",
+        "question_pt": "Qual proporcao das mortes vem de cada capitulo CID?",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.025268095996580087,
+        "errors": [
+          "Rejected relationship cannot be used for business answers: internacoes.DIAG_SECUN -> cid.CID",
+          "Rejected relationship cannot be used for business answers: internacoes.CID_MORTE -> cid.CID"
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q077",
+        "question_pt": "Quais capitulos CID tiveram maior taxa de mortalidade com pelo menos 100 mil internacoes?",
+        "status": "clarified",
+        "intent_status": "needs_clarification",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": false,
+        "latency_seconds": 0.00019947400141973048,
+        "errors": [
+          "Pergunta contem termo ambiguo para a semantica documentada."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q092",
+        "question_pt": "Quantos diagnosticos principais nao existem na tabela CID?",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.025281127003836446,
+        "errors": [
+          "Rejected relationship cannot be used for business answers: internacoes.DIAG_SECUN -> cid.CID",
+          "Rejected relationship cannot be used for business answers: internacoes.CID_MORTE -> cid.CID"
+        ],
+        "warnings": []
+      }
+    ]
+  },
+  "records": [
+    {
+      "id": "SIHRD5_Q001",
+      "question_pt": "Quantas internacoes existem na tabela principal?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.1258521839918103,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q002",
+      "question_pt": "Quantos registros de procedimentos realizados existem?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.07855470399954356,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q003",
+      "question_pt": "Qual e o periodo minimo e maximo de entrada e saida das internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.13300999399507418,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q004",
+      "question_pt": "Quantos hospitais existem no cadastro de estabelecimentos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.08995348800090142,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q005",
+      "question_pt": "Quantos municipios existem e quantas UFs brasileiras validas aparecem na dimensao territorial?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.09252531900710892,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q006",
+      "question_pt": "Quantos procedimentos distintos existem no cadastro de procedimentos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.08159775400417857,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q007",
+      "question_pt": "Quantos codigos CID existem na tabela de diagnosticos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.08707190099812578,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q008",
+      "question_pt": "Qual e o intervalo de anos dos indicadores socioeconomicos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.07498306399793364,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q009",
+      "question_pt": "Quantas internacoes tiveram morte registrada?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.3126115039922297,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q010",
+      "question_pt": "Quantas internacoes indicam uso de UTI pelo marcador de UTI?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.27991704099986237,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q011",
+      "question_pt": "Qual e a menor e a maior idade registradas nas internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.1147519849910168,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q012",
+      "question_pt": "Qual e o valor total aprovado registrado em VAL_TOT?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.9934731659886893,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q013",
+      "question_pt": "Quantos CNES distintos aparecem nas internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.4979557770129759,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q014",
+      "question_pt": "Quantos municipios de residencia distintos aparecem nas internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.49286331700568553,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q015",
+      "question_pt": "Quantos dias existem na dimensao tempo?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.08605584100587294,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q016",
+      "question_pt": "Quantas internacoes ocorreram por ano de entrada?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.30194759399455506,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q017",
+      "question_pt": "Qual foi o valor total por ano de entrada?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.0549730049970094,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q018",
+      "question_pt": "Quantas mortes hospitalares foram registradas por ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.3774750589946052,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q019",
+      "question_pt": "Qual foi a taxa bruta de mortalidade hospitalar por ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.40281005699944217,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q020",
+      "question_pt": "Qual foi o valor medio por internacao em cada ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.079507727001328,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q021",
+      "question_pt": "Quais CNES concentraram mais internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.4314215389895253,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q022",
+      "question_pt": "Quais codigos de diagnostico principal foram mais frequentes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.39034898299723864,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q023",
+      "question_pt": "Como as internacoes se distribuem por carater de internacao?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.2631117419950897,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q024",
+      "question_pt": "Como as internacoes se distribuem por codigo de sexo?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.2756181069999002,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q025",
+      "question_pt": "Como as internacoes se distribuem por codigo de raca/cor?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.2686235000001034,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q026",
+      "question_pt": "Qual e a distribuicao das internacoes por faixa etaria?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.8778914849972352,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q027",
+      "question_pt": "Como as internacoes se distribuem por complexidade do atendimento?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.0545575580035802,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q028",
+      "question_pt": "Como as internacoes se distribuem pelo marcador de UTI?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.25265835601021536,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q029",
+      "question_pt": "Qual foi a media de dias de permanencia por ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.40900106899789535,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q030",
+      "question_pt": "Qual e a distribuicao de permanencia em faixas de dias?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.15036616500583477,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q031",
+      "question_pt": "Qual foi o valor total por codigo de complexidade?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.0409081190009601,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q032",
+      "question_pt": "Quantas internacoes com gestacao de risco foram registradas por ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.38796023599570617,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q033",
+      "question_pt": "Quantos dias de UTI foram registrados por ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.28929634600353893,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q034",
+      "question_pt": "Quantas internacoes ocorreram por mes calendario?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.3059631540090777,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q035",
+      "question_pt": "Quantas saidas hospitalares ocorreram por ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.2904819300019881,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q036",
+      "question_pt": "Quais codigos PROC_REA aparecem mais na tabela de procedimentos realizados?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.5722537179972278,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q037",
+      "question_pt": "Qual e a populacao total registrada por ano nos indicadores socioeconomicos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.10318504799215589,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q038",
+      "question_pt": "Quantos leitos SUS estao registrados por ano nos indicadores socioeconomicos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.0869904499995755,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q039",
+      "question_pt": "Quantos municipios existem por UF brasileira valida no cadastro territorial?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.09995821400661953,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q040",
+      "question_pt": "Quantos hospitais existem por tipo de gestao cadastral?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.0878326670062961,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q041",
+      "question_pt": "Quantas internacoes e qual valor total por UF de residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.3844467219896615,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q042",
+      "question_pt": "Quantas internacoes ocorreram por UF do hospital?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.7379921649990138,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q043",
+      "question_pt": "Como as internacoes se distribuem por sexo descrito?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.3105140239931643,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q044",
+      "question_pt": "Como as internacoes se distribuem por codigo de raca/cor, com descricao quando houver correspondencia na dimensao?",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.03422926299390383,
+      "errors": [
+        "Rejected relationship cannot be used for business answers: internacoes.RACA_COR -> raca_cor.RACA_COR"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q045",
+      "question_pt": "Quantas internacoes ocorreram por descricao do carater de internacao?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.3168077070004074,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q046",
+      "question_pt": "Quais especialidades tiveram maior volume de internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.3117107170110103,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q047",
+      "question_pt": "Quantas internacoes existem por descricao de complexidade?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.6386935300106416,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q048",
+      "question_pt": "Quais tipos de UTI aparecem mais nas internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.3310971789906034,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q049",
+      "question_pt": "Quais procedimentos realizados foram mais frequentes por descricao?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.0694153100048425,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q050",
+      "question_pt": "Quais diagnosticos principais foram mais frequentes por descricao CID?",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.0289436090097297,
+      "errors": [
+        "Rejected relationship cannot be used for business answers: internacoes.DIAG_SECUN -> cid.CID",
+        "Rejected relationship cannot be used for business answers: internacoes.CID_MORTE -> cid.CID"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q051",
+      "question_pt": "Quais capitulos CID concentraram mais internacoes?",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.02151261200197041,
+      "errors": [
+        "Rejected relationship cannot be used for business answers: internacoes.DIAG_SECUN -> cid.CID",
+        "Rejected relationship cannot be used for business answers: internacoes.CID_MORTE -> cid.CID"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q052",
+      "question_pt": "Quais hospitais tiveram maior volume de internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.1197739899944281,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q053",
+      "question_pt": "Quais municipios de residencia tiveram mais internacoes? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.7473503000073833,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q054",
+      "question_pt": "Quais regioes de saude tiveram mais internacoes por residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.7323915860033594,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q055",
+      "question_pt": "Qual e a taxa de mortalidade hospitalar por UF de residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "clarified",
+      "intent_status": "needs_clarification",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": false,
+      "latency_seconds": 5.852199683431536e-05,
+      "errors": [
+        "Pergunta contem termo ambiguo para a semantica documentada."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q056",
+      "question_pt": "Qual e a media de permanencia por UF de residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.691901569996844,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q057",
+      "question_pt": "Qual e o valor medio por internacao em cada UF de residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.4727385090081953,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q058",
+      "question_pt": "Quais procedimentos por descricao tiveram maior valor total?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 10.293074184010038,
+      "errors": [],
+      "warnings": [
+        "Query joins procedures and admissions; confirm whether the unit is procedure occurrence or hospitalization."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q059",
+      "question_pt": "Quais municipios dos hospitais tiveram mais internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.2767695689981338,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q060",
+      "question_pt": "Quais hospitais tiveram maior valor total registrado?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 2.08180059499864,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q061",
+      "question_pt": "Como as internacoes por sexo se distribuem em cada UF? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.9101088820025325,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q062",
+      "question_pt": "Como a complexidade das internacoes se distribui em cada UF? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.1633282500115456,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q063",
+      "question_pt": "Quais grupos CID foram mais frequentes entre internacoes femininas?",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.027871297992533073,
+      "errors": [
+        "Rejected relationship cannot be used for business answers: internacoes.DIAG_SECUN -> cid.CID",
+        "Rejected relationship cannot be used for business answers: internacoes.CID_MORTE -> cid.CID"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q064",
+      "question_pt": "Qual e a populacao e o total de internacoes por UF e ano quando ha denominador socioeconomico?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.2852231660071993,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q065",
+      "question_pt": "Quais municipios tiveram maior valor total por residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.5733713710069424,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q066",
+      "question_pt": "Qual foi a variacao ano contra ano no volume de internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.2818102599994745,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q067",
+      "question_pt": "Qual foi a variacao ano contra ano do valor total?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.0506777550035622,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q068",
+      "question_pt": "Qual e a media movel de 3 meses das internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.0970424270053627,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q069",
+      "question_pt": "Quais UFs tiveram maior taxa de mortalidade entre UFs com pelo menos 100 mil internacoes? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "clarified",
+      "intent_status": "needs_clarification",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": false,
+      "latency_seconds": 0.0003365170123288408,
+      "errors": [
+        "Pergunta contem termo ambiguo para a semantica documentada."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q070",
+      "question_pt": "Quais procedimentos tiveram maior valor medio por ocorrencia entre os com pelo menos 10 mil ocorrencias?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 10.001038637987222,
+      "errors": [],
+      "warnings": [
+        "Query joins procedures and admissions; confirm whether the unit is procedure occurrence or hospitalization."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q071",
+      "question_pt": "Quais hospitais estao acima do percentil 95 de volume de internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.3516568339982769,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q072",
+      "question_pt": "Quais especialidades tiveram maior permanencia media entre as com pelo menos 100 mil internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.5019545879913494,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q073",
+      "question_pt": "Qual proporcao das mortes vem de cada capitulo CID?",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.025268095996580087,
+      "errors": [
+        "Rejected relationship cannot be used for business answers: internacoes.DIAG_SECUN -> cid.CID",
+        "Rejected relationship cannot be used for business answers: internacoes.CID_MORTE -> cid.CID"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q074",
+      "question_pt": "Quais foram os percentis de permanencia por ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 2.3807303470093757,
+      "errors": [],
+      "warnings": [
+        "Exploratory row-returning query has no LIMIT."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q075",
+      "question_pt": "Qual foi a taxa de internacoes por 1.000 habitantes por UF e ano? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.8045622379868291,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q076",
+      "question_pt": "Qual foi o valor total por habitante por UF e ano? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.6784478699992178,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q077",
+      "question_pt": "Quais capitulos CID tiveram maior taxa de mortalidade com pelo menos 100 mil internacoes?",
+      "status": "clarified",
+      "intent_status": "needs_clarification",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": false,
+      "latency_seconds": 0.00019947400141973048,
+      "errors": [
+        "Pergunta contem termo ambiguo para a semantica documentada."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q078",
+      "question_pt": "Qual foi o procedimento mais frequente em cada UF de residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 7.851045734001673,
+      "errors": [],
+      "warnings": [
+        "Query joins procedures and admissions; confirm whether the unit is procedure occurrence or hospitalization.",
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q079",
+      "question_pt": "Qual hospital teve maior volume em cada UF do estabelecimento?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.3795164540060796,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q080",
+      "question_pt": "Como variou ano a ano o valor total por complexidade?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.8332118649996119,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q081",
+      "question_pt": "Qual foi a taxa de uso de UTI por ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.44338932799291797,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q082",
+      "question_pt": "Qual foi o mix percentual de carater de internacao por ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.5541841660015052,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q083",
+      "question_pt": "Como evoluiram as internacoes obstetricas por ano?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.3304114659986226,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q084",
+      "question_pt": "Quantas internacoes ocorreram em UF de residencia diferente da UF do hospital? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 2.87603651000245,
+      "errors": [],
+      "warnings": [
+        "Query references SG_UF; ensure invalid numeric SG_UF codes are excluded when counting UFs."
+      ]
+    },
+    {
+      "id": "SIHRD5_Q085",
+      "question_pt": "Quais anos tem meses faltantes na serie de internacoes por entrada?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.46232864100602455,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q086",
+      "question_pt": "Existem internacoes com data de saida anterior a data de entrada?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.321264396989136,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q087",
+      "question_pt": "Quantas internacoes tem DIAS_PERM diferente da diferenca simples entre saida e entrada?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.45292427600361407,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q088",
+      "question_pt": "Existem valores financeiros negativos nos campos de valor?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.09332612498837989,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q089",
+      "question_pt": "Existem idades fora do intervalo aceito de 0 a 150 anos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.0856451739964541,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q090",
+      "question_pt": "Quantos CNES das internacoes nao existem no cadastro hospitalar?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.5690028490062105,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q091",
+      "question_pt": "Quantas internacoes tem municipio de residencia sem cadastro territorial? (considerando apenas internacoes com municipio de residencia mapeado)",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.5597193360008532,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q092",
+      "question_pt": "Quantos diagnosticos principais nao existem na tabela CID?",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.025281127003836446,
+      "errors": [
+        "Rejected relationship cannot be used for business answers: internacoes.DIAG_SECUN -> cid.CID",
+        "Rejected relationship cannot be used for business answers: internacoes.CID_MORTE -> cid.CID"
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q093",
+      "question_pt": "Quantos procedimentos realizados nao existem no cadastro de procedimentos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.6508608180010924,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q094",
+      "question_pt": "A dimensao sexo possui descricoes duplicadas entre codigos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.09189773700200021,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q095",
+      "question_pt": "Quantas internacoes tem VAL_TOT menor que VAL_SH + VAL_SP + VAL_UTI?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 1.0463918250025017,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q096",
+      "question_pt": "Quantas internacoes tem data de entrada fora da dimensao tempo?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.5030784130067332,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q097",
+      "question_pt": "Quantas internacoes tem data de saida fora da dimensao tempo?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.5108205849974183,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q098",
+      "question_pt": "Quais CNES sem nome cadastrado concentram mais internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.5362606949929614,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q099",
+      "question_pt": "A tabela final de internacoes tem o mesmo volume da staging?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.12031192598806228,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q100",
+      "question_pt": "Quais anos tiveram volume extremamente baixo de internacoes e podem indicar cobertura parcial?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.27849319599044975,
+      "errors": [],
+      "warnings": []
+    }
+  ]
+}

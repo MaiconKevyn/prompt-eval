@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q097",
+  "question_pt": "Quantas internacoes tem data de saida fora da dimensao tempo?",
+  "executed_at": "2026-05-14T03:40:21.031442+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS dt_saida_sem_tempo FROM internacoes i LEFT JOIN tempo t ON i.DT_SAIDA = t.data WHERE i.DT_SAIDA IS NOT NULL AND t.data IS NULL",
+  "duration_seconds": 0.55157,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "dt_saida_sem_tempo"
+  ],
+  "preview_rows": [
+    {
+      "dt_saida_sem_tempo": 518712
+    }
+  ],
+  "result_hash": "35539a30f343af76acf410a51d82a89b06d779c41a4dccc71ec333446c212373",
+  "semantic_disposition": "accepted"
+}

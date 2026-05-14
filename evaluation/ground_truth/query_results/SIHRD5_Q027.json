@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q027",
   "question_pt": "Como as internacoes se distribuem por complexidade do atendimento?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT COMPLEX, COUNT(*) AS internacoes, ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacoes GROUP BY 1 ORDER BY internacoes DESC",
-  "duration_seconds": 1.056,
+  "duration_seconds": 1.063,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 3,
   "columns": [
     "COMPLEX",

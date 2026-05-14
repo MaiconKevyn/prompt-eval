@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q069",
   "question_pt": "Quais UFs tiveram maior taxa de mortalidade entre UFs com pelo menos 100 mil internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH uf AS (SELECT m.SG_UF, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE i.MORTE) AS mortes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1) SELECT SG_UF, internacoes, mortes, ROUND(100.0 * mortes / internacoes, 4) AS taxa_morte_pct FROM uf WHERE internacoes >= 100000 ORDER BY taxa_morte_pct DESC",
-  "duration_seconds": 0.632,
+  "duration_seconds": 0.653,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 27,
   "columns": [
     "SG_UF",

@@ -1,0 +1,120 @@
+{
+  "id": "SIHRD5_Q052",
+  "question_pt": "Quais hospitais tiveram maior volume de internacoes?",
+  "executed_at": "2026-05-14T03:39:00.497032+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20",
+  "duration_seconds": 1.579084,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 20,
+  "columns": [
+    "CNES",
+    "NO_HOSPITAL",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "CNES": 2078015,
+      "NO_HOSPITAL": null,
+      "internacoes": 761959
+    },
+    {
+      "CNES": 434,
+      "NO_HOSPITAL": "INSTITUTO DE MEDICINA INTEGRAL PROF FERNANDO FIGUEIRA",
+      "internacoes": 719254
+    },
+    {
+      "CNES": 27014,
+      "NO_HOSPITAL": "SANTA CASA DE MISERICORDIA DE BELO HORIZONTE",
+      "internacoes": 623140
+    },
+    {
+      "CNES": 2082187,
+      "NO_HOSPITAL": "FUNDACAO DE APOIO AO ENSINO PESQUISA E ASSISTENCIA HCFMRP",
+      "internacoes": 592426
+    },
+    {
+      "CNES": 2237571,
+      "NO_HOSPITAL": null,
+      "internacoes": 587240
+    },
+    {
+      "CNES": 2077396,
+      "NO_HOSPITAL": null,
+      "internacoes": 582168
+    },
+    {
+      "CNES": 13846,
+      "NO_HOSPITAL": "MATERNIDADE E CIRURGIA NOSSA SENHORA DO ROCIO LTDA",
+      "internacoes": 569114
+    },
+    {
+      "CNES": 655,
+      "NO_HOSPITAL": null,
+      "internacoes": 522136
+    },
+    {
+      "CNES": 2237601,
+      "NO_HOSPITAL": "HOSPITAL DE CLINICAS DE PORTO ALEGRE",
+      "internacoes": 521837
+    },
+    {
+      "CNES": 2688689,
+      "NO_HOSPITAL": null,
+      "internacoes": 467320
+    },
+    {
+      "CNES": 13633,
+      "NO_HOSPITAL": "SOCIEDADE HOSPITALAR ANGELINA CARON",
+      "internacoes": 454384
+    },
+    {
+      "CNES": 2079798,
+      "NO_HOSPITAL": null,
+      "internacoes": 442815
+    },
+    {
+      "CNES": 2077477,
+      "NO_HOSPITAL": "CASA DE SAUDE SANTA MARCELINA",
+      "internacoes": 432735
+    },
+    {
+      "CNES": 9717,
+      "NO_HOSPITAL": null,
+      "internacoes": 424481
+    },
+    {
+      "CNES": 15245,
+      "NO_HOSPITAL": "SOCIEDADE EVANGELICA BENEFICENTE DE CURITIBA",
+      "internacoes": 423990
+    },
+    {
+      "CNES": 2755130,
+      "NO_HOSPITAL": null,
+      "internacoes": 385833
+    },
+    {
+      "CNES": 2077485,
+      "NO_HOSPITAL": null,
+      "internacoes": 371173
+    },
+    {
+      "CNES": 2237253,
+      "NO_HOSPITAL": "IRMANDADE DA SANTA CASA DE MISERICORDIA DE PORTO ALEGRE",
+      "internacoes": 368826
+    },
+    {
+      "CNES": 2246988,
+      "NO_HOSPITAL": "ASSOCIACAO HOSPITALAR BENEFICENTE SAO VICENTE DE PAULO",
+      "internacoes": 364975
+    },
+    {
+      "CNES": 2748223,
+      "NO_HOSPITAL": null,
+      "internacoes": 359852
+    }
+  ],
+  "result_hash": "0ec360db52c1ca76388f8a0d21f740f7ce2d07ef1f4db70869160701a4110eb1",
+  "semantic_disposition": "accepted"
+}

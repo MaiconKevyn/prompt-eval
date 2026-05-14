@@ -1,0 +1,120 @@
+{
+  "id": "SIHRD5_Q085",
+  "question_pt": "Quais anos tem meses faltantes na serie de internacoes por entrada?",
+  "executed_at": "2026-05-14T03:40:14.852832+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH meses AS (SELECT year(DT_INTER) AS ano, COUNT(DISTINCT month(DT_INTER)) AS meses_com_dados FROM internacoes GROUP BY 1) SELECT ano, meses_com_dados, 12 - meses_com_dados AS meses_faltantes FROM meses ORDER BY ano",
+  "duration_seconds": 0.410987,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "meses_com_dados",
+    "meses_faltantes"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "meses_com_dados": 5,
+      "meses_faltantes": 7
+    },
+    {
+      "ano": 2001,
+      "meses_com_dados": 2,
+      "meses_faltantes": 10
+    },
+    {
+      "ano": 2002,
+      "meses_com_dados": 2,
+      "meses_faltantes": 10
+    },
+    {
+      "ano": 2003,
+      "meses_com_dados": 1,
+      "meses_faltantes": 11
+    },
+    {
+      "ano": 2005,
+      "meses_com_dados": 4,
+      "meses_faltantes": 8
+    },
+    {
+      "ano": 2006,
+      "meses_com_dados": 7,
+      "meses_faltantes": 5
+    },
+    {
+      "ano": 2007,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2008,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2009,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2010,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2011,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2012,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2013,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2014,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2015,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2016,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2017,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2018,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2019,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    },
+    {
+      "ano": 2020,
+      "meses_com_dados": 12,
+      "meses_faltantes": 0
+    }
+  ],
+  "result_hash": "1f320c8a24f6a17924d9690adc0cf60b5981578889d4df4e6b50a64b130788eb",
+  "semantic_disposition": "accepted"
+}

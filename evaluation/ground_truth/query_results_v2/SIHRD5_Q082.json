@@ -1,0 +1,141 @@
+{
+  "id": "SIHRD5_Q082",
+  "question_pt": "Qual foi o mix percentual de carater de internacao por ano?",
+  "executed_at": "2026-05-14T03:40:11.610368+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH base AS (SELECT year(i.DT_INTER) AS ano, c.DESCRICAO AS carater, COUNT(*) AS internacoes FROM internacoes i JOIN car_int c ON i.CAR_INT = c.CAR_INT GROUP BY 1, 2), total AS (SELECT ano, SUM(internacoes) AS total_ano FROM base GROUP BY 1) SELECT b.ano, b.carater, b.internacoes, ROUND(100.0 * b.internacoes / t.total_ano, 4) AS percentual_ano FROM base b JOIN total t ON b.ano = t.ano ORDER BY b.ano, percentual_ano DESC, b.carater",
+  "duration_seconds": 0.562593,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 111,
+  "columns": [
+    "ano",
+    "carater",
+    "internacoes",
+    "percentual_ano"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "carater": "Eletivo",
+      "internacoes": 5,
+      "percentual_ano": 55.5556
+    },
+    {
+      "ano": 2000,
+      "carater": "Urgência",
+      "internacoes": 4,
+      "percentual_ano": 44.4444
+    },
+    {
+      "ano": 2001,
+      "carater": "Urgência",
+      "internacoes": 2,
+      "percentual_ano": 100.0
+    },
+    {
+      "ano": 2002,
+      "carater": "Eletivo",
+      "internacoes": 2,
+      "percentual_ano": 100.0
+    },
+    {
+      "ano": 2003,
+      "carater": "Urgência",
+      "internacoes": 1,
+      "percentual_ano": 100.0
+    },
+    {
+      "ano": 2005,
+      "carater": "Urgência",
+      "internacoes": 5,
+      "percentual_ano": 83.3333
+    },
+    {
+      "ano": 2005,
+      "carater": "Eletivo",
+      "internacoes": 1,
+      "percentual_ano": 16.6667
+    },
+    {
+      "ano": 2006,
+      "carater": "Urgência",
+      "internacoes": 6,
+      "percentual_ano": 85.7143
+    },
+    {
+      "ano": 2006,
+      "carater": "Eletivo",
+      "internacoes": 1,
+      "percentual_ano": 14.2857
+    },
+    {
+      "ano": 2007,
+      "carater": "Urgência",
+      "internacoes": 486510,
+      "percentual_ano": 80.6887
+    },
+    {
+      "ano": 2007,
+      "carater": "Eletivo",
+      "internacoes": 103477,
+      "percentual_ano": 17.1619
+    },
+    {
+      "ano": 2007,
+      "carater": "Out tp lesões e envenen por agent quím físicos",
+      "internacoes": 8456,
+      "percentual_ano": 1.4024
+    },
+    {
+      "ano": 2007,
+      "carater": "Outros tipo de acidente de trânsito",
+      "internacoes": 4487,
+      "percentual_ano": 0.7442
+    },
+    {
+      "ano": 2007,
+      "carater": "Acidente no local trabalho ou a serv da empresa",
+      "internacoes": 9,
+      "percentual_ano": 0.0015
+    },
+    {
+      "ano": 2007,
+      "carater": "Acidente no trajeto para o trabalho",
+      "internacoes": 8,
+      "percentual_ano": 0.0013
+    },
+    {
+      "ano": 2008,
+      "carater": "Urgência",
+      "internacoes": 8561856,
+      "percentual_ano": 78.9296
+    },
+    {
+      "ano": 2008,
+      "carater": "Eletivo",
+      "internacoes": 2111037,
+      "percentual_ano": 19.4611
+    },
+    {
+      "ano": 2008,
+      "carater": "Out tp lesões e envenen por agent quím físicos",
+      "internacoes": 120081,
+      "percentual_ano": 1.107
+    },
+    {
+      "ano": 2008,
+      "carater": "Outros tipo de acidente de trânsito",
+      "internacoes": 54344,
+      "percentual_ano": 0.501
+    },
+    {
+      "ano": 2008,
+      "carater": "Acidente no local trabalho ou a serv da empresa",
+      "internacoes": 125,
+      "percentual_ano": 0.0012
+    }
+  ],
+  "result_hash": "8c65770ac62c4462869247028723e4bb970e1a10957ec72be17327fb914ea730",
+  "semantic_disposition": "accepted"
+}

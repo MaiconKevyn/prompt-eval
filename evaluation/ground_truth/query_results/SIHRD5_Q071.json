@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q071",
   "question_pt": "Quais hospitais estao acima do percentil 95 de volume de internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH hosp AS (SELECT i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES GROUP BY 1, 2), limiar AS (SELECT quantile_cont(internacoes, 0.95) AS p95 FROM hosp) SELECT hosp.CNES, hosp.NO_HOSPITAL, hosp.internacoes, limiar.p95 FROM hosp, limiar WHERE hosp.internacoes >= limiar.p95 ORDER BY hosp.internacoes DESC, hosp.CNES",
-  "duration_seconds": 1.757,
+  "duration_seconds": 1.864,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 344,
   "columns": [
     "CNES",

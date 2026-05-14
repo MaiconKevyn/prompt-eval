@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q038",
   "question_pt": "Quantos leitos SUS estao registrados por ano nos indicadores socioeconomicos?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT NU_ANO AS ano, SUM(QT_LEITOS_SUS) AS leitos_sus FROM socioeconomico GROUP BY 1 ORDER BY 1",
   "duration_seconds": 0.002,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 13,
   "columns": [
     "ano",

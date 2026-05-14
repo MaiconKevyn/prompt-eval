@@ -8,7 +8,7 @@ import hashlib
 import json
 import re
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date, datetime
 from decimal import Decimal
 from pathlib import Path
@@ -22,7 +22,10 @@ DB_PATH = ROOT / "sihrd5.duckdb"
 DOCS_DIR = ROOT / "docs"
 GT_DIR = ROOT / "evaluation" / "ground_truth"
 RESULTS_DIR = GT_DIR / "query_results"
+RESULTS_V2_DIR = GT_DIR / "query_results_v2"
 MANIFEST_PATH = GT_DIR / "manifest.json"
+SLOW_QUERY_SECONDS = 5.0
+TOO_SLOW_QUERY_SECONDS = 15.0
 
 MAIN_TABLES = [
     "car_int",
@@ -84,6 +87,51 @@ PERSONAS = [
     "Tecnico de regulacao",
     "Analista financeiro da saude",
 ]
+
+VALID_UF_CODES = (
+    "AC",
+    "AL",
+    "AP",
+    "AM",
+    "BA",
+    "CE",
+    "DF",
+    "ES",
+    "GO",
+    "MA",
+    "MT",
+    "MS",
+    "MG",
+    "PA",
+    "PB",
+    "PR",
+    "PE",
+    "PI",
+    "RJ",
+    "RN",
+    "RS",
+    "RO",
+    "RR",
+    "SC",
+    "SP",
+    "SE",
+    "TO",
+)
+
+BUSINESS_CRITICAL_FACT_COLUMNS = {
+    ("internacoes", "N_AIH"),
+    ("internacoes", "CNES"),
+    ("internacoes", "MUNIC_RES"),
+    ("internacoes", "DIAG_PRINC"),
+    ("internacoes", "DT_INTER"),
+    ("internacoes", "DT_SAIDA"),
+    ("internacoes", "VAL_TOT"),
+    ("internacoes", "MORTE"),
+    ("internacao_procedimento", "id_atendimento"),
+    ("internacao_procedimento", "N_AIH"),
+    ("internacao_procedimento", "PROC_REA"),
+    ("stg_internacoes", "N_AIH"),
+}
 
 
 @dataclass(frozen=True)
@@ -166,6 +214,22 @@ def rows_to_dicts(columns: list[str], rows: list[tuple[Any, ...]]) -> list[dict[
     return [{columns[i]: to_jsonable(value) for i, value in enumerate(row)} for row in rows]
 
 
+def performance_class(duration_seconds: float) -> str:
+    if duration_seconds <= 1:
+        return "fast"
+    if duration_seconds <= SLOW_QUERY_SECONDS:
+        return "moderate"
+    if duration_seconds <= TOO_SLOW_QUERY_SECONDS:
+        return "slow"
+    return "too_slow_for_default_eval"
+
+
+def explain_query(con: duckdb.DuckDBPyConnection, sql: str) -> list[dict[str, Any]]:
+    result = con.execute(f"EXPLAIN {sql}")
+    columns = [d[0] for d in result.description]
+    return rows_to_dicts(columns, result.fetchall())
+
+
 def write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content.rstrip() + "\n", encoding="utf-8")
@@ -240,6 +304,105 @@ def get_catalog(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[str, Any]], l
     return tables, columns
 
 
+def duckdb_runtime_metadata(con: duckdb.DuckDBPyConnection, generated_at: str) -> dict[str, Any]:
+    settings = fetch_dicts(
+        con,
+        """
+        SELECT name, value, description, input_type, scope
+        FROM duckdb_settings()
+        WHERE name IN ('access_mode', 'threads', 'memory_limit', 'temp_directory', 'max_temp_directory_size')
+        ORDER BY name
+        """,
+    )
+    metadata = {
+        "generated_at": generated_at,
+        "database_file": DB_PATH.name,
+        "duckdb_python_version": duckdb.__version__,
+        "pragma_version": fetch_dicts(con, "PRAGMA version"),
+        "database_size": fetch_dicts(con, "PRAGMA database_size"),
+        "settings": settings,
+    }
+    write_json(DOCS_DIR / "generated" / "duckdb_runtime_metadata.json", metadata)
+    return metadata
+
+
+def duckdb_physical_metadata(
+    con: duckdb.DuckDBPyConnection,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    constraints = fetch_dicts(
+        con,
+        """
+        SELECT
+          schema_name,
+          table_name,
+          constraint_type,
+          constraint_column_names,
+          constraint_name,
+          referenced_table,
+          referenced_column_names,
+          constraint_text
+        FROM duckdb_constraints()
+        ORDER BY schema_name, table_name, constraint_type, constraint_column_names
+        """,
+    )
+    secondary_indexes = fetch_dicts(
+        con,
+        """
+        SELECT
+          schema_name,
+          table_name,
+          index_name,
+          is_unique,
+          is_primary,
+          expressions,
+          sql
+        FROM duckdb_indexes()
+        ORDER BY schema_name, table_name, index_name
+        """,
+    )
+    table_metadata = fetch_dicts(
+        con,
+        """
+        SELECT
+          schema_name,
+          table_name,
+          has_primary_key,
+          estimated_size,
+          column_count,
+          index_count,
+          check_constraint_count,
+          sql
+        FROM duckdb_tables()
+        WHERE NOT internal
+        ORDER BY schema_name, table_name
+        """,
+    )
+    write_csv(DOCS_DIR / "generated" / "physical_constraints.csv", constraints)
+    write_csv_with_fieldnames(
+        DOCS_DIR / "generated" / "secondary_indexes.csv",
+        secondary_indexes,
+        ["schema_name", "table_name", "index_name", "is_unique", "is_primary", "expressions", "sql"],
+    )
+    write_csv(DOCS_DIR / "generated" / "table_metadata.csv", table_metadata)
+    return constraints, secondary_indexes, table_metadata
+
+
+def table_profile_tier(row_count: int) -> str:
+    if row_count <= 100_000:
+        return "small"
+    if row_count <= 5_000_000:
+        return "medium"
+    return "large"
+
+
+def should_exact_profile(table_name: str, column_name: str, row_count: int) -> bool:
+    if row_count <= 100_000:
+        return True
+    if (table_name, column_name) in BUSINESS_CRITICAL_FACT_COLUMNS:
+        return True
+    return False
+
+
 def profile_columns(
     con: duckdb.DuckDBPyConnection, tables: list[dict[str, Any]], columns: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
@@ -256,30 +419,33 @@ def profile_columns(
         row_count = table["row_count"]
         table_cols = columns_by_table[(schema, name)]
         base = f"{quote_ident(schema)}.{quote_ident(name)}"
-        started = time.time()
-        expressions: list[str] = []
+        tier = table_profile_tier(row_count)
         for col in table_cols:
             column = col["column_name"]
             data_type = col["data_type"]
             colref = quote_ident(column)
-            expressions.append(f"COUNT(*) FILTER (WHERE {colref} IS NULL) AS {quote_ident(f'{column}__null_count')}")
-            expressions.append(f"approx_count_distinct({colref}) AS {quote_ident(f'{column}__approx_distinct')}")
+            exact = should_exact_profile(name, column, row_count)
+            distinct_expr = f"COUNT(DISTINCT {colref})" if exact else f"approx_count_distinct({colref})"
+            profile_mode = "exact" if exact else "approx"
             if data_type.upper() not in {"BLOB"}:
-                expressions.append(f"MIN({colref}) AS {quote_ident(f'{column}__min_value')}")
-                expressions.append(f"MAX({colref}) AS {quote_ident(f'{column}__max_value')}")
+                min_expr = f"MIN({colref})"
+                max_expr = f"MAX({colref})"
             else:
-                expressions.append(f"NULL AS {quote_ident(f'{column}__min_value')}")
-                expressions.append(f"NULL AS {quote_ident(f'{column}__max_value')}")
-        result = con.execute(f"SELECT {', '.join(expressions)} FROM {base}")
-        row = rows_to_dicts([d[0] for d in result.description], result.fetchall())[0]
-        duration = round(time.time() - started, 3)
-        for col in table_cols:
-            column = col["column_name"]
-            data_type = col["data_type"]
-            null_count = row[f"{column}__null_count"]
-            approx_distinct = row[f"{column}__approx_distinct"]
-            min_value = row[f"{column}__min_value"]
-            max_value = row[f"{column}__max_value"]
+                min_expr = "NULL"
+                max_expr = "NULL"
+            sql = f"""
+                SELECT
+                  COUNT(*) FILTER (WHERE {colref} IS NULL) AS null_count,
+                  {distinct_expr} AS distinct_count,
+                  {min_expr} AS min_value,
+                  {max_expr} AS max_value
+                FROM {base}
+            """
+            started = time.time()
+            row = fetch_dicts(con, sql)[0]
+            duration = round(time.time() - started, 3)
+            null_count = row["null_count"]
+            distinct_count = row["distinct_count"]
             profiles.append(
                 {
                     "table_schema": schema,
@@ -289,11 +455,17 @@ def profile_columns(
                     "row_count": row_count,
                     "null_count": null_count,
                     "null_rate": round(null_count / row_count, 6) if row_count else None,
-                    "approx_distinct": approx_distinct,
-                    "approx_distinct_rate": round(approx_distinct / row_count, 6) if row_count else None,
-                    "min_value": to_jsonable(min_value),
-                    "max_value": to_jsonable(max_value),
+                    "profile_tier": tier,
+                    "profile_mode": profile_mode,
+                    "exact_distinct_count": distinct_count if exact else None,
+                    "approx_distinct_count": None if exact else distinct_count,
+                    "distinct_count_for_catalog": distinct_count,
+                    "distinct_is_exact": exact,
+                    "distinct_rate": round(distinct_count / row_count, 6) if row_count else None,
+                    "min_value": to_jsonable(row["min_value"]),
+                    "max_value": to_jsonable(row["max_value"]),
                     "profile_seconds": duration,
+                    "profile_sql": clean_sql(sql),
                 }
             )
     return profiles
@@ -438,6 +610,14 @@ def relationship_coverage(con: duckdb.DuckDBPyConnection) -> list[dict[str, Any]
             confidence = "weak"
         else:
             confidence = "rejected"
+        if confidence == "confirmed":
+            accepted_usage_policy = "business_inner_join_allowed"
+        elif confidence == "likely":
+            accepted_usage_policy = "left_join_or_explicit_mapped_scope_required"
+        elif confidence == "weak":
+            accepted_usage_policy = "audit_only_unless_externally_validated"
+        else:
+            accepted_usage_policy = "audit_only"
         rows.append(
             {
                 "left_table": left_table,
@@ -447,11 +627,39 @@ def relationship_coverage(con: duckdb.DuckDBPyConnection) -> list[dict[str, Any]
                 "business_meaning": meaning,
                 **{k: to_jsonable(v) for k, v in result.items()},
                 "confidence": confidence,
+                "accepted_usage_policy": accepted_usage_policy,
                 "sql": clean_sql(sql),
                 "duration_seconds": round(time.time() - started, 3),
             }
         )
     return rows
+
+
+def build_join_policy(relationships: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows = []
+    for rel in relationships:
+        rows.append(
+            {
+                "left": f"{rel['left_table']}.{rel['left_key']}",
+                "right": f"{rel['right_table']}.{rel['right_key']}",
+                "business_meaning": rel["business_meaning"],
+                "left_rows": rel["left_rows"],
+                "matched_rows": rel["matched_rows"],
+                "unmatched_rows": rel["unmatched_rows"],
+                "match_rate_non_null": rel["match_rate_non_null"],
+                "confidence": rel["confidence"],
+                "accepted_usage_policy": rel["accepted_usage_policy"],
+            }
+        )
+    write_csv(DOCS_DIR / "generated" / "join_policy.csv", rows)
+    return rows
+
+
+def relationship_lookup(relationships: list[dict[str, Any]]) -> dict[tuple[str, str, str, str], dict[str, Any]]:
+    return {
+        (rel["left_table"], rel["left_key"], rel["right_table"], rel["right_key"]): rel
+        for rel in relationships
+    }
 
 
 def candidate_key_checks(con: duckdb.DuckDBPyConnection) -> list[dict[str, Any]]:
@@ -564,7 +772,36 @@ def top_frequent_values(con: duckdb.DuckDBPyConnection) -> list[dict[str, Any]]:
     return rows
 
 
+def valid_uf_values_sql() -> str:
+    values = ", ".join(f"('{uf}')" for uf in VALID_UF_CODES)
+    return f"WITH valid_uf(sg_uf) AS (VALUES {values})"
+
+
+def uf_code_quality(con: duckdb.DuckDBPyConnection) -> list[dict[str, Any]]:
+    sql = f"""
+        {valid_uf_values_sql()}
+        SELECT
+          m.SG_UF,
+          COUNT(*) AS municipios,
+          v.sg_uf IS NOT NULL AS is_valid_uf
+        FROM municipios m
+        LEFT JOIN valid_uf v ON m.SG_UF = v.sg_uf
+        GROUP BY 1, 3
+        ORDER BY is_valid_uf, SG_UF
+    """
+    rows = fetch_dicts(con, sql)
+    write_csv(DOCS_DIR / "generated" / "uf_code_quality.csv", rows)
+    return rows
+
+
 def data_quality_checks(con: duckdb.DuckDBPyConnection) -> list[dict[str, Any]]:
+    invalid_uf_sql = f"""
+        {valid_uf_values_sql()}
+        SELECT COUNT(*) AS affected_rows
+        FROM municipios m
+        LEFT JOIN valid_uf v ON m.SG_UF = v.sg_uf
+        WHERE v.sg_uf IS NULL
+    """
     checks = [
         (
             "DQ001",
@@ -671,6 +908,27 @@ def data_quality_checks(con: duckdb.DuckDBPyConnection) -> list[dict[str, Any]]:
             "Divergencia pode indicar que VAL_TOT nao e soma direta dos componentes ou que ha inconsistencia financeira.",
             "SELECT COUNT(*) AS affected_rows FROM internacoes WHERE VAL_TOT + 0.01 < COALESCE(VAL_SH, 0) + COALESCE(VAL_SP, 0) + COALESCE(VAL_UTI, 0)",
         ),
+        (
+            "DQ016",
+            "municipios.SG_UF contem valores que nao sao UFs brasileiras",
+            "high",
+            "Valores numericos em SG_UF fazem perguntas sobre UFs retornarem 38 categorias em vez das 27 UFs validas.",
+            invalid_uf_sql,
+        ),
+        (
+            "DQ017",
+            "CO_MUNICIPIO_6D com formato diferente de seis digitos",
+            "high",
+            "Codigos municipais fora do formato esperado prejudicam joins territoriais e validacao IBGE/DATASUS.",
+            "SELECT COUNT(*) AS affected_rows FROM municipios WHERE NOT regexp_full_match(CAST(CO_MUNICIPIO_6D AS VARCHAR), '^[0-9]{6}$')",
+        ),
+        (
+            "DQ018",
+            "CO_MUNICIPIO_7D nao nulo com formato diferente de sete digitos",
+            "medium",
+            "Codigos municipais de sete digitos fora do formato esperado indicam problema cadastral ou campo com significado distinto.",
+            "SELECT COUNT(*) AS affected_rows FROM municipios WHERE CO_MUNICIPIO_7D IS NOT NULL AND NOT regexp_full_match(CAST(CO_MUNICIPIO_7D AS VARCHAR), '^[0-9]{7}$')",
+        ),
     ]
     output = []
     for check_id, title, severity, why, sql in checks:
@@ -710,6 +968,9 @@ def sample_sql_for_check(check_id: str) -> str | None:
         "DQ013": "SELECT i.CNES, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i.CNES = h.CNES WHERE h.NO_HOSPITAL IS NULL OR h.NO_HOSPITAL = '' GROUP BY 1 ORDER BY 2 DESC LIMIT 10",
         "DQ014": "SELECT DESCRICAO, COUNT(*) AS codigos FROM sexo GROUP BY DESCRICAO HAVING COUNT(*) > 1",
         "DQ015": "SELECT N_AIH, VAL_SH, VAL_SP, VAL_UTI, VAL_TOT, COALESCE(VAL_SH, 0) + COALESCE(VAL_SP, 0) + COALESCE(VAL_UTI, 0) AS soma_componentes FROM internacoes WHERE VAL_TOT + 0.01 < COALESCE(VAL_SH, 0) + COALESCE(VAL_SP, 0) + COALESCE(VAL_UTI, 0) LIMIT 10",
+        "DQ016": f"{valid_uf_values_sql()} SELECT m.SG_UF, COUNT(*) AS municipios FROM municipios m LEFT JOIN valid_uf v ON m.SG_UF = v.sg_uf WHERE v.sg_uf IS NULL GROUP BY 1 ORDER BY 1",
+        "DQ017": "SELECT CO_MUNICIPIO_6D, NO_MUNICIPIO, SG_UF FROM municipios WHERE NOT regexp_full_match(CAST(CO_MUNICIPIO_6D AS VARCHAR), '^[0-9]{6}$') LIMIT 10",
+        "DQ018": "SELECT CO_MUNICIPIO_7D, NO_MUNICIPIO, SG_UF FROM municipios WHERE CO_MUNICIPIO_7D IS NOT NULL AND NOT regexp_full_match(CAST(CO_MUNICIPIO_7D AS VARCHAR), '^[0-9]{7}$') LIMIT 10",
     }
     return samples.get(check_id)
 
@@ -860,6 +1121,10 @@ def validate_sql_is_read_only(sql: str) -> None:
         raise ValueError(f"Forbidden SQL keyword found: {sql[:120]}")
 
 
+def result_hash(rows: list[dict[str, Any]]) -> str:
+    return hashlib.sha256(json.dumps(rows, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()
+
+
 def extract_tables_and_columns(sql: str, columns_by_table: dict[str, list[str]]) -> tuple[list[str], list[str]]:
     lowered = sql.lower()
     tables = [table for table in MAIN_TABLES if re.search(rf"\b{re.escape(table.lower())}\b", lowered)]
@@ -869,6 +1134,201 @@ def extract_tables_and_columns(sql: str, columns_by_table: dict[str, list[str]])
             if re.search(rf"\b{re.escape(col.lower())}\b", lowered):
                 cols.append(f"{table}.{col}")
     return sorted(set(tables)), sorted(set(cols))
+
+
+def valid_uf_cte_sql() -> str:
+    values = ", ".join(f"('{uf}')" for uf in VALID_UF_CODES)
+    return f"WITH valid_uf(sg_uf) AS (VALUES {values})"
+
+
+def v2_question_spec(query_id: str, spec: QuestionSpec) -> QuestionSpec:
+    if query_id == "SIHRD5_Q005":
+        sql = f"""
+            {valid_uf_cte_sql()}
+            SELECT
+              COUNT(*) AS total_municipios,
+              COUNT(DISTINCT m.SG_UF) FILTER (WHERE v.sg_uf IS NOT NULL) AS total_ufs_validas,
+              COUNT(DISTINCT m.SG_UF) FILTER (WHERE v.sg_uf IS NULL) AS total_codigos_sg_uf_invalidos
+            FROM municipios m
+            LEFT JOIN valid_uf v ON m.SG_UF = v.sg_uf
+        """
+        return replace(
+            spec,
+            question_pt="Quantos municipios existem e quantas UFs brasileiras validas aparecem na dimensao territorial?",
+            business_intent="Medir cobertura geografica sem contar codigos invalidos de SG_UF como UFs.",
+            sql=clean_sql(sql),
+            data_quality_notes="SG_UF possui valores invalidos documentados; por isso a consulta separa UFs validas de codigos invalidos.",
+        )
+    if query_id == "SIHRD5_Q039":
+        sql = f"""
+            {valid_uf_cte_sql()}
+            SELECT m.SG_UF, COUNT(*) AS municipios
+            FROM municipios m
+            JOIN valid_uf v ON m.SG_UF = v.sg_uf
+            GROUP BY 1
+            ORDER BY municipios DESC, SG_UF
+        """
+        return replace(
+            spec,
+            question_pt="Quantos municipios existem por UF brasileira valida no cadastro territorial?",
+            business_intent="Medir cobertura territorial por UF sem misturar codigos SG_UF invalidos.",
+            sql=clean_sql(sql),
+            data_quality_notes="SG_UF possui valores invalidos documentados; esta pergunta filtra apenas UFs brasileiras validas.",
+        )
+    if query_id == "SIHRD5_Q044":
+        sql = """
+            SELECT
+              COALESCE(r.DESCRICAO, 'Sem correspondencia na dimensao raca_cor') AS raca_cor,
+              i.RACA_COR AS codigo_raca_cor,
+              COUNT(*) AS internacoes
+            FROM internacoes i
+            LEFT JOIN raca_cor r ON i.RACA_COR = r.RACA_COR
+            GROUP BY 1, 2
+            ORDER BY internacoes DESC
+        """
+        return replace(
+            spec,
+            question_pt="Como as internacoes se distribuem por codigo de raca/cor, com descricao quando houver correspondencia na dimensao?",
+            business_intent="Preservar a populacao total ao analisar raca/cor e explicitar codigos sem correspondencia.",
+            sql=clean_sql(sql),
+            data_quality_notes="A cobertura de RACA_COR na dimensao raca_cor e baixa; a consulta usa LEFT JOIN e bucket de sem correspondencia.",
+        )
+
+    lower_sql = spec.sql.lower()
+    munic_res_inner_join = (
+        " join municipios m on i.munic_res = m.co_municipio_6d" in lower_sql
+        or " join municipios mr on i.munic_res = mr.co_municipio_6d" in lower_sql
+    )
+    if munic_res_inner_join and "mapeado" not in spec.question_pt.lower():
+        return replace(
+            spec,
+            question_pt=f"{spec.question_pt} (considerando apenas internacoes com municipio de residencia mapeado)",
+            assumptions=(
+                spec.assumptions
+                + " A consulta restringe resultados a internacoes cujo MUNIC_RES tem correspondencia em municipios.CO_MUNICIPIO_6D."
+            ),
+            data_quality_notes=(
+                spec.data_quality_notes
+                + " Ha internacoes com municipio de residencia sem correspondencia; interpretar como universo mapeado."
+            ),
+        )
+    return spec
+
+
+KNOWN_RELATIONSHIP_PATTERNS = [
+    (
+        ("internacoes", "MUNIC_RES", "municipios", "CO_MUNICIPIO_6D"),
+        [
+            "join municipios m on i.munic_res = m.co_municipio_6d",
+            "join municipios mr on i.munic_res = mr.co_municipio_6d",
+            "left join municipios m on i.munic_res = m.co_municipio_6d",
+            "left join municipios mr on i.munic_res = mr.co_municipio_6d",
+        ],
+    ),
+    (
+        ("internacoes", "RACA_COR", "raca_cor", "RACA_COR"),
+        [
+            "join raca_cor r on i.raca_cor = r.raca_cor",
+            "left join raca_cor r on i.raca_cor = r.raca_cor",
+        ],
+    ),
+    (
+        ("internacoes", "CNES", "hospital", "CNES"),
+        ["join hospital h on i.cnes = h.cnes", "left join hospital h on i.cnes = h.cnes"],
+    ),
+    (
+        ("hospital", "MUNIC_MOV", "municipios", "CO_MUNICIPIO_6D"),
+        ["join municipios mh on h.munic_mov = mh.co_municipio_6d"],
+    ),
+    (
+        ("internacao_procedimento", "N_AIH", "internacoes", "N_AIH"),
+        ["join internacoes i on ip.n_aih = i.n_aih"],
+    ),
+    (
+        ("internacao_procedimento", "PROC_REA", "procedimentos", "PROC_REA"),
+        ["join procedimentos p on ip.proc_rea = p.proc_rea"],
+    ),
+    (
+        ("internacoes", "DIAG_PRINC", "cid", "CID"),
+        ["join cid c on i.diag_princ = c.cid"],
+    ),
+]
+
+
+def analyze_question_semantics(
+    item: dict[str, Any],
+    spec: QuestionSpec,
+    relationships_by_key: dict[tuple[str, str, str, str], dict[str, Any]],
+) -> dict[str, Any]:
+    lower_sql = " ".join(spec.sql.lower().split())
+    relationships_used = []
+    worst_confidence = "none"
+    confidence_rank = {"none": 0, "confirmed": 1, "likely": 2, "weak": 3, "rejected": 4}
+    uses_rejected = False
+    uses_likely_without_caveat = False
+    dropped_by_join_count = 0
+    dropped_by_join_rate = 0.0
+    for rel_key, patterns in KNOWN_RELATIONSHIP_PATTERNS:
+        matched_pattern = next((pattern for pattern in patterns if pattern in lower_sql), None)
+        if not matched_pattern:
+            continue
+        rel = relationships_by_key.get(rel_key)
+        if not rel:
+            continue
+        relationships_used.append(f"{rel_key[0]}.{rel_key[1]}->{rel_key[2]}.{rel_key[3]}:{rel['confidence']}")
+        if confidence_rank[rel["confidence"]] > confidence_rank[worst_confidence]:
+            worst_confidence = rel["confidence"]
+        if rel["confidence"] == "rejected":
+            uses_rejected = True
+        if rel["confidence"] == "likely":
+            explicit_scope = "mapeado" in spec.question_pt.lower() or "left join" in matched_pattern
+            if not explicit_scope:
+                uses_likely_without_caveat = True
+        if "left join" not in matched_pattern:
+            dropped_by_join_count = max(dropped_by_join_count, int(rel["unmatched_rows"] or 0))
+            rate = 1.0 - float(rel["match_rate_non_null"] or 0.0)
+            dropped_by_join_rate = max(dropped_by_join_rate, rate)
+
+    invalid_domain_dependency = False
+    upper_sql = spec.sql.upper()
+    if "COUNT(DISTINCT SG_UF)" in upper_sql and "VALID_UF" not in upper_sql:
+        invalid_domain_dependency = True
+    if "SG_UF" in upper_sql and "VALID_UF" not in upper_sql and item["id"] in {"SIHRD5_Q005", "SIHRD5_Q039"}:
+        invalid_domain_dependency = True
+
+    if invalid_domain_dependency:
+        final_disposition = "rejected_domain_invalid"
+        business_status = "invalid_domain_dependency"
+    elif uses_likely_without_caveat:
+        final_disposition = "rejected_join_loss"
+        business_status = "likely_relationship_without_scope"
+    elif uses_rejected and "left join raca_cor" not in lower_sql:
+        final_disposition = "rejected_join_loss"
+        business_status = "rejected_relationship_for_business_label"
+    elif dropped_by_join_count:
+        final_disposition = "accepted_with_explicit_scope"
+        business_status = "accepted_scoped_population"
+    else:
+        final_disposition = "accepted"
+        business_status = "accepted"
+
+    return {
+        "id": item["id"],
+        "question_pt": spec.question_pt,
+        "execution_status": item["execution_status"],
+        "read_only_status": "passed",
+        "tables_used": ";".join(item["tables_used"]),
+        "relationships_used": ";".join(relationships_used),
+        "worst_relationship_confidence": worst_confidence,
+        "uses_rejected_relationship": uses_rejected,
+        "uses_likely_relationship_without_caveat": uses_likely_without_caveat,
+        "dropped_by_join_count": dropped_by_join_count,
+        "dropped_by_join_rate": round(dropped_by_join_rate, 8),
+        "invalid_domain_dependency": invalid_domain_dependency,
+        "business_semantics_status": business_status,
+        "final_disposition": final_disposition,
+        "disposition_reason": business_status,
+    }
 
 
 def validate_ground_truth(
@@ -886,6 +1346,8 @@ def validate_ground_truth(
         columns = [d[0] for d in result.description]
         rows = rows_to_dicts(columns, result.fetchall())
         duration = round(time.time() - started, 3)
+        query_performance_class = performance_class(duration)
+        explain_plan = explain_query(con, spec.sql) if duration > SLOW_QUERY_SECONDS else []
         preview = rows[:30]
         evidence_payload = {
             "id": query_id,
@@ -894,10 +1356,13 @@ def validate_ground_truth(
             "database_file": str(DB_PATH.name),
             "sql": spec.sql,
             "duration_seconds": duration,
+            "performance_class": query_performance_class,
+            "explain_sql": f"EXPLAIN {spec.sql}" if explain_plan else None,
+            "explain_plan": explain_plan,
             "row_count": len(rows),
             "columns": columns,
             "preview_rows": preview,
-            "result_hash": hashlib.sha256(json.dumps(rows, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest(),
+            "result_hash": result_hash(rows),
         }
         evidence_path = RESULTS_DIR / f"{query_id}.json"
         write_json(evidence_path, evidence_payload)
@@ -921,11 +1386,104 @@ def validate_ground_truth(
                 "assumptions": spec.assumptions,
                 "data_quality_notes": spec.data_quality_notes,
                 "duration_seconds": duration,
+                "performance_class": query_performance_class,
                 "created_at": executed_at[:10],
             }
         )
         print(f"[ground_truth] {query_id} {spec.difficulty} rows={len(rows)} seconds={duration}")
     return accepted
+
+
+def validate_ground_truth_v2(
+    con: duckdb.DuckDBPyConnection,
+    columns_by_table: dict[str, list[str]],
+    relationships_by_key: dict[tuple[str, str, str, str], dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    RESULTS_V2_DIR.mkdir(parents=True, exist_ok=True)
+    accepted: list[dict[str, Any]] = []
+    rejected: list[dict[str, Any]] = []
+    audit_rows: list[dict[str, Any]] = []
+    specs = question_specs()
+    executed_at = datetime.now().isoformat(timespec="seconds")
+    for index, original_spec in enumerate(specs, start=1):
+        query_id = f"SIHRD5_Q{index:03d}"
+        spec = v2_question_spec(query_id, original_spec)
+        validate_sql_is_read_only(spec.sql)
+        started = time.time()
+        result = con.execute(spec.sql)
+        columns = [d[0] for d in result.description]
+        rows = rows_to_dicts(columns, result.fetchall())
+        duration = round(time.time() - started, 3)
+        query_performance_class = performance_class(duration)
+        explain_plan = explain_query(con, spec.sql) if duration > SLOW_QUERY_SECONDS else []
+        tables_used, columns_used = extract_tables_and_columns(spec.sql, columns_by_table)
+        item = {
+            "id": query_id,
+            "persona": spec.persona,
+            "question_pt": spec.question_pt,
+            "business_intent": spec.business_intent,
+            "difficulty": spec.difficulty,
+            "difficulty_rationale": spec.difficulty_rationale,
+            "sql": spec.sql,
+            "tables_used": tables_used,
+            "columns_used": columns_used,
+            "expected_result_type": spec.expected_result_type,
+            "execution_status": "passed",
+            "row_count": len(rows),
+            "result_summary": summarize_result(columns, rows),
+            "validation_evidence": str((RESULTS_V2_DIR / f"{query_id}.json").relative_to(ROOT)),
+            "assumptions": spec.assumptions,
+            "data_quality_notes": spec.data_quality_notes,
+            "duration_seconds": duration,
+            "performance_class": query_performance_class,
+            "created_at": executed_at[:10],
+        }
+        audit = analyze_question_semantics(item, spec, relationships_by_key)
+        audit_rows.append(audit)
+        if audit["final_disposition"] in {"accepted", "accepted_with_explicit_scope"}:
+            evidence_payload = {
+                "id": query_id,
+                "question_pt": spec.question_pt,
+                "executed_at": executed_at,
+                "database_file": str(DB_PATH.name),
+                "sql": spec.sql,
+                "duration_seconds": duration,
+                "performance_class": query_performance_class,
+                "explain_sql": f"EXPLAIN {spec.sql}" if explain_plan else None,
+                "explain_plan": explain_plan,
+                "row_count": len(rows),
+                "columns": columns,
+                "preview_rows": rows[:30],
+                "result_hash": result_hash(rows),
+                "semantic_audit": audit,
+                "base_population_sql": None,
+                "base_population_count": None,
+                "result_population_count": len(rows),
+                "dropped_by_join_count": audit["dropped_by_join_count"],
+                "dropped_by_join_rate": audit["dropped_by_join_rate"],
+                "denominator_definition": spec.assumptions,
+            }
+            write_json(RESULTS_V2_DIR / f"{query_id}.json", evidence_payload)
+            item["semantic_disposition"] = audit["final_disposition"]
+            accepted.append(item)
+            print(f"[ground_truth_v2] {query_id} {spec.difficulty} accepted rows={len(rows)} seconds={duration}")
+        else:
+            rejected.append(
+                {
+                    "id": query_id,
+                    "persona": spec.persona,
+                    "question_pt": spec.question_pt,
+                    "business_intent": spec.business_intent,
+                    "difficulty": spec.difficulty,
+                    "sql": spec.sql,
+                    "rejection_reason": audit["final_disposition"],
+                    "semantic_status": audit["business_semantics_status"],
+                    "can_be_fixed": audit["final_disposition"] in {"rejected_join_loss", "rejected_domain_invalid"},
+                }
+            )
+            print(f"[ground_truth_v2] {query_id} {spec.difficulty} rejected reason={audit['final_disposition']}")
+    write_csv(DOCS_DIR / "generated" / "ground_truth_semantic_audit.csv", audit_rows)
+    return accepted, rejected, audit_rows
 
 
 def summarize_result(columns: list[str], rows: list[dict[str, Any]]) -> str:
@@ -948,10 +1506,19 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         writer.writerows(rows)
 
 
+def write_csv_with_fieldnames(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def write_database_overview(
     tables: list[dict[str, Any]],
     top_values: dict[str, list[dict[str, Any]]],
     storage_rows: list[dict[str, Any]],
+    runtime_metadata: dict[str, Any],
     generated_at: str,
 ) -> None:
     write_csv(DOCS_DIR / "generated" / "table_storage_estimates.csv", storage_rows)
@@ -959,6 +1526,9 @@ def write_database_overview(
     audit_tables = [t for t in tables if t["table_schema"] == "main_dbt_test__audit"]
     fact_rows = {t["table_name"]: t["row_count"] for t in main_tables if t["table_name"] in FACT_TABLES}
     largest_tables = sorted(storage_rows, key=lambda row: row["estimated_bytes"], reverse=True)[:10]
+    settings = {row["name"]: row["value"] for row in runtime_metadata.get("settings", [])}
+    version_rows = runtime_metadata.get("pragma_version", [])
+    version_text = version_rows[0]["library_version"] if version_rows else "unknown"
     content = f"""# Database Overview: sihrd5.duckdb
 
 Generated at: {generated_at}
@@ -970,6 +1540,26 @@ Generated at: {generated_at}
 **Observed:** the main fact table `internacoes` has `{fact_rows.get('internacoes'):,}` rows and the bridge/detail table `internacao_procedimento` has `{fact_rows.get('internacao_procedimento'):,}` rows. The database therefore appears to model SIH/SUS hospital admissions (AIH/internacoes), procedures, hospitals, municipalities, clinical diagnoses, and socioeconomic context.
 
 **Observed:** `PRAGMA database_size` reports the database size as `{storage_rows[0]['database_size'] if storage_rows else 'unknown'}`. Main-schema table storage estimates are derived from `PRAGMA storage_info` persistent block ids, so they are approximate and intended for prioritizing exploration rather than billing or physical storage guarantees.
+
+## DuckDB Runtime
+
+**Observed:** DuckDB version `{version_text}` using Python package `{runtime_metadata.get('duckdb_python_version')}`.
+
+| setting | value |
+| --- | --- |
+| access_mode | {settings.get('access_mode')} |
+| threads | {settings.get('threads')} |
+| memory_limit | {settings.get('memory_limit')} |
+| temp_directory | {settings.get('temp_directory')} |
+| max_temp_directory_size | {settings.get('max_temp_directory_size')} |
+
+The generator opens `sihrd5.duckdb` with `read_only=True`. DuckDB is an embedded analytical database; this Stage 1 workflow assumes multiple read-only readers are safe, while writes to the source file are out of scope.
+
+DuckDB source anchors used for DBMS-specific claims:
+
+- Metadata table functions: https://duckdb.org/docs/current/sql/meta/duckdb_table_functions
+- `PRAGMA database_size` and `PRAGMA storage_info`: https://duckdb.org/docs/current/configuration/pragmas
+- Read-only concurrency model: https://duckdb.org/docs/current/connect/concurrency
 
 **Inferred:** one row in `internacoes` most likely represents one hospital admission/AIH-level event. `internacao_procedimento` links admissions to performed procedures and can contain multiple records per admission.
 
@@ -1037,6 +1627,8 @@ def write_schema_catalog(
     write_csv(DOCS_DIR / "generated" / "table_inventory.csv", tables)
     write_csv(DOCS_DIR / "generated" / "column_catalog.csv", columns)
     write_csv(DOCS_DIR / "generated" / "column_profiles.csv", profiles)
+    write_csv(DOCS_DIR / "generated" / "column_profiles_exact.csv", [p for p in profiles if p["profile_mode"] == "exact"])
+    write_csv(DOCS_DIR / "generated" / "column_profiles_approx.csv", [p for p in profiles if p["profile_mode"] == "approx"])
     write_csv(DOCS_DIR / "generated" / "top_frequent_values.csv", top_frequencies)
 
     content = [f"# Schema Catalog\n\nGenerated at: {generated_at}\n"]
@@ -1055,7 +1647,11 @@ def write_schema_catalog(
                 "column_name": p["column_name"],
                 "data_type": p["data_type"],
                 "null_rate": p["null_rate"],
-                "approx_distinct": p["approx_distinct"],
+                "profile_mode": p["profile_mode"],
+                "exact_distinct_count": p["exact_distinct_count"],
+                "approx_distinct_count": p["approx_distinct_count"],
+                "distinct_count_for_catalog": p["distinct_count_for_catalog"],
+                "distinct_is_exact": p["distinct_is_exact"],
                 "min_value": p["min_value"],
                 "max_value": p["max_value"],
             }
@@ -1098,24 +1694,89 @@ def write_business_dictionary(tables: list[dict[str, Any]], generated_at: str) -
     }
 
     metric_notes = [
-        ("N_AIH", "Identificador da AIH/internacao. Deve ser tratado como chave candidata somente apos validar unicidade."),
-        ("CNES", "Codigo nacional do estabelecimento de saude; liga `internacoes` a `hospital`."),
-        ("DT_INTER", "Data de entrada/internacao."),
-        ("DT_SAIDA", "Data de saida/alta."),
-        ("DIAS_PERM", "Dias de permanencia. A relacao com `DT_SAIDA - DT_INTER` precisa de caveat porque pode seguir regra inclusiva ou ter divergencias."),
-        ("VAL_SH", "Valor de servicos hospitalares."),
-        ("VAL_SP", "Valor de servicos profissionais."),
-        ("VAL_UTI", "Valor associado a UTI."),
-        ("VAL_TOT", "Valor total registrado. Nao assumir soma direta de VAL_SH + VAL_SP + VAL_UTI sem verificar."),
-        ("MORTE", "Marcador booleano de morte/desfecho obito."),
-        ("MUNIC_RES", "Municipio de residencia do usuario."),
-        ("PROC_REA", "Procedimento realizado."),
-        ("DIAG_PRINC", "Diagnostico principal CID."),
+        {
+            "field": "N_AIH",
+            "evidence_status": "Observed + Inferred",
+            "business_meaning": "Identificador da AIH/internacao. A unicidade e observada por PRIMARY KEY e candidate-key checks; o significado AIH/internacao ainda depende de dicionario oficial para ficar externamente verificado.",
+            "evidence_basis": "duckdb_constraints(), candidate_keys.csv, nomes de colunas/tabelas",
+        },
+        {
+            "field": "CNES",
+            "evidence_status": "Inferred",
+            "business_meaning": "Codigo nacional do estabelecimento de saude; liga `internacoes` a `hospital` com cobertura observada, mas a definicao oficial do campo ainda precisa ser citada.",
+            "evidence_basis": "relationship_coverage.csv, nomes de colunas/tabelas",
+        },
+        {
+            "field": "DT_INTER",
+            "evidence_status": "Inferred",
+            "business_meaning": "Data de entrada/internacao.",
+            "evidence_basis": "nome da coluna, perfil temporal e uso nos SQLs validados",
+        },
+        {
+            "field": "DT_SAIDA",
+            "evidence_status": "Inferred",
+            "business_meaning": "Data de saida/alta.",
+            "evidence_basis": "nome da coluna, checks DQ001-DQ004",
+        },
+        {
+            "field": "DIAS_PERM",
+            "evidence_status": "Observed + Inferred",
+            "business_meaning": "Dias de permanencia. A relacao com `DT_SAIDA - DT_INTER` precisa de caveat porque DQ004 mostra divergencia massiva em relacao a diferenca simples de datas.",
+            "evidence_basis": "DQ004, perfil de coluna",
+        },
+        {
+            "field": "VAL_SH",
+            "evidence_status": "Inferred",
+            "business_meaning": "Valor de servicos hospitalares.",
+            "evidence_basis": "nome da coluna e checks financeiros",
+        },
+        {
+            "field": "VAL_SP",
+            "evidence_status": "Inferred",
+            "business_meaning": "Valor de servicos profissionais.",
+            "evidence_basis": "nome da coluna e checks financeiros",
+        },
+        {
+            "field": "VAL_UTI",
+            "evidence_status": "Inferred",
+            "business_meaning": "Valor associado a UTI.",
+            "evidence_basis": "nome da coluna e checks financeiros",
+        },
+        {
+            "field": "VAL_TOT",
+            "evidence_status": "Observed + Inferred",
+            "business_meaning": "Valor total registrado. Nao assumir soma direta de VAL_SH + VAL_SP + VAL_UTI sem verificar; DQ015 apenas confirma que nao ha casos em que VAL_TOT seja menor que a soma dos componentes testados.",
+            "evidence_basis": "DQ015, nome da coluna",
+        },
+        {
+            "field": "MORTE",
+            "evidence_status": "Inferred",
+            "business_meaning": "Marcador booleano de morte/desfecho obito. Perguntas de mortalidade ainda precisam explicitar denominador e data de referencia.",
+            "evidence_basis": "tipo booleano, nomes de colunas e checks relacionados a CID_MORTE",
+        },
+        {
+            "field": "MUNIC_RES",
+            "evidence_status": "Observed + Inferred",
+            "business_meaning": "Municipio de residencia do usuario. A cobertura contra `municipios` e incompleta; perguntas territoriais devem declarar se usam apenas municipios mapeados ou preservar bucket sem correspondencia.",
+            "evidence_basis": "relationship_coverage.csv, DQ010, join_policy.csv",
+        },
+        {
+            "field": "PROC_REA",
+            "evidence_status": "Observed + Inferred",
+            "business_meaning": "Procedimento realizado. Pode aparecer no fato principal e na tabela de detalhe; joins com `internacao_procedimento` podem multiplicar internacoes.",
+            "evidence_basis": "relationship_coverage.csv, nomes de tabelas/colunas",
+        },
+        {
+            "field": "DIAG_PRINC",
+            "evidence_status": "Observed + Inferred",
+            "business_meaning": "Diagnostico principal CID. A cobertura contra `cid` e quase completa, mas DQ011 registra diagnosticos sem correspondencia.",
+            "evidence_basis": "relationship_coverage.csv, DQ011",
+        },
     ]
 
     content = [f"# Business Dictionary\n\nGenerated at: {generated_at}\n"]
     content.append("## Reading Rules\n")
-    content.append("- **Observed:** supported by executed SQL and schema inspection.\n- **Inferred:** likely from names/descriptions, not externally verified in this run.\n- **Unknown:** do not rely on without more evidence.\n")
+    content.append("- **Observed:** supported by executed SQL and schema inspection.\n- **Inferred:** likely from names/descriptions, not externally verified in this run.\n- **Externally verified:** confirmed by an official external source. No SIH/DATASUS field definition was promoted to this status in this run because no official field dictionary was cited in the generated artifacts.\n- **Unknown:** do not rely on without more evidence.\n")
     content.append("## Table Meanings\n")
     for table in [t["table_name"] for t in tables if t["table_schema"] == "main"]:
         note = table_notes.get(table, "Tabela presente no schema main; significado detalhado ainda depende de exploracao adicional.")
@@ -1124,7 +1785,19 @@ def write_business_dictionary(tables: list[dict[str, Any]], generated_at: str) -
             note += " A duplicidade de descricao citada e observada por SQL no data quality report."
         content.append(f"### {table}\n\n**{label}:** {note}\n")
     content.append("## Key Business Fields\n")
-    content.append(markdown_table([{"field": f, "business_meaning": m} for f, m in metric_notes]))
+    content.append(markdown_table(metric_notes))
+    content.append(
+        """
+## External Dictionaries Still Needed Before Stage 2 Promotion
+
+- Official SIH/SUS AIH layout and field dictionary for `internacoes` and `stg_internacoes`.
+- Official SIGTAP/procedure dictionary validation for `PROC_REA` and `procedimentos`.
+- Official CID version/source confirmation for `cid` and all diagnosis columns.
+- Official CNES dictionary/source confirmation for `hospital` and establishment fields.
+- Official IBGE/DATASUS municipality code source for `municipios`, including the invalid `SG_UF` values found in DQ016.
+- Official definitions for demographic/social fields such as `RACA_COR`, `ETNIA`, `INSTRU`, `VINCPREV`, `CBOR`, `NACIONAL`, and `CONTRACEP*`.
+"""
+    )
     content.append(
         """
 ## Important Business Caveats
@@ -1140,7 +1813,13 @@ def write_business_dictionary(tables: list[dict[str, Any]], generated_at: str) -
 
 
 def write_relationship_map(
-    relationships: list[dict[str, Any]], candidate_keys: list[dict[str, Any]], generated_at: str
+    relationships: list[dict[str, Any]],
+    candidate_keys: list[dict[str, Any]],
+    physical_constraints: list[dict[str, Any]],
+    secondary_indexes: list[dict[str, Any]],
+    table_metadata: list[dict[str, Any]],
+    join_policy: list[dict[str, Any]],
+    generated_at: str,
 ) -> None:
     write_csv(DOCS_DIR / "generated" / "relationship_coverage.csv", relationships)
     write_csv(DOCS_DIR / "generated" / "candidate_keys.csv", candidate_keys)
@@ -1154,6 +1833,7 @@ def write_relationship_map(
             "unmatched_rows": r["unmatched_rows"],
             "match_rate_non_null": r["match_rate_non_null"],
             "confidence": r["confidence"],
+            "accepted_usage_policy": r["accepted_usage_policy"],
         }
         for r in relationships
     ]
@@ -1173,6 +1853,32 @@ def write_relationship_map(
 
 Generated at: {generated_at}
 
+## Physical DuckDB Metadata
+
+`duckdb_constraints()` reports physical constraints. `duckdb_indexes()` reports secondary indexes only; primary-key and unique-constraint backing indexes are represented through constraints, not as secondary indexes.
+
+DuckDB source anchors:
+
+- Metadata functions (`duckdb_constraints`, `duckdb_indexes`, `duckdb_tables`): https://duckdb.org/docs/current/sql/meta/duckdb_table_functions
+- Constraint semantics and automatic ART indexes for keys: https://duckdb.org/docs/current/sql/constraints
+- ART index performance caveats: https://duckdb.org/docs/current/guides/performance/indexing
+
+### Physical Constraints Summary
+
+{markdown_table([{'constraint_type': row['constraint_type'], 'count': sum(1 for item in physical_constraints if item['constraint_type'] == row['constraint_type'])} for row in sorted({item['constraint_type']: item for item in physical_constraints}.values(), key=lambda item: item['constraint_type'])])}
+
+### Physical Constraints
+
+{markdown_table(physical_constraints)}
+
+### Secondary Indexes
+
+{markdown_table(secondary_indexes)}
+
+### DuckDB Table Metadata
+
+{markdown_table(table_metadata)}
+
 ## Candidate Keys
 
 Candidate-key confidence is **observed** from null checks and exact distinct-key counts. A key is `confirmed` only when it has zero null-key rows and zero duplicate-key rows.
@@ -1187,6 +1893,17 @@ Relationship confidence is based on non-null match coverage:
 - `rejected`: < 80% or unavailable
 
 {markdown_table(rows)}
+
+## Join Policy
+
+Accepted usage policy:
+
+- `business_inner_join_allowed`: safe for ordinary business questions.
+- `left_join_or_explicit_mapped_scope_required`: use `LEFT JOIN` with an unmatched bucket or make the question explicitly scoped to mapped records.
+- `audit_only_unless_externally_validated`: do not use for business labels unless an external dictionary/source validates the relationship.
+- `audit_only`: use only for data-quality/audit questions.
+
+{markdown_table(join_policy)}
 
 ## SQL Evidence
 
@@ -1271,10 +1988,33 @@ For each accepted item, the validator writes one JSON evidence file with:
 - executed SQL;
 - execution timestamp;
 - duration;
+- performance class;
+- `EXPLAIN` output for queries slower than 5 seconds;
 - row count;
 - result columns;
 - preview rows;
 - SHA-256 hash of the full returned result.
+- semantic audit fields for v2, including relationship risk, dropped-row count, and final disposition.
+
+## V2 Semantic Acceptance Gate
+
+V2 accepts a query only when it executes and the SQL semantics match the Portuguese question.
+
+- Relationships with `confirmed` confidence can use inner joins for business questions.
+- Relationships with `likely` confidence must use `LEFT JOIN` plus an unmatched bucket, or the question must explicitly say it is restricted to mapped records.
+- Relationships with `weak` confidence are allowed only for audit questions unless externally validated.
+- Relationships with `rejected` confidence are allowed only for audit/data-quality questions, except when the SQL explicitly preserves unmapped codes and the wording says labels are shown only when mapped.
+- Questions about UFs must filter to the 27 valid Brazilian UF codes or explicitly discuss invalid `SG_UF` codes.
+- Rate questions must make denominator scope clear.
+
+## Performance Policy
+
+- `fast`: <= 1 second.
+- `moderate`: > 1 and <= 5 seconds.
+- `slow`: > 5 and <= 15 seconds.
+- `too_slow_for_default_eval`: > 15 seconds.
+
+Slow queries should be inspected with `EXPLAIN`. Use `EXPLAIN ANALYZE` selectively because it executes the query.
 
 ## Rejection Rules
 
@@ -1306,6 +2046,7 @@ def write_ground_truth_docs(items: list[dict[str, Any]]) -> None:
 - Evidence: `{item['validation_evidence']}`
 - Rows returned: `{item['row_count']}`
 - Duration seconds: `{item['duration_seconds']}`
+- Performance class: `{item['performance_class']}`
 
 ```sql
 {item['sql']}
@@ -1328,6 +2069,47 @@ Future rejected questions should be recorded here with:
     write_text(GT_DIR / "rejected_questions.md", rejected)
 
 
+def write_ground_truth_docs_v2(items: list[dict[str, Any]], rejected_items: list[dict[str, Any]]) -> None:
+    with (GT_DIR / "stage1_questions_v2.jsonl").open("w", encoding="utf-8") as handle:
+        for item in items:
+            handle.write(json.dumps(item, ensure_ascii=False) + "\n")
+
+    by_diff: dict[str, int] = {}
+    for item in items:
+        by_diff[item["difficulty"]] = by_diff.get(item["difficulty"], 0) + 1
+
+    content = "# Stage 1 Ground Truth Questions V2\n\n"
+    content += f"Accepted validated questions: `{len(items)}`\n\n"
+    content += "## Difficulty Distribution\n\n"
+    content += markdown_table([{"difficulty": k, "count": by_diff[k]} for k in sorted(by_diff)])
+    content += "\n\n## Questions\n\n"
+    for item in items:
+        content += f"""### {item['id']} ({item['difficulty']})
+
+- Persona: {item['persona']}
+- Question: {item['question_pt']}
+- Intent: {item['business_intent']}
+- Semantic disposition: `{item['semantic_disposition']}`
+- Evidence: `{item['validation_evidence']}`
+- Rows returned: `{item['row_count']}`
+- Duration seconds: `{item['duration_seconds']}`
+- Performance class: `{item['performance_class']}`
+
+```sql
+{item['sql']}
+```
+
+"""
+    write_text(GT_DIR / "stage1_questions_v2.md", content)
+
+    rejected = "# Rejected Or Pending Questions V2\n\n"
+    if not rejected_items:
+        rejected += "No candidate questions were rejected by the v2 semantic validation run.\n"
+    else:
+        rejected += markdown_table(rejected_items)
+    write_text(GT_DIR / "rejected_questions_v2.md", rejected)
+
+
 def write_stage2_readiness(items: list[dict[str, Any]], checks: list[dict[str, Any]], generated_at: str) -> None:
     critical = [c for c in checks if c["affected_rows"] and c["severity"] in {"critical", "high"}]
     content = f"""# Stage 2 Readiness Notes
@@ -1347,6 +2129,9 @@ Generated at: {generated_at}
 - The chatbot must cite whether a metric is based on `VAL_TOT` or component fields.
 - The chatbot must use CID/procedure/hospital/municipality dimensions for human-readable answers.
 - The chatbot should refuse or ask a clarification when the user asks for undefined terms such as "custo", "produção", "mortalidade" or "local" without specifying denominator/date/geography.
+- The chatbot must disclose when a result is restricted to mapped municipalities because `MUNIC_RES` has known orphan rows.
+- The chatbot must not count invalid numeric `SG_UF` values as Brazilian UFs.
+- The chatbot must not use rejected relationships such as `RACA_COR`, `ETNIA`, `INSTRU`, `VINCPREV`, `CBOR`, `DIAG_SECUN`, or `CID_MORTE` as descriptive dimensions without an audit framing or explicit unmapped bucket.
 
 ## Known Data Quality Caveats
 
@@ -1361,6 +2146,14 @@ Generated at: {generated_at}
 - Caveat/citation quality.
 - Latency.
 - Refusal or clarification accuracy for ambiguous questions.
+
+## Unsafe Or Ambiguous User Intents
+
+- "custo" without specifying `VAL_TOT`, `VAL_SH`, `VAL_SP`, `VAL_UTI`, or another derived definition.
+- "local" without specifying residence municipality/UF or hospital municipality/UF.
+- "mortalidade" without denominator and date field.
+- "procedimento principal" without deciding between `internacao_procedimento` occurrences and hospitalization-level facts.
+- Race/color, ethnicity, instruction, CBO-R, and secondary diagnosis descriptions where relationship coverage is weak or rejected.
 """
     write_text(DOCS_DIR / "stage2_readiness.md", content)
 
@@ -1371,10 +2164,17 @@ def main() -> None:
     DOCS_DIR.mkdir(exist_ok=True)
     GT_DIR.mkdir(parents=True, exist_ok=True)
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    RESULTS_V2_DIR.mkdir(parents=True, exist_ok=True)
 
     generated_at = datetime.now().isoformat(timespec="seconds")
     con = duckdb.connect(str(DB_PATH), read_only=True)
     con.execute("PRAGMA threads=4")
+
+    print("[stage1] capturing duckdb runtime metadata")
+    runtime_metadata = duckdb_runtime_metadata(con, generated_at)
+
+    print("[stage1] capturing duckdb physical metadata")
+    physical_constraints, secondary_indexes, table_metadata = duckdb_physical_metadata(con)
 
     print("[stage1] loading catalog")
     tables, columns = get_catalog(con)
@@ -1395,8 +2195,13 @@ def main() -> None:
     print("[stage1] calculating categorical top values")
     top_frequencies = top_frequent_values(con)
 
+    print("[stage1] checking UF code quality")
+    uf_code_quality(con)
+
     print("[stage1] mapping relationships")
     relationships = relationship_coverage(con)
+    join_policy = build_join_policy(relationships)
+    relationships_by_key = relationship_lookup(relationships)
 
     print("[stage1] checking candidate keys")
     candidate_keys = candidate_key_checks(con)
@@ -1407,19 +2212,34 @@ def main() -> None:
     print("[stage1] validating ground-truth questions")
     items = validate_ground_truth(con, columns_by_table)
 
+    print("[stage1] validating v2 ground-truth questions")
+    items_v2, rejected_v2, audit_v2 = validate_ground_truth_v2(con, columns_by_table, relationships_by_key)
+
     print("[stage1] writing documentation")
-    write_database_overview(tables, top_values, storage_rows, generated_at)
+    write_database_overview(tables, top_values, storage_rows, runtime_metadata, generated_at)
     write_schema_catalog(tables, columns, profiles, top_frequencies, generated_at)
     write_business_dictionary(tables, generated_at)
-    write_relationship_map(relationships, candidate_keys, generated_at)
+    write_relationship_map(
+        relationships,
+        candidate_keys,
+        physical_constraints,
+        secondary_indexes,
+        table_metadata,
+        join_policy,
+        generated_at,
+    )
     write_data_quality_report(checks, generated_at)
     write_query_methodology(generated_at)
     write_ground_truth_docs(items)
-    write_stage2_readiness(items, checks, generated_at)
+    write_ground_truth_docs_v2(items_v2, rejected_v2)
+    write_stage2_readiness(items_v2, checks, generated_at)
 
     distribution: dict[str, int] = {}
     for item in items:
         distribution[item["difficulty"]] = distribution.get(item["difficulty"], 0) + 1
+    distribution_v2: dict[str, int] = {}
+    for item in items_v2:
+        distribution_v2[item["difficulty"]] = distribution_v2.get(item["difficulty"], 0) + 1
     write_json(
         MANIFEST_PATH,
         {
@@ -1429,7 +2249,10 @@ def main() -> None:
             "main_table_count": len([t for t in tables if t["table_schema"] == "main"]),
             "audit_table_count": len([t for t in tables if t["table_schema"] == "main_dbt_test__audit"]),
             "ground_truth_count": len(items),
+            "ground_truth_v2_count": len(items_v2),
             "difficulty_distribution": distribution,
+            "difficulty_distribution_v2": distribution_v2,
+            "rejected_v2_count": len(rejected_v2),
             "docs": [
                 "docs/database_overview.md",
                 "docs/schema_catalog.md",
@@ -1444,20 +2267,34 @@ def main() -> None:
                 "evaluation/ground_truth/stage1_questions.md",
                 "evaluation/ground_truth/rejected_questions.md",
                 "evaluation/ground_truth/query_results/",
+                "evaluation/ground_truth/stage1_questions_v2.jsonl",
+                "evaluation/ground_truth/stage1_questions_v2.md",
+                "evaluation/ground_truth/rejected_questions_v2.md",
+                "evaluation/ground_truth/query_results_v2/",
             ],
             "generated_artifacts": [
+                "docs/generated/duckdb_runtime_metadata.json",
+                "docs/generated/physical_constraints.csv",
+                "docs/generated/secondary_indexes.csv",
+                "docs/generated/table_metadata.csv",
                 "docs/generated/table_inventory.csv",
                 "docs/generated/table_storage_estimates.csv",
                 "docs/generated/column_catalog.csv",
                 "docs/generated/column_profiles.csv",
+                "docs/generated/column_profiles_exact.csv",
+                "docs/generated/column_profiles_approx.csv",
                 "docs/generated/top_frequent_values.csv",
                 "docs/generated/candidate_keys.csv",
                 "docs/generated/relationship_coverage.csv",
+                "docs/generated/join_policy.csv",
+                "docs/generated/uf_code_quality.csv",
+                "docs/generated/ground_truth_semantic_audit.csv",
                 "docs/generated/data_quality_checks.json",
             ],
         },
     )
     print(f"[stage1] complete questions={len(items)} distribution={distribution}")
+    print(f"[stage1] complete_v2 questions={len(items_v2)} rejected={len(rejected_v2)} distribution={distribution_v2}")
 
 
 if __name__ == "__main__":

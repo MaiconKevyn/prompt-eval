@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q088",
   "question_pt": "Existem valores financeiros negativos nos campos de valor?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT COUNT(*) AS registros_com_valor_negativo FROM internacoes WHERE VAL_SH < 0 OR VAL_SP < 0 OR VAL_UTI < 0 OR VAL_TOT < 0",
   "duration_seconds": 0.001,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 1,
   "columns": [
     "registros_com_valor_negativo"

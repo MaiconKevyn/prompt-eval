@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q090",
   "question_pt": "Quantos CNES das internacoes nao existem no cadastro hospitalar?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT COUNT(*) AS internacoes_cnes_orfao FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES WHERE i.CNES IS NOT NULL AND h.CNES IS NULL",
-  "duration_seconds": 0.518,
+  "duration_seconds": 0.537,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 1,
   "columns": [
     "internacoes_cnes_orfao"

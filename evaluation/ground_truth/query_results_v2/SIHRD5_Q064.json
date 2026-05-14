@@ -1,0 +1,141 @@
+{
+  "id": "SIHRD5_Q064",
+  "question_pt": "Qual e a populacao e o total de internacoes por UF e ano quando ha denominador socioeconomico?",
+  "executed_at": "2026-05-14T03:39:29.048576+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT m.SG_UF, se.NU_ANO AS ano, SUM(se.QT_POPULACAO) AS populacao, COUNT(i.N_AIH) AS internacoes FROM socioeconomico se JOIN municipios m ON se.CO_MUNICIPIO_6D = m.CO_MUNICIPIO_6D LEFT JOIN internacoes i ON i.MUNIC_RES = se.CO_MUNICIPIO_6D AND year(i.DT_INTER) = se.NU_ANO GROUP BY 1, 2 ORDER BY 1, 2",
+  "duration_seconds": 1.881433,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 351,
+  "columns": [
+    "SG_UF",
+    "ano",
+    "populacao",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "AC",
+      "ano": 2008,
+      "populacao": 7813945964,
+      "internacoes": 48259
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2009,
+      "populacao": 8105862930,
+      "internacoes": 50408
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2011,
+      "populacao": 9419467182,
+      "internacoes": 51384
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2012,
+      "populacao": 9344819077,
+      "internacoes": 51624
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2013,
+      "populacao": 9083855533,
+      "internacoes": 50644
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2014,
+      "populacao": 9065783209,
+      "internacoes": 51139
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2015,
+      "populacao": 9388349731,
+      "internacoes": 47381
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2016,
+      "populacao": 9233616919,
+      "internacoes": 45737
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2017,
+      "populacao": 9058454144,
+      "internacoes": 44632
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2018,
+      "populacao": 9249049805,
+      "internacoes": 44484
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2019,
+      "populacao": 9312801141,
+      "internacoes": 43837
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2020,
+      "populacao": 8944868169,
+      "internacoes": 41070
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2021,
+      "populacao": 9821528885,
+      "internacoes": 47545
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2008,
+      "populacao": 50998185843,
+      "internacoes": 183364
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2009,
+      "populacao": 51268842814,
+      "internacoes": 181431
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2011,
+      "populacao": 56507895887,
+      "internacoes": 180939
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2012,
+      "populacao": 51422148999,
+      "internacoes": 167352
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2013,
+      "populacao": 56769682190,
+      "internacoes": 169429
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2014,
+      "populacao": 53815495955,
+      "internacoes": 163201
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2015,
+      "populacao": 56201646580,
+      "internacoes": 165894
+    }
+  ],
+  "result_hash": "c290312b061eb33bc083ea369ddc64f9f25595d96549c22bc074551438ede598",
+  "semantic_disposition": "accepted"
+}

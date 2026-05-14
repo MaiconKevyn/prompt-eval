@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q022",
   "question_pt": "Quais codigos de diagnostico principal foram mais frequentes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT DIAG_PRINC, COUNT(*) AS internacoes FROM internacoes WHERE DIAG_PRINC IS NOT NULL GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
-  "duration_seconds": 0.262,
+  "duration_seconds": 0.269,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "DIAG_PRINC",

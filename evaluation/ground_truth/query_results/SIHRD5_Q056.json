@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q056",
   "question_pt": "Qual e a media de permanencia por UF de residencia?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT m.SG_UF, ROUND((SUM(CAST(i.DIAS_PERM AS DECIMAL(20,2)))::DOUBLE / COUNT(i.DIAS_PERM)), 2) AS media_dias_permanencia, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY media_dias_permanencia DESC, SG_UF",
-  "duration_seconds": 0.621,
+  "duration_seconds": 0.629,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 27,
   "columns": [
     "SG_UF",

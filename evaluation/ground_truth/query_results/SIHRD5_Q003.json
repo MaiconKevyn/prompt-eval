@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q003",
   "question_pt": "Qual e o periodo minimo e maximo de entrada e saida das internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT MIN(DT_INTER) AS primeira_internacao, MAX(DT_INTER) AS ultima_internacao, MIN(DT_SAIDA) AS primeira_saida, MAX(DT_SAIDA) AS ultima_saida FROM internacoes",
-  "duration_seconds": 0.094,
+  "duration_seconds": 0.091,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 1,
   "columns": [
     "primeira_internacao",

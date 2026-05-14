@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q096",
+  "question_pt": "Quantas internacoes tem data de entrada fora da dimensao tempo?",
+  "executed_at": "2026-05-14T03:40:20.479534+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS dt_inter_sem_tempo FROM internacoes i LEFT JOIN tempo t ON i.DT_INTER = t.data WHERE i.DT_INTER IS NOT NULL AND t.data IS NULL",
+  "duration_seconds": 0.549246,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "dt_inter_sem_tempo"
+  ],
+  "preview_rows": [
+    {
+      "dt_inter_sem_tempo": 602974
+    }
+  ],
+  "result_hash": "d1fd45321359faeeae259342bca3ab5ae8ef7062f934b98b369d8b618386ff58",
+  "semantic_disposition": "accepted"
+}

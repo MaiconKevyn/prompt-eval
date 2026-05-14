@@ -1,0 +1,99 @@
+{
+  "id": "SIHRD5_Q032",
+  "question_pt": "Quantas internacoes com gestacao de risco foram registradas por ano?",
+  "executed_at": "2026-05-14T03:38:45.517285+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, COUNT(*) FILTER (WHERE GESTRISCO) AS gestacao_risco FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 0.314736,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "gestacao_risco"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "gestacao_risco": 9
+    },
+    {
+      "ano": 2001,
+      "gestacao_risco": 2
+    },
+    {
+      "ano": 2002,
+      "gestacao_risco": 2
+    },
+    {
+      "ano": 2003,
+      "gestacao_risco": 1
+    },
+    {
+      "ano": 2005,
+      "gestacao_risco": 6
+    },
+    {
+      "ano": 2006,
+      "gestacao_risco": 7
+    },
+    {
+      "ano": 2007,
+      "gestacao_risco": 337838
+    },
+    {
+      "ano": 2008,
+      "gestacao_risco": 10544731
+    },
+    {
+      "ano": 2009,
+      "gestacao_risco": 11102039
+    },
+    {
+      "ano": 2010,
+      "gestacao_risco": 11334929
+    },
+    {
+      "ano": 2011,
+      "gestacao_risco": 11254134
+    },
+    {
+      "ano": 2012,
+      "gestacao_risco": 11090541
+    },
+    {
+      "ano": 2013,
+      "gestacao_risco": 11168422
+    },
+    {
+      "ano": 2014,
+      "gestacao_risco": 11342148
+    },
+    {
+      "ano": 2015,
+      "gestacao_risco": 11313960
+    },
+    {
+      "ano": 2016,
+      "gestacao_risco": 11245910
+    },
+    {
+      "ano": 2017,
+      "gestacao_risco": 11511686
+    },
+    {
+      "ano": 2018,
+      "gestacao_risco": 11845554
+    },
+    {
+      "ano": 2019,
+      "gestacao_risco": 12171727
+    },
+    {
+      "ano": 2020,
+      "gestacao_risco": 10518636
+    }
+  ],
+  "result_hash": "76757c456108e95cff8a1e57df5299174445790b8c5efeaeb727db9e66366a3c",
+  "semantic_disposition": "accepted"
+}

@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q067",
   "question_pt": "Qual foi a variacao ano contra ano do valor total?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH anual AS (SELECT year(DT_INTER) AS ano, SUM(CAST(VAL_TOT AS DECIMAL(20,2))) AS valor_total FROM internacoes GROUP BY 1) SELECT ano, ROUND(valor_total, 2) AS valor_total, ROUND(valor_total - LAG(valor_total) OVER (ORDER BY ano), 2) AS diff_abs, ROUND(100.0 * (valor_total - LAG(valor_total) OVER (ORDER BY ano)) / NULLIF(LAG(valor_total) OVER (ORDER BY ano), 0), 4) AS diff_pct FROM anual ORDER BY ano",
-  "duration_seconds": 1.037,
+  "duration_seconds": 1.049,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 23,
   "columns": [
     "ano",

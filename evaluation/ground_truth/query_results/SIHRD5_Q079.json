@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q079",
   "question_pt": "Qual hospital teve maior volume em cada UF do estabelecimento?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH hosp_uf AS (SELECT mh.SG_UF, i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes, ROW_NUMBER() OVER (PARTITION BY mh.SG_UF ORDER BY COUNT(*) DESC) AS rn FROM internacoes i JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1, 2, 3) SELECT SG_UF, CNES, NO_HOSPITAL, internacoes FROM hosp_uf WHERE rn = 1 ORDER BY SG_UF",
-  "duration_seconds": 1.873,
+  "duration_seconds": 1.781,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 27,
   "columns": [
     "SG_UF",

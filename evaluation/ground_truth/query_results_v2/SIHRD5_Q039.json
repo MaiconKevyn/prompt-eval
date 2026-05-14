@@ -1,0 +1,99 @@
+{
+  "id": "SIHRD5_Q039",
+  "question_pt": "Quantos municipios existem por UF brasileira valida no cadastro territorial?",
+  "executed_at": "2026-05-14T03:38:46.941061+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH valid_uf(sg_uf) AS (VALUES ('AC'), ('AL'), ('AP'), ('AM'), ('BA'), ('CE'), ('DF'), ('ES'), ('GO'), ('MA'), ('MT'), ('MS'), ('MG'), ('PA'), ('PB'), ('PR'), ('PE'), ('PI'), ('RJ'), ('RN'), ('RS'), ('RO'), ('RR'), ('SC'), ('SP'), ('SE'), ('TO')) SELECT m.SG_UF, COUNT(*) AS municipios FROM municipios m JOIN valid_uf v ON m.SG_UF = v.sg_uf GROUP BY 1 ORDER BY municipios DESC, SG_UF",
+  "duration_seconds": 0.001732,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 27,
+  "columns": [
+    "SG_UF",
+    "municipios"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "MG",
+      "municipios": 853
+    },
+    {
+      "SG_UF": "SP",
+      "municipios": 645
+    },
+    {
+      "SG_UF": "RS",
+      "municipios": 497
+    },
+    {
+      "SG_UF": "BA",
+      "municipios": 417
+    },
+    {
+      "SG_UF": "PR",
+      "municipios": 399
+    },
+    {
+      "SG_UF": "SC",
+      "municipios": 295
+    },
+    {
+      "SG_UF": "GO",
+      "municipios": 246
+    },
+    {
+      "SG_UF": "PI",
+      "municipios": 224
+    },
+    {
+      "SG_UF": "PB",
+      "municipios": 223
+    },
+    {
+      "SG_UF": "MA",
+      "municipios": 217
+    },
+    {
+      "SG_UF": "PE",
+      "municipios": 185
+    },
+    {
+      "SG_UF": "CE",
+      "municipios": 184
+    },
+    {
+      "SG_UF": "RN",
+      "municipios": 167
+    },
+    {
+      "SG_UF": "PA",
+      "municipios": 144
+    },
+    {
+      "SG_UF": "MT",
+      "municipios": 142
+    },
+    {
+      "SG_UF": "TO",
+      "municipios": 139
+    },
+    {
+      "SG_UF": "AL",
+      "municipios": 102
+    },
+    {
+      "SG_UF": "RJ",
+      "municipios": 92
+    },
+    {
+      "SG_UF": "MS",
+      "municipios": 79
+    },
+    {
+      "SG_UF": "ES",
+      "municipios": 78
+    }
+  ],
+  "result_hash": "2b52d455fe513c0ec4d69eb2db21d58445b0f4e06eb577f493ff81b56c486d32",
+  "semantic_disposition": "accepted"
+}

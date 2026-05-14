@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q075",
   "question_pt": "Qual foi a taxa de internacoes por 1.000 habitantes por UF e ano?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH internacoes_uf AS (SELECT m.SG_UF, year(i.DT_INTER) AS ano, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2), pop_uf AS (SELECT m.SG_UF, se.NU_ANO AS ano, SUM(se.QT_POPULACAO) AS populacao FROM socioeconomico se JOIN municipios m ON se.CO_MUNICIPIO_6D = m.CO_MUNICIPIO_6D GROUP BY 1, 2) SELECT p.SG_UF, p.ano, p.populacao, COALESCE(i.internacoes, 0) AS internacoes, ROUND(1000.0 * COALESCE(i.internacoes, 0) / NULLIF(p.populacao, 0), 4) AS internacoes_por_1000 FROM pop_uf p LEFT JOIN internacoes_uf i ON p.SG_UF = i.SG_UF AND p.ano = i.ano ORDER BY p.SG_UF, p.ano",
-  "duration_seconds": 0.914,
+  "duration_seconds": 0.957,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 351,
   "columns": [
     "SG_UF",

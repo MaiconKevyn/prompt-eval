@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q060",
   "question_pt": "Quais hospitais tiveram maior valor total registrado?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT i.CNES, h.NO_HOSPITAL, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total, COUNT(*) AS internacoes FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES GROUP BY 1, 2 ORDER BY valor_total DESC LIMIT 20",
-  "duration_seconds": 2.952,
+  "duration_seconds": 3.095,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "CNES",

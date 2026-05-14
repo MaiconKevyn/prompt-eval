@@ -1,0 +1,141 @@
+{
+  "id": "SIHRD5_Q074",
+  "question_pt": "Quais foram os percentis de permanencia por ano segundo o campo DIAS_PERM?",
+  "executed_at": "2026-05-14T03:39:51.763759+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, quantile_cont(DIAS_PERM, 0.5) AS p50_dias, quantile_cont(DIAS_PERM, 0.9) AS p90_dias, quantile_cont(DIAS_PERM, 0.99) AS p99_dias FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 2.917305,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "p50_dias",
+    "p90_dias",
+    "p99_dias"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2001,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2002,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2003,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2005,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2006,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2007,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2008,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2009,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2010,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2011,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2012,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2013,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2014,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2015,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2016,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2017,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2018,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2019,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    },
+    {
+      "ano": 2020,
+      "p50_dias": 0.0,
+      "p90_dias": 0.0,
+      "p99_dias": 0.0
+    }
+  ],
+  "result_hash": "91ef70db5f1aeed89da8a514624ce3f72154b4c8f861d8c091730b5c57ad6a2e",
+  "semantic_disposition": "valid_with_caveats"
+}

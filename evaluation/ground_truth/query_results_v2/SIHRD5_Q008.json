@@ -1,0 +1,25 @@
+{
+  "id": "SIHRD5_Q008",
+  "question_pt": "Qual e o intervalo de anos dos indicadores socioeconomicos?",
+  "executed_at": "2026-05-14T03:38:33.221761+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT MIN(NU_ANO) AS primeiro_ano, MAX(NU_ANO) AS ultimo_ano, COUNT(*) AS registros FROM socioeconomico",
+  "duration_seconds": 0.000359,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "primeiro_ano",
+    "ultimo_ano",
+    "registros"
+  ],
+  "preview_rows": [
+    {
+      "primeiro_ano": 2008,
+      "ultimo_ano": 2021,
+      "registros": 72395
+    }
+  ],
+  "result_hash": "452086f7753d05a94c8bf65700dc98fde7a2657d5474a4031089b5e559c3957a",
+  "semantic_disposition": "accepted"
+}

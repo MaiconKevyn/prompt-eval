@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q028",
   "question_pt": "Como as internacoes se distribuem pelo marcador de UTI?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT MARCA_UTI, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY internacoes DESC",
-  "duration_seconds": 0.17,
+  "duration_seconds": 0.172,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 17,
   "columns": [
     "MARCA_UTI",

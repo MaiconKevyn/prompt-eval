@@ -1,0 +1,120 @@
+{
+  "id": "SIHRD5_Q068",
+  "question_pt": "Qual e a media movel de 3 meses das internacoes?",
+  "executed_at": "2026-05-14T03:39:33.582857+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH mensal AS (SELECT date_trunc('month', DT_INTER) AS mes_ref, COUNT(*) AS internacoes FROM internacoes GROUP BY 1) SELECT mes_ref, internacoes, ROUND(AVG(internacoes) OVER (ORDER BY mes_ref ROWS BETWEEN 2 PRECEDING AND CURRENT ROW), 2) AS media_movel_3m FROM mensal ORDER BY mes_ref",
+  "duration_seconds": 1.463263,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 225,
+  "columns": [
+    "mes_ref",
+    "internacoes",
+    "media_movel_3m"
+  ],
+  "preview_rows": [
+    {
+      "mes_ref": "2000-01-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.0
+    },
+    {
+      "mes_ref": "2000-03-01T00:00:00",
+      "internacoes": 2,
+      "media_movel_3m": 1.5
+    },
+    {
+      "mes_ref": "2000-06-01T00:00:00",
+      "internacoes": 3,
+      "media_movel_3m": 2.0
+    },
+    {
+      "mes_ref": "2000-07-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 2.0
+    },
+    {
+      "mes_ref": "2000-11-01T00:00:00",
+      "internacoes": 2,
+      "media_movel_3m": 2.0
+    },
+    {
+      "mes_ref": "2001-04-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.33
+    },
+    {
+      "mes_ref": "2001-11-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.33
+    },
+    {
+      "mes_ref": "2002-02-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.0
+    },
+    {
+      "mes_ref": "2002-03-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.0
+    },
+    {
+      "mes_ref": "2003-01-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.0
+    },
+    {
+      "mes_ref": "2005-01-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.0
+    },
+    {
+      "mes_ref": "2005-03-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.0
+    },
+    {
+      "mes_ref": "2005-05-01T00:00:00",
+      "internacoes": 2,
+      "media_movel_3m": 1.33
+    },
+    {
+      "mes_ref": "2005-11-01T00:00:00",
+      "internacoes": 2,
+      "media_movel_3m": 1.67
+    },
+    {
+      "mes_ref": "2006-01-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.67
+    },
+    {
+      "mes_ref": "2006-03-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.33
+    },
+    {
+      "mes_ref": "2006-06-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.0
+    },
+    {
+      "mes_ref": "2006-08-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.0
+    },
+    {
+      "mes_ref": "2006-09-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.0
+    },
+    {
+      "mes_ref": "2006-10-01T00:00:00",
+      "internacoes": 1,
+      "media_movel_3m": 1.0
+    }
+  ],
+  "result_hash": "995219ec536f6fa88bb2b2d20c75fba3835f3c7e18f576636b92b9641bc70b96",
+  "semantic_disposition": "accepted"
+}

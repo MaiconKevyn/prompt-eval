@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q055",
   "question_pt": "Qual e a taxa de mortalidade hospitalar por UF de residencia?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT m.SG_UF, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE i.MORTE) AS mortes, ROUND(100.0 * COUNT(*) FILTER (WHERE i.MORTE) / COUNT(*), 4) AS taxa_morte_pct FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY taxa_morte_pct DESC",
-  "duration_seconds": 0.553,
+  "duration_seconds": 0.558,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 27,
   "columns": [
     "SG_UF",

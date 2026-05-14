@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q032",
   "question_pt": "Quantas internacoes com gestacao de risco foram registradas por ano?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT year(DT_INTER) AS ano, COUNT(*) FILTER (WHERE GESTRISCO) AS gestacao_risco FROM internacoes GROUP BY 1 ORDER BY 1",
-  "duration_seconds": 0.252,
+  "duration_seconds": 0.268,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 23,
   "columns": [
     "ano",

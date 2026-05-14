@@ -1,0 +1,125 @@
+{
+  "id": "SIHRD5_Q078",
+  "question_pt": "Qual foi o procedimento mais frequente em cada UF de residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+  "executed_at": "2026-05-14T03:40:06.549399+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH proc_uf AS (SELECT m.SG_UF, NOME_PROC AS nome_procedimento, COUNT(*) AS ocorrencias, ROW_NUMBER() OVER (PARTITION BY m.SG_UF ORDER BY COUNT(*) DESC) AS rn FROM internacao_procedimento ip JOIN internacoes i ON ip.N_AIH = i.N_AIH JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1, 2) SELECT SG_UF, nome_procedimento, ocorrencias FROM proc_uf WHERE rn = 1 ORDER BY SG_UF",
+  "duration_seconds": 10.040603,
+  "performance_class": "slow",
+  "explain_plan": [
+    {
+      "explain_key": "physical_plan",
+      "explain_value": "┌───────────────────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│__internal_decompress_strin│\n│           g(#0)           │\n│             #1            │\n│             #2            │\n│                           │\n│          ~0 rows          │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│          ORDER_BY         │\n│    ────────────────────   │\n│     proc_uf.SG_UF ASC     │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│__internal_compress_string_│\n│        uinteger(#0)       │\n│             #1            │\n│             #2            │\n│                           │\n│       ~624,524 rows       │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│             #0            │\n│          #[21.1]          │\n│          #[21.2]          │\n│                           │\n│          ~0 rows          │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       HASH_GROUP_BY       │\n│    ────────────────────   │\n│         Groups: #0        │\n│                           │\n│        Aggregates:        │\n│ arg_max_nulls_last(#1, #2)│\n│                           │\n│          ~0 rows          │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│           SG_UF           │\n│ struct_pack(#[21.1], #[21 │\n│            .2])           │\n│        count_star()       │\n│                           │\n│      ~3,122,620 rows      │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│__internal_decompress_strin│\n│           g(#0)           │\n│             #1            │\n│             #2            │\n│                           │\n│      ~3,122,620 rows      │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│       HASH_GROUP_BY       │\n│    ────────────────────   │\n│          Groups:          │\n│             #0            │\n│             #1            │\n│                           │\n│        Aggregates:        │\n│        count_star()       │\n│                           │\n│      ~3,122,620 rows      │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│           SG_UF           │\n│     nome_procedimento     │\n│                           │\n│     ~162,806,550 rows     │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         PROJECTION        │\n│    ────────────────────   │\n│__internal_compress_string_│\n│        uinteger(#0)       │\n│             #1            │\n│                           │\n│     ~162,806,550 rows     │\n└─────────────┬─────────────┘\n┌─────────────┴─────────────┐\n│         HASH_JOIN         │\n│    ────────────────────   │\n│      Join Type: INNER     │\n│                           │\n│        Conditions:        ├────────────────────────────────────────────────────────────────────────┐\n│    PROC_REA = PROC_REA    │                                                                        │\n│                           │                                                                        │\n│     ~162,806,550 rows     │                                                                        │\n└─────────────┬─────────────┘                                                                        │\n┌─────────────┴─────────────┐                                                          ┌─────────────┴─────────────┐\n│         PROJECTION        │                                                          │          SEQ_SCAN         │\n│    ────────────────────   │                                                          │    ────────────────────   │\n│             #0            │                                                          │           Table:          │\n│__internal_decompress_integ│                                                          │ sihrd5.main.procedimentos │\n│ ral_bigint(#1, 201010038) │                                                          │                           │\n│                           │                                                          │   Type: Sequential Scan   │\n│                           │                                                          │                           │\n│                           │                                                          │        Projections:       │\n│                           │                                                          │          PROC_REA         │\n│                           │                                                          │         NOME_PROC         │\n│                           │                                                          │                           │\n│                           │                                                          │          Filters:         │\n│                           │                                                          │  PROC_REA>=201010038 AND  │\n│                           │                                                          │     PROC_REA<=506020134   │\n│                           │                                                          │                           │\n│     ~162,806,550 rows     │                                                          │        ~5,394 rows        │\n└─────────────┬─────────────┘                                                          └───────────────────────────┘\n┌─────────────┴─────────────┐\n│         HASH_JOIN         │\n│    ────────────────────   │\n│      Join Type: INNER     │\n│                           │\n│        Conditions:        ├───────────────────────────────────────────┐\n│       N_AIH = N_AIH       │                                           │\n│                           │                                           │\n│     ~162,806,550 rows     │                                           │\n└─────────────┬─────────────┘                                           │\n┌─────────────┴─────────────┐                             ┌─────────────┴─────────────┐\n│         HASH_JOIN         │                             │         PROJECTION        │\n│    ────────────────────   │                             │    ────────────────────   │\n│      Join Type: INNER     │                             │             #0            │\n│                           │                             │__internal_compress_integra│\n│        Conditions:        ├──────────────┐              │ l_uinteger(#1, 201010038) │\n│MUNIC_RES = CO_MUNICIPIO_6D│              │              │                           │\n│                           │              │              │                           │\n│     ~158,203,475 rows     │              │              │     ~187,957,888 rows     │\n└─────────────┬─────────────┘              │              └─────────────┬─────────────┘\n┌─────────────┴─────────────┐┌─────────────┴─────────────┐┌─────────────┴─────────────┐\n│          SEQ_SCAN         ││          SEQ_SCAN         ││          SEQ_SCAN         │\n│    ────────────────────   ││    ────────────────────   ││    ────────────────────   │\n│           Table:          ││           Table:          ││           Table:          │\n│  sihrd5.main.internacoes  ││   sihrd5.main.municipios  ││        sihrd5.main        │\n│                           ││                           ││  .internacao_procedimento │\n│   Type: Sequential Scan   ││   Type: Sequential Scan   ││                           │\n│                           ││                           ││   Type: Sequential Scan   │\n│        Projections:       ││        Projections:       ││                           │\n│           N_AIH           ││      CO_MUNICIPIO_6D      ││        Projections:       │\n│         MUNIC_RES         ││           SG_UF           ││           N_AIH           │\n│                           ││                           ││          PROC_REA         │\n│          Filters:         ││                           ││                           │\n│     MUNIC_RES<=530010     ││                           ││                           │\n│                           ││                           ││                           │\n│     ~183,877,219 rows     ││        ~5,589 rows        ││     ~187,957,888 rows     │\n└───────────────────────────┘└───────────────────────────┘└───────────────────────────┘\n"
+    }
+  ],
+  "row_count": 27,
+  "columns": [
+    "SG_UF",
+    "nome_procedimento",
+    "ocorrencias"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "AC",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 102277
+    },
+    {
+      "SG_UF": "AL",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 349583
+    },
+    {
+      "SG_UF": "AM",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 563922
+    },
+    {
+      "SG_UF": "AP",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 139908
+    },
+    {
+      "SG_UF": "BA",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 1575460
+    },
+    {
+      "SG_UF": "CE",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 704685
+    },
+    {
+      "SG_UF": "DF",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 104069
+    },
+    {
+      "SG_UF": "ES",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 262794
+    },
+    {
+      "SG_UF": "GO",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 406178
+    },
+    {
+      "SG_UF": "MA",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 884984
+    },
+    {
+      "SG_UF": "MG",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 1366894
+    },
+    {
+      "SG_UF": "MS",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 230737
+    },
+    {
+      "SG_UF": "MT",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 296689
+    },
+    {
+      "SG_UF": "PA",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 939282
+    },
+    {
+      "SG_UF": "PB",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 321322
+    },
+    {
+      "SG_UF": "PE",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 814832
+    },
+    {
+      "SG_UF": "PI",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 322301
+    },
+    {
+      "SG_UF": "PR",
+      "nome_procedimento": "TRATAMENTO DE PNEUMONIAS OU INFLUENZA (GRIPE)",
+      "ocorrencias": 787729
+    },
+    {
+      "SG_UF": "RJ",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 1154996
+    },
+    {
+      "SG_UF": "RN",
+      "nome_procedimento": "PARTO NORMAL",
+      "ocorrencias": 253068
+    }
+  ],
+  "result_hash": "a3c8fe6b327d86cf07acb8662e0efd4bf7235471f73a8271c86dc80352df38bb",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

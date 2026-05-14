@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q095",
   "question_pt": "Quantas internacoes tem VAL_TOT menor que VAL_SH + VAL_SP + VAL_UTI?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT COUNT(*) AS divergencias_financeiras FROM internacoes WHERE VAL_TOT + 0.01 < COALESCE(VAL_SH, 0) + COALESCE(VAL_SP, 0) + COALESCE(VAL_UTI, 0)",
-  "duration_seconds": 1.16,
+  "duration_seconds": 1.471,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 1,
   "columns": [
     "divergencias_financeiras"

@@ -1,0 +1,87 @@
+{
+  "id": "SIHRD5_Q035",
+  "question_pt": "Quantas saidas hospitalares ocorreram por ano?",
+  "executed_at": "2026-05-14T03:38:46.234213+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_SAIDA) AS ano_saida, COUNT(*) AS saidas FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 0.250724,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 17,
+  "columns": [
+    "ano_saida",
+    "saidas"
+  ],
+  "preview_rows": [
+    {
+      "ano_saida": 2007,
+      "saidas": 518712
+    },
+    {
+      "ano_saida": 2008,
+      "saidas": 10831629
+    },
+    {
+      "ano_saida": 2009,
+      "saidas": 11112697
+    },
+    {
+      "ano_saida": 2010,
+      "saidas": 11339463
+    },
+    {
+      "ano_saida": 2011,
+      "saidas": 11273023
+    },
+    {
+      "ano_saida": 2012,
+      "saidas": 11104735
+    },
+    {
+      "ano_saida": 2013,
+      "saidas": 11173254
+    },
+    {
+      "ano_saida": 2014,
+      "saidas": 11353554
+    },
+    {
+      "ano_saida": 2015,
+      "saidas": 11325307
+    },
+    {
+      "ano_saida": 2016,
+      "saidas": 11256853
+    },
+    {
+      "ano_saida": 2017,
+      "saidas": 11518507
+    },
+    {
+      "ano_saida": 2018,
+      "saidas": 11853952
+    },
+    {
+      "ano_saida": 2019,
+      "saidas": 12181199
+    },
+    {
+      "ano_saida": 2020,
+      "saidas": 10532432
+    },
+    {
+      "ano_saida": 2021,
+      "saidas": 11557370
+    },
+    {
+      "ano_saida": 2022,
+      "saidas": 12365102
+    },
+    {
+      "ano_saida": 2023,
+      "saidas": 12579430
+    }
+  ],
+  "result_hash": "dd3b27a4863b839fc5117c2a90b73ea6fcbbd7b24aa380485b6b76bc6fe94440",
+  "semantic_disposition": "accepted"
+}

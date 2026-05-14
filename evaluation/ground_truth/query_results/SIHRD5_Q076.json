@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q076",
   "question_pt": "Qual foi o valor total por habitante por UF e ano?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH valor_uf AS (SELECT m.SG_UF, year(i.DT_INTER) AS ano, SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))) AS valor_total FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2), pop_uf AS (SELECT m.SG_UF, se.NU_ANO AS ano, SUM(se.QT_POPULACAO) AS populacao FROM socioeconomico se JOIN municipios m ON se.CO_MUNICIPIO_6D = m.CO_MUNICIPIO_6D GROUP BY 1, 2) SELECT p.SG_UF, p.ano, ROUND(COALESCE(v.valor_total, 0), 2) AS valor_total, p.populacao, ROUND(COALESCE(v.valor_total, 0) / NULLIF(p.populacao, 0), 4) AS valor_por_habitante FROM pop_uf p LEFT JOIN valor_uf v ON p.SG_UF = v.SG_UF AND p.ano = v.ano ORDER BY p.SG_UF, p.ano",
-  "duration_seconds": 2.044,
+  "duration_seconds": 2.051,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 351,
   "columns": [
     "SG_UF",

@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q033",
   "question_pt": "Quantos dias de UTI foram registrados por ano?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT year(DT_INTER) AS ano, SUM(UTI_INT_TO) AS dias_uti FROM internacoes GROUP BY 1 ORDER BY 1",
-  "duration_seconds": 0.213,
+  "duration_seconds": 0.214,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 23,
   "columns": [
     "ano",

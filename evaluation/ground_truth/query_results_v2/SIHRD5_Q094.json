@@ -1,0 +1,23 @@
+{
+  "id": "SIHRD5_Q094",
+  "question_pt": "A dimensao sexo possui descricoes duplicadas entre codigos?",
+  "executed_at": "2026-05-14T03:40:18.367858+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT DESCRICAO, COUNT(*) AS quantidade_codigos FROM sexo GROUP BY DESCRICAO HAVING COUNT(*) > 1",
+  "duration_seconds": 0.001601,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "DESCRICAO",
+    "quantidade_codigos"
+  ],
+  "preview_rows": [
+    {
+      "DESCRICAO": "Feminino",
+      "quantidade_codigos": 2
+    }
+  ],
+  "result_hash": "87e2b5ebfdd8c7c9867ffbc31fe19596ca4d1d97b0cc31d0eae0941170f3c063",
+  "semantic_disposition": "accepted"
+}

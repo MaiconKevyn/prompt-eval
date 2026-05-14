@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q045",
   "question_pt": "Quantas internacoes ocorreram por descricao do carater de internacao?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT c.DESCRICAO AS carater_internacao, COUNT(*) AS internacoes FROM internacoes i JOIN car_int c ON i.CAR_INT = c.CAR_INT GROUP BY 1 ORDER BY internacoes DESC",
-  "duration_seconds": 0.255,
+  "duration_seconds": 0.257,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 6,
   "columns": [
     "carater_internacao",

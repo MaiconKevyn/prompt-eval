@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q051",
   "question_pt": "Quais capitulos CID concentraram mais internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT c.DS_CAPITULO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
-  "duration_seconds": 1.595,
+  "duration_seconds": 1.625,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "DS_CAPITULO",

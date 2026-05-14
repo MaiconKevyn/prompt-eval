@@ -22,6 +22,7 @@ Accepted validated questions: `100`
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q001.json`
 - Rows returned: `1`
 - Duration seconds: `0.001`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS total_internacoes FROM internacoes
@@ -35,6 +36,7 @@ SELECT COUNT(*) AS total_internacoes FROM internacoes
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q002.json`
 - Rows returned: `1`
 - Duration seconds: `0.001`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS total_procedimentos_realizados FROM internacao_procedimento
@@ -47,7 +49,8 @@ SELECT COUNT(*) AS total_procedimentos_realizados FROM internacao_procedimento
 - Intent: Entender a cobertura temporal bruta da base.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q003.json`
 - Rows returned: `1`
-- Duration seconds: `0.094`
+- Duration seconds: `0.091`
+- Performance class: `fast`
 
 ```sql
 SELECT MIN(DT_INTER) AS primeira_internacao, MAX(DT_INTER) AS ultima_internacao, MIN(DT_SAIDA) AS primeira_saida, MAX(DT_SAIDA) AS ultima_saida FROM internacoes
@@ -61,6 +64,7 @@ SELECT MIN(DT_INTER) AS primeira_internacao, MAX(DT_INTER) AS ultima_internacao,
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q004.json`
 - Rows returned: `1`
 - Duration seconds: `0.0`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS total_hospitais FROM hospital
@@ -74,6 +78,7 @@ SELECT COUNT(*) AS total_hospitais FROM hospital
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q005.json`
 - Rows returned: `1`
 - Duration seconds: `0.001`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS total_municipios, COUNT(DISTINCT SG_UF) AS total_ufs FROM municipios
@@ -87,6 +92,7 @@ SELECT COUNT(*) AS total_municipios, COUNT(DISTINCT SG_UF) AS total_ufs FROM mun
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q006.json`
 - Rows returned: `1`
 - Duration seconds: `0.0`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS total_procedimentos_cadastrados FROM procedimentos
@@ -100,6 +106,7 @@ SELECT COUNT(*) AS total_procedimentos_cadastrados FROM procedimentos
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q007.json`
 - Rows returned: `1`
 - Duration seconds: `0.0`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS total_cids FROM cid
@@ -113,6 +120,7 @@ SELECT COUNT(*) AS total_cids FROM cid
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q008.json`
 - Rows returned: `1`
 - Duration seconds: `0.0`
+- Performance class: `fast`
 
 ```sql
 SELECT MIN(NU_ANO) AS primeiro_ano, MAX(NU_ANO) AS ultimo_ano, COUNT(*) AS registros FROM socioeconomico
@@ -125,7 +133,8 @@ SELECT MIN(NU_ANO) AS primeiro_ano, MAX(NU_ANO) AS ultimo_ano, COUNT(*) AS regis
 - Intent: Medir o volume bruto de obitos hospitalares marcados.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q009.json`
 - Rows returned: `1`
-- Duration seconds: `0.097`
+- Duration seconds: `0.149`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS internacoes_com_morte FROM internacoes WHERE MORTE = TRUE
@@ -139,6 +148,7 @@ SELECT COUNT(*) AS internacoes_com_morte FROM internacoes WHERE MORTE = TRUE
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q010.json`
 - Rows returned: `1`
 - Duration seconds: `0.114`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS internacoes_com_uti FROM internacoes WHERE MARCA_UTI <> 0 OR UTI_INT_TO > 0
@@ -151,7 +161,8 @@ SELECT COUNT(*) AS internacoes_com_uti FROM internacoes WHERE MARCA_UTI <> 0 OR 
 - Intent: Avaliar limites demograficos antes de analises por idade.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q011.json`
 - Rows returned: `1`
-- Duration seconds: `0.048`
+- Duration seconds: `0.045`
+- Performance class: `fast`
 
 ```sql
 SELECT MIN(IDADE) AS idade_minima, MAX(IDADE) AS idade_maxima FROM internacoes
@@ -164,7 +175,8 @@ SELECT MIN(IDADE) AS idade_minima, MAX(IDADE) AS idade_maxima FROM internacoes
 - Intent: Medir o total financeiro bruto da tabela principal.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q012.json`
 - Rows returned: `1`
-- Duration seconds: `0.879`
+- Duration seconds: `0.886`
+- Performance class: `fast`
 
 ```sql
 SELECT ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacoes
@@ -177,7 +189,8 @@ SELECT ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM interna
 - Intent: Medir quantos estabelecimentos sao efetivamente usados nos fatos.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q013.json`
 - Rows returned: `1`
-- Duration seconds: `0.249`
+- Duration seconds: `0.253`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(DISTINCT CNES) AS cnes_distintos FROM internacoes
@@ -190,7 +203,8 @@ SELECT COUNT(DISTINCT CNES) AS cnes_distintos FROM internacoes
 - Intent: Medir cobertura territorial efetiva dos fatos.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q014.json`
 - Rows returned: `1`
-- Duration seconds: `0.23`
+- Duration seconds: `0.231`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(DISTINCT MUNIC_RES) AS municipios_residencia_distintos FROM internacoes
@@ -204,6 +218,7 @@ SELECT COUNT(DISTINCT MUNIC_RES) AS municipios_residencia_distintos FROM interna
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q015.json`
 - Rows returned: `1`
 - Duration seconds: `0.001`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS dias_calendario, MIN(data) AS data_inicial, MAX(data) AS data_final FROM tempo
@@ -217,6 +232,7 @@ SELECT COUNT(*) AS dias_calendario, MIN(data) AS data_inicial, MAX(data) AS data
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q016.json`
 - Rows returned: `23`
 - Duration seconds: `0.184`
+- Performance class: `fast`
 
 ```sql
 SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY 1
@@ -229,7 +245,8 @@ SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes FROM internacoes GROUP BY 
 - Intent: Acompanhar gasto/reembolso anual.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q017.json`
 - Rows returned: `23`
-- Duration seconds: `1.035`
+- Duration seconds: `1.038`
+- Performance class: `moderate`
 
 ```sql
 SELECT year(DT_INTER) AS ano, ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacoes GROUP BY 1 ORDER BY 1
@@ -243,6 +260,7 @@ SELECT year(DT_INTER) AS ano, ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS v
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q018.json`
 - Rows returned: `23`
 - Duration seconds: `0.232`
+- Performance class: `fast`
 
 ```sql
 SELECT year(DT_INTER) AS ano, COUNT(*) FILTER (WHERE MORTE) AS mortes FROM internacoes GROUP BY 1 ORDER BY 1
@@ -255,7 +273,8 @@ SELECT year(DT_INTER) AS ano, COUNT(*) FILTER (WHERE MORTE) AS mortes FROM inter
 - Intent: Comparar desfecho de morte usando internacoes como denominador.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q019.json`
 - Rows returned: `23`
-- Duration seconds: `0.263`
+- Duration seconds: `0.264`
+- Performance class: `fast`
 
 ```sql
 SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE MORTE) AS mortes, ROUND(100.0 * COUNT(*) FILTER (WHERE MORTE) / COUNT(*), 4) AS taxa_morte_pct FROM internacoes GROUP BY 1 ORDER BY 1
@@ -268,7 +287,8 @@ SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE MO
 - Intent: Monitorar custo medio bruto anual.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q020.json`
 - Rows returned: `23`
-- Duration seconds: `1.058`
+- Duration seconds: `1.061`
+- Performance class: `moderate`
 
 ```sql
 SELECT year(DT_INTER) AS ano, ROUND((SUM(CAST(VAL_TOT AS DECIMAL(20,2)))::DOUBLE / COUNT(VAL_TOT)), 2) AS valor_medio FROM internacoes GROUP BY 1 ORDER BY 1
@@ -281,7 +301,8 @@ SELECT year(DT_INTER) AS ano, ROUND((SUM(CAST(VAL_TOT AS DECIMAL(20,2)))::DOUBLE
 - Intent: Identificar estabelecimentos com maior volume usando codigo CNES.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q021.json`
 - Rows returned: `20`
-- Duration seconds: `0.282`
+- Duration seconds: `0.284`
+- Performance class: `fast`
 
 ```sql
 SELECT CNES, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY internacoes DESC LIMIT 20
@@ -294,7 +315,8 @@ SELECT CNES, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY intern
 - Intent: Identificar principais CIDs em volume bruto.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q022.json`
 - Rows returned: `20`
-- Duration seconds: `0.262`
+- Duration seconds: `0.269`
+- Performance class: `fast`
 
 ```sql
 SELECT DIAG_PRINC, COUNT(*) AS internacoes FROM internacoes WHERE DIAG_PRINC IS NOT NULL GROUP BY 1 ORDER BY internacoes DESC LIMIT 20
@@ -307,7 +329,8 @@ SELECT DIAG_PRINC, COUNT(*) AS internacoes FROM internacoes WHERE DIAG_PRINC IS 
 - Intent: Avaliar mix entre eletivo, urgencia e acidentes usando codigo bruto.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q023.json`
 - Rows returned: `6`
-- Duration seconds: `0.168`
+- Duration seconds: `0.182`
+- Performance class: `fast`
 
 ```sql
 SELECT CAR_INT, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY internacoes DESC
@@ -320,7 +343,8 @@ SELECT CAR_INT, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY int
 - Intent: Avaliar distribuicao demografica basica por codigo.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q024.json`
 - Rows returned: `2`
-- Duration seconds: `0.166`
+- Duration seconds: `0.193`
+- Performance class: `fast`
 
 ```sql
 SELECT SEXO, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY SEXO
@@ -333,7 +357,8 @@ SELECT SEXO, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY SEXO
 - Intent: Avaliar distribuicao demografica basica por raca/cor.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q025.json`
 - Rows returned: `6`
-- Duration seconds: `0.179`
+- Duration seconds: `0.215`
+- Performance class: `fast`
 
 ```sql
 SELECT RACA_COR, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY RACA_COR
@@ -346,7 +371,8 @@ SELECT RACA_COR, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY RA
 - Intent: Preparar analise populacional por grupos de idade.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q026.json`
 - Rows returned: `6`
-- Duration seconds: `1.232`
+- Duration seconds: `1.278`
+- Performance class: `moderate`
 
 ```sql
 SELECT CASE WHEN IDADE < 1 THEN '00_<1' WHEN IDADE BETWEEN 1 AND 4 THEN '01_1_4' WHEN IDADE BETWEEN 5 AND 14 THEN '02_5_14' WHEN IDADE BETWEEN 15 AND 24 THEN '03_15_24' WHEN IDADE BETWEEN 25 AND 44 THEN '04_25_44' WHEN IDADE BETWEEN 45 AND 64 THEN '05_45_64' WHEN IDADE >= 65 THEN '06_65_plus' ELSE '99_ignorado' END AS faixa_etaria, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY 1
@@ -359,7 +385,8 @@ SELECT CASE WHEN IDADE < 1 THEN '00_<1' WHEN IDADE BETWEEN 1 AND 4 THEN '01_1_4'
 - Intent: Avaliar mix de atencao basica, media e alta complexidade no codigo bruto.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q027.json`
 - Rows returned: `3`
-- Duration seconds: `1.056`
+- Duration seconds: `1.063`
+- Performance class: `moderate`
 
 ```sql
 SELECT COMPLEX, COUNT(*) AS internacoes, ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacoes GROUP BY 1 ORDER BY internacoes DESC
@@ -372,7 +399,8 @@ SELECT COMPLEX, COUNT(*) AS internacoes, ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2)
 - Intent: Entender uso de UTI por codigo bruto.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q028.json`
 - Rows returned: `17`
-- Duration seconds: `0.17`
+- Duration seconds: `0.172`
+- Performance class: `fast`
 
 ```sql
 SELECT MARCA_UTI, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY internacoes DESC
@@ -385,7 +413,8 @@ SELECT MARCA_UTI, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY i
 - Intent: Acompanhar permanencia hospitalar media no tempo.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q029.json`
 - Rows returned: `23`
-- Duration seconds: `0.371`
+- Duration seconds: `0.375`
+- Performance class: `fast`
 
 ```sql
 SELECT year(DT_INTER) AS ano, ROUND((SUM(CAST(DIAS_PERM AS DECIMAL(20,2)))::DOUBLE / COUNT(DIAS_PERM)), 2) AS media_dias_permanencia FROM internacoes GROUP BY 1 ORDER BY 1
@@ -398,7 +427,8 @@ SELECT year(DT_INTER) AS ano, ROUND((SUM(CAST(DIAS_PERM AS DECIMAL(20,2)))::DOUB
 - Intent: Entender concentracao de internacoes curtas e longas.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q030.json`
 - Rows returned: `4`
-- Duration seconds: `0.065`
+- Duration seconds: `0.067`
+- Performance class: `fast`
 
 ```sql
 SELECT CASE WHEN DIAS_PERM = 0 THEN '00_0' WHEN DIAS_PERM BETWEEN 1 AND 3 THEN '01_1_3' WHEN DIAS_PERM BETWEEN 4 AND 7 THEN '02_4_7' WHEN DIAS_PERM BETWEEN 8 AND 14 THEN '03_8_14' WHEN DIAS_PERM BETWEEN 15 AND 30 THEN '04_15_30' WHEN DIAS_PERM > 30 THEN '05_31_plus' ELSE '99_ignorado' END AS faixa_dias, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY 1
@@ -411,7 +441,8 @@ SELECT CASE WHEN DIAS_PERM = 0 THEN '00_0' WHEN DIAS_PERM BETWEEN 1 AND 3 THEN '
 - Intent: Comparar volume financeiro por nivel de complexidade.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q031.json`
 - Rows returned: `3`
-- Duration seconds: `1.055`
+- Duration seconds: `1.059`
+- Performance class: `moderate`
 
 ```sql
 SELECT COMPLEX, ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY valor_total DESC
@@ -424,7 +455,8 @@ SELECT COMPLEX, ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total, CO
 - Intent: Monitorar marcador de gestacao de risco no tempo.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q032.json`
 - Rows returned: `23`
-- Duration seconds: `0.252`
+- Duration seconds: `0.268`
+- Performance class: `fast`
 
 ```sql
 SELECT year(DT_INTER) AS ano, COUNT(*) FILTER (WHERE GESTRISCO) AS gestacao_risco FROM internacoes GROUP BY 1 ORDER BY 1
@@ -437,7 +469,8 @@ SELECT year(DT_INTER) AS ano, COUNT(*) FILTER (WHERE GESTRISCO) AS gestacao_risc
 - Intent: Acompanhar intensidade anual de uso de UTI.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q033.json`
 - Rows returned: `23`
-- Duration seconds: `0.213`
+- Duration seconds: `0.214`
+- Performance class: `fast`
 
 ```sql
 SELECT year(DT_INTER) AS ano, SUM(UTI_INT_TO) AS dias_uti FROM internacoes GROUP BY 1 ORDER BY 1
@@ -450,7 +483,8 @@ SELECT year(DT_INTER) AS ano, SUM(UTI_INT_TO) AS dias_uti FROM internacoes GROUP
 - Intent: Avaliar sazonalidade mensal bruta.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q034.json`
 - Rows returned: `225`
-- Duration seconds: `0.229`
+- Duration seconds: `0.233`
+- Performance class: `fast`
 
 ```sql
 SELECT year(DT_INTER) AS ano, month(DT_INTER) AS mes, COUNT(*) AS internacoes FROM internacoes GROUP BY 1, 2 ORDER BY 1, 2
@@ -463,7 +497,8 @@ SELECT year(DT_INTER) AS ano, month(DT_INTER) AS mes, COUNT(*) AS internacoes FR
 - Intent: Comparar series por data de saida.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q035.json`
 - Rows returned: `17`
-- Duration seconds: `0.183`
+- Duration seconds: `0.186`
+- Performance class: `fast`
 
 ```sql
 SELECT year(DT_SAIDA) AS ano_saida, COUNT(*) AS saidas FROM internacoes GROUP BY 1 ORDER BY 1
@@ -476,7 +511,8 @@ SELECT year(DT_SAIDA) AS ano_saida, COUNT(*) AS saidas FROM internacoes GROUP BY
 - Intent: Identificar procedimentos mais frequentes por codigo bruto.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q036.json`
 - Rows returned: `20`
-- Duration seconds: `0.268`
+- Duration seconds: `0.277`
+- Performance class: `fast`
 
 ```sql
 SELECT PROC_REA, COUNT(*) AS ocorrencias FROM internacao_procedimento GROUP BY 1 ORDER BY ocorrencias DESC LIMIT 20
@@ -490,6 +526,7 @@ SELECT PROC_REA, COUNT(*) AS ocorrencias FROM internacao_procedimento GROUP BY 1
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q037.json`
 - Rows returned: `13`
 - Duration seconds: `0.001`
+- Performance class: `fast`
 
 ```sql
 SELECT NU_ANO AS ano, SUM(QT_POPULACAO) AS populacao_total FROM socioeconomico GROUP BY 1 ORDER BY 1
@@ -503,6 +540,7 @@ SELECT NU_ANO AS ano, SUM(QT_POPULACAO) AS populacao_total FROM socioeconomico G
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q038.json`
 - Rows returned: `13`
 - Duration seconds: `0.002`
+- Performance class: `fast`
 
 ```sql
 SELECT NU_ANO AS ano, SUM(QT_LEITOS_SUS) AS leitos_sus FROM socioeconomico GROUP BY 1 ORDER BY 1
@@ -516,6 +554,7 @@ SELECT NU_ANO AS ano, SUM(QT_LEITOS_SUS) AS leitos_sus FROM socioeconomico GROUP
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q039.json`
 - Rows returned: `38`
 - Duration seconds: `0.001`
+- Performance class: `fast`
 
 ```sql
 SELECT SG_UF, COUNT(*) AS municipios FROM municipios GROUP BY 1 ORDER BY municipios DESC, SG_UF
@@ -528,7 +567,8 @@ SELECT SG_UF, COUNT(*) AS municipios FROM municipios GROUP BY 1 ORDER BY municip
 - Intent: Entender distribuicao dos estabelecimentos por codigo de gestao.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q040.json`
 - Rows returned: `2`
-- Duration seconds: `0.001`
+- Duration seconds: `0.0`
+- Performance class: `fast`
 
 ```sql
 SELECT GESTAO, COUNT(*) AS hospitais FROM hospital GROUP BY 1 ORDER BY hospitais DESC
@@ -541,7 +581,8 @@ SELECT GESTAO, COUNT(*) AS hospitais FROM hospital GROUP BY 1 ORDER BY hospitais
 - Intent: Comparar volume e valor financeiro por estado de residencia.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q041.json`
 - Rows returned: `27`
-- Duration seconds: `1.392`
+- Duration seconds: `1.401`
+- Performance class: `moderate`
 
 ```sql
 SELECT m.SG_UF, COUNT(*) AS internacoes, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY internacoes DESC
@@ -554,7 +595,8 @@ SELECT m.SG_UF, COUNT(*) AS internacoes, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,
 - Intent: Comparar producao assistencial por estado do estabelecimento.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q042.json`
 - Rows returned: `27`
-- Duration seconds: `0.744`
+- Duration seconds: `0.768`
+- Performance class: `fast`
 
 ```sql
 SELECT mh.SG_UF, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY internacoes DESC
@@ -567,7 +609,8 @@ SELECT mh.SG_UF, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i
 - Intent: Usar a dimensao de sexo para resultado interpretavel.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q043.json`
 - Rows returned: `2`
-- Duration seconds: `0.269`
+- Duration seconds: `0.271`
+- Performance class: `fast`
 
 ```sql
 SELECT s.DESCRICAO AS sexo, COUNT(*) AS internacoes FROM internacoes i JOIN sexo s ON i.SEXO = s.SEXO GROUP BY 1 ORDER BY internacoes DESC
@@ -580,7 +623,8 @@ SELECT s.DESCRICAO AS sexo, COUNT(*) AS internacoes FROM internacoes i JOIN sexo
 - Intent: Usar a dimensao de raca/cor para resultado interpretavel.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q044.json`
 - Rows returned: `5`
-- Duration seconds: `0.264`
+- Duration seconds: `0.272`
+- Performance class: `fast`
 
 ```sql
 SELECT r.DESCRICAO AS raca_cor, COUNT(*) AS internacoes FROM internacoes i JOIN raca_cor r ON i.RACA_COR = r.RACA_COR GROUP BY 1 ORDER BY internacoes DESC
@@ -593,7 +637,8 @@ SELECT r.DESCRICAO AS raca_cor, COUNT(*) AS internacoes FROM internacoes i JOIN 
 - Intent: Interpretar eletivo, urgencia e acidentes com descricao.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q045.json`
 - Rows returned: `6`
-- Duration seconds: `0.255`
+- Duration seconds: `0.257`
+- Performance class: `fast`
 
 ```sql
 SELECT c.DESCRICAO AS carater_internacao, COUNT(*) AS internacoes FROM internacoes i JOIN car_int c ON i.CAR_INT = c.CAR_INT GROUP BY 1 ORDER BY internacoes DESC
@@ -606,7 +651,8 @@ SELECT c.DESCRICAO AS carater_internacao, COUNT(*) AS internacoes FROM internaco
 - Intent: Identificar especialidades/leitos mais demandados.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q046.json`
 - Rows returned: `15`
-- Duration seconds: `0.278`
+- Duration seconds: `0.286`
+- Performance class: `fast`
 
 ```sql
 SELECT e.DESCRICAO AS especialidade, COUNT(*) AS internacoes FROM internacoes i JOIN especialidade e ON i.ESPEC = e.ESPEC GROUP BY 1 ORDER BY internacoes DESC LIMIT 20
@@ -619,7 +665,8 @@ SELECT e.DESCRICAO AS especialidade, COUNT(*) AS internacoes FROM internacoes i 
 - Intent: Interpretar o mix de complexidade com descricao oficial da dimensao.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q047.json`
 - Rows returned: `2`
-- Duration seconds: `1.808`
+- Duration seconds: `1.828`
+- Performance class: `moderate`
 
 ```sql
 SELECT c.DESCRICAO AS complexidade, COUNT(*) AS internacoes, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacoes i JOIN complexidade c ON i.COMPLEX = c.COMPLEX GROUP BY 1 ORDER BY internacoes DESC
@@ -632,7 +679,8 @@ SELECT c.DESCRICAO AS complexidade, COUNT(*) AS internacoes, ROUND(SUM(CAST(i.VA
 - Intent: Interpretar o marcador de UTI por descricao.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q048.json`
 - Rows returned: `17`
-- Duration seconds: `0.266`
+- Duration seconds: `0.284`
+- Performance class: `fast`
 
 ```sql
 SELECT mu.DESCRICAO AS marca_uti, COUNT(*) AS internacoes FROM internacoes i JOIN marca_uti mu ON i.MARCA_UTI = mu.MARCA_UTI GROUP BY 1 ORDER BY internacoes DESC
@@ -645,7 +693,8 @@ SELECT mu.DESCRICAO AS marca_uti, COUNT(*) AS internacoes FROM internacoes i JOI
 - Intent: Identificar procedimentos principais em linguagem de negocio.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q049.json`
 - Rows returned: `20`
-- Duration seconds: `1.289`
+- Duration seconds: `1.313`
+- Performance class: `moderate`
 
 ```sql
 SELECT p.NOME_PROC, COUNT(*) AS ocorrencias FROM internacao_procedimento ip JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1 ORDER BY ocorrencias DESC LIMIT 20
@@ -658,7 +707,8 @@ SELECT p.NOME_PROC, COUNT(*) AS ocorrencias FROM internacao_procedimento ip JOIN
 - Intent: Interpretar diagnosticos principais com descricao.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q050.json`
 - Rows returned: `20`
-- Duration seconds: `1.845`
+- Duration seconds: `1.88`
+- Performance class: `moderate`
 
 ```sql
 SELECT c.CID, c.DESCRICAO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20
@@ -671,7 +721,8 @@ SELECT c.CID, c.DESCRICAO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c
 - Intent: Analisar perfil clinico agregado por capitulo CID.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q051.json`
 - Rows returned: `20`
-- Duration seconds: `1.595`
+- Duration seconds: `1.625`
+- Performance class: `moderate`
 
 ```sql
 SELECT c.DS_CAPITULO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID GROUP BY 1 ORDER BY internacoes DESC LIMIT 20
@@ -684,7 +735,8 @@ SELECT c.DS_CAPITULO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c ON i
 - Intent: Criar ranking nominal de hospitais por volume.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q052.json`
 - Rows returned: `20`
-- Duration seconds: `1.465`
+- Duration seconds: `1.485`
+- Performance class: `moderate`
 
 ```sql
 SELECT i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20
@@ -697,7 +749,8 @@ SELECT i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes FROM internacoes i LEFT JO
 - Intent: Identificar municipios de maior demanda por residencia.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q053.json`
 - Rows returned: `20`
-- Duration seconds: `0.72`
+- Duration seconds: `0.736`
+- Performance class: `fast`
 
 ```sql
 SELECT m.SG_UF, m.NO_MUNICIPIO, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20
@@ -710,7 +763,8 @@ SELECT m.SG_UF, m.NO_MUNICIPIO, COUNT(*) AS internacoes FROM internacoes i JOIN 
 - Intent: Apoiar planejamento regional de rede assistencial.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q054.json`
 - Rows returned: `20`
-- Duration seconds: `0.732`
+- Duration seconds: `0.731`
+- Performance class: `fast`
 
 ```sql
 SELECT m.SG_UF, m.NO_REGIAO_SAUDE, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20
@@ -723,7 +777,8 @@ SELECT m.SG_UF, m.NO_REGIAO_SAUDE, COUNT(*) AS internacoes FROM internacoes i JO
 - Intent: Comparar desfecho de morte usando UF de residencia.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q055.json`
 - Rows returned: `27`
-- Duration seconds: `0.553`
+- Duration seconds: `0.558`
+- Performance class: `fast`
 
 ```sql
 SELECT m.SG_UF, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE i.MORTE) AS mortes, ROUND(100.0 * COUNT(*) FILTER (WHERE i.MORTE) / COUNT(*), 4) AS taxa_morte_pct FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY taxa_morte_pct DESC
@@ -736,7 +791,8 @@ SELECT m.SG_UF, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE i.MORTE) AS mort
 - Intent: Comparar permanencia media entre estados.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q056.json`
 - Rows returned: `27`
-- Duration seconds: `0.621`
+- Duration seconds: `0.629`
+- Performance class: `fast`
 
 ```sql
 SELECT m.SG_UF, ROUND((SUM(CAST(i.DIAS_PERM AS DECIMAL(20,2)))::DOUBLE / COUNT(i.DIAS_PERM)), 2) AS media_dias_permanencia, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY media_dias_permanencia DESC, SG_UF
@@ -749,7 +805,8 @@ SELECT m.SG_UF, ROUND((SUM(CAST(i.DIAS_PERM AS DECIMAL(20,2)))::DOUBLE / COUNT(i
 - Intent: Comparar custo medio bruto entre estados.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q057.json`
 - Rows returned: `27`
-- Duration seconds: `1.396`
+- Duration seconds: `1.413`
+- Performance class: `moderate`
 
 ```sql
 SELECT m.SG_UF, ROUND((SUM(CAST(i.VAL_TOT AS DECIMAL(20,2)))::DOUBLE / COUNT(i.VAL_TOT)), 2) AS valor_medio, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY valor_medio DESC
@@ -762,7 +819,8 @@ SELECT m.SG_UF, ROUND((SUM(CAST(i.VAL_TOT AS DECIMAL(20,2)))::DOUBLE / COUNT(i.V
 - Intent: Identificar procedimentos que mais concentram valor aprovado.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q058.json`
 - Rows returned: `20`
-- Duration seconds: `9.177`
+- Duration seconds: `10.661`
+- Performance class: `slow`
 
 ```sql
 SELECT p.NOME_PROC, COUNT(*) AS ocorrencias, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacao_procedimento ip JOIN internacoes i ON ip.N_AIH = i.N_AIH JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1 ORDER BY valor_total DESC LIMIT 20
@@ -775,7 +833,8 @@ SELECT p.NOME_PROC, COUNT(*) AS ocorrencias, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL
 - Intent: Analisar producao por municipio de atendimento.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q059.json`
 - Rows returned: `20`
-- Duration seconds: `1.851`
+- Duration seconds: `1.771`
+- Performance class: `moderate`
 
 ```sql
 SELECT mh.SG_UF, mh.NO_MUNICIPIO, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20
@@ -788,7 +847,8 @@ SELECT mh.SG_UF, mh.NO_MUNICIPIO, COUNT(*) AS internacoes FROM internacoes i JOI
 - Intent: Rankear estabelecimentos por valor aprovado.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q060.json`
 - Rows returned: `20`
-- Duration seconds: `2.952`
+- Duration seconds: `3.095`
+- Performance class: `moderate`
 
 ```sql
 SELECT i.CNES, h.NO_HOSPITAL, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total, COUNT(*) AS internacoes FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES GROUP BY 1, 2 ORDER BY valor_total DESC LIMIT 20
@@ -801,7 +861,8 @@ SELECT i.CNES, h.NO_HOSPITAL, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS
 - Intent: Cruzar sexo e territorio para analise demografica regional.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q061.json`
 - Rows returned: `54`
-- Duration seconds: `1.14`
+- Duration seconds: `1.311`
+- Performance class: `moderate`
 
 ```sql
 SELECT m.SG_UF, s.DESCRICAO AS sexo, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D JOIN sexo s ON i.SEXO = s.SEXO GROUP BY 1, 2 ORDER BY 1, internacoes DESC
@@ -814,7 +875,8 @@ SELECT m.SG_UF, s.DESCRICAO AS sexo, COUNT(*) AS internacoes FROM internacoes i 
 - Intent: Comparar mix assistencial por estado.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q062.json`
 - Rows returned: `54`
-- Duration seconds: `1.315`
+- Duration seconds: `1.371`
+- Performance class: `moderate`
 
 ```sql
 SELECT m.SG_UF, c.DESCRICAO AS complexidade, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D JOIN complexidade c ON i.COMPLEX = c.COMPLEX GROUP BY 1, 2 ORDER BY 1, internacoes DESC
@@ -827,7 +889,8 @@ SELECT m.SG_UF, c.DESCRICAO AS complexidade, COUNT(*) AS internacoes FROM intern
 - Intent: Analisar perfil clinico de internacoes femininas.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q063.json`
 - Rows returned: `20`
-- Duration seconds: `1.518`
+- Duration seconds: `1.511`
+- Performance class: `moderate`
 
 ```sql
 SELECT c.DS_GRUPO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID JOIN sexo s ON i.SEXO = s.SEXO WHERE s.DESCRICAO = 'Feminino' GROUP BY 1 ORDER BY internacoes DESC LIMIT 20
@@ -840,7 +903,8 @@ SELECT c.DS_GRUPO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c ON i.DI
 - Intent: Conectar fatos assistenciais a denominadores populacionais agregados.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q064.json`
 - Rows returned: `351`
-- Duration seconds: `1.575`
+- Duration seconds: `1.778`
+- Performance class: `moderate`
 
 ```sql
 SELECT m.SG_UF, se.NU_ANO AS ano, SUM(se.QT_POPULACAO) AS populacao, COUNT(i.N_AIH) AS internacoes FROM socioeconomico se JOIN municipios m ON se.CO_MUNICIPIO_6D = m.CO_MUNICIPIO_6D LEFT JOIN internacoes i ON i.MUNIC_RES = se.CO_MUNICIPIO_6D AND year(i.DT_INTER) = se.NU_ANO GROUP BY 1, 2 ORDER BY 1, 2
@@ -853,7 +917,8 @@ SELECT m.SG_UF, se.NU_ANO AS ano, SUM(se.QT_POPULACAO) AS populacao, COUNT(i.N_A
 - Intent: Identificar territorios de residencia com maior concentracao financeira.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q065.json`
 - Rows returned: `20`
-- Duration seconds: `1.695`
+- Duration seconds: `1.711`
+- Performance class: `moderate`
 
 ```sql
 SELECT m.SG_UF, m.NO_MUNICIPIO, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY valor_total DESC LIMIT 20
@@ -866,7 +931,8 @@ SELECT m.SG_UF, m.NO_MUNICIPIO, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) 
 - Intent: Medir crescimento ou queda anual em internacoes.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q066.json`
 - Rows returned: `23`
-- Duration seconds: `0.188`
+- Duration seconds: `0.192`
+- Performance class: `fast`
 
 ```sql
 WITH anual AS (SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes FROM internacoes GROUP BY 1) SELECT ano, internacoes, internacoes - LAG(internacoes) OVER (ORDER BY ano) AS diff_abs, ROUND(100.0 * (internacoes - LAG(internacoes) OVER (ORDER BY ano)) / NULLIF(LAG(internacoes) OVER (ORDER BY ano), 0), 4) AS diff_pct FROM anual ORDER BY ano
@@ -879,7 +945,8 @@ WITH anual AS (SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes FROM intern
 - Intent: Medir crescimento financeiro anual.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q067.json`
 - Rows returned: `23`
-- Duration seconds: `1.037`
+- Duration seconds: `1.049`
+- Performance class: `moderate`
 
 ```sql
 WITH anual AS (SELECT year(DT_INTER) AS ano, SUM(CAST(VAL_TOT AS DECIMAL(20,2))) AS valor_total FROM internacoes GROUP BY 1) SELECT ano, ROUND(valor_total, 2) AS valor_total, ROUND(valor_total - LAG(valor_total) OVER (ORDER BY ano), 2) AS diff_abs, ROUND(100.0 * (valor_total - LAG(valor_total) OVER (ORDER BY ano)) / NULLIF(LAG(valor_total) OVER (ORDER BY ano), 0), 4) AS diff_pct FROM anual ORDER BY ano
@@ -892,7 +959,8 @@ WITH anual AS (SELECT year(DT_INTER) AS ano, SUM(CAST(VAL_TOT AS DECIMAL(20,2)))
 - Intent: Suavizar sazonalidade mensal para monitoramento.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q068.json`
 - Rows returned: `225`
-- Duration seconds: `1.428`
+- Duration seconds: `1.437`
+- Performance class: `moderate`
 
 ```sql
 WITH mensal AS (SELECT date_trunc('month', DT_INTER) AS mes_ref, COUNT(*) AS internacoes FROM internacoes GROUP BY 1) SELECT mes_ref, internacoes, ROUND(AVG(internacoes) OVER (ORDER BY mes_ref ROWS BETWEEN 2 PRECEDING AND CURRENT ROW), 2) AS media_movel_3m FROM mensal ORDER BY mes_ref
@@ -905,7 +973,8 @@ WITH mensal AS (SELECT date_trunc('month', DT_INTER) AS mes_ref, COUNT(*) AS int
 - Intent: Evitar rankings instaveis por baixo denominador.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q069.json`
 - Rows returned: `27`
-- Duration seconds: `0.632`
+- Duration seconds: `0.653`
+- Performance class: `fast`
 
 ```sql
 WITH uf AS (SELECT m.SG_UF, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE i.MORTE) AS mortes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1) SELECT SG_UF, internacoes, mortes, ROUND(100.0 * mortes / internacoes, 4) AS taxa_morte_pct FROM uf WHERE internacoes >= 100000 ORDER BY taxa_morte_pct DESC
@@ -918,7 +987,8 @@ WITH uf AS (SELECT m.SG_UF, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE i.MO
 - Intent: Identificar procedimentos de alto custo medio com volume relevante.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q070.json`
 - Rows returned: `20`
-- Duration seconds: `9.078`
+- Duration seconds: `9.592`
+- Performance class: `slow`
 
 ```sql
 WITH proc AS (SELECT p.NOME_PROC, COUNT(*) AS ocorrencias, (SUM(CAST(i.VAL_TOT AS DECIMAL(20,2)))::DOUBLE / COUNT(i.VAL_TOT)) AS valor_medio FROM internacao_procedimento ip JOIN internacoes i ON ip.N_AIH = i.N_AIH JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1) SELECT NOME_PROC, ocorrencias, ROUND(valor_medio, 2) AS valor_medio FROM proc WHERE ocorrencias >= 10000 ORDER BY valor_medio DESC LIMIT 20
@@ -931,7 +1001,8 @@ WITH proc AS (SELECT p.NOME_PROC, COUNT(*) AS ocorrencias, (SUM(CAST(i.VAL_TOT A
 - Intent: Identificar estabelecimentos extremamente concentradores de volume.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q071.json`
 - Rows returned: `344`
-- Duration seconds: `1.757`
+- Duration seconds: `1.864`
+- Performance class: `moderate`
 
 ```sql
 WITH hosp AS (SELECT i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES GROUP BY 1, 2), limiar AS (SELECT quantile_cont(internacoes, 0.95) AS p95 FROM hosp) SELECT hosp.CNES, hosp.NO_HOSPITAL, hosp.internacoes, limiar.p95 FROM hosp, limiar WHERE hosp.internacoes >= limiar.p95 ORDER BY hosp.internacoes DESC, hosp.CNES
@@ -944,7 +1015,8 @@ WITH hosp AS (SELECT i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes FROM interna
 - Intent: Comparar permanencia evitando especialidades raras.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q072.json`
 - Rows returned: `12`
-- Duration seconds: `0.562`
+- Duration seconds: `0.65`
+- Performance class: `fast`
 
 ```sql
 WITH esp AS (SELECT e.DESCRICAO AS especialidade, COUNT(*) AS internacoes, (SUM(CAST(i.DIAS_PERM AS DECIMAL(20,2)))::DOUBLE / COUNT(i.DIAS_PERM)) AS media_dias FROM internacoes i JOIN especialidade e ON i.ESPEC = e.ESPEC GROUP BY 1) SELECT especialidade, internacoes, ROUND(media_dias, 2) AS media_dias FROM esp WHERE internacoes >= 100000 ORDER BY media_dias DESC, especialidade LIMIT 20
@@ -957,7 +1029,8 @@ WITH esp AS (SELECT e.DESCRICAO AS especialidade, COUNT(*) AS internacoes, (SUM(
 - Intent: Entender concentracao de obitos por grupo clinico amplo.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q073.json`
 - Rows returned: `22`
-- Duration seconds: `0.472`
+- Duration seconds: `0.684`
+- Performance class: `fast`
 
 ```sql
 WITH mortes AS (SELECT c.DS_CAPITULO, COUNT(*) AS mortes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID WHERE i.MORTE GROUP BY 1), total AS (SELECT SUM(mortes) AS total_mortes FROM mortes) SELECT DS_CAPITULO, mortes, ROUND(100.0 * mortes / total_mortes, 4) AS proporcao_mortes_pct FROM mortes, total ORDER BY mortes DESC
@@ -970,7 +1043,8 @@ WITH mortes AS (SELECT c.DS_CAPITULO, COUNT(*) AS mortes FROM internacoes i JOIN
 - Intent: Entender distribuicao da permanencia alem da media.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q074.json`
 - Rows returned: `23`
-- Duration seconds: `2.366`
+- Duration seconds: `2.699`
+- Performance class: `moderate`
 
 ```sql
 SELECT year(DT_INTER) AS ano, quantile_cont(DIAS_PERM, 0.5) AS p50_dias, quantile_cont(DIAS_PERM, 0.9) AS p90_dias, quantile_cont(DIAS_PERM, 0.99) AS p99_dias FROM internacoes GROUP BY 1 ORDER BY 1
@@ -983,7 +1057,8 @@ SELECT year(DT_INTER) AS ano, quantile_cont(DIAS_PERM, 0.5) AS p50_dias, quantil
 - Intent: Usar denominador populacional para comparacao territorial.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q075.json`
 - Rows returned: `351`
-- Duration seconds: `0.914`
+- Duration seconds: `0.957`
+- Performance class: `fast`
 
 ```sql
 WITH internacoes_uf AS (SELECT m.SG_UF, year(i.DT_INTER) AS ano, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2), pop_uf AS (SELECT m.SG_UF, se.NU_ANO AS ano, SUM(se.QT_POPULACAO) AS populacao FROM socioeconomico se JOIN municipios m ON se.CO_MUNICIPIO_6D = m.CO_MUNICIPIO_6D GROUP BY 1, 2) SELECT p.SG_UF, p.ano, p.populacao, COALESCE(i.internacoes, 0) AS internacoes, ROUND(1000.0 * COALESCE(i.internacoes, 0) / NULLIF(p.populacao, 0), 4) AS internacoes_por_1000 FROM pop_uf p LEFT JOIN internacoes_uf i ON p.SG_UF = i.SG_UF AND p.ano = i.ano ORDER BY p.SG_UF, p.ano
@@ -996,7 +1071,8 @@ WITH internacoes_uf AS (SELECT m.SG_UF, year(i.DT_INTER) AS ano, COUNT(*) AS int
 - Intent: Comparar intensidade financeira com denominador populacional.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q076.json`
 - Rows returned: `351`
-- Duration seconds: `2.044`
+- Duration seconds: `2.051`
+- Performance class: `moderate`
 
 ```sql
 WITH valor_uf AS (SELECT m.SG_UF, year(i.DT_INTER) AS ano, SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))) AS valor_total FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2), pop_uf AS (SELECT m.SG_UF, se.NU_ANO AS ano, SUM(se.QT_POPULACAO) AS populacao FROM socioeconomico se JOIN municipios m ON se.CO_MUNICIPIO_6D = m.CO_MUNICIPIO_6D GROUP BY 1, 2) SELECT p.SG_UF, p.ano, ROUND(COALESCE(v.valor_total, 0), 2) AS valor_total, p.populacao, ROUND(COALESCE(v.valor_total, 0) / NULLIF(p.populacao, 0), 4) AS valor_por_habitante FROM pop_uf p LEFT JOIN valor_uf v ON p.SG_UF = v.SG_UF AND p.ano = v.ano ORDER BY p.SG_UF, p.ano
@@ -1009,7 +1085,8 @@ WITH valor_uf AS (SELECT m.SG_UF, year(i.DT_INTER) AS ano, SUM(CAST(i.VAL_TOT AS
 - Intent: Comparar risco de morte por capitulo com denominador minimo.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q077.json`
 - Rows returned: `20`
-- Duration seconds: `1.678`
+- Duration seconds: `1.701`
+- Performance class: `moderate`
 
 ```sql
 WITH cap AS (SELECT c.DS_CAPITULO, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE i.MORTE) AS mortes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID GROUP BY 1) SELECT DS_CAPITULO, internacoes, mortes, ROUND(100.0 * mortes / internacoes, 4) AS taxa_morte_pct FROM cap WHERE internacoes >= 100000 ORDER BY taxa_morte_pct DESC
@@ -1022,7 +1099,8 @@ WITH cap AS (SELECT c.DS_CAPITULO, COUNT(*) AS internacoes, COUNT(*) FILTER (WHE
 - Intent: Identificar o procedimento dominante por estado.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q078.json`
 - Rows returned: `27`
-- Duration seconds: `9.824`
+- Duration seconds: `10.273`
+- Performance class: `slow`
 
 ```sql
 WITH proc_uf AS (SELECT m.SG_UF, p.NOME_PROC, COUNT(*) AS ocorrencias, ROW_NUMBER() OVER (PARTITION BY m.SG_UF ORDER BY COUNT(*) DESC) AS rn FROM internacao_procedimento ip JOIN internacoes i ON ip.N_AIH = i.N_AIH JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1, 2) SELECT SG_UF, NOME_PROC, ocorrencias FROM proc_uf WHERE rn = 1 ORDER BY SG_UF
@@ -1035,7 +1113,8 @@ WITH proc_uf AS (SELECT m.SG_UF, p.NOME_PROC, COUNT(*) AS ocorrencias, ROW_NUMBE
 - Intent: Identificar lideres de producao por estado de atendimento.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q079.json`
 - Rows returned: `27`
-- Duration seconds: `1.873`
+- Duration seconds: `1.781`
+- Performance class: `moderate`
 
 ```sql
 WITH hosp_uf AS (SELECT mh.SG_UF, i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes, ROW_NUMBER() OVER (PARTITION BY mh.SG_UF ORDER BY COUNT(*) DESC) AS rn FROM internacoes i JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1, 2, 3) SELECT SG_UF, CNES, NO_HOSPITAL, internacoes FROM hosp_uf WHERE rn = 1 ORDER BY SG_UF
@@ -1048,7 +1127,8 @@ WITH hosp_uf AS (SELECT mh.SG_UF, i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes
 - Intent: Acompanhar crescimento financeiro por nivel de complexidade.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q080.json`
 - Rows returned: `40`
-- Duration seconds: `2.289`
+- Duration seconds: `2.414`
+- Performance class: `moderate`
 
 ```sql
 WITH anual AS (SELECT c.DESCRICAO AS complexidade, year(i.DT_INTER) AS ano, SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))) AS valor_total FROM internacoes i JOIN complexidade c ON i.COMPLEX = c.COMPLEX GROUP BY 1, 2) SELECT complexidade, ano, ROUND(valor_total, 2) AS valor_total, ROUND(valor_total - LAG(valor_total) OVER (PARTITION BY complexidade ORDER BY ano), 2) AS diff_abs FROM anual ORDER BY complexidade, ano
@@ -1061,7 +1141,8 @@ WITH anual AS (SELECT c.DESCRICAO AS complexidade, year(i.DT_INTER) AS ano, SUM(
 - Intent: Medir proporcao anual de internacoes com marcador de UTI.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q081.json`
 - Rows returned: `23`
-- Duration seconds: `0.351`
+- Duration seconds: `0.343`
+- Performance class: `fast`
 
 ```sql
 SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE MARCA_UTI <> 0 OR UTI_INT_TO > 0) AS com_uti, ROUND(100.0 * COUNT(*) FILTER (WHERE MARCA_UTI <> 0 OR UTI_INT_TO > 0) / COUNT(*), 4) AS taxa_uti_pct FROM internacoes GROUP BY 1 ORDER BY 1
@@ -1074,7 +1155,8 @@ SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE MA
 - Intent: Comparar eletivo/urgencia/acidentes no tempo.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q082.json`
 - Rows returned: `111`
-- Duration seconds: `0.516`
+- Duration seconds: `0.519`
+- Performance class: `fast`
 
 ```sql
 WITH base AS (SELECT year(i.DT_INTER) AS ano, c.DESCRICAO AS carater, COUNT(*) AS internacoes FROM internacoes i JOIN car_int c ON i.CAR_INT = c.CAR_INT GROUP BY 1, 2), total AS (SELECT ano, SUM(internacoes) AS total_ano FROM base GROUP BY 1) SELECT b.ano, b.carater, b.internacoes, ROUND(100.0 * b.internacoes / t.total_ano, 4) AS percentual_ano FROM base b JOIN total t ON b.ano = t.ano ORDER BY b.ano, percentual_ano DESC
@@ -1087,7 +1169,8 @@ WITH base AS (SELECT year(i.DT_INTER) AS ano, c.DESCRICAO AS carater, COUNT(*) A
 - Intent: Monitorar linhas de cuidado obstetricas pela especialidade.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q083.json`
 - Rows returned: `17`
-- Duration seconds: `0.151`
+- Duration seconds: `0.12`
+- Performance class: `fast`
 
 ```sql
 SELECT year(i.DT_INTER) AS ano, e.DESCRICAO AS especialidade, COUNT(*) AS internacoes FROM internacoes i JOIN especialidade e ON i.ESPEC = e.ESPEC WHERE e.DESCRICAO ILIKE '%OBSTETRICIA%' GROUP BY 1, 2 ORDER BY 1, 2
@@ -1100,7 +1183,8 @@ SELECT year(i.DT_INTER) AS ano, e.DESCRICAO AS especialidade, COUNT(*) AS intern
 - Intent: Medir deslocamento interestadual entre residencia e atendimento.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q084.json`
 - Rows returned: `30`
-- Duration seconds: `2.846`
+- Duration seconds: `2.814`
+- Performance class: `moderate`
 
 ```sql
 WITH fluxo AS (SELECT mr.SG_UF AS uf_residencia, mh.SG_UF AS uf_hospital, COUNT(*) AS internacoes FROM internacoes i JOIN municipios mr ON i.MUNIC_RES = mr.CO_MUNICIPIO_6D JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1, 2) SELECT uf_residencia, uf_hospital, internacoes FROM fluxo WHERE uf_residencia <> uf_hospital ORDER BY internacoes DESC LIMIT 30
@@ -1113,7 +1197,8 @@ WITH fluxo AS (SELECT mr.SG_UF AS uf_residencia, mh.SG_UF AS uf_hospital, COUNT(
 - Intent: Auditar completude mensal da serie temporal.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q085.json`
 - Rows returned: `23`
-- Duration seconds: `0.382`
+- Duration seconds: `0.383`
+- Performance class: `fast`
 
 ```sql
 WITH meses AS (SELECT year(DT_INTER) AS ano, COUNT(DISTINCT month(DT_INTER)) AS meses_com_dados FROM internacoes GROUP BY 1) SELECT ano, meses_com_dados, 12 - meses_com_dados AS meses_faltantes FROM meses ORDER BY ano
@@ -1126,7 +1211,8 @@ WITH meses AS (SELECT year(DT_INTER) AS ano, COUNT(DISTINCT month(DT_INTER)) AS 
 - Intent: Detectar erro temporal critico.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q086.json`
 - Rows returned: `1`
-- Duration seconds: `0.12`
+- Duration seconds: `0.113`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS registros_invalidos FROM internacoes WHERE DT_SAIDA < DT_INTER
@@ -1139,7 +1225,8 @@ SELECT COUNT(*) AS registros_invalidos FROM internacoes WHERE DT_SAIDA < DT_INTE
 - Intent: Avaliar se DIAS_PERM pode ser usado como permanencia sem regra adicional.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q087.json`
 - Rows returned: `1`
-- Duration seconds: `0.372`
+- Duration seconds: `0.358`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS divergencias FROM internacoes WHERE DT_INTER IS NOT NULL AND DT_SAIDA IS NOT NULL AND DIAS_PERM <> date_diff('day', DT_INTER, DT_SAIDA)
@@ -1153,6 +1240,7 @@ SELECT COUNT(*) AS divergencias FROM internacoes WHERE DT_INTER IS NOT NULL AND 
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q088.json`
 - Rows returned: `1`
 - Duration seconds: `0.001`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS registros_com_valor_negativo FROM internacoes WHERE VAL_SH < 0 OR VAL_SP < 0 OR VAL_UTI < 0 OR VAL_TOT < 0
@@ -1166,6 +1254,7 @@ SELECT COUNT(*) AS registros_com_valor_negativo FROM internacoes WHERE VAL_SH < 
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q089.json`
 - Rows returned: `1`
 - Duration seconds: `0.0`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS idades_invalidas FROM internacoes WHERE IDADE < 0 OR IDADE > 150
@@ -1178,7 +1267,8 @@ SELECT COUNT(*) AS idades_invalidas FROM internacoes WHERE IDADE < 0 OR IDADE > 
 - Intent: Medir orfandade do relacionamento internacao-hospital.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q090.json`
 - Rows returned: `1`
-- Duration seconds: `0.518`
+- Duration seconds: `0.537`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS internacoes_cnes_orfao FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES WHERE i.CNES IS NOT NULL AND h.CNES IS NULL
@@ -1191,7 +1281,8 @@ SELECT COUNT(*) AS internacoes_cnes_orfao FROM internacoes i LEFT JOIN hospital 
 - Intent: Medir orfandade territorial.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q091.json`
 - Rows returned: `1`
-- Duration seconds: `0.481`
+- Duration seconds: `0.476`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS internacoes_municipio_orfao FROM internacoes i LEFT JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D WHERE i.MUNIC_RES IS NOT NULL AND m.CO_MUNICIPIO_6D IS NULL
@@ -1204,7 +1295,8 @@ SELECT COUNT(*) AS internacoes_municipio_orfao FROM internacoes i LEFT JOIN muni
 - Intent: Medir perda de interpretabilidade clinica.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q092.json`
 - Rows returned: `1`
-- Duration seconds: `0.945`
+- Duration seconds: `0.861`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS diagnosticos_principais_orfaos FROM internacoes i LEFT JOIN cid c ON i.DIAG_PRINC = c.CID WHERE i.DIAG_PRINC IS NOT NULL AND c.CID IS NULL
@@ -1217,7 +1309,8 @@ SELECT COUNT(*) AS diagnosticos_principais_orfaos FROM internacoes i LEFT JOIN c
 - Intent: Medir orfandade de procedimentos.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q093.json`
 - Rows returned: `1`
-- Duration seconds: `0.836`
+- Duration seconds: `0.801`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS procedimentos_orfaos FROM internacao_procedimento ip LEFT JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA WHERE ip.PROC_REA IS NOT NULL AND p.PROC_REA IS NULL
@@ -1231,6 +1324,7 @@ SELECT COUNT(*) AS procedimentos_orfaos FROM internacao_procedimento ip LEFT JOI
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q094.json`
 - Rows returned: `1`
 - Duration seconds: `0.001`
+- Performance class: `fast`
 
 ```sql
 SELECT DESCRICAO, COUNT(*) AS quantidade_codigos FROM sexo GROUP BY DESCRICAO HAVING COUNT(*) > 1
@@ -1243,7 +1337,8 @@ SELECT DESCRICAO, COUNT(*) AS quantidade_codigos FROM sexo GROUP BY DESCRICAO HA
 - Intent: Testar consistencia financeira entre total e componentes.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q095.json`
 - Rows returned: `1`
-- Duration seconds: `1.16`
+- Duration seconds: `1.471`
+- Performance class: `moderate`
 
 ```sql
 SELECT COUNT(*) AS divergencias_financeiras FROM internacoes WHERE VAL_TOT + 0.01 < COALESCE(VAL_SH, 0) + COALESCE(VAL_SP, 0) + COALESCE(VAL_UTI, 0)
@@ -1256,7 +1351,8 @@ SELECT COUNT(*) AS divergencias_financeiras FROM internacoes WHERE VAL_TOT + 0.0
 - Intent: Verificar cobertura do calendario para DT_INTER.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q096.json`
 - Rows returned: `1`
-- Duration seconds: `0.528`
+- Duration seconds: `0.543`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS dt_inter_sem_tempo FROM internacoes i LEFT JOIN tempo t ON i.DT_INTER = t.data WHERE i.DT_INTER IS NOT NULL AND t.data IS NULL
@@ -1269,7 +1365,8 @@ SELECT COUNT(*) AS dt_inter_sem_tempo FROM internacoes i LEFT JOIN tempo t ON i.
 - Intent: Verificar cobertura do calendario para DT_SAIDA.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q097.json`
 - Rows returned: `1`
-- Duration seconds: `0.527`
+- Duration seconds: `0.53`
+- Performance class: `fast`
 
 ```sql
 SELECT COUNT(*) AS dt_saida_sem_tempo FROM internacoes i LEFT JOIN tempo t ON i.DT_SAIDA = t.data WHERE i.DT_SAIDA IS NOT NULL AND t.data IS NULL
@@ -1282,7 +1379,8 @@ SELECT COUNT(*) AS dt_saida_sem_tempo FROM internacoes i LEFT JOIN tempo t ON i.
 - Intent: Avaliar impacto pratico de hospitais sem nome.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q098.json`
 - Rows returned: `20`
-- Duration seconds: `0.392`
+- Duration seconds: `0.399`
+- Performance class: `fast`
 
 ```sql
 SELECT i.CNES, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i.CNES = h.CNES WHERE h.NO_HOSPITAL IS NULL OR h.NO_HOSPITAL = '' GROUP BY 1 ORDER BY internacoes DESC LIMIT 20
@@ -1295,7 +1393,8 @@ SELECT i.CNES, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i.C
 - Intent: Comparar carga final contra staging.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q099.json`
 - Rows returned: `1`
-- Duration seconds: `0.003`
+- Duration seconds: `0.002`
+- Performance class: `fast`
 
 ```sql
 SELECT (SELECT COUNT(*) FROM stg_internacoes) AS stg_internacoes, (SELECT COUNT(*) FROM internacoes) AS internacoes, (SELECT COUNT(*) FROM stg_internacoes) - (SELECT COUNT(*) FROM internacoes) AS diferenca
@@ -1308,7 +1407,8 @@ SELECT (SELECT COUNT(*) FROM stg_internacoes) AS stg_internacoes, (SELECT COUNT(
 - Intent: Encontrar anos anomalo-baixos na serie.
 - Evidence: `evaluation/ground_truth/query_results/SIHRD5_Q100.json`
 - Rows returned: `0`
-- Duration seconds: `0.185`
+- Duration seconds: `0.186`
+- Performance class: `fast`
 
 ```sql
 WITH anual AS (SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes FROM internacoes GROUP BY 1), stats AS (SELECT quantile_cont(internacoes, 0.25) AS q1, quantile_cont(internacoes, 0.75) AS q3 FROM anual) SELECT a.ano, a.internacoes, s.q1, s.q3, s.q1 - 1.5 * (s.q3 - s.q1) AS limite_inferior_iqr FROM anual a, stats s WHERE a.internacoes < s.q1 - 1.5 * (s.q3 - s.q1) ORDER BY a.ano

@@ -1,0 +1,99 @@
+{
+  "id": "SIHRD5_Q033",
+  "question_pt": "Quantos dias de UTI foram registrados por ano?",
+  "executed_at": "2026-05-14T03:38:45.744614+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, SUM(UTI_INT_TO) AS dias_uti FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 0.226818,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "dias_uti"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "dias_uti": 0
+    },
+    {
+      "ano": 2001,
+      "dias_uti": 0
+    },
+    {
+      "ano": 2002,
+      "dias_uti": 0
+    },
+    {
+      "ano": 2003,
+      "dias_uti": 0
+    },
+    {
+      "ano": 2005,
+      "dias_uti": 0
+    },
+    {
+      "ano": 2006,
+      "dias_uti": 0
+    },
+    {
+      "ano": 2007,
+      "dias_uti": 0
+    },
+    {
+      "ano": 2008,
+      "dias_uti": 227
+    },
+    {
+      "ano": 2009,
+      "dias_uti": 112
+    },
+    {
+      "ano": 2010,
+      "dias_uti": 314
+    },
+    {
+      "ano": 2011,
+      "dias_uti": 243
+    },
+    {
+      "ano": 2012,
+      "dias_uti": 448
+    },
+    {
+      "ano": 2013,
+      "dias_uti": 330
+    },
+    {
+      "ano": 2014,
+      "dias_uti": 328
+    },
+    {
+      "ano": 2015,
+      "dias_uti": 542
+    },
+    {
+      "ano": 2016,
+      "dias_uti": 665
+    },
+    {
+      "ano": 2017,
+      "dias_uti": 863
+    },
+    {
+      "ano": 2018,
+      "dias_uti": 855
+    },
+    {
+      "ano": 2019,
+      "dias_uti": 312
+    },
+    {
+      "ano": 2020,
+      "dias_uti": 1071
+    }
+  ],
+  "result_hash": "657058827c934a606350719d70e73e0a7d10667352bcf6958e88e929d44b07fb",
+  "semantic_disposition": "accepted"
+}

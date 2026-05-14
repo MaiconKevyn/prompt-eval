@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q072",
   "question_pt": "Quais especialidades tiveram maior permanencia media entre as com pelo menos 100 mil internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH esp AS (SELECT e.DESCRICAO AS especialidade, COUNT(*) AS internacoes, (SUM(CAST(i.DIAS_PERM AS DECIMAL(20,2)))::DOUBLE / COUNT(i.DIAS_PERM)) AS media_dias FROM internacoes i JOIN especialidade e ON i.ESPEC = e.ESPEC GROUP BY 1) SELECT especialidade, internacoes, ROUND(media_dias, 2) AS media_dias FROM esp WHERE internacoes >= 100000 ORDER BY media_dias DESC, especialidade LIMIT 20",
-  "duration_seconds": 0.562,
+  "duration_seconds": 0.65,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 12,
   "columns": [
     "especialidade",

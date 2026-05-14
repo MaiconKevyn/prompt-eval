@@ -1,0 +1,120 @@
+{
+  "id": "SIHRD5_Q057",
+  "question_pt": "Qual e o valor medio por internacao em cada UF de residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+  "executed_at": "2026-05-14T03:39:04.902509+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT m.SG_UF, ROUND((SUM(CAST(i.VAL_TOT AS DECIMAL(20,2)))::DOUBLE / COUNT(i.VAL_TOT)), 2) AS valor_medio, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY valor_medio DESC",
+  "duration_seconds": 1.570698,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 27,
+  "columns": [
+    "SG_UF",
+    "valor_medio",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "PR",
+      "valor_medio": 1890.36,
+      "internacoes": 12700186
+    },
+    {
+      "SG_UF": "SC",
+      "valor_medio": 1799.13,
+      "internacoes": 7223756
+    },
+    {
+      "SG_UF": "MG",
+      "valor_medio": 1798.67,
+      "internacoes": 19403123
+    },
+    {
+      "SG_UF": "SP",
+      "valor_medio": 1748.33,
+      "internacoes": 37750172
+    },
+    {
+      "SG_UF": "RS",
+      "valor_medio": 1714.61,
+      "internacoes": 11834981
+    },
+    {
+      "SG_UF": "ES",
+      "valor_medio": 1623.98,
+      "internacoes": 3656717
+    },
+    {
+      "SG_UF": "RN",
+      "valor_medio": 1592.88,
+      "internacoes": 2708573
+    },
+    {
+      "SG_UF": "PE",
+      "valor_medio": 1582.46,
+      "internacoes": 8532465
+    },
+    {
+      "SG_UF": "RJ",
+      "valor_medio": 1575.84,
+      "internacoes": 10939273
+    },
+    {
+      "SG_UF": "DF",
+      "valor_medio": 1547.34,
+      "internacoes": 1264585
+    },
+    {
+      "SG_UF": "MS",
+      "valor_medio": 1526.15,
+      "internacoes": 2706080
+    },
+    {
+      "SG_UF": "GO",
+      "valor_medio": 1433.2,
+      "internacoes": 6179099
+    },
+    {
+      "SG_UF": "SE",
+      "valor_medio": 1432.05,
+      "internacoes": 1484587
+    },
+    {
+      "SG_UF": "PB",
+      "valor_medio": 1369.53,
+      "internacoes": 3223339
+    },
+    {
+      "SG_UF": "CE",
+      "valor_medio": 1333.26,
+      "internacoes": 7813316
+    },
+    {
+      "SG_UF": "AL",
+      "valor_medio": 1309.3,
+      "internacoes": 2724676
+    },
+    {
+      "SG_UF": "MT",
+      "valor_medio": 1289.32,
+      "internacoes": 3028008
+    },
+    {
+      "SG_UF": "BA",
+      "valor_medio": 1178.03,
+      "internacoes": 13289208
+    },
+    {
+      "SG_UF": "TO",
+      "valor_medio": 1143.74,
+      "internacoes": 1465583
+    },
+    {
+      "SG_UF": "AM",
+      "valor_medio": 1140.99,
+      "internacoes": 2877882
+    }
+  ],
+  "result_hash": "0028acb9230ccc21bc25c7e0604ef5d674494386c1de672660531f626a2a0dd2",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

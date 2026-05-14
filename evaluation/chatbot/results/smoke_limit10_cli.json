@@ -1,0 +1,137 @@
+{
+  "dataset": "/home/maiconkevyn/PycharmProjects/health-system-chatbot/evaluation/ground_truth/stage1_questions_v2.jsonl",
+  "limit": 10,
+  "allow_llm": false,
+  "summary": {
+    "total": 10,
+    "intent_accuracy": 1.0,
+    "sql_valid_rate": 1.0,
+    "sql_execution_rate": 1.0,
+    "result_match_rate": 1.0,
+    "latency_p50": 0.13414973000180908,
+    "latency_p95": 0.2710028729925398,
+    "failures": []
+  },
+  "records": [
+    {
+      "id": "SIHRD5_Q001",
+      "question_pt": "Quantas internacoes existem na tabela principal?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.12074011600634549,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q002",
+      "question_pt": "Quantos registros de procedimentos realizados existem?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.10601729599875398,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q003",
+      "question_pt": "Qual e o periodo minimo e maximo de entrada e saida das internacoes?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.19532310399517883,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q004",
+      "question_pt": "Quantos hospitais existem no cadastro de estabelecimentos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.12914614100009203,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q005",
+      "question_pt": "Quantos municipios existem e quantas UFs brasileiras validas aparecem na dimensao territorial?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.14679742899897974,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q006",
+      "question_pt": "Quantos procedimentos distintos existem no cadastro de procedimentos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.13915331900352612,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q007",
+      "question_pt": "Quantos codigos CID existem na tabela de diagnosticos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.12199314100143965,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q008",
+      "question_pt": "Qual e o intervalo de anos dos indicadores socioeconomicos?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.12898086800123565,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q009",
+      "question_pt": "Quantas internacoes tiveram morte registrada?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.2710028729925398,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q010",
+      "question_pt": "Quantas internacoes indicam uso de UTI pelo marcador de UTI?",
+      "status": "answered",
+      "intent_status": "answerable",
+      "sql_valid": true,
+      "executed": true,
+      "result_match": true,
+      "latency_seconds": 0.326827722004964,
+      "errors": [],
+      "warnings": []
+    }
+  ]
+}

@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q073",
   "question_pt": "Qual proporcao das mortes vem de cada capitulo CID?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH mortes AS (SELECT c.DS_CAPITULO, COUNT(*) AS mortes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID WHERE i.MORTE GROUP BY 1), total AS (SELECT SUM(mortes) AS total_mortes FROM mortes) SELECT DS_CAPITULO, mortes, ROUND(100.0 * mortes / total_mortes, 4) AS proporcao_mortes_pct FROM mortes, total ORDER BY mortes DESC",
-  "duration_seconds": 0.472,
+  "duration_seconds": 0.684,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 22,
   "columns": [
     "DS_CAPITULO",

@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q086",
   "question_pt": "Existem internacoes com data de saida anterior a data de entrada?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT COUNT(*) AS registros_invalidos FROM internacoes WHERE DT_SAIDA < DT_INTER",
-  "duration_seconds": 0.12,
+  "duration_seconds": 0.113,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 1,
   "columns": [
     "registros_invalidos"

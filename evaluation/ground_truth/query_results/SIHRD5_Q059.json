@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q059",
   "question_pt": "Quais municipios dos hospitais tiveram mais internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT mh.SG_UF, mh.NO_MUNICIPIO, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20",
-  "duration_seconds": 1.851,
+  "duration_seconds": 1.771,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "SG_UF",

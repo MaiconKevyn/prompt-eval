@@ -1,0 +1,162 @@
+{
+  "id": "SIHRD5_Q075",
+  "question_pt": "Qual foi a taxa de internacoes por 1.000 habitantes por UF e ano? (considerando apenas internacoes com municipio de residencia mapeado)",
+  "executed_at": "2026-05-14T03:39:52.728854+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH internacoes_uf AS (SELECT m.SG_UF, year(i.DT_INTER) AS ano, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2), pop_uf AS (SELECT m.SG_UF, se.NU_ANO AS ano, SUM(se.QT_POPULACAO) AS populacao FROM socioeconomico se JOIN municipios m ON se.CO_MUNICIPIO_6D = m.CO_MUNICIPIO_6D GROUP BY 1, 2) SELECT p.SG_UF, p.ano, p.populacao, COALESCE(i.internacoes, 0) AS internacoes, ROUND(1000.0 * COALESCE(i.internacoes, 0) / NULLIF(p.populacao, 0), 4) AS internacoes_por_1000 FROM pop_uf p LEFT JOIN internacoes_uf i ON p.SG_UF = i.SG_UF AND p.ano = i.ano ORDER BY p.SG_UF, p.ano",
+  "duration_seconds": 0.964404,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 351,
+  "columns": [
+    "SG_UF",
+    "ano",
+    "populacao",
+    "internacoes",
+    "internacoes_por_1000"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "AC",
+      "ano": 2008,
+      "populacao": 680075,
+      "internacoes": 48259,
+      "internacoes_por_1000": 70.9613
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2009,
+      "populacao": 691132,
+      "internacoes": 50408,
+      "internacoes_por_1000": 72.9354
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2011,
+      "populacao": 746386,
+      "internacoes": 51384,
+      "internacoes_por_1000": 68.8437
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2012,
+      "populacao": 758786,
+      "internacoes": 51624,
+      "internacoes_por_1000": 68.035
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2013,
+      "populacao": 776463,
+      "internacoes": 50644,
+      "internacoes_por_1000": 65.224
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2014,
+      "populacao": 790101,
+      "internacoes": 51139,
+      "internacoes_por_1000": 64.7246
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2015,
+      "populacao": 803513,
+      "internacoes": 47381,
+      "internacoes_por_1000": 58.9673
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2016,
+      "populacao": 816687,
+      "internacoes": 45737,
+      "internacoes_por_1000": 56.0031
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2017,
+      "populacao": 829619,
+      "internacoes": 44632,
+      "internacoes_por_1000": 53.7982
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2018,
+      "populacao": 869265,
+      "internacoes": 44484,
+      "internacoes_por_1000": 51.1743
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2019,
+      "populacao": 881935,
+      "internacoes": 43837,
+      "internacoes_por_1000": 49.7055
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2020,
+      "populacao": 894470,
+      "internacoes": 41070,
+      "internacoes_por_1000": 45.9155
+    },
+    {
+      "SG_UF": "AC",
+      "ano": 2021,
+      "populacao": 906876,
+      "internacoes": 47545,
+      "internacoes_por_1000": 52.4272
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2008,
+      "populacao": 3127560,
+      "internacoes": 183364,
+      "internacoes_por_1000": 58.6285
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2009,
+      "populacao": 3156108,
+      "internacoes": 181431,
+      "internacoes_por_1000": 57.4857
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2011,
+      "populacao": 3143384,
+      "internacoes": 180939,
+      "internacoes_por_1000": 57.5619
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2012,
+      "populacao": 3165472,
+      "internacoes": 167352,
+      "internacoes_por_1000": 52.8679
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2013,
+      "populacao": 3300935,
+      "internacoes": 169429,
+      "internacoes_por_1000": 51.3276
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2014,
+      "populacao": 3321730,
+      "internacoes": 163201,
+      "internacoes_por_1000": 49.1313
+    },
+    {
+      "SG_UF": "AL",
+      "ano": 2015,
+      "populacao": 3340932,
+      "internacoes": 165894,
+      "internacoes_por_1000": 49.655
+    }
+  ],
+  "result_hash": "8a9ff9e0a69ad28891c2748739cf85147527e6fb05aae07e6c67e35c82af75f7",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

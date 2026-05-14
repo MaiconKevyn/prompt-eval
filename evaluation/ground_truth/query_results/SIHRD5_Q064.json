@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q064",
   "question_pt": "Qual e a populacao e o total de internacoes por UF e ano quando ha denominador socioeconomico?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT m.SG_UF, se.NU_ANO AS ano, SUM(se.QT_POPULACAO) AS populacao, COUNT(i.N_AIH) AS internacoes FROM socioeconomico se JOIN municipios m ON se.CO_MUNICIPIO_6D = m.CO_MUNICIPIO_6D LEFT JOIN internacoes i ON i.MUNIC_RES = se.CO_MUNICIPIO_6D AND year(i.DT_INTER) = se.NU_ANO GROUP BY 1, 2 ORDER BY 1, 2",
-  "duration_seconds": 1.575,
+  "duration_seconds": 1.778,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 351,
   "columns": [
     "SG_UF",

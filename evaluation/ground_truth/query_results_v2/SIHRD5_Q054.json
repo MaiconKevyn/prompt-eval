@@ -1,0 +1,120 @@
+{
+  "id": "SIHRD5_Q054",
+  "question_pt": "Quais regioes de saude tiveram mais internacoes por residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+  "executed_at": "2026-05-14T03:39:02.040309+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT m.SG_UF, m.NO_REGIAO_SAUDE, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20",
+  "duration_seconds": 0.772715,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 20,
+  "columns": [
+    "SG_UF",
+    "NO_REGIAO_SAUDE",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "SP",
+      "NO_REGIAO_SAUDE": "São Paulo",
+      "internacoes": 9179591
+    },
+    {
+      "SG_UF": "RJ",
+      "NO_REGIAO_SAUDE": "Metropolitana I",
+      "internacoes": 5726217
+    },
+    {
+      "SG_UF": "PE",
+      "NO_REGIAO_SAUDE": "I Região de Saúde",
+      "internacoes": 4033702
+    },
+    {
+      "SG_UF": "CE",
+      "NO_REGIAO_SAUDE": "1ª RS Fortaleza",
+      "internacoes": 3823037
+    },
+    {
+      "SG_UF": "PR",
+      "NO_REGIAO_SAUDE": "2ª RS Metropolitana",
+      "internacoes": 3733299
+    },
+    {
+      "SG_UF": "MG",
+      "NO_REGIAO_SAUDE": "Belo Horizonte/Nova Lima/Santa Luzia",
+      "internacoes": 2927732
+    },
+    {
+      "SG_UF": "BA",
+      "NO_REGIAO_SAUDE": "Salvador",
+      "internacoes": 2596994
+    },
+    {
+      "SG_UF": "RS",
+      "NO_REGIAO_SAUDE": "Região 10 - Capital e Vale do Gravataí",
+      "internacoes": 2407254
+    },
+    {
+      "SG_UF": "SP",
+      "NO_REGIAO_SAUDE": "Região Metropolitana de Campinas",
+      "internacoes": 2253862
+    },
+    {
+      "SG_UF": "SP",
+      "NO_REGIAO_SAUDE": "Alto do Tietê",
+      "internacoes": 2174623
+    },
+    {
+      "SG_UF": "SP",
+      "NO_REGIAO_SAUDE": "Grande ABC",
+      "internacoes": 2040078
+    },
+    {
+      "SG_UF": "ES",
+      "NO_REGIAO_SAUDE": "Metropolitana",
+      "internacoes": 1942829
+    },
+    {
+      "SG_UF": "PA",
+      "NO_REGIAO_SAUDE": "Metropolitana I",
+      "internacoes": 1891342
+    },
+    {
+      "SG_UF": "AM",
+      "NO_REGIAO_SAUDE": "Manaus, Entorno e Alto Rio Negro",
+      "internacoes": 1853727
+    },
+    {
+      "SG_UF": "GO",
+      "NO_REGIAO_SAUDE": "Central",
+      "internacoes": 1720881
+    },
+    {
+      "SG_UF": "SP",
+      "NO_REGIAO_SAUDE": "Rota dos Bandeirantes",
+      "internacoes": 1616732
+    },
+    {
+      "SG_UF": "CE",
+      "NO_REGIAO_SAUDE": "2ª RS Cariri",
+      "internacoes": 1462052
+    },
+    {
+      "SG_UF": "CE",
+      "NO_REGIAO_SAUDE": "5ª RS Sobral",
+      "internacoes": 1392465
+    },
+    {
+      "SG_UF": "RJ",
+      "NO_REGIAO_SAUDE": "Metropolitana II",
+      "internacoes": 1339825
+    },
+    {
+      "SG_UF": "DF",
+      "NO_REGIAO_SAUDE": "Distrito Federal",
+      "internacoes": 1264585
+    }
+  ],
+  "result_hash": "fb29f5018e8f92f1dc3805ca96cdde95f85f5e91d7fdc8014fdf636ec0e2b336",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

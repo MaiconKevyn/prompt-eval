@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q048",
   "question_pt": "Quais tipos de UTI aparecem mais nas internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT mu.DESCRICAO AS marca_uti, COUNT(*) AS internacoes FROM internacoes i JOIN marca_uti mu ON i.MARCA_UTI = mu.MARCA_UTI GROUP BY 1 ORDER BY internacoes DESC",
-  "duration_seconds": 0.266,
+  "duration_seconds": 0.284,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 17,
   "columns": [
     "marca_uti",

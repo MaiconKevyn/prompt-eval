@@ -1,0 +1,141 @@
+{
+  "id": "SIHRD5_Q077",
+  "question_pt": "Quais capitulos CID tiveram maior taxa de mortalidade com pelo menos 100 mil internacoes?",
+  "executed_at": "2026-05-14T03:39:56.508250+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH cap AS (SELECT c.DS_CAPITULO, COUNT(*) AS internacoes, COUNT(*) FILTER (WHERE i.MORTE) AS mortes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID GROUP BY 1) SELECT DS_CAPITULO, internacoes, mortes, ROUND(100.0 * mortes / internacoes, 4) AS taxa_morte_pct FROM cap WHERE internacoes >= 100000 ORDER BY taxa_morte_pct DESC",
+  "duration_seconds": 1.743097,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 20,
+  "columns": [
+    "DS_CAPITULO",
+    "internacoes",
+    "mortes",
+    "taxa_morte_pct"
+  ],
+  "preview_rows": [
+    {
+      "DS_CAPITULO": "I. Algumas doenças infecciosas e parasitárias",
+      "internacoes": 14907800,
+      "mortes": 1648769,
+      "taxa_morte_pct": 11.0598
+    },
+    {
+      "DS_CAPITULO": "IX. Doenças do aparelho circulatório",
+      "internacoes": 18158828,
+      "mortes": 1477322,
+      "taxa_morte_pct": 8.1356
+    },
+    {
+      "DS_CAPITULO": "II. Neoplasias [tumores]",
+      "internacoes": 11975513,
+      "mortes": 962049,
+      "taxa_morte_pct": 8.0335
+    },
+    {
+      "DS_CAPITULO": "XVIII. Sintomas, sinais e achados anormais",
+      "internacoes": 2871002,
+      "mortes": 223961,
+      "taxa_morte_pct": 7.8008
+    },
+    {
+      "DS_CAPITULO": "X. Doenças do aparelho respiratório",
+      "internacoes": 19690732,
+      "mortes": 1438634,
+      "taxa_morte_pct": 7.3061
+    },
+    {
+      "DS_CAPITULO": "IV. Doenças endócrinas, nutricionais e metabólicas",
+      "internacoes": 4090558,
+      "mortes": 236603,
+      "taxa_morte_pct": 5.7841
+    },
+    {
+      "DS_CAPITULO": "VI. Doenças do sistema nervoso",
+      "internacoes": 2963099,
+      "mortes": 145107,
+      "taxa_morte_pct": 4.8971
+    },
+    {
+      "DS_CAPITULO": "III. Doenças do sangue e dos órgãos hematopoéticos",
+      "internacoes": 1536821,
+      "mortes": 73322,
+      "taxa_morte_pct": 4.771
+    },
+    {
+      "DS_CAPITULO": "XVI. Algumas afecções originadas no período perinatal",
+      "internacoes": 4192852,
+      "mortes": 177340,
+      "taxa_morte_pct": 4.2296
+    },
+    {
+      "DS_CAPITULO": "XI. Doenças do aparelho digestivo",
+      "internacoes": 17325707,
+      "mortes": 576771,
+      "taxa_morte_pct": 3.329
+    },
+    {
+      "DS_CAPITULO": "XIV. Doenças do aparelho geniturinário",
+      "internacoes": 12654302,
+      "mortes": 341301,
+      "taxa_morte_pct": 2.6971
+    },
+    {
+      "DS_CAPITULO": "XVII. Malformações congênitas, deformidades e anomalias cromossômicas",
+      "internacoes": 1284877,
+      "mortes": 32839,
+      "taxa_morte_pct": 2.5558
+    },
+    {
+      "DS_CAPITULO": "XIX. Lesões, envenenamento e outras consequências de causas externas",
+      "internacoes": 17789367,
+      "mortes": 417530,
+      "taxa_morte_pct": 2.3471
+    },
+    {
+      "DS_CAPITULO": "XII. Doenças da pele e do tecido subcutâneo",
+      "internacoes": 3737369,
+      "mortes": 55055,
+      "taxa_morte_pct": 1.4731
+    },
+    {
+      "DS_CAPITULO": "XXI. Fatores que influenciam o estado de saúde",
+      "internacoes": 3885467,
+      "mortes": 48775,
+      "taxa_morte_pct": 1.2553
+    },
+    {
+      "DS_CAPITULO": "XIII. Doenças do sistema osteomuscular e do tecido conjuntivo",
+      "internacoes": 3241585,
+      "mortes": 21526,
+      "taxa_morte_pct": 0.6641
+    },
+    {
+      "DS_CAPITULO": "V. Transtornos mentais e comportamentais",
+      "internacoes": 3926755,
+      "mortes": 14811,
+      "taxa_morte_pct": 0.3772
+    },
+    {
+      "DS_CAPITULO": "VIII. Doenças do ouvido e da apófise mastóide",
+      "internacoes": 299473,
+      "mortes": 403,
+      "taxa_morte_pct": 0.1346
+    },
+    {
+      "DS_CAPITULO": "XV. Gravidez, parto e puerpério",
+      "internacoes": 37670769,
+      "mortes": 13772,
+      "taxa_morte_pct": 0.0366
+    },
+    {
+      "DS_CAPITULO": "VII. Doenças do olho e anexos",
+      "internacoes": 1642482,
+      "mortes": 425,
+      "taxa_morte_pct": 0.0259
+    }
+  ],
+  "result_hash": "9075e939f0546cd907cf247a723a0f9d6ca5d626724fd18ab93a46d9bfea409e",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

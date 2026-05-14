@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q052",
   "question_pt": "Quais hospitais tiveram maior volume de internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes FROM internacoes i LEFT JOIN hospital h ON i.CNES = h.CNES GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20",
-  "duration_seconds": 1.465,
+  "duration_seconds": 1.485,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "CNES",

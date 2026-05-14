@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q100",
   "question_pt": "Quais anos tiveram volume extremamente baixo de internacoes e podem indicar cobertura parcial?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH anual AS (SELECT year(DT_INTER) AS ano, COUNT(*) AS internacoes FROM internacoes GROUP BY 1), stats AS (SELECT quantile_cont(internacoes, 0.25) AS q1, quantile_cont(internacoes, 0.75) AS q3 FROM anual) SELECT a.ano, a.internacoes, s.q1, s.q3, s.q1 - 1.5 * (s.q3 - s.q1) AS limite_inferior_iqr FROM anual a, stats s WHERE a.internacoes < s.q1 - 1.5 * (s.q3 - s.q1) ORDER BY a.ano",
-  "duration_seconds": 0.185,
+  "duration_seconds": 0.186,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 0,
   "columns": [
     "ano",

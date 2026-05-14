@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q012",
+  "question_pt": "Qual e o valor total aprovado registrado em VAL_TOT?",
+  "executed_at": "2026-05-14T03:38:35.147099+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT ROUND(SUM(CAST(VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacoes",
+  "duration_seconds": 1.3772,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "valor_total"
+  ],
+  "preview_rows": [
+    {
+      "valor_total": 281483308093.99
+    }
+  ],
+  "result_hash": "356b73ecd3a65baf3a7bc6896192e2e2d1f37971ab978f73ce23b9a2054ad9b5",
+  "semantic_disposition": "accepted"
+}

@@ -1,0 +1,627 @@
+{
+  "dataset": "/home/maiconkevyn/PycharmProjects/health-system-chatbot/evaluation/ground_truth/stage1_questions_v2.jsonl",
+  "limit": 20,
+  "allow_llm": false,
+  "summary": {
+    "total": 20,
+    "intent_accuracy": 1.0,
+    "sql_valid_rate": 0.0,
+    "sql_execution_rate": 0.0,
+    "result_match_rate": null,
+    "caveat_recall": 0.0,
+    "latency_p50": 0.4607376294952701,
+    "latency_p95": 2.4154452969960403,
+    "cost_estimate": {
+      "usd": null,
+      "method": "not_tracked_yet"
+    },
+    "failure_by_difficulty": {
+      "L1": 15,
+      "L2": 5
+    },
+    "failures": [
+      {
+        "id": "SIHRD5_Q001",
+        "question_pt": "Quantas internacoes existem na tabela principal?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 2.4154452969960403,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q002",
+        "question_pt": "Quantos registros de procedimentos realizados existem?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.42170247100875713,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q003",
+        "question_pt": "Qual e o periodo minimo e maximo de entrada e saida das internacoes?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.5551539290026994,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q004",
+        "question_pt": "Quantos hospitais existem no cadastro de estabelecimentos?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.4191634009912377,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q005",
+        "question_pt": "Quantos municipios existem e quantas UFs brasileiras validas aparecem na dimensao territorial?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.6144795759901172,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q006",
+        "question_pt": "Quantos procedimentos distintos existem no cadastro de procedimentos?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.4542973030038411,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q007",
+        "question_pt": "Quantos codigos CID existem na tabela de diagnosticos?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.5671662649983773,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q008",
+        "question_pt": "Qual e o intervalo de anos dos indicadores socioeconomicos?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.586672499004635,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q009",
+        "question_pt": "Quantas internacoes tiveram morte registrada?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.4611930679966463,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q010",
+        "question_pt": "Quantas internacoes indicam uso de UTI pelo marcador de UTI?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.4403847700014012,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q011",
+        "question_pt": "Qual e a menor e a maior idade registradas nas internacoes?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 2.685043396995752,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q012",
+        "question_pt": "Qual e o valor total aprovado registrado em VAL_TOT?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.3788280680018943,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q013",
+        "question_pt": "Quantos CNES distintos aparecem nas internacoes?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.45259911999164615,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q014",
+        "question_pt": "Quantos municipios de residencia distintos aparecem nas internacoes?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.4602821909938939,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q015",
+        "question_pt": "Quantos dias existem na dimensao tempo?",
+        "difficulty": "L1",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.44940095700439997,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q016",
+        "question_pt": "Quantas internacoes ocorreram por ano de entrada?",
+        "difficulty": "L2",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.5665814840031089,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q017",
+        "question_pt": "Qual foi o valor total por ano de entrada?",
+        "difficulty": "L2",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.38535484700696543,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q018",
+        "question_pt": "Quantas mortes hospitalares foram registradas por ano?",
+        "difficulty": "L2",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.6263692209904548,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q019",
+        "question_pt": "Qual foi a taxa bruta de mortalidade hospitalar por ano?",
+        "difficulty": "L2",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.5847247000056086,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      },
+      {
+        "id": "SIHRD5_Q020",
+        "question_pt": "Qual foi o valor medio por internacao em cada ano?",
+        "difficulty": "L2",
+        "status": "failed",
+        "intent_status": "answerable",
+        "sql_valid": false,
+        "executed": false,
+        "result_match": null,
+        "latency_seconds": 0.45692005498858634,
+        "errors": [
+          "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+        ],
+        "warnings": []
+      }
+    ]
+  },
+  "records": [
+    {
+      "id": "SIHRD5_Q001",
+      "question_pt": "Quantas internacoes existem na tabela principal?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 2.4154452969960403,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q002",
+      "question_pt": "Quantos registros de procedimentos realizados existem?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.42170247100875713,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q003",
+      "question_pt": "Qual e o periodo minimo e maximo de entrada e saida das internacoes?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.5551539290026994,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q004",
+      "question_pt": "Quantos hospitais existem no cadastro de estabelecimentos?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.4191634009912377,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q005",
+      "question_pt": "Quantos municipios existem e quantas UFs brasileiras validas aparecem na dimensao territorial?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.6144795759901172,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q006",
+      "question_pt": "Quantos procedimentos distintos existem no cadastro de procedimentos?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.4542973030038411,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q007",
+      "question_pt": "Quantos codigos CID existem na tabela de diagnosticos?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.5671662649983773,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q008",
+      "question_pt": "Qual e o intervalo de anos dos indicadores socioeconomicos?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.586672499004635,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q009",
+      "question_pt": "Quantas internacoes tiveram morte registrada?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.4611930679966463,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q010",
+      "question_pt": "Quantas internacoes indicam uso de UTI pelo marcador de UTI?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.4403847700014012,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q011",
+      "question_pt": "Qual e a menor e a maior idade registradas nas internacoes?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 2.685043396995752,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q012",
+      "question_pt": "Qual e o valor total aprovado registrado em VAL_TOT?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.3788280680018943,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q013",
+      "question_pt": "Quantos CNES distintos aparecem nas internacoes?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.45259911999164615,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q014",
+      "question_pt": "Quantos municipios de residencia distintos aparecem nas internacoes?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.4602821909938939,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q015",
+      "question_pt": "Quantos dias existem na dimensao tempo?",
+      "difficulty": "L1",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.44940095700439997,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q016",
+      "question_pt": "Quantas internacoes ocorreram por ano de entrada?",
+      "difficulty": "L2",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.5665814840031089,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q017",
+      "question_pt": "Qual foi o valor total por ano de entrada?",
+      "difficulty": "L2",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.38535484700696543,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q018",
+      "question_pt": "Quantas mortes hospitalares foram registradas por ano?",
+      "difficulty": "L2",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.6263692209904548,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q019",
+      "question_pt": "Qual foi a taxa bruta de mortalidade hospitalar por ano?",
+      "difficulty": "L2",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.5847247000056086,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    },
+    {
+      "id": "SIHRD5_Q020",
+      "question_pt": "Qual foi o valor medio por internacao em cada ano?",
+      "difficulty": "L2",
+      "status": "failed",
+      "intent_status": "answerable",
+      "sql_valid": false,
+      "executed": false,
+      "result_match": null,
+      "latency_seconds": 0.45692005498858634,
+      "errors": [
+        "LLM generation is disabled. Runtime SQL generation no longer uses ground truth shortcuts."
+      ],
+      "warnings": []
+    }
+  ]
+}

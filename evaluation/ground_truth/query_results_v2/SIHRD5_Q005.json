@@ -1,0 +1,25 @@
+{
+  "id": "SIHRD5_Q005",
+  "question_pt": "Quantos municipios existem e quantas UFs brasileiras validas aparecem na dimensao territorial?",
+  "executed_at": "2026-05-14T03:38:33.220047+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH valid_uf(sg_uf) AS (VALUES ('AC'), ('AL'), ('AP'), ('AM'), ('BA'), ('CE'), ('DF'), ('ES'), ('GO'), ('MA'), ('MT'), ('MS'), ('MG'), ('PA'), ('PB'), ('PR'), ('PE'), ('PI'), ('RJ'), ('RN'), ('RS'), ('RO'), ('RR'), ('SC'), ('SP'), ('SE'), ('TO')) SELECT COUNT(*) AS total_municipios, COUNT(DISTINCT m.SG_UF) FILTER (WHERE v.sg_uf IS NOT NULL) AS total_ufs_validas, COUNT(DISTINCT m.SG_UF) FILTER (WHERE v.sg_uf IS NULL) AS total_codigos_sg_uf_invalidos FROM municipios m LEFT JOIN valid_uf v ON m.SG_UF = v.sg_uf",
+  "duration_seconds": 0.004064,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "total_municipios",
+    "total_ufs_validas",
+    "total_codigos_sg_uf_invalidos"
+  ],
+  "preview_rows": [
+    {
+      "total_municipios": 5589,
+      "total_ufs_validas": 27,
+      "total_codigos_sg_uf_invalidos": 11
+    }
+  ],
+  "result_hash": "e3e0e2195c9b49a96fdf588fcdbe5c7900dbd29974ced804ec63f1c3ca73aa3a",
+  "semantic_disposition": "accepted"
+}

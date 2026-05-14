@@ -1,6 +1,6 @@
 # Data Quality Report
 
-Generated at: 2026-05-13T09:42:16
+Generated at: 2026-05-13T19:23:25
 
 ## Summary
 
@@ -21,6 +21,9 @@ Generated at: 2026-05-13T09:42:16
 | DQ013 | Hospitais referenciados sem nome cadastrado | medium | 59346551 | False |
 | DQ014 | Tabela sexo possui descricoes duplicadas | medium | 1 | False |
 | DQ015 | VAL_TOT menor que a soma VAL_SH + VAL_SP + VAL_UTI | medium | 0 | False |
+| DQ016 | municipios.SG_UF contem valores que nao sao UFs brasileiras | high | 18 | True |
+| DQ017 | CO_MUNICIPIO_6D com formato diferente de seis digitos | high | 0 | False |
+| DQ018 | CO_MUNICIPIO_7D nao nulo com formato diferente de sete digitos | medium | 0 | False |
 
 ## DQ001: Altas anteriores a internacao
 
@@ -386,6 +389,83 @@ Sample SQL:
 
 ```sql
 SELECT N_AIH, VAL_SH, VAL_SP, VAL_UTI, VAL_TOT, COALESCE(VAL_SH, 0) + COALESCE(VAL_SP, 0) + COALESCE(VAL_UTI, 0) AS soma_componentes FROM internacoes WHERE VAL_TOT + 0.01 < COALESCE(VAL_SH, 0) + COALESCE(VAL_SP, 0) + COALESCE(VAL_UTI, 0) LIMIT 10
+```
+
+Sample rows:
+
+_Nenhuma linha retornada._
+
+## DQ016: municipios.SG_UF contem valores que nao sao UFs brasileiras
+
+- Severity: `high`
+- Affected rows: `18`
+- Blocks ground truth: `True`
+
+Why it matters: Valores numericos em SG_UF fazem perguntas sobre UFs retornarem 38 categorias em vez das 27 UFs validas.
+
+```sql
+WITH valid_uf(sg_uf) AS (VALUES ('AC'), ('AL'), ('AP'), ('AM'), ('BA'), ('CE'), ('DF'), ('ES'), ('GO'), ('MA'), ('MT'), ('MS'), ('MG'), ('PA'), ('PB'), ('PR'), ('PE'), ('PI'), ('RJ'), ('RN'), ('RS'), ('RO'), ('RR'), ('SC'), ('SP'), ('SE'), ('TO')) SELECT COUNT(*) AS affected_rows FROM municipios m LEFT JOIN valid_uf v ON m.SG_UF = v.sg_uf WHERE v.sg_uf IS NULL
+```
+
+Sample SQL:
+
+```sql
+WITH valid_uf(sg_uf) AS (VALUES ('AC'), ('AL'), ('AP'), ('AM'), ('BA'), ('CE'), ('DF'), ('ES'), ('GO'), ('MA'), ('MT'), ('MS'), ('MG'), ('PA'), ('PB'), ('PR'), ('PE'), ('PI'), ('RJ'), ('RN'), ('RS'), ('RO'), ('RR'), ('SC'), ('SP'), ('SE'), ('TO')) SELECT m.SG_UF, COUNT(*) AS municipios FROM municipios m LEFT JOIN valid_uf v ON m.SG_UF = v.sg_uf WHERE v.sg_uf IS NULL GROUP BY 1 ORDER BY 1
+```
+
+Sample rows:
+
+| SG_UF | municipios |
+| --- | --- |
+| 13 | 3 |
+| 14 | 1 |
+| 20 | 1 |
+| 21 | 2 |
+| 25 | 4 |
+| 29 | 1 |
+| 33 | 1 |
+| 42 | 1 |
+| 43 | 2 |
+| 51 | 1 |
+
+## DQ017: CO_MUNICIPIO_6D com formato diferente de seis digitos
+
+- Severity: `high`
+- Affected rows: `0`
+- Blocks ground truth: `False`
+
+Why it matters: Codigos municipais fora do formato esperado prejudicam joins territoriais e validacao IBGE/DATASUS.
+
+```sql
+SELECT COUNT(*) AS affected_rows FROM municipios WHERE NOT regexp_full_match(CAST(CO_MUNICIPIO_6D AS VARCHAR), '^[0-9]{6}$')
+```
+
+Sample SQL:
+
+```sql
+SELECT CO_MUNICIPIO_6D, NO_MUNICIPIO, SG_UF FROM municipios WHERE NOT regexp_full_match(CAST(CO_MUNICIPIO_6D AS VARCHAR), '^[0-9]{6}$') LIMIT 10
+```
+
+Sample rows:
+
+_Nenhuma linha retornada._
+
+## DQ018: CO_MUNICIPIO_7D nao nulo com formato diferente de sete digitos
+
+- Severity: `medium`
+- Affected rows: `0`
+- Blocks ground truth: `False`
+
+Why it matters: Codigos municipais de sete digitos fora do formato esperado indicam problema cadastral ou campo com significado distinto.
+
+```sql
+SELECT COUNT(*) AS affected_rows FROM municipios WHERE CO_MUNICIPIO_7D IS NOT NULL AND NOT regexp_full_match(CAST(CO_MUNICIPIO_7D AS VARCHAR), '^[0-9]{7}$')
+```
+
+Sample SQL:
+
+```sql
+SELECT CO_MUNICIPIO_7D, NO_MUNICIPIO, SG_UF FROM municipios WHERE CO_MUNICIPIO_7D IS NOT NULL AND NOT regexp_full_match(CAST(CO_MUNICIPIO_7D AS VARCHAR), '^[0-9]{7}$') LIMIT 10
 ```
 
 Sample rows:

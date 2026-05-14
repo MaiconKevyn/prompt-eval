@@ -1,0 +1,21 @@
+{
+  "id": "SIHRD5_Q087",
+  "question_pt": "Quantas internacoes tem DIAS_PERM diferente da diferenca simples entre saida e entrada?",
+  "executed_at": "2026-05-14T03:40:15.478067+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT COUNT(*) AS divergencias FROM internacoes WHERE DT_INTER IS NOT NULL AND DT_SAIDA IS NOT NULL AND DIAS_PERM <> date_diff('day', DT_INTER, DT_SAIDA)",
+  "duration_seconds": 0.367536,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "divergencias"
+  ],
+  "preview_rows": [
+    {
+      "divergencias": 172581441
+    }
+  ],
+  "result_hash": "f2f4d12e1b687c347f4ee65e5e7d4b40d085a52ae692e4fd9f9e84dcd1b8c665",
+  "semantic_disposition": "accepted"
+}

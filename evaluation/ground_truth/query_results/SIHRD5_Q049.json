@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q049",
   "question_pt": "Quais procedimentos realizados foram mais frequentes por descricao?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT p.NOME_PROC, COUNT(*) AS ocorrencias FROM internacao_procedimento ip JOIN procedimentos p ON ip.PROC_REA = p.PROC_REA GROUP BY 1 ORDER BY ocorrencias DESC LIMIT 20",
-  "duration_seconds": 1.289,
+  "duration_seconds": 1.313,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "NOME_PROC",

@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q057",
   "question_pt": "Qual e o valor medio por internacao em cada UF de residencia?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT m.SG_UF, ROUND((SUM(CAST(i.VAL_TOT AS DECIMAL(20,2)))::DOUBLE / COUNT(i.VAL_TOT)), 2) AS valor_medio, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1 ORDER BY valor_medio DESC",
-  "duration_seconds": 1.396,
+  "duration_seconds": 1.413,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 27,
   "columns": [
     "SG_UF",

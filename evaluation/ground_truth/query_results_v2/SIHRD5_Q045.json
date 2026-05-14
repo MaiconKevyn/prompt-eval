@@ -1,0 +1,43 @@
+{
+  "id": "SIHRD5_Q045",
+  "question_pt": "Quantas internacoes ocorreram por descricao do carater de internacao?",
+  "executed_at": "2026-05-14T03:38:51.093200+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT c.DESCRICAO AS carater_internacao, COUNT(*) AS internacoes FROM internacoes i JOIN car_int c ON i.CAR_INT = c.CAR_INT GROUP BY 1 ORDER BY internacoes DESC",
+  "duration_seconds": 0.256212,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 6,
+  "columns": [
+    "carater_internacao",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "carater_internacao": "Urgência",
+      "internacoes": 145586729
+    },
+    {
+      "carater_internacao": "Eletivo",
+      "internacoes": 36515288
+    },
+    {
+      "carater_internacao": "Out tp lesões e envenen por agent quím físicos",
+      "internacoes": 1138155
+    },
+    {
+      "carater_internacao": "Outros tipo de acidente de trânsito",
+      "internacoes": 635768
+    },
+    {
+      "carater_internacao": "Acidente no local trabalho ou a serv da empresa",
+      "internacoes": 1060
+    },
+    {
+      "carater_internacao": "Acidente no trajeto para o trabalho",
+      "internacoes": 219
+    }
+  ],
+  "result_hash": "c20de62b3335e59faa35bb9747c40d492857d5bc23e4ce48250a4b349c6bc54f",
+  "semantic_disposition": "accepted"
+}

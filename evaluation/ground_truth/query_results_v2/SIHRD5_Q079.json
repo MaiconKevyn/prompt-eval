@@ -1,0 +1,141 @@
+{
+  "id": "SIHRD5_Q079",
+  "question_pt": "Qual hospital teve maior volume em cada UF do estabelecimento?",
+  "executed_at": "2026-05-14T03:40:08.414255+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH hosp_uf AS (SELECT mh.SG_UF, i.CNES, h.NO_HOSPITAL, COUNT(*) AS internacoes, ROW_NUMBER() OVER (PARTITION BY mh.SG_UF ORDER BY COUNT(*) DESC) AS rn FROM internacoes i JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1, 2, 3) SELECT SG_UF, CNES, NO_HOSPITAL, internacoes FROM hosp_uf WHERE rn = 1 ORDER BY SG_UF",
+  "duration_seconds": 1.859497,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 27,
+  "columns": [
+    "SG_UF",
+    "CNES",
+    "NO_HOSPITAL",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "AC",
+      "CNES": 2001586,
+      "NO_HOSPITAL": "FUNDACAO HOSPITAL ESTADUAL DO ACRE",
+      "internacoes": 105779
+    },
+    {
+      "SG_UF": "AL",
+      "CNES": 2006510,
+      "NO_HOSPITAL": "SECRETARIA DE ESTADO DA SAUDE FES",
+      "internacoes": 200599
+    },
+    {
+      "SG_UF": "AM",
+      "CNES": 2013649,
+      "NO_HOSPITAL": "HOSPITAL PRONTO SOCORRO 28 DE AGOSTO",
+      "internacoes": 186849
+    },
+    {
+      "SG_UF": "AP",
+      "CNES": 2020068,
+      "NO_HOSPITAL": "SECRETARIA DE ESTADO DA SAUDE DO AMAPA",
+      "internacoes": 162660
+    },
+    {
+      "SG_UF": "BA",
+      "CNES": 3859,
+      "NO_HOSPITAL": "BAHIA SECRETARIA DE SAUDE DO ESTADO",
+      "internacoes": 304142
+    },
+    {
+      "SG_UF": "CE",
+      "CNES": 3021114,
+      "NO_HOSPITAL": null,
+      "internacoes": 314447
+    },
+    {
+      "SG_UF": "DF",
+      "CNES": 10456,
+      "NO_HOSPITAL": null,
+      "internacoes": 349390
+    },
+    {
+      "SG_UF": "ES",
+      "CNES": 11746,
+      "NO_HOSPITAL": "IRMANDADE DA SANTA CASA DE MISERICORDIA",
+      "internacoes": 178432
+    },
+    {
+      "SG_UF": "GO",
+      "CNES": 2338262,
+      "NO_HOSPITAL": null,
+      "internacoes": 205375
+    },
+    {
+      "SG_UF": "MA",
+      "CNES": 2726653,
+      "NO_HOSPITAL": "UNIVERSIDADE FEDERAL DO MARANHAO UFMA",
+      "internacoes": 231453
+    },
+    {
+      "SG_UF": "MG",
+      "CNES": 27014,
+      "NO_HOSPITAL": "SANTA CASA DE MISERICORDIA DE BELO HORIZONTE",
+      "internacoes": 623140
+    },
+    {
+      "SG_UF": "MS",
+      "CNES": 9717,
+      "NO_HOSPITAL": null,
+      "internacoes": 424481
+    },
+    {
+      "SG_UF": "MT",
+      "CNES": 2311682,
+      "NO_HOSPITAL": "SOCIEDADE BENEFICENTE SANTA HELENA",
+      "internacoes": 198009
+    },
+    {
+      "SG_UF": "PA",
+      "CNES": 2752700,
+      "NO_HOSPITAL": "FUNDACAO SANTA CASA DE MISERICORDIA DO PARA",
+      "internacoes": 308665
+    },
+    {
+      "SG_UF": "PB",
+      "CNES": 2362287,
+      "NO_HOSPITAL": "FUNDO MUNICIPAL DE SAUDE DE CAMPINA GRANDE",
+      "internacoes": 180315
+    },
+    {
+      "SG_UF": "PE",
+      "CNES": 434,
+      "NO_HOSPITAL": "INSTITUTO DE MEDICINA INTEGRAL PROF FERNANDO FIGUEIRA",
+      "internacoes": 719254
+    },
+    {
+      "SG_UF": "PI",
+      "CNES": 5828856,
+      "NO_HOSPITAL": "MUNICIPIO DE TERESINA",
+      "internacoes": 298737
+    },
+    {
+      "SG_UF": "PR",
+      "CNES": 13846,
+      "NO_HOSPITAL": "MATERNIDADE E CIRURGIA NOSSA SENHORA DO ROCIO LTDA",
+      "internacoes": 569114
+    },
+    {
+      "SG_UF": "RJ",
+      "CNES": 2798662,
+      "NO_HOSPITAL": "HOSPITAL GERAL DE NOVA IGUACU",
+      "internacoes": 315413
+    },
+    {
+      "SG_UF": "RN",
+      "CNES": 2653923,
+      "NO_HOSPITAL": "SECRETARIA ESTADUAL DE SAUDE DO RN",
+      "internacoes": 198829
+    }
+  ],
+  "result_hash": "48361552b61540cf626578c5b3a48966d7ff3748324c2dca04113842a7fd0286",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

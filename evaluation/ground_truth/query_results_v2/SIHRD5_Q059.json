@@ -1,0 +1,120 @@
+{
+  "id": "SIHRD5_Q059",
+  "question_pt": "Quais municipios dos hospitais tiveram mais internacoes?",
+  "executed_at": "2026-05-14T03:39:19.237163+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT mh.SG_UF, mh.NO_MUNICIPIO, COUNT(*) AS internacoes FROM internacoes i JOIN hospital h ON i.CNES = h.CNES JOIN municipios mh ON h.MUNIC_MOV = mh.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20",
+  "duration_seconds": 2.206397,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 20,
+  "columns": [
+    "SG_UF",
+    "NO_MUNICIPIO",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "SP",
+      "NO_MUNICIPIO": "São Paulo",
+      "internacoes": 10418938
+    },
+    {
+      "SG_UF": "PE",
+      "NO_MUNICIPIO": "Recife",
+      "internacoes": 4195266
+    },
+    {
+      "SG_UF": "RJ",
+      "NO_MUNICIPIO": "Rio de Janeiro",
+      "internacoes": 4174023
+    },
+    {
+      "SG_UF": "MG",
+      "NO_MUNICIPIO": "Belo Horizonte",
+      "internacoes": 3834222
+    },
+    {
+      "SG_UF": "BA",
+      "NO_MUNICIPIO": "Salvador",
+      "internacoes": 3256996
+    },
+    {
+      "SG_UF": "CE",
+      "NO_MUNICIPIO": "Fortaleza",
+      "internacoes": 3239117
+    },
+    {
+      "SG_UF": "RS",
+      "NO_MUNICIPIO": "Porto Alegre",
+      "internacoes": 2766884
+    },
+    {
+      "SG_UF": "PR",
+      "NO_MUNICIPIO": "Curitiba",
+      "internacoes": 2507552
+    },
+    {
+      "SG_UF": "GO",
+      "NO_MUNICIPIO": "Goiânia",
+      "internacoes": 2276279
+    },
+    {
+      "SG_UF": "AM",
+      "NO_MUNICIPIO": "Manaus",
+      "internacoes": 1791854
+    },
+    {
+      "SG_UF": "PA",
+      "NO_MUNICIPIO": "Belém",
+      "internacoes": 1783348
+    },
+    {
+      "SG_UF": "MA",
+      "NO_MUNICIPIO": "São Luís",
+      "internacoes": 1497054
+    },
+    {
+      "SG_UF": "PI",
+      "NO_MUNICIPIO": "Teresina",
+      "internacoes": 1444319
+    },
+    {
+      "SG_UF": "AL",
+      "NO_MUNICIPIO": "Maceió",
+      "internacoes": 1325060
+    },
+    {
+      "SG_UF": "RN",
+      "NO_MUNICIPIO": "Natal",
+      "internacoes": 1294176
+    },
+    {
+      "SG_UF": "PB",
+      "NO_MUNICIPIO": "João Pessoa",
+      "internacoes": 1248685
+    },
+    {
+      "SG_UF": "SP",
+      "NO_MUNICIPIO": "Campinas",
+      "internacoes": 1217931
+    },
+    {
+      "SG_UF": "DF",
+      "NO_MUNICIPIO": "Brasília",
+      "internacoes": 1212516
+    },
+    {
+      "SG_UF": "SP",
+      "NO_MUNICIPIO": "Ribeirão Preto",
+      "internacoes": 1092837
+    },
+    {
+      "SG_UF": "MS",
+      "NO_MUNICIPIO": "Campo Grande",
+      "internacoes": 1037729
+    }
+  ],
+  "result_hash": "739895ddb9f3a307f15efce13168440c400f7844c08f2e96c2d934eb220a52d7",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

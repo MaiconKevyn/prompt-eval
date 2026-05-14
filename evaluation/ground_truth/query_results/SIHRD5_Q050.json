@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q050",
   "question_pt": "Quais diagnosticos principais foram mais frequentes por descricao CID?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT c.CID, c.DESCRICAO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID GROUP BY 1, 2 ORDER BY internacoes DESC LIMIT 20",
-  "duration_seconds": 1.845,
+  "duration_seconds": 1.88,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 20,
   "columns": [
     "CID",

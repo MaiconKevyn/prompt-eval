@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q068",
   "question_pt": "Qual e a media movel de 3 meses das internacoes?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH mensal AS (SELECT date_trunc('month', DT_INTER) AS mes_ref, COUNT(*) AS internacoes FROM internacoes GROUP BY 1) SELECT mes_ref, internacoes, ROUND(AVG(internacoes) OVER (ORDER BY mes_ref ROWS BETWEEN 2 PRECEDING AND CURRENT ROW), 2) AS media_movel_3m FROM mensal ORDER BY mes_ref",
-  "duration_seconds": 1.428,
+  "duration_seconds": 1.437,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 225,
   "columns": [
     "mes_ref",

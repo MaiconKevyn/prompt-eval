@@ -1,0 +1,99 @@
+{
+  "id": "SIHRD5_Q018",
+  "question_pt": "Quantas mortes hospitalares foram registradas por ano?",
+  "executed_at": "2026-05-14T03:38:38.109348+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, COUNT(*) FILTER (WHERE MORTE) AS mortes FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 0.239145,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "mortes"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "mortes": 0
+    },
+    {
+      "ano": 2001,
+      "mortes": 0
+    },
+    {
+      "ano": 2002,
+      "mortes": 0
+    },
+    {
+      "ano": 2003,
+      "mortes": 0
+    },
+    {
+      "ano": 2005,
+      "mortes": 0
+    },
+    {
+      "ano": 2006,
+      "mortes": 0
+    },
+    {
+      "ano": 2007,
+      "mortes": 27510
+    },
+    {
+      "ano": 2008,
+      "mortes": 359547
+    },
+    {
+      "ano": 2009,
+      "mortes": 385756
+    },
+    {
+      "ano": 2010,
+      "mortes": 409593
+    },
+    {
+      "ano": 2011,
+      "mortes": 417535
+    },
+    {
+      "ano": 2012,
+      "mortes": 422779
+    },
+    {
+      "ano": 2013,
+      "mortes": 438335
+    },
+    {
+      "ano": 2014,
+      "mortes": 449779
+    },
+    {
+      "ano": 2015,
+      "mortes": 473573
+    },
+    {
+      "ano": 2016,
+      "mortes": 490975
+    },
+    {
+      "ano": 2017,
+      "mortes": 492555
+    },
+    {
+      "ano": 2018,
+      "mortes": 504632
+    },
+    {
+      "ano": 2019,
+      "mortes": 524050
+    },
+    {
+      "ano": 2020,
+      "mortes": 605736
+    }
+  ],
+  "result_hash": "3d7af4aeac2a55d34a78645feae119ce18d32445b37cf1cb40fd758d8f137524",
+  "semantic_disposition": "accepted"
+}

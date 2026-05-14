@@ -1,0 +1,99 @@
+{
+  "id": "SIHRD5_Q020",
+  "question_pt": "Qual foi o valor medio por internacao em cada ano?",
+  "executed_at": "2026-05-14T03:38:39.509605+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT year(DT_INTER) AS ano, ROUND((SUM(CAST(VAL_TOT AS DECIMAL(20,2)))::DOUBLE / COUNT(VAL_TOT)), 2) AS valor_medio FROM internacoes GROUP BY 1 ORDER BY 1",
+  "duration_seconds": 1.127308,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 23,
+  "columns": [
+    "ano",
+    "valor_medio"
+  ],
+  "preview_rows": [
+    {
+      "ano": 2000,
+      "valor_medio": 7422.67
+    },
+    {
+      "ano": 2001,
+      "valor_medio": 17692.54
+    },
+    {
+      "ano": 2002,
+      "valor_medio": 8084.11
+    },
+    {
+      "ano": 2003,
+      "valor_medio": 1917.93
+    },
+    {
+      "ano": 2005,
+      "valor_medio": 2364.58
+    },
+    {
+      "ano": 2006,
+      "valor_medio": 9136.19
+    },
+    {
+      "ano": 2007,
+      "valor_medio": 1185.05
+    },
+    {
+      "ano": 2008,
+      "valor_medio": 1041.99
+    },
+    {
+      "ano": 2009,
+      "valor_medio": 1064.66
+    },
+    {
+      "ano": 2010,
+      "valor_medio": 1122.28
+    },
+    {
+      "ano": 2011,
+      "valor_medio": 1185.96
+    },
+    {
+      "ano": 2012,
+      "valor_medio": 1253.53
+    },
+    {
+      "ano": 2013,
+      "valor_medio": 1342.86
+    },
+    {
+      "ano": 2014,
+      "valor_medio": 1391.0
+    },
+    {
+      "ano": 2015,
+      "valor_medio": 1428.66
+    },
+    {
+      "ano": 2016,
+      "valor_medio": 1476.41
+    },
+    {
+      "ano": 2017,
+      "valor_medio": 1501.49
+    },
+    {
+      "ano": 2018,
+      "valor_medio": 1515.96
+    },
+    {
+      "ano": 2019,
+      "valor_medio": 1541.66
+    },
+    {
+      "ano": 2020,
+      "valor_medio": 2045.26
+    }
+  ],
+  "result_hash": "1979aa1f2d3266156e195818d9e7391031b6fe50365ed33cbd0a13562c37932e",
+  "semantic_disposition": "accepted"
+}

@@ -1,6 +1,6 @@
 # Query Design Methodology
 
-Generated at: 2026-05-13T09:42:16
+Generated at: 2026-05-13T19:23:25
 
 ## Goal
 
@@ -35,10 +35,33 @@ For each accepted item, the validator writes one JSON evidence file with:
 - executed SQL;
 - execution timestamp;
 - duration;
+- performance class;
+- `EXPLAIN` output for queries slower than 5 seconds;
 - row count;
 - result columns;
 - preview rows;
 - SHA-256 hash of the full returned result.
+- semantic audit fields for v2, including relationship risk, dropped-row count, and final disposition.
+
+## V2 Semantic Acceptance Gate
+
+V2 accepts a query only when it executes and the SQL semantics match the Portuguese question.
+
+- Relationships with `confirmed` confidence can use inner joins for business questions.
+- Relationships with `likely` confidence must use `LEFT JOIN` plus an unmatched bucket, or the question must explicitly say it is restricted to mapped records.
+- Relationships with `weak` confidence are allowed only for audit questions unless externally validated.
+- Relationships with `rejected` confidence are allowed only for audit/data-quality questions, except when the SQL explicitly preserves unmapped codes and the wording says labels are shown only when mapped.
+- Questions about UFs must filter to the 27 valid Brazilian UF codes or explicitly discuss invalid `SG_UF` codes.
+- Rate questions must make denominator scope clear.
+
+## Performance Policy
+
+- `fast`: <= 1 second.
+- `moderate`: > 1 and <= 5 seconds.
+- `slow`: > 5 and <= 15 seconds.
+- `too_slow_for_default_eval`: > 15 seconds.
+
+Slow queries should be inspected with `EXPLAIN`. Use `EXPLAIN ANALYZE` selectively because it executes the query.
 
 ## Rejection Rules
 

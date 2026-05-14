@@ -1,0 +1,99 @@
+{
+  "id": "SIHRD5_Q051",
+  "question_pt": "Quais capitulos CID concentraram mais internacoes?",
+  "executed_at": "2026-05-14T03:38:58.917593+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT c.DS_CAPITULO, COUNT(*) AS internacoes FROM internacoes i JOIN cid c ON i.DIAG_PRINC = c.CID GROUP BY 1 ORDER BY internacoes DESC LIMIT 20",
+  "duration_seconds": 1.834151,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 20,
+  "columns": [
+    "DS_CAPITULO",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "DS_CAPITULO": "XV. Gravidez, parto e puerpério",
+      "internacoes": 37670769
+    },
+    {
+      "DS_CAPITULO": "X. Doenças do aparelho respiratório",
+      "internacoes": 19690732
+    },
+    {
+      "DS_CAPITULO": "IX. Doenças do aparelho circulatório",
+      "internacoes": 18158828
+    },
+    {
+      "DS_CAPITULO": "XIX. Lesões, envenenamento e outras consequências de causas externas",
+      "internacoes": 17789367
+    },
+    {
+      "DS_CAPITULO": "XI. Doenças do aparelho digestivo",
+      "internacoes": 17325707
+    },
+    {
+      "DS_CAPITULO": "I. Algumas doenças infecciosas e parasitárias",
+      "internacoes": 14907800
+    },
+    {
+      "DS_CAPITULO": "XIV. Doenças do aparelho geniturinário",
+      "internacoes": 12654302
+    },
+    {
+      "DS_CAPITULO": "II. Neoplasias [tumores]",
+      "internacoes": 11975513
+    },
+    {
+      "DS_CAPITULO": "XVI. Algumas afecções originadas no período perinatal",
+      "internacoes": 4192852
+    },
+    {
+      "DS_CAPITULO": "IV. Doenças endócrinas, nutricionais e metabólicas",
+      "internacoes": 4090558
+    },
+    {
+      "DS_CAPITULO": "V. Transtornos mentais e comportamentais",
+      "internacoes": 3926755
+    },
+    {
+      "DS_CAPITULO": "XXI. Fatores que influenciam o estado de saúde",
+      "internacoes": 3885467
+    },
+    {
+      "DS_CAPITULO": "XII. Doenças da pele e do tecido subcutâneo",
+      "internacoes": 3737369
+    },
+    {
+      "DS_CAPITULO": "XIII. Doenças do sistema osteomuscular e do tecido conjuntivo",
+      "internacoes": 3241585
+    },
+    {
+      "DS_CAPITULO": "VI. Doenças do sistema nervoso",
+      "internacoes": 2963099
+    },
+    {
+      "DS_CAPITULO": "XVIII. Sintomas, sinais e achados anormais",
+      "internacoes": 2871002
+    },
+    {
+      "DS_CAPITULO": "VII. Doenças do olho e anexos",
+      "internacoes": 1642482
+    },
+    {
+      "DS_CAPITULO": "III. Doenças do sangue e dos órgãos hematopoéticos",
+      "internacoes": 1536821
+    },
+    {
+      "DS_CAPITULO": "XVII. Malformações congênitas, deformidades e anomalias cromossômicas",
+      "internacoes": 1284877
+    },
+    {
+      "DS_CAPITULO": "VIII. Doenças do ouvido e da apófise mastóide",
+      "internacoes": 299473
+    }
+  ],
+  "result_hash": "94fbb91f28bd606f48c10ae59bcc9a347830cc1b2c5dc1b8dc73e8cd4b6419ba",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

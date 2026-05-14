@@ -1,0 +1,141 @@
+{
+  "id": "SIHRD5_Q065",
+  "question_pt": "Quais municipios tiveram maior valor total por residencia? (considerando apenas internacoes com municipio de residencia mapeado)",
+  "executed_at": "2026-05-14T03:39:30.810915+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT m.SG_UF, m.NO_MUNICIPIO, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D GROUP BY 1, 2 ORDER BY valor_total DESC LIMIT 20",
+  "duration_seconds": 1.761458,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 20,
+  "columns": [
+    "SG_UF",
+    "NO_MUNICIPIO",
+    "valor_total",
+    "internacoes"
+  ],
+  "preview_rows": [
+    {
+      "SG_UF": "SP",
+      "NO_MUNICIPIO": "São Paulo",
+      "valor_total": 17255545450.61,
+      "internacoes": 9179591
+    },
+    {
+      "SG_UF": "RJ",
+      "NO_MUNICIPIO": "Rio de Janeiro",
+      "valor_total": 5614207779.98,
+      "internacoes": 3412931
+    },
+    {
+      "SG_UF": "MG",
+      "NO_MUNICIPIO": "Belo Horizonte",
+      "valor_total": 4839899420.67,
+      "internacoes": 2148438
+    },
+    {
+      "SG_UF": "BA",
+      "NO_MUNICIPIO": "Salvador",
+      "valor_total": 4437316778.61,
+      "internacoes": 2249720
+    },
+    {
+      "SG_UF": "PR",
+      "NO_MUNICIPIO": "Curitiba",
+      "valor_total": 4292732494.71,
+      "internacoes": 1773231
+    },
+    {
+      "SG_UF": "CE",
+      "NO_MUNICIPIO": "Fortaleza",
+      "valor_total": 3614877821.61,
+      "internacoes": 2237047
+    },
+    {
+      "SG_UF": "RS",
+      "NO_MUNICIPIO": "Porto Alegre",
+      "valor_total": 3218196403.13,
+      "internacoes": 1581334
+    },
+    {
+      "SG_UF": "PE",
+      "NO_MUNICIPIO": "Recife",
+      "valor_total": 2977431251.2,
+      "internacoes": 1636126
+    },
+    {
+      "SG_UF": "AM",
+      "NO_MUNICIPIO": "Manaus",
+      "valor_total": 2469042785.47,
+      "internacoes": 1691106
+    },
+    {
+      "SG_UF": "GO",
+      "NO_MUNICIPIO": "Goiânia",
+      "valor_total": 2382042432.27,
+      "internacoes": 1285536
+    },
+    {
+      "SG_UF": "DF",
+      "NO_MUNICIPIO": "Brasília",
+      "valor_total": 1956743257.45,
+      "internacoes": 1264585
+    },
+    {
+      "SG_UF": "SP",
+      "NO_MUNICIPIO": "Guarulhos",
+      "valor_total": 1837221708.78,
+      "internacoes": 961104
+    },
+    {
+      "SG_UF": "SP",
+      "NO_MUNICIPIO": "Campinas",
+      "valor_total": 1832482743.9,
+      "internacoes": 858995
+    },
+    {
+      "SG_UF": "MS",
+      "NO_MUNICIPIO": "Campo Grande",
+      "valor_total": 1773865804.13,
+      "internacoes": 815951
+    },
+    {
+      "SG_UF": "PA",
+      "NO_MUNICIPIO": "Belém",
+      "valor_total": 1693475529.77,
+      "internacoes": 1189411
+    },
+    {
+      "SG_UF": "MA",
+      "NO_MUNICIPIO": "São Luís",
+      "valor_total": 1486265655.23,
+      "internacoes": 902980
+    },
+    {
+      "SG_UF": "MG",
+      "NO_MUNICIPIO": "Juiz de Fora",
+      "valor_total": 1340694713.98,
+      "internacoes": 564145
+    },
+    {
+      "SG_UF": "MG",
+      "NO_MUNICIPIO": "Uberlândia",
+      "valor_total": 1338865952.08,
+      "internacoes": 648052
+    },
+    {
+      "SG_UF": "SP",
+      "NO_MUNICIPIO": "Ribeirão Preto",
+      "valor_total": 1280625016.35,
+      "internacoes": 612271
+    },
+    {
+      "SG_UF": "RN",
+      "NO_MUNICIPIO": "Natal",
+      "valor_total": 1199410595.31,
+      "internacoes": 628640
+    }
+  ],
+  "result_hash": "c48b55389765760c30dd38cf5f635b9fe194f3e8c5a4d53934bb9644d86d3844",
+  "semantic_disposition": "accepted_with_explicit_scope"
+}

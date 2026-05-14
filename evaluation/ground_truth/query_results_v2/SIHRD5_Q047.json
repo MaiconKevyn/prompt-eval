@@ -1,0 +1,30 @@
+{
+  "id": "SIHRD5_Q047",
+  "question_pt": "Quantas internacoes existem por descricao de complexidade?",
+  "executed_at": "2026-05-14T03:38:53.422185+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT c.DESCRICAO AS complexidade, COUNT(*) AS internacoes, ROUND(SUM(CAST(i.VAL_TOT AS DECIMAL(20,2))), 2) AS valor_total FROM internacoes i JOIN complexidade c ON i.COMPLEX = c.COMPLEX GROUP BY 1 ORDER BY internacoes DESC",
+  "duration_seconds": 2.018106,
+  "performance_class": "moderate",
+  "explain_plan": [],
+  "row_count": 2,
+  "columns": [
+    "complexidade",
+    "internacoes",
+    "valor_total"
+  ],
+  "preview_rows": [
+    {
+      "complexidade": "Média complexidade",
+      "internacoes": 171675245,
+      "valor_total": 211583361374.16
+    },
+    {
+      "complexidade": "Alta complexidade",
+      "internacoes": 12201962,
+      "valor_total": 69899943016.92
+    }
+  ],
+  "result_hash": "e464b4a48dff9ecd4945d73c2d1c0da56880955341b5f62caa27d575b4b8caad",
+  "semantic_disposition": "accepted"
+}

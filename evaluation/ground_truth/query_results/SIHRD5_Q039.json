@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q039",
   "question_pt": "Quantos municipios existem por UF no cadastro territorial?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT SG_UF, COUNT(*) AS municipios FROM municipios GROUP BY 1 ORDER BY municipios DESC, SG_UF",
   "duration_seconds": 0.001,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 38,
   "columns": [
     "SG_UF",

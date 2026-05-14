@@ -1,0 +1,80 @@
+{
+  "id": "SIHRD5_Q072",
+  "question_pt": "Quais especialidades tiveram maior permanencia media entre as com pelo menos 100 mil internacoes segundo o campo DIAS_PERM?",
+  "executed_at": "2026-05-14T03:39:48.396317+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "WITH esp AS (SELECT e.DESCRICAO AS especialidade, COUNT(*) AS internacoes, (SUM(CAST(i.DIAS_PERM AS DECIMAL(20,2)))::DOUBLE / COUNT(i.DIAS_PERM)) AS media_dias FROM internacoes i JOIN especialidade e ON i.ESPEC = e.ESPEC GROUP BY 1) SELECT especialidade, internacoes, ROUND(media_dias, 2) AS media_dias FROM esp WHERE internacoes >= 100000 ORDER BY media_dias DESC, especialidade LIMIT 20",
+  "duration_seconds": 0.606743,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 12,
+  "columns": [
+    "especialidade",
+    "internacoes",
+    "media_dias"
+  ],
+  "preview_rows": [
+    {
+      "especialidade": "BUCO MAXILO FACIAL",
+      "internacoes": 57484340,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "CARDIOLOGIA",
+      "internacoes": 34051416,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "CIRURGIA GERAL",
+      "internacoes": 66592564,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "CIRURGICO/DIAGNOSTICO/TERAPEUTICO",
+      "internacoes": 19967078,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "ENDOCRINOLOGIA",
+      "internacoes": 339853,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "GASTROENTEROLOGIA",
+      "internacoes": 2847736,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "GINECOLOGIA",
+      "internacoes": 111362,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "NEFROLOGIAUROLOGIA",
+      "internacoes": 253952,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "NEUROCIRURGIA",
+      "internacoes": 1545414,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "OBSTETRICIA CIRURGICA",
+      "internacoes": 116261,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "OTORRINOLARINGOLOGIA",
+      "internacoes": 235106,
+      "media_dias": 0.0
+    },
+    {
+      "especialidade": "SAUDE MENTAL",
+      "internacoes": 230078,
+      "media_dias": 0.0
+    }
+  ],
+  "result_hash": "39d9cc0f9e6b3e407883f6d5cc9287667c9c8a014ac8ab12a44db1c88b5e9bff",
+  "semantic_disposition": "valid_with_caveats"
+}

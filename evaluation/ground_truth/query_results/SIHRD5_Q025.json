@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q025",
   "question_pt": "Como as internacoes se distribuem por codigo de raca/cor?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT RACA_COR, COUNT(*) AS internacoes FROM internacoes GROUP BY 1 ORDER BY RACA_COR",
-  "duration_seconds": 0.179,
+  "duration_seconds": 0.215,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 6,
   "columns": [
     "RACA_COR",

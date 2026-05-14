@@ -1,0 +1,25 @@
+{
+  "id": "SIHRD5_Q099",
+  "question_pt": "A tabela final de internacoes tem o mesmo volume da staging?",
+  "executed_at": "2026-05-14T03:40:21.451687+00:00",
+  "database_file": "sihrd5.duckdb",
+  "sql": "SELECT (SELECT COUNT(*) FROM stg_internacoes) AS stg_internacoes, (SELECT COUNT(*) FROM internacoes) AS internacoes, (SELECT COUNT(*) FROM stg_internacoes) - (SELECT COUNT(*) FROM internacoes) AS diferenca",
+  "duration_seconds": 0.014321,
+  "performance_class": "fast",
+  "explain_plan": [],
+  "row_count": 1,
+  "columns": [
+    "stg_internacoes",
+    "internacoes",
+    "diferenca"
+  ],
+  "preview_rows": [
+    {
+      "stg_internacoes": 183877219,
+      "internacoes": 183877219,
+      "diferenca": 0
+    }
+  ],
+  "result_hash": "974bd16ebce35e8be9952ceb2cc1a1a46d491159192830e83def6cc7bd97047d",
+  "semantic_disposition": "accepted"
+}

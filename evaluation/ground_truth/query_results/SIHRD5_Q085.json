@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q085",
   "question_pt": "Quais anos tem meses faltantes na serie de internacoes por entrada?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "WITH meses AS (SELECT year(DT_INTER) AS ano, COUNT(DISTINCT month(DT_INTER)) AS meses_com_dados FROM internacoes GROUP BY 1) SELECT ano, meses_com_dados, 12 - meses_com_dados AS meses_faltantes FROM meses ORDER BY ano",
-  "duration_seconds": 0.382,
+  "duration_seconds": 0.383,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 23,
   "columns": [
     "ano",

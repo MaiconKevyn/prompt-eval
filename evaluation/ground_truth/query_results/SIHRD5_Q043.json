@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q043",
   "question_pt": "Como as internacoes se distribuem por sexo descrito?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT s.DESCRICAO AS sexo, COUNT(*) AS internacoes FROM internacoes i JOIN sexo s ON i.SEXO = s.SEXO GROUP BY 1 ORDER BY internacoes DESC",
-  "duration_seconds": 0.269,
+  "duration_seconds": 0.271,
+  "performance_class": "fast",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 2,
   "columns": [
     "sexo",

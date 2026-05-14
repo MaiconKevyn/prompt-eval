@@ -1,10 +1,13 @@
 {
   "id": "SIHRD5_Q062",
   "question_pt": "Como a complexidade das internacoes se distribui em cada UF?",
-  "executed_at": "2026-05-13T09:45:23",
+  "executed_at": "2026-05-13T19:25:46",
   "database_file": "sihrd5.duckdb",
   "sql": "SELECT m.SG_UF, c.DESCRICAO AS complexidade, COUNT(*) AS internacoes FROM internacoes i JOIN municipios m ON i.MUNIC_RES = m.CO_MUNICIPIO_6D JOIN complexidade c ON i.COMPLEX = c.COMPLEX GROUP BY 1, 2 ORDER BY 1, internacoes DESC",
-  "duration_seconds": 1.315,
+  "duration_seconds": 1.371,
+  "performance_class": "moderate",
+  "explain_sql": null,
+  "explain_plan": [],
   "row_count": 54,
   "columns": [
     "SG_UF",

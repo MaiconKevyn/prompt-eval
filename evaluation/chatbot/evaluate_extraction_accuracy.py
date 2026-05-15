@@ -84,6 +84,27 @@ class RunPaths:
     trace_output: Path
 
 
+def format_progress_start(index: int, total: int, item_id: str) -> str:
+    return f"[{index}/{total}] {item_id} running..."
+
+
+def format_progress_done(index: int, total: int, record: dict[str, Any]) -> str:
+    error = record.get("error_category") or "none"
+    elapsed = float(record.get("latency_seconds") or 0)
+    return (
+        f"[{index}/{total}] {record['id']} done "
+        f"match={record['result_match']} "
+        f"generated={record['generated_execution_status']} "
+        f"ground_truth={record['ground_truth_execution_status']} "
+        f"error={error} elapsed={elapsed:.2f}s"
+    )
+
+
+def print_progress(message: str, *, quiet: bool) -> None:
+    if not quiet:
+        print(message, flush=True)
+
+
 def _json_default(value: Any) -> Any:
     if isinstance(value, Decimal):
         return float(value)
@@ -680,6 +701,20 @@ def write_trace(records: list[dict[str, Any]], path: Path) -> Path:
     return path
 
 
+def initialize_trace(path: Path) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("", encoding="utf-8")
+    return path
+
+
+def append_trace_record(record: dict[str, Any], path: Path) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(record, ensure_ascii=True, default=_json_default))
+        handle.write("\n")
+    return path
+
+
 def write_json_payload(payload: dict[str, Any], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -779,6 +814,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-rows", type=int, default=10000)
     parser.add_argument("--timeout-seconds", type=int, default=60)
     parser.add_argument("--no-llm", action="store_true")
+    parser.add_argument(
+        "--quiet",
+        action="store_true",
+        help="Disable per-question progress logs. Final summary is still printed.",
+    )
     return parser
 
 
@@ -799,8 +839,15 @@ def main() -> int:
 
     items = select_items(load_dataset(dataset), ids=args.ids, limit=args.limit)
     ctx = load_stage1_context(config.project_root)
-    records = [
-        evaluate_item(
+    trace_path = initialize_trace(run_paths.trace_output)
+    records = []
+    total = len(items)
+    for index, item in enumerate(items, start=1):
+        print_progress(
+            format_progress_start(index, total, item.id),
+            quiet=args.quiet,
+        )
+        record = evaluate_item(
             item,
             config=config,
             ctx=ctx,
@@ -809,9 +856,12 @@ def main() -> int:
             timeout_seconds=args.timeout_seconds,
             numeric_tolerance=args.numeric_tolerance,
         )
-        for item in items
-    ]
-    trace_path = write_trace(records, run_paths.trace_output)
+        records.append(record)
+        append_trace_record(record, trace_path)
+        print_progress(
+            format_progress_done(index, total, record),
+            quiet=args.quiet,
+        )
     payload = {
         "run_id": run_paths.run_id,
         "run_dir": str(run_paths.run_dir),

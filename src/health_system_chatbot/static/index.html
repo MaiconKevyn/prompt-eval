@@ -445,6 +445,10 @@
               <span>Mostrar SQL</span>
               <input id="show-sql" type="checkbox">
             </label>
+            <label class="toggle" for="show-debug">
+              <span>Debug</span>
+              <input id="show-debug" type="checkbox">
+            </label>
             <label class="toggle" for="allow-llm">
               <span>Usar LLM</span>
               <input id="allow-llm" type="checkbox" checked>
@@ -487,6 +491,7 @@
     const emptyState = document.getElementById("empty-state");
     const sendButton = document.getElementById("send-button");
     const showSqlInput = document.getElementById("show-sql");
+    const showDebugInput = document.getElementById("show-debug");
     const allowLlmInput = document.getElementById("allow-llm");
     const apiStatus = document.getElementById("api-status");
     const apiStatusText = document.getElementById("api-status-text");
@@ -576,6 +581,24 @@
         details.appendChild(related);
       }
 
+      if (developerContext.warnings && developerContext.warnings.length) {
+        const warnings = document.createElement("div");
+        warnings.textContent = `Warnings: ${developerContext.warnings.join(" ")}`;
+        details.appendChild(warnings);
+      }
+
+      if (developerContext.retrieved_tables && developerContext.retrieved_tables.length) {
+        const tables = document.createElement("div");
+        tables.textContent = `Tabelas recuperadas: ${developerContext.retrieved_tables.join(", ")}`;
+        details.appendChild(tables);
+      }
+
+      if (payload.evidence && Object.keys(payload.evidence).length) {
+        const evidence = document.createElement("pre");
+        evidence.textContent = JSON.stringify(payload.evidence, null, 2);
+        details.appendChild(evidence);
+      }
+
       return details.children.length ? details : null;
     }
 
@@ -625,6 +648,7 @@
           body: JSON.stringify({
             question,
             show_sql: showSqlInput.checked,
+            show_debug: showDebugInput.checked,
             allow_llm: allowLlmInput.checked
           })
         });
@@ -635,7 +659,7 @@
         }
 
         appendMessage("assistant", payload.answer_pt, {
-          details: buildDetails(payload)
+          details: showDebugInput.checked ? buildDetails(payload) : null
         });
         updateMetrics(payload);
       } catch (error) {

@@ -8,12 +8,20 @@ class FakeChatService:
     def __init__(self) -> None:
         self.calls: list[dict[str, object]] = []
 
-    def ask(self, question: str, *, show_sql: bool, allow_llm: bool) -> ChatbotAnswer:
+    def ask(
+        self,
+        question: str,
+        *,
+        show_sql: bool,
+        allow_llm: bool,
+        show_debug: bool,
+    ) -> ChatbotAnswer:
         self.calls.append(
             {
                 "question": question,
                 "show_sql": show_sql,
                 "allow_llm": allow_llm,
+                "show_debug": show_debug,
             }
         )
         return ChatbotAnswer(
@@ -37,6 +45,7 @@ def test_chat_endpoint_delegates_question_to_chat_service():
             "question": "Quantas internacoes existem?",
             "show_sql": True,
             "allow_llm": False,
+            "show_debug": True,
         },
     )
 
@@ -55,6 +64,29 @@ def test_chat_endpoint_delegates_question_to_chat_service():
             "question": "Quantas internacoes existem?",
             "show_sql": True,
             "allow_llm": False,
+            "show_debug": True,
+        }
+    ]
+
+
+def test_chat_endpoint_defaults_show_debug_to_false():
+    service = FakeChatService()
+    client = TestClient(create_app(chat_service=service))
+
+    response = client.post(
+        "/api/chat",
+        json={
+            "question": "Quantas internacoes existem?",
+        },
+    )
+
+    assert response.status_code == 200
+    assert service.calls == [
+        {
+            "question": "Quantas internacoes existem?",
+            "show_sql": False,
+            "allow_llm": True,
+            "show_debug": False,
         }
     ]
 
@@ -77,6 +109,8 @@ def test_frontend_is_served_from_root():
     assert response.status_code == 200
     assert 'id="chat-form"' in response.text
     assert 'fetch("/api/chat"' in response.text
+    assert 'id="show-debug"' in response.text
+    assert "show_debug" in response.text
     assert "developer_context" in response.text
     assert "Detalhe tecnico" in response.text
 

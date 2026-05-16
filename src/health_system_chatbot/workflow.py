@@ -35,17 +35,20 @@ except Exception:  # pragma: no cover - import fallback for partial installs
 class UserQuestionEvent(Event):
     question: str
     show_sql: bool = False
+    show_debug: bool = False
 
 
 class IntentEvent(Event):
     question: str
     show_sql: bool = False
+    show_debug: bool = False
     intent: QuestionIntent
 
 
 class ContextEvent(Event):
     question: str
     show_sql: bool = False
+    show_debug: bool = False
     intent: QuestionIntent
     context: RetrievedContext
 
@@ -53,6 +56,7 @@ class ContextEvent(Event):
 class SqlDraftEvent(Event):
     question: str
     show_sql: bool = False
+    show_debug: bool = False
     intent: QuestionIntent
     context: RetrievedContext
     plan: SqlPlan
@@ -115,6 +119,7 @@ def run_chat(
     config: ChatbotConfig,
     stage1_context: Stage1Context,
     show_sql: bool = False,
+    show_debug: bool = False,
     allow_llm: bool = True,
     write_trace: bool = True,
     write_audit_log: bool = True,
@@ -128,14 +133,14 @@ def run_chat(
     intent = classify_question(question, stage1_context)
     trace["steps"].append({"name": "intent", "payload": intent.model_dump()})
     if intent.status == "needs_clarification":
-        answer = clarification_answer(intent)
+        answer = clarification_answer(intent, show_debug=show_debug)
         trace["answer"] = answer.model_dump()
         _write_observability_record(
             config, trace, write_trace=write_trace, write_audit_log=write_audit_log
         )
         return answer
     if intent.status == "refused":
-        answer = refused_answer(intent)
+        answer = refused_answer(intent, show_debug=show_debug)
         trace["answer"] = answer.model_dump()
         _write_observability_record(
             config, trace, write_trace=write_trace, write_audit_log=write_audit_log
@@ -157,7 +162,7 @@ def run_chat(
         )
         trace["steps"].append({"name": "sql_plan", "payload": plan.model_dump()})
     except Exception as exc:
-        answer = failed_answer(str(exc))
+        answer = failed_answer(str(exc), show_debug=show_debug)
         trace["answer"] = answer.model_dump()
         trace["steps"].append({"name": "failure", "payload": {"errors": [str(exc)]}})
         _write_observability_record(
@@ -168,7 +173,7 @@ def run_chat(
     validation = validate_sql(plan.sql, stage1_context, question=question, plan=plan)
     trace["steps"].append({"name": "validation", "payload": validation.model_dump()})
     if not validation.is_valid:
-        answer = failed_answer("; ".join(validation.errors))
+        answer = failed_answer("; ".join(validation.errors), show_debug=show_debug)
         trace["answer"] = answer.model_dump()
         _write_observability_record(
             config, trace, write_trace=write_trace, write_audit_log=write_audit_log
@@ -183,7 +188,7 @@ def run_chat(
         )
         trace["steps"].append({"name": "execution", "payload": execution.model_dump()})
     except Exception as exc:
-        answer = failed_answer(str(exc))
+        answer = failed_answer(str(exc), show_debug=show_debug)
         trace["answer"] = answer.model_dump()
         trace["steps"].append({"name": "failure", "payload": {"errors": [str(exc)]}})
         _write_observability_record(
@@ -200,6 +205,9 @@ def run_chat(
         context=context,
         related_context=related_context,
         show_sql=show_sql,
+        show_debug=show_debug,
+        config=config,
+        allow_llm=allow_llm,
     )
     trace["answer"] = answer.model_dump()
     _write_observability_record(
@@ -220,10 +228,12 @@ class LlamaIndexChatWorkflow(Workflow):
     async def start(self, ev: StartEvent) -> StopEvent:
         question = getattr(ev, "question", "")
         show_sql = bool(getattr(ev, "show_sql", False))
+        show_debug = bool(getattr(ev, "show_debug", False))
         answer = run_chat(
             question,
             config=self.config,
             stage1_context=self.stage1_context,
             show_sql=show_sql,
+            show_debug=show_debug,
         )
         return StopEvent(result=answer)

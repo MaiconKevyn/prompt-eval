@@ -23,6 +23,7 @@ class ChatRequest(BaseModel):
     question: str = Field(..., min_length=1, max_length=4000)
     show_sql: bool = False
     allow_llm: bool = True
+    show_debug: bool = False
 
     @field_validator("question")
     @classmethod
@@ -46,13 +47,21 @@ class ChatService:
             stage1_context=load_stage1_context(config.project_root),
         )
 
-    def ask(self, question: str, *, show_sql: bool, allow_llm: bool) -> ChatbotAnswer:
+    def ask(
+        self,
+        question: str,
+        *,
+        show_sql: bool,
+        allow_llm: bool,
+        show_debug: bool,
+    ) -> ChatbotAnswer:
         return run_chat(
             question,
             config=self.config,
             stage1_context=self.stage1_context,
             show_sql=show_sql,
             allow_llm=allow_llm,
+            show_debug=show_debug,
         )
 
 
@@ -93,6 +102,7 @@ def create_app(*, chat_service: ChatService | None = None) -> FastAPI:
             request.question,
             show_sql=request.show_sql,
             allow_llm=request.allow_llm,
+            show_debug=request.show_debug,
         )
 
     return app

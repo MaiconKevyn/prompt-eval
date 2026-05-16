@@ -50,12 +50,14 @@ def build_parser() -> argparse.ArgumentParser:
     ask_p = sub.add_parser("ask", help="Ask a natural-language question.")
     ask_p.add_argument("question")
     ask_p.add_argument("--show-sql", action="store_true")
+    ask_p.add_argument("--show-debug", action="store_true")
     ask_p.add_argument("--no-llm", action="store_true", help="Debug only: disables model SQL generation.")
     _add_common(ask_p)
 
     ask_file_p = sub.add_parser("ask-file", help="Ask many questions from a text file.")
     ask_file_p.add_argument("questions_file")
     ask_file_p.add_argument("--show-sql", action="store_true")
+    ask_file_p.add_argument("--show-debug", action="store_true")
     ask_file_p.add_argument("--no-llm", action="store_true", help="Debug only: disables model SQL generation.")
     ask_file_p.add_argument(
         "--output",
@@ -123,6 +125,7 @@ def main(argv: list[str] | None = None) -> int:
             config=config,
             stage1_context=ctx,
             show_sql=args.show_sql,
+            show_debug=args.show_debug,
             allow_llm=not args.no_llm,
         )
         if args.json:
@@ -148,6 +151,7 @@ def main(argv: list[str] | None = None) -> int:
                     config=config,
                     stage1_context=ctx,
                     show_sql=args.show_sql,
+                    show_debug=args.show_debug,
                     allow_llm=not args.no_llm,
                 )
                 statuses.append(answer.status)

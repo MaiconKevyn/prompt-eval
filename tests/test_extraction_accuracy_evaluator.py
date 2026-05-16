@@ -4,9 +4,14 @@ import json
 from decimal import Decimal
 
 from evaluation.chatbot.evaluate_extraction_accuracy import (
+    append_trace_record,
     build_run_id,
+    build_parser,
     canonicalize_result,
     compare_results,
+    format_progress_done,
+    format_progress_start,
+    initialize_trace,
     resolve_run_paths,
     summarize,
 )
@@ -169,3 +174,45 @@ def test_run_paths_create_per_run_result_folder(tmp_path):
     assert paths.output == paths.run_dir / "results.json"
     assert paths.analysis_output == paths.run_dir / "analysis.md"
     assert paths.trace_output == paths.run_dir / "trace.jsonl"
+
+
+def test_trace_record_is_appended_incrementally(tmp_path):
+    path = initialize_trace(tmp_path / "trace.jsonl")
+
+    append_trace_record({"id": "Q1", "result_match": True}, path)
+    assert len(path.read_text(encoding="utf-8").splitlines()) == 1
+
+    append_trace_record({"id": "Q2", "result_match": False}, path)
+    lines = path.read_text(encoding="utf-8").splitlines()
+
+    assert [json.loads(line)["id"] for line in lines] == ["Q1", "Q2"]
+
+
+def test_progress_messages_include_item_status_and_elapsed_time():
+    assert format_progress_start(1, 100, "SIHRD5_Q001") == (
+        "[1/100] SIHRD5_Q001 running..."
+    )
+
+    message = format_progress_done(
+        1,
+        100,
+        {
+            "id": "SIHRD5_Q001",
+            "result_match": True,
+            "generated_execution_status": "passed",
+            "ground_truth_execution_status": "passed",
+            "error_category": None,
+            "latency_seconds": 1.234,
+        },
+    )
+
+    assert message == (
+        "[1/100] SIHRD5_Q001 done match=True generated=passed "
+        "ground_truth=passed error=none elapsed=1.23s"
+    )
+
+
+def test_parser_supports_quiet_mode_for_progress_logs():
+    args = build_parser().parse_args(["--quiet"])
+
+    assert args.quiet is True

@@ -1,4 +1,6 @@
-from health_system_chatbot.answer_synthesizer import synthesize_answer
+import health_system_chatbot.answer_synthesizer as synth_module
+from health_system_chatbot.answer_synthesizer import NaturalAnswer, synthesize_answer
+from health_system_chatbot.config import ChatbotConfig
 from health_system_chatbot.models import (
     ExecutionResult,
     QuestionIntent,
@@ -93,6 +95,7 @@ def test_answer_pt_is_user_friendly_while_dev_context_keeps_artifacts():
             }
         ],
         show_sql=True,
+        show_debug=True,
     )
 
     assert "Sindr da angustia respirat do recem-nascido (P220): 205 mortes" in answer.answer_pt
@@ -105,3 +108,87 @@ def test_answer_pt_is_user_friendly_while_dev_context_keeps_artifacts():
     assert answer.developer_context["related_context"][0]["question"] == (
         "Pergunta anterior sobre Porto Alegre"
     )
+
+
+def test_no_debug_hides_developer_context_and_technical_payload():
+    intent = QuestionIntent(status="answerable", reason="ok", normalized_question="total")
+    plan = SqlPlan(question="Total?", sql="SELECT 10 AS total")
+    validation = ValidationResult(is_valid=True, severity="info", safe_sql=plan.sql)
+    execution = ExecutionResult(
+        sql=plan.sql,
+        columns=["total"],
+        rows=[{"total": 10}],
+        row_count=1,
+        result_hash="abc",
+    )
+
+    answer = synthesize_answer(
+        question=plan.question,
+        intent=intent,
+        plan=plan,
+        validation=validation,
+        execution=execution,
+        show_sql=True,
+        show_debug=False,
+        allow_llm=False,
+    )
+
+    assert answer.answer_pt
+    assert answer.sql == plan.sql
+    assert answer.result_summary == ""
+    assert answer.caveats == []
+    assert answer.developer_context == {}
+    assert answer.evidence == {}
+
+
+def test_llm_natural_answer_uses_configured_model(monkeypatch, tmp_path):
+    class FakeLlm:
+        def structured_predict(self, model, prompt, **kwargs):
+            assert model is NaturalAnswer
+            assert "Pergunta original" in getattr(prompt, "template", str(prompt))
+            assert kwargs["question"] == "Total?"
+            return NaturalAnswer(answer_pt="Resposta natural gerada pelo modelo.")
+
+    captured = {}
+
+    def fake_build_openai_llm(config):
+        captured["model"] = config.llm_model
+        return FakeLlm()
+
+    monkeypatch.setattr(synth_module, "build_openai_llm", fake_build_openai_llm)
+    config = ChatbotConfig(
+        project_root=tmp_path,
+        db_path=tmp_path / "test.duckdb",
+        openai_api_key="test",
+        llm_model="gpt-test",
+    )
+    intent = QuestionIntent(status="answerable", reason="ok", normalized_question="total")
+    plan = SqlPlan(
+        question="Total?",
+        sql="SELECT 10 AS total",
+        metric_basis=["COUNT"],
+        date_basis="internacoes.DT_SAIDA",
+    )
+    validation = ValidationResult(is_valid=True, severity="info", safe_sql=plan.sql)
+    execution = ExecutionResult(
+        sql=plan.sql,
+        columns=["total"],
+        rows=[{"total": 10}],
+        row_count=1,
+        result_hash="abc",
+    )
+
+    answer = synthesize_answer(
+        question=plan.question,
+        intent=intent,
+        plan=plan,
+        validation=validation,
+        execution=execution,
+        config=config,
+        allow_llm=True,
+        show_debug=True,
+    )
+
+    assert captured["model"] == "gpt-test"
+    assert answer.answer_pt == "Resposta natural gerada pelo modelo."
+    assert "natural_answer_warning" not in answer.developer_context

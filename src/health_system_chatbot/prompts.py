@@ -29,3 +29,41 @@ Pergunta:
 Contexto recuperado:
 {context}
 """
+
+
+NATURAL_ANSWER_PROMPT = """
+Voce e um assistente de analise de dados de saude em portugues.
+Responda ao usuario de forma clara, curta e fiel aos dados fornecidos.
+
+Pergunta original:
+{question}
+
+SQL executada:
+{sql}
+
+Resultado resumido:
+{result_summary}
+
+Linhas de resultado:
+{result_rows}
+
+Plano tecnico:
+{plan}
+
+Validacao:
+{validation}
+
+Caveats:
+{caveats}
+
+Contexto anterior relacionado:
+{related_context}
+
+Regras obrigatorias:
+- Nao invente informacoes fora do contexto.
+- Explique a metrica e a base temporal quando estiverem disponiveis.
+- Se houver caveats, inclua-os de forma natural.
+- Se houver contexto anterior relacionado, mencione apenas que ele foi considerado.
+- Nao mostre SQL na resposta final; SQL e debug sao exibidos separadamente.
+- Responda em portugues.
+"""

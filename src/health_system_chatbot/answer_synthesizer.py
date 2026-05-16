@@ -1,7 +1,13 @@
 from __future__ import annotations
 
+import json
 from typing import Any
 
+from llama_index.core import PromptTemplate
+from pydantic import BaseModel
+
+from .config import ChatbotConfig
+from .llm import build_openai_llm
 from .models import (
     ChatbotAnswer,
     ExecutionResult,
@@ -10,7 +16,12 @@ from .models import (
     SqlPlan,
     ValidationResult,
 )
+from .prompts import NATURAL_ANSWER_PROMPT
 from .text import normalize_text
+
+
+class NaturalAnswer(BaseModel):
+    answer_pt: str
 
 
 def _format_value(value: object) -> str:
@@ -174,6 +185,125 @@ def _build_developer_context(
     }
 
 
+def _compact_result_rows(rows: list[dict[str, Any]], *, limit: int = 8) -> list[dict[str, Any]]:
+    return rows[:limit]
+
+
+def _natural_answer_context(
+    *,
+    question: str,
+    plan: SqlPlan,
+    validation: ValidationResult,
+    execution: ExecutionResult,
+    result_summary: str,
+    caveats: list[str],
+    related_context: list[dict[str, Any]],
+) -> dict[str, str]:
+    return {
+        "question": question,
+        "sql": execution.sql,
+        "result_summary": result_summary,
+        "result_rows": json.dumps(
+            _compact_result_rows(execution.rows),
+            ensure_ascii=False,
+            default=str,
+        ),
+        "plan": json.dumps(
+            {
+                "metric_basis": plan.metric_basis,
+                "date_basis": plan.date_basis,
+                "geography_basis": plan.geography_basis,
+                "grain": plan.grain,
+                "join_assumptions": plan.join_assumptions,
+                "caveats": plan.caveats,
+            },
+            ensure_ascii=False,
+            default=str,
+        ),
+        "validation": json.dumps(
+            {
+                "warnings": validation.warnings,
+                "severity": validation.severity,
+            },
+            ensure_ascii=False,
+            default=str,
+        ),
+        "caveats": json.dumps(caveats, ensure_ascii=False, default=str),
+        "related_context": json.dumps(
+            [
+                {
+                    "question": item.get("question"),
+                    "answer_status": item.get("answer_status"),
+                    "result_summary": item.get("result_summary"),
+                    "caveats": item.get("caveats", []),
+                }
+                for item in related_context[:3]
+            ],
+            ensure_ascii=False,
+            default=str,
+        ),
+    }
+
+
+def _build_llm_user_answer(
+    *,
+    question: str,
+    plan: SqlPlan,
+    validation: ValidationResult,
+    execution: ExecutionResult,
+    result_summary: str,
+    caveats: list[str],
+    related_context: list[dict[str, Any]],
+    config: ChatbotConfig | None,
+    allow_llm: bool,
+) -> tuple[str, str | None]:
+    fallback = _build_user_answer(
+        question=question,
+        plan=plan,
+        execution=execution,
+        caveats=caveats,
+        related_context=related_context,
+    )
+    if not allow_llm:
+        return fallback, "Natural-language LLM synthesis disabled; used deterministic fallback."
+    if config is None:
+        return fallback, "Missing ChatbotConfig; used deterministic fallback."
+    try:
+        llm = build_openai_llm(config)
+        answer = llm.structured_predict(
+            NaturalAnswer,
+            PromptTemplate(NATURAL_ANSWER_PROMPT),
+            **_natural_answer_context(
+                question=question,
+                plan=plan,
+                validation=validation,
+                execution=execution,
+                result_summary=result_summary,
+                caveats=caveats,
+                related_context=related_context,
+            ),
+        )
+        answer_pt = answer.answer_pt.strip()
+        if answer_pt:
+            return answer_pt, None
+        return fallback, "Natural-language LLM returned an empty answer; used deterministic fallback."
+    except Exception as exc:
+        return fallback, f"Natural-language LLM synthesis failed; used deterministic fallback: {exc}"
+
+
+def _filter_debug_payload(answer: ChatbotAnswer, *, show_debug: bool) -> ChatbotAnswer:
+    if show_debug:
+        return answer
+    return answer.model_copy(
+        update={
+            "result_summary": "",
+            "caveats": [],
+            "developer_context": {},
+            "evidence": {},
+        }
+    )
+
+
 def synthesize_answer(
     *,
     question: str,
@@ -184,6 +314,9 @@ def synthesize_answer(
     context: RetrievedContext | None = None,
     related_context: list[dict[str, Any]] | None = None,
     show_sql: bool = False,
+    show_debug: bool = False,
+    config: ChatbotConfig | None = None,
+    allow_llm: bool = True,
 ) -> ChatbotAnswer:
     caveats = []
     caveats.extend(intent.required_caveats)
@@ -193,26 +326,34 @@ def synthesize_answer(
     related_context = related_context or []
 
     result_summary = _summarize_result(execution)
+    answer_pt, natural_answer_warning = _build_llm_user_answer(
+        question=question,
+        plan=plan,
+        validation=validation,
+        execution=execution,
+        result_summary=result_summary,
+        caveats=caveats,
+        related_context=related_context,
+        config=config,
+        allow_llm=allow_llm,
+    )
+    developer_context = _build_developer_context(
+        plan=plan,
+        validation=validation,
+        execution=execution,
+        context=context,
+        related_context=related_context,
+        caveats=caveats,
+    )
+    if natural_answer_warning:
+        developer_context["natural_answer_warning"] = natural_answer_warning
 
-    return ChatbotAnswer(
-        answer_pt=_build_user_answer(
-            question=question,
-            plan=plan,
-            execution=execution,
-            caveats=caveats,
-            related_context=related_context,
-        ),
+    answer = ChatbotAnswer(
+        answer_pt=answer_pt,
         sql=execution.sql if show_sql else "",
         result_summary=result_summary,
         caveats=caveats,
-        developer_context=_build_developer_context(
-            plan=plan,
-            validation=validation,
-            execution=execution,
-            context=context,
-            related_context=related_context,
-            caveats=caveats,
-        ),
+        developer_context=developer_context,
         evidence={
             "result_hash": execution.result_hash,
             "elapsed_seconds": execution.elapsed_seconds,
@@ -222,33 +363,37 @@ def synthesize_answer(
         },
         status="answered",
     )
+    return _filter_debug_payload(answer, show_debug=show_debug)
 
 
-def clarification_answer(intent: QuestionIntent) -> ChatbotAnswer:
+def clarification_answer(intent: QuestionIntent, *, show_debug: bool = False) -> ChatbotAnswer:
     detail = " ".join(intent.ambiguities) if intent.ambiguities else intent.reason
-    return ChatbotAnswer(
+    answer = ChatbotAnswer(
         answer_pt=f"Preciso de esclarecimento antes de consultar o banco. {detail}",
         status="clarified",
         caveats=intent.required_caveats,
         developer_context={"intent_reason": intent.reason},
         evidence={"intent_reason": intent.reason},
     )
+    return _filter_debug_payload(answer, show_debug=show_debug)
 
 
-def refused_answer(intent: QuestionIntent) -> ChatbotAnswer:
-    return ChatbotAnswer(
+def refused_answer(intent: QuestionIntent, *, show_debug: bool = False) -> ChatbotAnswer:
+    answer = ChatbotAnswer(
         answer_pt=f"Nao vou executar SQL para essa pergunta. {intent.reason}",
         status="refused",
         caveats=intent.required_caveats,
         developer_context={"intent_reason": intent.reason},
         evidence={"intent_reason": intent.reason},
     )
+    return _filter_debug_payload(answer, show_debug=show_debug)
 
 
-def failed_answer(message: str) -> ChatbotAnswer:
-    return ChatbotAnswer(
+def failed_answer(message: str, *, show_debug: bool = False) -> ChatbotAnswer:
+    answer = ChatbotAnswer(
         answer_pt=f"Nao foi possivel responder com seguranca. {message}",
         status="failed",
         developer_context={"error": message},
         evidence={"error": message},
     )
+    return _filter_debug_payload(answer, show_debug=show_debug)
